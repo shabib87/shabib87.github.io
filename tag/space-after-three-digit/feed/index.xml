@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>space after three digit &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:10:49 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>space after three digit &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Objective-C: Space for Every Three Digits of A Number</title>
+		<link>./../../../objective-c-space-for-every-three-digits-of-a-number/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=objective-c-space-for-every-three-digits-of-a-number</link>
+					<comments>./../../../objective-c-space-for-every-three-digits-of-a-number/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 18:47:31 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[NSNumberDecimalStyle]]></category>
+		<category><![CDATA[NSNumberFormatter]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[space after three digit]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=104</guid>
+
+					<description><![CDATA[<p>Hi everyone and welcome again to my blog. Today I am going to discuss a quick fix with you guys. Recently I was working in one my projects and came to a point where I had to use a formatter, which will put spaces after every three digit of a decimal number. For example, if [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../objective-c-space-for-every-three-digits-of-a-number/index.html">Objective-C: Space for Every Three Digits of A Number</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hi everyone and welcome again to my blog. Today I am going to discuss a quick fix with you guys. Recently I was working in one my projects and came to a point where I had to use a formatter, which will put spaces after every three digit of a decimal number. For example, if the number is 20000, it will make it look like 200 000. Simple and it is vastly used, isn’t it?</p>
+<p>But what surprised me was, iOS doesn’t give a built-in support to format the number in this manner! Java has a built in method for this, but Objective-C doesn’t! So I had to write the following method to accomplish the job. Here’s the code:<br />
+<code><br />
+-(void)formatAmount:(CGFloat)amount<br />
+{<br />
+NSNumberFormatter *formatter = [NSNumberFormatter new];<br />
+formatter.numberStyle = NSNumberFormatterDecimalStyle;<br />
+formatter.allowsFloats = YES;<br />
+formatter.minimumFractionDigits = 2;</code></p>
+<p><code><code></code></code></p>
+<p>NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithFloat:amount]];<br />
+NSArray *substring = [formatted componentsSeparatedByString:@&#8221;,&#8221;];<br />
+formatted = @&#8221;&#8221;;</p>
+<p><code><code></code></code></p>
+<p>for (int i = 0; i &lt; substring.count; i++)<br />
+{<br />
+NSString *newString = @&#8221;&#8221;;</p>
+<p><code><code></code></code></p>
+<p>if (i == 0)<br />
+{<br />
+newString = [NSString stringWithFormat:@&#8221;%@&#8221;, [substring objectAtIndex:i]];<br />
+}<br />
+else<br />
+{<br />
+newString = [NSString stringWithFormat:@&#8221; %@&#8221;, [substring objectAtIndex:i]];<br />
+}</p>
+<p><code><code></code></code></p>
+<p>formatted = [formatted stringByAppendingString:newString];<br />
+}</p>
+<p><code><br />
+</code></p>
+<p><code>NSLog(@"%@",formatted);<br />
+}<br />
+</code><br />
+The method is quite simple; it takes a float and formats it as demanded. Firstly iOS supports number formatting with comma separation after every third digit and it is the <b><i>NSNumberFormatterDecimalStyle</i></b>. What I’ve done is, I’ve formatted the float value in <b><i>NSNumberFormatterDecimalStyle</i></b> and then replaced the commas (,) with spaces. Easy, right? Oh, I needed the tailing zeros of the float value (i.e. 20000.00), but the <b><i>NSNumberFormatterDecimalStyle</i></b> truncates them if it is a full number (i.e. is the number is 20000.00, it will show only 20000). I got that fixed by setting the minimumFractionDigits property of <b><i>NSNumberFormatter</i></b>.</p>
+<p>Well, that was a quick fix! Until next time, happy coding :)!</p>
+<p>The post <a rel="nofollow" href="./../../../objective-c-space-for-every-three-digits-of-a-number/index.html">Objective-C: Space for Every Three Digits of A Number</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../objective-c-space-for-every-three-digits-of-a-number/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">104</post-id>	</item>
+	</channel>
+</rss>

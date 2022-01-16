@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>pod &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:13:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>pod &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>SHTwoDimensionalArray : A simple and easy to use two dimensional array for iOS applications.</title>
+		<link>./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications</link>
+					<comments>./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 23 Aug 2016 17:17:53 +0000</pubDate>
+				<category><![CDATA[Cocoapods]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[2d array]]></category>
+		<category><![CDATA[array]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Library]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pod]]></category>
+		<category><![CDATA[SHTwoDimensionalArray]]></category>
+		<category><![CDATA[two dimensional array]]></category>
+		<category><![CDATA[twoD array]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=282</guid>
+
+					<description><![CDATA[<p>Ever felt the need to use a two dimensional array in you iOS project? Well, I have. So here is what I had done: Created a NSObject subclass. Taken two private NSMutableArray instances, one for row and one for column. Created a nested for loop to traverse those arrays, and fill them with NSNull objects. Created [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html">SHTwoDimensionalArray : A simple and easy to use two dimensional array for iOS applications.</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Ever felt the need to use a two dimensional array in you iOS project? Well, I have. So here is what I had done:</p>
+<ul>
+<li>Created a NSObject subclass.</li>
+<li>Taken two private NSMutableArray instances, one for row and one for column.</li>
+<li>Created a nested for loop to traverse those arrays, and fill them with NSNull objects.</li>
+<li>Created a method to insert value/object on the [row][column] index.</li>
+</ul>
+<p>So this is fairly easy and straightforward. But wouldn&#8217;t it be nicer if you didn&#8217;t have to do all these steps and figure out how to write those monotonous codes all by yourself?</p>
+<p>My good friend, I have good news for you! I have created <a href="https://github.com/shabib87/SHTwoDimensionalArray" target="_blank" rel="noopener noreferrer">a simple CocoaPod</a> to minimize your task!</p>
+<p>To install it, simply add the following line to your Podfile:</p>
+<pre>pod <span class="pl-s"><span class="pl-pds">'</span>SHTwoDimensionalArray<span class="pl-pds">'</span></span></pre>
+<p>and run</p>
+<pre>pod install</pre>
+<p>command!</p>
+<p>To use this, try the following code snippet:</p>
+<pre>#<span class="pl-k">import</span> <span class="pl-s"><span class="pl-pds">"</span>SHTwoDimensionalArray.h<span class="pl-pds">"
+
+</span></span>SHTwoDimensionalArray *twoDArray = [SHTwoDimensionalArray <span class="pl-c1">arrayWithRows:</span><span class="pl-c1">2</span> <span class="pl-c1">andColumns:</span><span class="pl-c1">2</span>];
+[twoDArray <span class="pl-c1">setObject:</span><span class="pl-s"><span class="pl-pds">@"</span>Foo<span class="pl-pds">"</span></span> <span class="pl-c1">inRow:</span><span class="pl-c1">0</span> <span class="pl-c1">column:</span><span class="pl-c1">0</span>];
+...
+
+<span class="pl-c1">NSString</span> *foo = [twoDArray <span class="pl-c1">objectInRow:</span><span class="pl-c1">0</span> <span class="pl-c1">column:</span><span class="pl-c1">0</span>];</pre>
+<p>I hope you find it helpful and it&#8217;s under MIT license. Feel free to fork, modify and contribute!</p>
+<p>Cheers!</p>
+<p>The post <a rel="nofollow" href="./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html">SHTwoDimensionalArray : A simple and easy to use two dimensional array for iOS applications.</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">282</post-id>	</item>
+		<item>
+		<title>Creating your own COCOAPOD</title>
+		<link>./../../../creating-your-own-cocoapod/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=creating-your-own-cocoapod</link>
+					<comments>./../../../creating-your-own-cocoapod/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 16 Aug 2016 16:34:48 +0000</pubDate>
+				<category><![CDATA[Cocoapods]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[dependency manager]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Library]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pod]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=144</guid>
+
+					<description><![CDATA[<p>Now a days it is fairly common to use CocoaPods to your project as the dependency manager for your iOS and MacOs projects. I have been using it for quite some time now; and to my utter delight, oh boy, I am glad I got to know how to use this masterpiece! Now to a [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../creating-your-own-cocoapod/index.html">Creating your own COCOAPOD</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Now a days it is fairly common to use <strong><a href="https://cocoapods.org/">CocoaPods</a></strong> to your project as the dependency manager for your iOS and MacOs projects. I have been using it for quite some time now; and to my utter delight, oh boy, I am glad I got to know how to use this masterpiece!</p>
+<p><strong>Now to a fairly uncommon scenario, what if you want to create your own pod?</strong></p>
+<p>It is not uncommon for developers like me, who have been working in the industry for quite a few years to have their own tricks and tweaks. You might have made quite some subclasses/libraries/UI controls to make your life easier and have been using them to your projects. Well done sire! But have you ever thought of sharing your awesome work? Oh come on dude! We; the developers; rely so much on the open source community and it&#8217;s pretty damn cool to be one of the contributors! So, how do you make your own awesome pod? Well, I am not going to write all those steps, as it is already in the web!!! The guys from <a href="http://code.tutsplus.com/" target="_blank" rel="noopener noreferrer">http://code.tutsplus.com/</a> have written this awesome tutorial on how to make your own pod! So go check it out here: <a href="http://code.tutsplus.com/tutorials/creating-your-first-cocoapod--cms-24332" target="_blank" rel="noopener noreferrer">Creating Your First CocoaPod</a>.  You can also get a good detailed read from <a href="https://guides.cocoapods.org/making/making-a-cocoapod.html" target="_blank" rel="noopener noreferrer">Official Guide from CocoaPod</a>.</p>
+<p>From the tutorial it is possible, you will face this error on the following command (in the tutorial <strong>Step 3: Pushing to Specs Repository</strong>):</p>
+<pre style="padding-left: 30px;">pod trunk push YOUR_POD.podspec 
+
+[!] You need to register a session first.
+
+</pre>
+<p>Don&#8217;t worry about it, you need to register yourself for the session. Just run:</p>
+<pre><code class="highlight plaintext">$ pod trunk register &lt;Your Email&gt; 'Your Name' --description='Your Description'</code></pre>
+<p>You&#8217;ll have the following output to confirm the session:</p>
+<pre class="p1" style="padding-left: 30px;"><span class="s1">[!] Please verify the session by clicking the link in the verification email that has been sent to YOUR EMAIL</span></pre>
+<p>You must click a link in an email Trunk sends you to verify the connection between your Trunk account and the current computer. You can list your sessions by running:</p>
+<pre style="padding-left: 30px;">pod trunk me</pre>
+<p>Trunk accounts do not have passwords, only per-computer session tokens.</p>
+<p>You can learn more from the <a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html">cocoapods official site here</a>.<br />
+Chiao!!!</p>
+<p>The post <a rel="nofollow" href="./../../../creating-your-own-cocoapod/index.html">Creating your own COCOAPOD</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../creating-your-own-cocoapod/feed/index.html</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">144</post-id>	</item>
+	</channel>
+</rss>

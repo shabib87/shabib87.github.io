@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Swift &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Tue, 04 Aug 2020 22:39:52 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>Swift &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>How to add photos in the iOS Simulator: A cooler automated approach!</title>
+		<link>./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach</link>
+					<comments>./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 04 Aug 2020 22:39:50 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[add photos]]></category>
+		<category><![CDATA[awk]]></category>
+		<category><![CDATA[bash]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[simulator]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[terminal]]></category>
+		<guid isPermaLink="false">./../../../index.html?p=2125</guid>
+
+					<description><![CDATA[<p>Whenever anyone worked on an app that deals with the photo library, they did a google search on how to add photos to the iOS simulator at least once! The boring way! 🙄 The most common approach would be to search for an image in safari. Then long-press the image and save to photos. Another [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html">How to add photos in the iOS Simulator: A cooler automated approach!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Whenever anyone worked on an app that deals with the photo library, they did a google search on how to add photos to the iOS simulator at least once! </p>
+
+
+
+<h4>The boring way! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f644.png" alt="🙄" class="wp-smiley" style="height: 1em; max-height: 1em;" /></h4>
+
+
+
+<p>The most common approach would be to search for an image in safari. Then long-press the image and save to photos. Another approach would be to download the photo in your mac, drag it to the simulator. Then do the same thing as before! This is cumbersome and tiring at the same time. What if you need to download multiple images? Annoying steps, right?</p>
+
+
+
+<h4>The cooler way: <code>xcrun simctl</code> to the rescue! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f9b8-200d-2642-fe0f.png" alt="🦸‍♂️" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f9b8-200d-2640-fe0f.png" alt="🦸‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" /></h4>
+
+
+
+<p>There is a much easier and cooler way to add photos in the iOS Simulator. That is by using the <code>xcrun simctl</code> command. </p>
+
+
+
+<p>To add a single photo to the currently running simulator, first, navigate to the destination directory. Then use the command below in terminal (replace the <code>&lt;image_name></code> with the actual name of the image):</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-1" data-shcb-language-name="HTML, XML" data-shcb-language-slug="xml"><div><code class="hljs language-xml">$ xcrun simctl addmedia booted ./<span class="hljs-tag">&lt;<span class="hljs-name">image_name</span>&gt;</span>.jpg</code></div><small class="shcb-language" id="shcb-language-1"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">HTML, XML</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">xml</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>If you want to add this image to a specific simulator, you need to pass its device id. The device id of the available simulators can be found by running:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-2" data-shcb-language-name="PHP" data-shcb-language-slug="php"><div><code class="hljs language-php">$ xcrun simctl <span class="hljs-keyword">list</span></code></div><small class="shcb-language" id="shcb-language-2"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">PHP</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">php</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<figure class="wp-block-image size-large"><img width="1024" height="330" src="./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-1024x330.png" alt="add photos to the iOS simulator, listed device id of available simulators in the terminal" class="wp-image-2130" title="add photos to the iOS simulator, listed device id of available simulators in the terminal" srcset="./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-1024x330.png 1024w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-300x97.png 300w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-768x247.png 768w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-1536x494.png 1536w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-2048x659.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>Available Simulator List</figcaption></figure>
+
+
+
+<p>Next, you need to run the following command along with the simulator id as following:</p>
+
+
+<pre class="wp-block-code"><div><code class="hljs">$ xcrun simctl addmedia D0BD5CE0-FC24-4DD4-B688-2A882D4A69A7 ./image_name.jpg</code></div></pre>
+
+
+<p>Replace <code>D0BD5CE0-FC24-4DD4-B688-2A882D4A69A7</code> with your desired simulator device id.</p>
+
+
+
+<h4>Save multiple photos: unleash the Bash! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f60e.png" alt="😎" class="wp-smiley" style="height: 1em; max-height: 1em;" /></h4>
+
+
+
+<p>Let&#8217;s say you need 20 (n) images to be added to the simulator. Downloading and adding them 1 by 1 would be annoying and repetitive. The good news is, whenever you have a repetitive task, you can automate it! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f643.png" alt="🙃" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+
+
+<p>Let&#8217;s assume you have got <code>n</code> images downloaded in a folder called <code>SimulatorGallery</code>. Now, you need a way to iterate through these images to automate the above process. Thankfully, the bash script comes with a really cool tool called  <code>awk</code>, which makes it super easy. To use <code>awk</code> you need to state a begin, end and the execution block as</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-3" data-shcb-language-name="HTML, XML" data-shcb-language-slug="xml"><div><code class="hljs language-xml">$ awk 'BEGIN { <span class="hljs-tag">&lt;<span class="hljs-name">CONDITION</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">STATEMENT</span>&gt;</span> } { <span class="hljs-tag">&lt;<span class="hljs-name">EXECUTION_STATEMENT</span>&gt;</span> } END { <span class="hljs-tag">&lt;<span class="hljs-name">STATEMENT</span> }</span></code></div><small class="shcb-language" id="shcb-language-3"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">HTML, XML</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">xml</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>You can specify a command to find all <code>.jpg</code> images in this folder and add them to your specified/booted simulator. Run the following command:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-4" data-shcb-language-name="JavaScript" data-shcb-language-slug="javascript"><div><code class="hljs language-javascript">$ awk <span class="hljs-string">'BEGIN{} { print "xcrun simctl addmedia booted ./"FILENAME; nextfile } END{} '</span> *.jpg | sh</code></div><small class="shcb-language" id="shcb-language-4"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">JavaScript</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">javascript</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The pipe <code>| sh</code> is specifying that the <code>print</code> statement should actually be a shell command.</p>
+
+
+
+<h4>Finally</h4>
+
+
+
+<p>Now if you visit your simulators <code>Photos</code> app, you&#8217;ll see all the photos there. It&#8217;s pretty damn cool, isn&#8217;t it? It doesn&#8217;t matter how many photos you want to add, you just need to specify the file format and visit that directory from the terminal.</p>
+
+
+
+<p>Happy coding!</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html">How to add photos in the iOS Simulator: A cooler automated approach!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2125</post-id>	</item>
+		<item>
+		<title>Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</title>
+		<link>./../../../mock-dependencies-in-swift-unit-test/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=mock-dependencies-in-swift-unit-test</link>
+					<comments>./../../../mock-dependencies-in-swift-unit-test/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Mon, 08 Jun 2020 15:00:10 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Protocol Oriented Programming]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[SOLID]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[Unit Testing]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS application development]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[mocking]]></category>
+		<category><![CDATA[pop]]></category>
+		<category><![CDATA[protocol]]></category>
+		<category><![CDATA[protocol oriented programming]]></category>
+		<category><![CDATA[unit test]]></category>
+		<guid isPermaLink="false">./../../../index.html?p=2075</guid>
+
+					<description><![CDATA[<p>We should always write unit test for our code. We all know that, right? But sometimes having external dependencies make it very hard to test a class. Sometimes even almost impossible. Today I am going to discuss on how to solve this problem using mock dependencies in swift unit test. The Problem The root of [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../mock-dependencies-in-swift-unit-test/index.html">Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>We should always write unit test for our code. We all know that, right? But sometimes having external dependencies make it very hard to test a class. Sometimes even almost impossible. Today I am going to discuss on how to solve this problem using mock dependencies in swift unit test.</p>
+
+
+
+<h4>The Problem</h4>
+
+
+
+<p>The root of the problem is actually not the dependencies. But how we manage them. To write testable code, dependencies should always be decoupled and isolated. In other words &#8220;Dependencies should be Inverted&#8221;. Rings any bell? Yes, it&#8217;s the <a rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" target="_blank">Dependency Inversion Rule</a> from the <a rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/SOLID" target="_blank">SOLID</a> principle.</p>
+
+
+
+<h4>Dependency Injection to the rescue&#8230;</h4>
+
+
+
+<p>We should inject all dependencies to decouple code. It can be <a rel="noreferrer noopener" href="https://cocoacasts.com/dependency-injection-in-swift" target="_blank">constructor injection, property injection or method injection</a>. I prefer to use constructor injection over the others whenever possible. Because it enforces the dependency requirement by making it container-agnostic.</p>
+
+
+
+<h4>A use-case scenario</h4>
+
+
+
+<p>Let&#8217;s assume we have an app that relies on user login via <code>OAUTH2</code> authentication. The authentication is handled in a struct named <code>AuthManager</code>. After a successful login/signup it saves users <code>accessToken</code> and <code>refreshToken</code>  using a <code>AuthToken</code> object. The token object is then securely stored in users keychain. The storing and retrieving mechanism of the keychain is handled in another struct called <code>KeychainManager</code>.</p>
+
+
+
+<p>Now if we didn&#8217;t know anything about dependency inversion and unit testing, we could create the instances as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-5" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AuthToken</span> </span>{
+    <span class="hljs-keyword">let</span> accessToken: <span class="hljs-type">String</span>
+    <span class="hljs-keyword">let</span> refreshToken: <span class="hljs-type">String</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AuthManager</span> </span>{
+    ...
+    <span class="hljs-keyword">var</span> authToken: <span class="hljs-type">AuthToken</span> {
+        <span class="hljs-keyword">get</span> { getTokenFromKeychain() }
+        <span class="hljs-keyword">set</span> { setTokenInKeychain(token: newValue) }
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> keychainManager = <span class="hljs-type">KeychainManager</span>()
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getTokenFromKeychain</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">AuthToken</span> {
+        <span class="hljs-keyword">let</span> accessToken = keychainManager.<span class="hljs-keyword">get</span>(valueByKey: .accessToken)                            
+        <span class="hljs-keyword">let</span> refreshToken = keychainManager.<span class="hljs-keyword">get</span>(valueByKey: .refreshToken)
+        <span class="hljs-keyword">return</span> <span class="hljs-type">AuthToken</span>(accessToken: accessToken, refreshToken: refreshToken)
+    }
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setTokenInKeychain</span><span class="hljs-params">(token: AuthToken)</span></span> {
+        keychainManager.<span class="hljs-keyword">set</span>(asValue: token.accessToken, byKey: .accessToken)
+        keychainManager.<span class="hljs-keyword">set</span>(asValue: token.refreshToken, byKey: .refreshToken)
+    }
+    ...
+}
+
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Key</span>: <span class="hljs-title">String</span> </span>{
+    <span class="hljs-keyword">case</span> accessToken, refreshToken
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">KeychainManager</span> </span>{
+    <span class="hljs-comment">// the actual keychain as an example object instance</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> keychain: <span class="hljs-type">Keychain</span>
+    
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">get</span><span class="hljs-params">(valueByKey key: Key)</span></span> -&gt; <span class="hljs-type">String</span> {
+        keychain.getString(key.rawValue)
+    }
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">set</span><span class="hljs-params">(asValue value: String, byKey key: Key)</span></span> {
+        keychain.<span class="hljs-keyword">set</span>(value, key: key.rawValue)
+    }
+}</code></div><small class="shcb-language" id="shcb-language-5"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>On surface this code looks pretty good. However there are two problems:</p>
+
+
+
+<ul><li>The <code>KeychainManager</code> instance is a private variable initialized by the <code>AuthManager</code> struct itself. This results a tightly coupled property. </li></ul>
+
+
+
+<p>Which leads us to our second problem:</p>
+
+
+
+<ul><li>We cannot test the <code>AuthManager</code> get/set token behaviour without reading or writing in the actual keychain. And if we write tests using the current implementation, it&#8217;ll read/write in keychain every time unit tests are run. This is definitely something we don&#8217;t want to do.</li></ul>
+
+
+
+<p>Meanwhile, if we omit writing unit tests, it is possible to make the mistake inside <code>setTokenInKeychain</code> method as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-6" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setTokenInKeychain</span><span class="hljs-params">(token: AuthToken)</span></span> {
+    keychainManager.<span class="hljs-keyword">set</span>(asValue: token.accessToken, byKey: .refreshToken)
+    keychainManager.<span class="hljs-keyword">set</span>(asValue: token.refreshToken, byKey: .accessToken)
+}</code></div><small class="shcb-language" id="shcb-language-6"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>And it will get pretty hard to catch this sneaky bug.</p>
+
+
+
+<h4>The solution: Protocol Oriented Programming</h4>
+
+
+
+<p>The general idea is to rely on swift <code>protocol</code>s to decouple dependency and make a class/struct testable in isolation.</p>
+
+
+
+<p>For instance, in our example use-case the dependency graph is:<br><code>AuthManager</code> depends on <code>KeychainManager</code>. Some other instance (e.g. <code>UserService</code>) could depend on <code>AuthManager</code>. So how do we decouple the dependencies? In addition, how do we test these instances in isolation?</p>
+
+
+
+<p>To solve this, we need to-</p>
+
+
+
+<ul><li>Separate the dependency as protocol and</li><li>Push the protocol as constructor injection</li></ul>
+
+
+
+<p>Therefore each instance can have their own set of swift unit test, that can run in isolation.</p>
+
+
+
+<p>If we take the relation between <code>keychainManager</code> and <code>AuthManager</code>, and separate the keychain dependency behaviour as protocol:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-7" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">KeychainManageable</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">get</span><span class="hljs-params">(valueByKey key: Key)</span></span> -&gt; <span class="hljs-type">String?</span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">set</span><span class="hljs-params">(asValue value: String, byKey key: Key)</span></span>
+}</code></div><small class="shcb-language" id="shcb-language-7"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The <code>AuthManager</code> can use it via constructor injection as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-8" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">init</span>(keychainManager: <span class="hljs-type">KeychainManageable</span>) {
+    <span class="hljs-keyword">self</span>.keychainManager = keychainManager
+}</code></div><small class="shcb-language" id="shcb-language-8"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>In our real application we can initialize it with the real <code>KeychainManager</code>. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-9" data-shcb-language-name="JavaScript" data-shcb-language-slug="javascript"><div><code class="hljs language-javascript"><span class="hljs-keyword">let</span> manager = AuthManager(keychainManager: KeychainManager())</code></div><small class="shcb-language" id="shcb-language-9"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">JavaScript</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">javascript</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>In addition, we can now write unit tests for it by passing a mock <code>KeychainManager</code> dependency.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-10" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">let</span> sut = <span class="hljs-type">AuthManager</span>(keychainManager: <span class="hljs-type">MockKeychainManager</span>())</code></div><small class="shcb-language" id="shcb-language-10"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The <code>MockKeychainManager</code> has to implement the <code>KeychainManageable</code> protocol to mimic the behaviour of  users <code>keychain</code>.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-11" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockKeychainManager</span>: <span class="hljs-title">KeychainManageable</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> storage = [<span class="hljs-type">Key</span>: <span class="hljs-type">String</span>]()
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">get</span><span class="hljs-params">(valueByKey key: Key)</span></span> -&gt; <span class="hljs-type">String</span> {
+        storage[key]
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">set</span><span class="hljs-params">(asValue value: String, byKey key: Key)</span></span> {
+        storage[key] = value
+    }
+}</code></div><small class="shcb-language" id="shcb-language-11"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>As a result, we can now make sure our test cases cover the behaviour of the <code>AuthManager</code> instance without enforcing/exposing the real dependency. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-12" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthManagerTests</span>: <span class="hljs-title">XCTestCase</span> </span>{
+    <span class="hljs-keyword">var</span> sut: <span class="hljs-type">AuthManager!</span>
+    <span class="hljs-keyword">var</span> token: <span class="hljs-type">AuthToken!</span>
+   
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span></span> {
+        token = <span class="hljs-type">AuthToken</span>(accessToken: <span class="hljs-string">"AccessToken"</span>,
+                          refreshToken: <span class="hljs-string">"RefreshToken"</span>)
+        sut = <span class="hljs-type">AuthManager</span>(keychainManager: <span class="hljs-type">MockKecychainManager</span>())
+        sut.authToken = token
+    }
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">tearDown</span><span class="hljs-params">()</span></span> {
+        sut = <span class="hljs-literal">nil</span>
+        token = <span class="hljs-literal">nil</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testAuthManagerDidSetCorrectAccessToken</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-type">XCTAssertEqual</span>(sut.authToken.accessToken, token.accessToken)
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testAuthManagerDidSetCorrectRefreshToken</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-type">XCTAssertEqual</span>(sut.authToken.refreshToken, token.refreshToken)
+    }
+}</code></div><small class="shcb-language" id="shcb-language-12"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>We can now easily avoid making the mistake of setting wrong token value to keychain. If we do that, our unit tests <code>testAuthManagerDidSetCorrectAccessToken</code> and <code>testAuthManagerDidSetCorrectRefreshToken</code> will fail.</p>
+
+
+
+<p>Similarly, we can also mock the <code>AuthManager</code> by  defining a <code>AuthManageable</code> protocol.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-13" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">AuthManageable</span> </span>{
+    <span class="hljs-keyword">init</span>(keychainManager: <span class="hljs-type">KeychainManageable</span>)
+    <span class="hljs-keyword">var</span> authToken: <span class="hljs-type">AuthToken</span> { <span class="hljs-keyword">get</span> <span class="hljs-keyword">set</span> }
+}</code></div><small class="shcb-language" id="shcb-language-13"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>This way we&#8217;d be able to construct the <code>UserService</code> by passing <code>AuthManageable</code> as dependency. As a result, we&#8217;d be able to unit it test by passing a <code>MockAuthManager</code> instance.</p>
+
+
+
+<h4>Final words</h4>
+
+
+
+<p>In conclusion, to write testable and decoupled code, we have to always remember:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Dependencies should be passed down instead of initiated. </p></blockquote>
+
+
+
+<p>Above all, for long running projects, we can run into situations where we&#8217;ve to replace a dependency entirely. In scenarios like that; decoupling instances not only helps us with writing unit tests, but also helps us to get away with minimal changes. </p>
+
+
+
+<p>I hope this blog will help someone to understand the concepts of <code>Mocking</code> and <code>Dependency Injection</code> a little better. As well as understanding the importance of writing unit tests for you application.</p>
+
+
+
+<p>Happy coding!</p>
+<p>The post <a rel="nofollow" href="./../../../mock-dependencies-in-swift-unit-test/index.html">Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../mock-dependencies-in-swift-unit-test/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2075</post-id>	</item>
+		<item>
+		<title>SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</title>
+		<link>./../../../how-to-create-a-swiftui-collectionview/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-to-create-a-swiftui-collectionview</link>
+					<comments>./../../../how-to-create-a-swiftui-collectionview/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Sat, 06 Jun 2020 05:04:36 +0000</pubDate>
+				<category><![CDATA[Combine]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[SwiftUI]]></category>
+		<category><![CDATA[clean architecture]]></category>
+		<category><![CDATA[clean code]]></category>
+		<category><![CDATA[combine]]></category>
+		<category><![CDATA[ios 13]]></category>
+		<category><![CDATA[swiftui]]></category>
+		<category><![CDATA[uicollectionviewcompositionallayout]]></category>
+		<category><![CDATA[uicollectionviewdiffabledatasource]]></category>
+		<guid isPermaLink="false">./../../../index.html?p=2042</guid>
+
+					<description><![CDATA[<p>Apple released SwiftUI and Combine on last year WWDC 2019. It has been very exciting to see native declarative way to build apps. But unfortunately SwiftUI is missing a key UI component modern apps use quite a lot, the UICollectionView. Another WWDC is on the door and I am as excited as everyone else on [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-create-a-swiftui-collectionview/index.html">SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Apple released <code>SwiftUI</code> and <code>Combine</code> on last year WWDC 2019. It has been very exciting to see native declarative way to build apps. But unfortunately <code>SwiftUI</code> is missing a key UI component modern apps use quite a lot, the <code>UICollectionView</code>. Another WWDC is on the door and I am as excited as everyone else on what Apple does with <code>SwiftUI 2.0</code>. May be we&#8217;ll finally get native SwiftUI CollectionView with that. But until then, using <code>UIViewRepresentable</code> or <code>UIViewControllerRepresentable</code> is the only solution for now.</p>
+
+
+
+<h4>The target result</h4>
+
+
+
+<p>The final result of this example will look the following. A SwiftUI CollectionView with SwiftUI View cell, header and footer and the ability to pull to refresh and paginate.</p>
+
+
+
+<figure class="wp-block-image size-large"><img width="572" height="1024" src="./../../../wp-content/uploads/2020/06/output-572x1024.gif" alt="swiftui collection view" class="wp-image-2049" srcset="./../../../wp-content/uploads/2020/06/output-572x1024.gif 572w, ./../../../wp-content/uploads/2020/06/output-168x300.gif 168w" sizes="(max-width: 572px) 100vw, 572px" /></figure>
+
+
+
+<h4>Shiny iOS 13 UIKit APIs</h4>
+
+
+
+<p>With all the excitement revolving <code>SwiftUI</code> and <code>Combine</code>, a lot of iOS enthusiast almost missed a significant improvement on <code>UIKit</code>. Specifically in <code>UICollectionView</code>: <a rel="noreferrer noopener" href="https://developer.apple.com/documentation/uikit/views_and_controls/collection_views/using_collection_view_compositional_layouts_and_diffable_data_sources" target="_blank"><code>UICollectionViewDiffableDataSource</code> and <code>UICollectionViewCompositionalLayout</code></a>. Now these two APIs have made using <code>UICollectionView</code> way easier than before, eliminating the usage of nasty update blocks inside delegate methods. Like <code>SwiftUI</code> and <code>Combine</code>, these two APIs also require iOS 13.0 as minimum deployment target. This makes these the perfect candidates to create a <code>SwiftUI</code> wrapper view for the missing collection view.</p>
+
+
+
+<h4>A typical collection view</h4>
+
+
+
+<p>A fairly common collection view use-case will have the following behaviours, that we&#8217;ll need to access from our SwiftUI counter part:</p>
+
+
+
+<ul><li>A reusable cell</li><li>A reusable header / footer view</li><li>A cell selection callback</li><li>A pull to refresh callback</li><li>A pagination/ load more callback (assuming it&#8217;s displaying something from an API endpoint)</li></ul>
+
+
+
+<p>There might be other customizations one might need for their app. But I am only focusing on the most common ones.</p>
+
+
+
+<p>I have not focused on how <code>UICollectionViewDiffableDataSource</code> or <code>UICollectionViewCompositionalLayout</code> works or how to customize them. Rather I have focused on how to use these APIs and make a declarative SwiftUI CollectionView. </p>
+
+
+
+<h4>Combine Replacing Delegates: The Declarative Way</h4>
+
+
+
+<p>Now if I was going with the typical imperative approach, I’d have used some delegate methods like following to send the corresponding event updates. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-14" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">FeedViewControllerDelegate</span>: <span class="hljs-title">AnyObject</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">feed</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> feed: UIViewController, 
+        didSelectItemAtIndexPath indexPath: IndexPath
+    )</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">feed</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> feed: UIViewController,
+        didPullToRefresh completion: @escaping <span class="hljs-params">(<span class="hljs-params">()</span></span></span></span> -&gt; <span class="hljs-type">Void</span>)
+    )
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">feedShouldLoadMore</span><span class="hljs-params">(<span class="hljs-number">_</span> feed: UIViewController)</span></span>
+}</code></div><small class="shcb-language" id="shcb-language-14"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>But as promised I’ll be using declarative approach using the power of <code>Combine</code> Framework.  So I’ll be replacing our delegate methods using <code>Publishers</code>, more specifically <code>PassthroughSubject</code>. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-15" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">typealias</span> <span class="hljs-type">PullToRefreshCompletion</span> = () -&gt; <span class="hljs-type">Void</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> loadMoreSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">Void</span>, <span class="hljs-type">Never</span>&gt;?
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> itemSelectionSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">IndexPath</span>, <span class="hljs-type">Never</span>&gt;?
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> pullToRefreshSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">PullToRefreshCompletion</span>, <span class="hljs-type">Never</span>&gt;?</code></div><small class="shcb-language" id="shcb-language-15"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>And instead of calling the delegate methods I&#8217;d be sending publisher events as following:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-16" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift">...
+<span class="hljs-comment">// pagination</span>
+section.visibleItemsInvalidationHandler = {
+    [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] visibleItems, <span class="hljs-number">_</span>, <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> <span class="hljs-keyword">self</span> = <span class="hljs-keyword">self</span>,
+        <span class="hljs-keyword">let</span> row = visibleItems.last?.indexPath.row <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+    <span class="hljs-comment">// sending prefetch subscription notice for pagination</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.items.<span class="hljs-built_in">count</span> - <span class="hljs-keyword">self</span>.prefetchLimit &gt; <span class="hljs-number">0</span>,
+        row &gt;= <span class="hljs-keyword">self</span>.items.<span class="hljs-built_in">count</span> - <span class="hljs-keyword">self</span>.prefetchLimit {
+        <span class="hljs-keyword">guard</span> !<span class="hljs-keyword">self</span>.isPaginating <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+        <span class="hljs-keyword">self</span>.isPaginating = <span class="hljs-literal">true</span>
+        <span class="hljs-keyword">self</span>.loadMoreSubject?.send()
+    }
+}
+...
+<span class="hljs-comment">// didSelectItem</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">collectionView</span><span class="hljs-params">(<span class="hljs-number">_</span>: UICollectionView, 
+                    didSelectItemAt indexPath: IndexPath)</span></span> {
+    itemSelectionSubject?.send(indexPath)
+}
+...
+<span class="hljs-comment">// pull to refresh</span>
+<span class="hljs-meta">@objc</span> <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">pullToRefreshAction</span><span class="hljs-params">()</span></span> {
+    pullToRefreshSubject?.send {
+        <span class="hljs-keyword">self</span>.collectionView.refreshControl?.endRefreshing()
+    }
+}
+...</code></div><small class="shcb-language" id="shcb-language-16"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<h4>The FeedView: A SwiftUI CollectionView</h4>
+
+
+
+<p>To make this work I&#8217;ll be pushing the publisher dependencies as constructor injection: for <code>SwiftUI</code> wrapper to <code>FeedCollectionViewControler</code>. So our <code>UIViewControllerRepresentable</code> will look something like this:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-17" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FeedView</span>: <span class="hljs-title">UIViewControllerRepresentable</span> </span>{
+    ...
+
+    <span class="hljs-keyword">init</span>(
+        ...
+        loadMoreSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">Void</span>, <span class="hljs-type">Never</span>&gt;? = <span class="hljs-literal">nil</span>,
+        itemSelectionSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">IndexPath</span>, <span class="hljs-type">Never</span>&gt;? = <span class="hljs-literal">nil</span>,
+        pullToRefreshSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">PullToRefreshCompletion</span>, <span class="hljs-type">Never</span>&gt;? = <span class="hljs-literal">nil</span>,
+        ...
+    ) {
+        ...
+        <span class="hljs-keyword">self</span>.loadMoreSubject = loadMoreSubject
+        <span class="hljs-keyword">self</span>.itemSelectionSubject = itemSelectionSubject
+        <span class="hljs-keyword">self</span>.pullToRefreshSubject = pullToRefreshSubject
+        ...
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">makeUIViewController</span><span class="hljs-params">(context <span class="hljs-number">_</span>: Context)</span></span>
+        -&gt; <span class="hljs-type">FeedViewController</span> {
+        <span class="hljs-type">FeedViewController</span>(
+            ...
+            loadMoreSubject: loadMoreSubject,
+            itemSelectionSubject: itemSelectionSubject,
+            pullToRefreshSubject: pullToRefreshSubject,
+            ...
+        )
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateUIViewController</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> view: FeedViewController,
+        context <span class="hljs-number">_</span>: Context
+    )</span></span> {
+        view.updateSnapshot(items: items)
+    }
+}</code></div><small class="shcb-language" id="shcb-language-17"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The <code>updateSnapshot(items:)</code> method is a crucial method for <code>FeedViewController</code>. Because that&#8217;s the one that&#8217;ll update our diffable datasource snapshot of the <code>UICollectionView</code>.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-18" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateSnapshot</span><span class="hljs-params">(items: [FeedViewModel])</span></span> {
+    <span class="hljs-keyword">self</span>.items = items
+    <span class="hljs-keyword">var</span> snapshot = <span class="hljs-type">NSDiffableDataSourceSnapshot</span>&lt;<span class="hljs-type">Section</span>, <span class="hljs-type">FeedViewModel</span>&gt;()
+    snapshot.appendSections([.main])
+    snapshot.appendItems(items)
+    dataSource.apply(snapshot, animatingDifferences: <span class="hljs-literal">false</span>)
+}</code></div><small class="shcb-language" id="shcb-language-18"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>Now we can use our FeedView in a SwiftUI content as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-19" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-type">FeedView</span>(
+    ...,
+    loadMoreSubject: interactor.loadMoreSubject,
+    itemSelectionSubject: interactor.itemSelectionSubject,
+    pullToRefreshSubject: interactor.pullToRefreshSubject,
+    ...
+)
+.onReceive(interactor.loadMoreSubject, perform: {
+    <span class="hljs-keyword">self</span>.interactor.loadMore()
+})
+.onReceive(interactor.itemSelectionSubject, perform: {
+    <span class="hljs-keyword">self</span>.selectedItemName = <span class="hljs-keyword">self</span>.interactor.items[$<span class="hljs-number">0</span>.row].name
+})
+.onReceive(interactor.pullToRefreshSubject, perform: { completion <span class="hljs-keyword">in</span>
+    <span class="hljs-keyword">self</span>.interactor.refresh().sink {
+        completion()
+    }
+    .store(<span class="hljs-keyword">in</span>: &amp;<span class="hljs-keyword">self</span>.interactor.cancellables)
+})</code></div><small class="shcb-language" id="shcb-language-19"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<h4>Final words</h4>
+
+
+
+<p>I have put all these concepts together to create a single view application. You can found the complete implementation in <a rel="noreferrer noopener" href="https://github.com/shabib87/SwiftUICollectionView" target="_blank">my GitHub Repo</a>.</p>
+
+
+
+<p>Feel free to modify or adjust as your need. This example can be further extended using <code>Swift Generics</code> to create a fully customizable collection view replacement for <code>SwiftUI</code>. May be I&#8217;ll talk about it some other day. Happy Coding!</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-create-a-swiftui-collectionview/index.html">SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../how-to-create-a-swiftui-collectionview/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2042</post-id>	</item>
+	</channel>
+</rss>

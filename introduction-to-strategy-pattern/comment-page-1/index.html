@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html class="html" lang="en-US">
+<head>
+<meta charset="UTF-8">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"> <meta name="google-site-verification" content="./kHUr_GXc00HBxwlXRAWawBaZn2kAX1A_I-nlOozwiv4/index.html">
+<link rel="pingback" href="./../../xmlrpc.php">
+<meta name="viewport" content="./width=device-width, initial-scale=1/index.html"> <title>Introduction to Strategy Pattern - codewithshabib</title>
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<style type="text/css">@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUOjIg1_i6t8kCHKm459WxZqh7k29Y.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZBg_z_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZYgzz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUQjIg1_i6t8kCHKm459WxRyS7j.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZOg3z_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZFgrz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZcgvz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZbgjz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZSgnz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUQjIg1_i6t8kCHKm45_QpRyS7j.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_aZA3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_cJD3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_ZpC3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_dJE3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_c5H3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_epG3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiAyp8kv8JHgFVrJJLmE0tCMPc.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmv1pVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLm21lVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiGyp8kv8JHgFVrJJLucHtF.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmg1hVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmr19VF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmy15VF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLm111VF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLm81xVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiGyp8kv8JHgFVrLPTucHtF.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLFj_Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDz8Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfedw.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLGT9Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDD4Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLBT5Z1xlEA.ttf) format('truetype');
+}</style>
+<link rel="stylesheet" id="siteground-optimizer-combined-css-cd20b16ae1569bbd5c59fe2184d818eb" href="./../../wp-content/uploads/siteground-optimizer-assets/siteground-optimizer-combined-css-cd20b16ae1569bbd5c59fe2184d818eb.css" media="all">
+<link rel="canonical" href="./../index.html">
+<meta property="og:locale" content="./en_US/index.html">
+<meta property="og:type" content="./article/index.html">
+<meta property="og:title" content="./Introduction to Strategy Pattern - codewithshabib/index.html">
+<meta property="og:description" content="In real life software development one particular challenge we developers constantly face is requirement changes. Anyone who is in the software business game knows how frequently and drastically software specification can change in any time. For this reason, in software engineering only one thing is considered as constant: CHANGE! In object oriented world, we have [&hellip;]">
+<meta property="og:url" content="./../index.html">
+<meta property="og:site_name" content="./codewithshabib/index.html">
+<meta property="article:published_time" content="2017-02-05T06:30:51+00:00">
+<meta property="article:modified_time" content="2020-02-03T01:19:32+00:00">
+<meta name="twitter:card" content="./summary_large_image/index.html">
+<meta name="twitter:creator" content="./@hossainshabib/index.html">
+<meta name="twitter:site" content="./@hossainshabib/index.html">
+<meta name="twitter:label1" content="./Written by/index.html">
+<meta name="twitter:data1" content="./Shabib Hossain/index.html">
+<meta name="twitter:label2" content="./Est. reading time">
+<meta name="twitter:data2" content="./5 minutes/index.html"> <script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"./#website","url":"./","name":"codewithshabib","description":"ios and swift blog","publisher":{"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"./?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"./introduction-to-strategy-pattern/#webpage","url":"./introduction-to-strategy-pattern/","name":"Introduction to Strategy Pattern - codewithshabib","isPartOf":{"@id":"./#website"},"datePublished":"2017-02-05T06:30:51+00:00","dateModified":"2020-02-03T01:19:32+00:00","breadcrumb":{"@id":"./introduction-to-strategy-pattern/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["./introduction-to-strategy-pattern/"]}]},{"@type":"BreadcrumbList","@id":"./introduction-to-strategy-pattern/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"./"},{"@type":"ListItem","position":2,"name":"Introduction to Strategy Pattern"}]},{"@type":"Article","@id":"./introduction-to-strategy-pattern/#article","isPartOf":{"@id":"./introduction-to-strategy-pattern/#webpage"},"author":{"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254"},"headline":"Introduction to Strategy Pattern","datePublished":"2017-02-05T06:30:51+00:00","dateModified":"2020-02-03T01:19:32+00:00","mainEntityOfPage":{"@id":"./introduction-to-strategy-pattern/#webpage"},"wordCount":1063,"commentCount":1,"publisher":{"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254"},"keywords":["basic oop","coding","development","encapsulation","Inheritance","Object Oriented Design Patterns","polymorphism","programming","software design patterns","Software Development","strategy pattern"],"articleSection":["Behavioral Patterns","Cocoa","Cocoatouch","Design Patterns","iOS Programming","Object Oriented Design","OOP","Swift"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["./introduction-to-strategy-pattern/#respond"]}]},{"@type":["Person","Organization"],"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254","name":"Shabib Hossain","image":{"@type":"ImageObject","@id":"./#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/ca3a156afda1703176bccbd43004ca3a?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/ca3a156afda1703176bccbd43004ca3a?s=96&d=mm&r=g","caption":"Shabib Hossain"},"logo":{"@id":"./#personlogo"},"sameAs":[".","https://twitter.com/hossainshabib"]}]}</script> <link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//s.w.org">
+<link rel="dns-prefetch" href="//c0.wp.com">
+<link rel="dns-prefetch" href="//widgets.wp.com">
+<link rel="dns-prefetch" href="//s0.wp.com">
+<link rel="dns-prefetch" href="//0.gravatar.com">
+<link rel="dns-prefetch" href="//1.gravatar.com">
+<link rel="dns-prefetch" href="//2.gravatar.com">
+<link rel="dns-prefetch" href="//v0.wordpress.com">
+<link rel="alternate" type="application/rss+xml" title="codewithshabib &raquo; Feed" href="./../../feed/index.html">
+<link rel="alternate" type="application/rss+xml" title="codewithshabib &raquo; Comments Feed" href="./../../comments/feed/index.html">
+<link rel="alternate" type="application/rss+xml" title="codewithshabib &raquo; Introduction to Strategy Pattern Comments Feed" href="./../feed/index.html">  <script src="//www.googletagmanager.com/gtag/js?id=UA-157554662-1" type="text/javascript" data-cfasync="false" data-wpfc-render="false" async></script> <script type="text/javascript" data-cfasync="false" data-wpfc-render="false"> var mi_version = '8.3.0';
+ var mi_track_user = true;
+ var mi_no_track_reason = ''; 
+ var disableStrs = [
+ 'ga-disable-UA-157554662-1',
+ ];  /* Function to detect opted out users */
+ function __gtagTrackerIsOptedOut() {
+ for ( var index = 0; index < disableStrs.length; index++ ) {
+ if ( document.cookie.indexOf( disableStrs[ index ] + '=true' ) > -1 ) {
+ return true;
+ }
+ }  return false;
+ }  /* Disable tracking if the opt-out cookie exists. */
+ if ( __gtagTrackerIsOptedOut() ) {
+ for ( var index = 0; index < disableStrs.length; index++ ) {
+ window[ disableStrs[ index ] ] = true;
+ }
+ }  /* Opt-out function */
+ function __gtagTrackerOptout() {
+ for ( var index = 0; index < disableStrs.length; index++ ) {
+ document.cookie = disableStrs[ index ] + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+ window[ disableStrs[ index ] ] = true;
+ }
+ }  if ( 'undefined' === typeof gaOptout ) {
+ function gaOptout() {
+ __gtagTrackerOptout();
+ }
+ }
+ window.dataLayer = window.dataLayer || [];  window.MonsterInsightsDualTracker = {
+ helpers: {},
+ trackers: {},
+ };
+ if ( mi_track_user ) {
+ function __gtagDataLayer() {
+ dataLayer.push( arguments );
+ }  function __gtagTracker( type, name, parameters ) {
+ if (!parameters) {
+ parameters = {};
+ }  if (parameters.send_to) {
+ __gtagDataLayer.apply( null, arguments );
+ return;
+ }  if ( type === 'event' ) { 
+ parameters.send_to = monsterinsights_frontend.ua;
+ __gtagDataLayer( type, name, parameters );
+ } else {
+ __gtagDataLayer.apply( null, arguments );
+ }
+ }
+ __gtagTracker( 'js', new Date() );
+ __gtagTracker( 'set', {
+ 'developer_id.dZGIzZG' : true,
+ } );
+ __gtagTracker( 'config', 'UA-157554662-1', {"forceSSL":"true","link_attribution":"true"} );
+ window.gtag = __gtagTracker;											(function () {
+ /* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+ /* ga and __gaTracker compatibility shim. */
+ var noopfn = function () {
+ return null;
+ };
+ var newtracker = function () {
+ return new Tracker();
+ };
+ var Tracker = function () {
+ return null;
+ };
+ var p = Tracker.prototype;
+ p.get = noopfn;
+ p.set = noopfn;
+ p.send = function (){
+ var args = Array.prototype.slice.call(arguments);
+ args.unshift( 'send' );
+ __gaTracker.apply(null, args);
+ };
+ var __gaTracker = function () {
+ var len = arguments.length;
+ if ( len === 0 ) {
+ return;
+ }
+ var f = arguments[len - 1];
+ if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+ if ( 'send' === arguments[0] ) {
+ var hitConverted, hitObject = false, action;
+ if ( 'event' === arguments[1] ) {
+ if ( 'undefined' !== typeof arguments[3] ) {
+ hitObject = {
+ 'eventAction': arguments[3],
+ 'eventCategory': arguments[2],
+ 'eventLabel': arguments[4],
+ 'value': arguments[5] ? arguments[5] : 1,
+ }
+ }
+ }
+ if ( 'pageview' === arguments[1] ) {
+ if ( 'undefined' !== typeof arguments[2] ) {
+ hitObject = {
+ 'eventAction': 'page_view',
+ 'page_path' : arguments[2],
+ }
+ }
+ }
+ if ( typeof arguments[2] === 'object' ) {
+ hitObject = arguments[2];
+ }
+ if ( typeof arguments[5] === 'object' ) {
+ Object.assign( hitObject, arguments[5] );
+ }
+ if ( 'undefined' !== typeof arguments[1].hitType ) {
+ hitObject = arguments[1];
+ if ( 'pageview' === hitObject.hitType ) {
+ hitObject.eventAction = 'page_view';
+ }
+ }
+ if ( hitObject ) {
+ action = 'timing' === arguments[1].hitType ? 'timing_complete' : hitObject.eventAction;
+ hitConverted = mapArgs( hitObject );
+ __gtagTracker( 'event', action, hitConverted );
+ }
+ }
+ return;
+ }  function mapArgs( args ) {
+ var arg, hit = {};
+ var gaMap = {
+ 'eventCategory': 'event_category',
+ 'eventAction': 'event_action',
+ 'eventLabel': 'event_label',
+ 'eventValue': 'event_value',
+ 'nonInteraction': 'non_interaction',
+ 'timingCategory': 'event_category',
+ 'timingVar': 'name',
+ 'timingValue': 'value',
+ 'timingLabel': 'event_label',
+ 'page' : 'page_path',
+ 'location' : 'page_location',
+ 'title' : 'page_title',
+ };
+ for ( arg in args ) {
+ if ( ! ( ! args.hasOwnProperty(arg) || ! gaMap.hasOwnProperty(arg) ) ) {
+ hit[gaMap[arg]] = args[arg];
+ } else {
+ hit[arg] = args[arg];
+ }
+ }
+ return hit;
+ }  try {
+ f.hitCallback();
+ } catch ( ex ) {
+ }
+ };
+ __gaTracker.create = newtracker;
+ __gaTracker.getByName = newtracker;
+ __gaTracker.getAll = function () {
+ return [];
+ };
+ __gaTracker.remove = noopfn;
+ __gaTracker.loaded = true;
+ window['__gaTracker'] = __gaTracker;
+ })();
+ } else {
+ console.log( "" );
+ ( function () {
+ function __gtagTracker() {
+ return null;
+ }
+ window['__gtagTracker'] = __gtagTracker;
+ window['gtag'] = __gtagTracker;
+ } )();
+ }
+ </script>  <script type="text/javascript"> window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":".\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.3"}};
+ !function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+ </script> <style type="text/css">img.wp-smiley,
+img.emoji {
+ display: inline !important;
+ border: none !important;
+ box-shadow: none !important;
+ height: 1em !important;
+ width: 1em !important;
+ margin: 0 .07em !important;
+ vertical-align: -0.1em !important;
+ background: none !important;
+ padding: 0 !important;
+}</style> <style id="wp-block-library-inline-css" type="text/css">.has-text-align-justify{text-align:justify;}</style> <style id="wp-block-library-theme-inline-css" type="text/css">#start-resizable-editor-section{display:none}.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-code{font-family:Menlo,Consolas,monaco,monospace;color:#1e1e1e;padding:.8em 1em;border:1px solid #ddd;border-radius:4px}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-group.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto;opacity:.4}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{padding:.5em;border:1px solid;word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}#end-resizable-editor-section{display:none}</style>
+<link rel="stylesheet" id="social-logos-css" href="https://c0.wp.com/p/jetpack/10.5/_inc/social-logos/social-logos.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="https://c0.wp.com/p/jetpack/10.5/css/jetpack.css" type="text/css" media="all"> <script type="text/javascript" id="jetpack_related-posts-js-extra"> /* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */ </script> <script type="text/javascript" src="https://c0.wp.com/p/jetpack/10.5/_inc/build/related-posts/related-posts.min.js" id="jetpack_related-posts-js"></script> <script type="text/javascript" id="monsterinsights-frontend-script-js-extra"> /* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":".","hash_tracking":"false","ua":"UA-157554662-1","v4_id":""};
+/* ]]> */ </script> <script type="text/javascript" src="./../../wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend-gtag.min.js?ver=8.3.0" id="monsterinsights-frontend-script-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script><link rel="https://api.w.org/" href="./../../wp-json/index.html">
+<link rel="alternate" type="application/json" href="./../../wp-json/wp/v2/posts/690/index.html">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="./../../xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="./../../wp-includes/wlwmanifest.xml">
+<meta name="generator" content="./WordPress 5.8.3">
+<link rel="shortlink" href="https://wp.me/pbF0i9-b8">
+<link rel="alternate" type="application/json+oembed" href="./../../wp-json/oembed/1.0/embed/index.html?url=https%3A%2F%2F%2Fintroduction-to-strategy-pattern%2F">
+<link rel="alternate" type="text/xml+oembed" href="./../../wp-json/oembed/1.0/embed/index.html?url=https%3A%2F%2F%2Fintroduction-to-strategy-pattern%2F&#038;format=xml"> <style type="text/css">img#wpstats{display:none}</style> <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<link rel="amphtml" href="./amp/index.html"> <style type="text/css">/* If html does not have either class, do not show lazy loaded images. */
+ html:not( .jetpack-lazy-images-js-enabled ):not( .js ) .jetpack-lazy-image {
+ display: none;
+ }</style> <script> document.documentElement.classList.add(
+ 'jetpack-lazy-images-js-enabled'
+ ); </script><link rel="icon" href="./../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg" sizes="32x32">
+<link rel="icon" href="./../../wp-content/uploads/2016/08/cropped-logo1-192x192.jpg" sizes="192x192">
+<link rel="apple-touch-icon" href="./../../wp-content/uploads/2016/08/cropped-logo1-180x180.jpg">
+<meta name="msapplication-TileImage" content="./../../wp-content/uploads/2016/08/cropped-logo1-270x270.jpg"> <style type="text/css" id="wp-custom-css">/** Center Align Meta and Content **/ul.meta li{float:none;display:inline-block}.single-post .site-content{text-align:center}.entry-content{text-align:justify}/** Color **/#footer .oceanwp-about-me .oceanwp-about-me-name{color:#fff}/** WP Contact Form **/body div.wpforms-container-full .wpforms-form input.wpforms-field-medium,body div.wpforms-container-full .wpforms-form input.wpforms-field-medium,body div.wpforms-container-full .wpforms-form select.wpforms-field-medium,body div.wpforms-container-full .wpforms-form .wpforms-field-row.wpforms-field-medium{max-width:100%}</style>  <style type="text/css">/* General CSS */a:hover,a.light:hover,.theme-heading .text::before,.theme-heading .text::after,#top-bar-content >a:hover,#top-bar-social li.oceanwp-email a:hover,#site-navigation-wrap .dropdown-menu >li >a:hover,#site-header.medium-header #medium-searchform button:hover,.oceanwp-mobile-menu-icon a:hover,.blog-entry.post .blog-entry-header .entry-title a:hover,.blog-entry.post .blog-entry-readmore a:hover,.blog-entry.thumbnail-entry .blog-entry-category a,ul.meta li a:hover,.dropcap,.single nav.post-navigation .nav-links .title,body .related-post-title a:hover,body #wp-calendar caption,body .contact-info-widget.default i,body .contact-info-widget.big-icons i,body .custom-links-widget .oceanwp-custom-links li a:hover,body .custom-links-widget .oceanwp-custom-links li a:hover:before,body .posts-thumbnails-widget li a:hover,body .social-widget li.oceanwp-email a:hover,.comment-author .comment-meta .comment-reply-link,#respond #cancel-comment-reply-link:hover,#footer-widgets .footer-box a:hover,#footer-bottom a:hover,#footer-bottom #footer-bottom-menu a:hover,.sidr a:hover,.sidr-class-dropdown-toggle:hover,.sidr-class-menu-item-has-children.active >a,.sidr-class-menu-item-has-children.active >a >.sidr-class-dropdown-toggle,input[type=checkbox]:checked:before{color:#e84500}input[type="button"],input[type="reset"],input[type="submit"],button[type="submit"],.button,#site-navigation-wrap .dropdown-menu >li.btn >a >span,.thumbnail:hover i,.post-quote-content,.omw-modal .omw-close-modal,body .contact-info-widget.big-icons li:hover i,body div.wpforms-container-full .wpforms-form input[type=submit],body div.wpforms-container-full .wpforms-form button[type=submit],body div.wpforms-container-full .wpforms-form .wpforms-page-button{background-color:#e84500}.widget-title{border-color:#e84500}blockquote{border-color:#e84500}#searchform-dropdown{border-color:#e84500}.dropdown-menu .sub-menu{border-color:#e84500}.blog-entry.large-entry .blog-entry-readmore a:hover{border-color:#e84500}.oceanwp-newsletter-form-wrap input[type="email"]:focus{border-color:#e84500}.social-widget li.oceanwp-email a:hover{border-color:#e84500}#respond #cancel-comment-reply-link:hover{border-color:#e84500}body .contact-info-widget.big-icons li:hover i{border-color:#e84500}#footer-widgets .oceanwp-newsletter-form-wrap input[type="email"]:focus{border-color:#e84500}input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,button[type="submit"]:hover,input[type="button"]:focus,input[type="reset"]:focus,input[type="submit"]:focus,button[type="submit"]:focus,.button:hover,#site-navigation-wrap .dropdown-menu >li.btn >a:hover >span,.post-quote-author,.omw-modal .omw-close-modal:hover,body div.wpforms-container-full .wpforms-form input[type=submit]:hover,body div.wpforms-container-full .wpforms-form button[type=submit]:hover,body div.wpforms-container-full .wpforms-form .wpforms-page-button:hover{background-color:#dd782a}table th,table td,hr,.content-area,body.content-left-sidebar #content-wrap .content-area,.content-left-sidebar .content-area,#top-bar-wrap,#site-header,#site-header.top-header #search-toggle,.dropdown-menu ul li,.centered-minimal-page-header,.blog-entry.post,.blog-entry.grid-entry .blog-entry-inner,.blog-entry.thumbnail-entry .blog-entry-bottom,.single-post .entry-title,.single .entry-share-wrap .entry-share,.single .entry-share,.single .entry-share ul li a,.single nav.post-navigation,.single nav.post-navigation .nav-links .nav-previous,#author-bio,#author-bio .author-bio-avatar,#author-bio .author-bio-social li a,#related-posts,#comments,.comment-body,#respond #cancel-comment-reply-link,#blog-entries .type-page,.page-numbers a,.page-numbers span:not(.elementor-screen-only),.page-links span,body #wp-calendar caption,body #wp-calendar th,body #wp-calendar tbody,body .contact-info-widget.default i,body .contact-info-widget.big-icons i,body .posts-thumbnails-widget li,body .tagcloud a{border-color:rgba(207,207,207,0.5)}body{background-image:url(https://personalblog.sgwpdemo.com/wp-content/uploads/2018/08/fresh_snow.png)}a{color:#003d54}a:hover{color:#dd782a}.boxed-layout #wrap,.boxed-layout .parallax-footer,.boxed-layout .owp-floating-bar{width:1290px}.container{width:1024px}#main #content-wrap,.separate-layout #main #content-wrap{padding-top:50px;padding-bottom:50px}#scroll-top{bottom:50px}#scroll-top{width:29px;height:29px;line-height:29px}#scroll-top{border-radius:100px}/* Header CSS */#site-header{border-color:#dd3333}#site-header.has-header-media .overlay-header-media{background-color:rgba(0,0,0,0.5)}.effect-one #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-three #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-five #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:before,.effect-five #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-nine #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:before,.effect-nine #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after{background-color:#dd782a}.effect-four #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:before,.effect-four #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-seven #site-navigation-wrap .dropdown-menu >li >a.menu-link:hover >span:after,.effect-seven #site-navigation-wrap .dropdown-menu >li.sfHover >a.menu-link >span:after{color:#dd782a}.effect-seven #site-navigation-wrap .dropdown-menu >li >a.menu-link:hover >span:after,.effect-seven #site-navigation-wrap .dropdown-menu >li.sfHover >a.menu-link >span:after{text-shadow:10px 0 #dd782a,-10px 0 #dd782a}#site-navigation-wrap .dropdown-menu >li >a,.oceanwp-mobile-menu-icon a,#searchform-header-replace-close{color:#e84500}#site-navigation-wrap .dropdown-menu >li >a:hover,.oceanwp-mobile-menu-icon a:hover,#searchform-header-replace-close:hover{color:#dd782a}.dropdown-menu ul li a.menu-link:hover{color:#dd782a}.oceanwp-social-menu ul li a{margin:0 2px 0 3px}.oceanwp-social-menu ul li a{border-radius:100%}.oceanwp-social-menu.simple-social ul li a{color:#ffffff}.oceanwp-social-menu.simple-social ul li a:hover{color:#fff200!important}#sidr,#mobile-dropdown{background-color:#e84500}body .sidr a,body .sidr-class-dropdown-toggle,#mobile-dropdown ul li a,#mobile-dropdown ul li a .dropdown-toggle,#mobile-fullscreen ul li a,#mobile-fullscreen .oceanwp-social-menu.simple-social ul li a{color:#ffffff}#mobile-fullscreen a.close .close-icon-inner,#mobile-fullscreen a.close .close-icon-inner::after{background-color:#ffffff}body .sidr a:hover,body .sidr-class-dropdown-toggle:hover,body .sidr-class-dropdown-toggle .fa,body .sidr-class-menu-item-has-children.active >a,body .sidr-class-menu-item-has-children.active >a >.sidr-class-dropdown-toggle,#mobile-dropdown ul li a:hover,#mobile-dropdown ul li a .dropdown-toggle:hover,#mobile-dropdown .menu-item-has-children.active >a,#mobile-dropdown .menu-item-has-children.active >a >.dropdown-toggle,#mobile-fullscreen ul li a:hover,#mobile-fullscreen .oceanwp-social-menu.simple-social ul li a:hover{color:#dd782a}#mobile-fullscreen a.close:hover .close-icon-inner,#mobile-fullscreen a.close:hover .close-icon-inner::after{background-color:#dd782a}body .sidr-class-mobile-searchform input,body .sidr-class-mobile-searchform input:focus,#mobile-dropdown #mobile-menu-search form input,#mobile-fullscreen #mobile-search input,#mobile-fullscreen #mobile-search label{color:#ffffff}body .sidr-class-mobile-searchform input,#mobile-dropdown #mobile-menu-search form input,#mobile-fullscreen #mobile-search input{border-color:#ffffff}body .sidr-class-mobile-searchform input:focus,#mobile-dropdown #mobile-menu-search form input:focus,#mobile-fullscreen #mobile-search input:focus{border-color:#ffffff}.sidr-class-mobile-searchform button,#mobile-dropdown #mobile-menu-search form button{color:#ffffff}.sidr-class-mobile-searchform button:hover,#mobile-dropdown #mobile-menu-search form button:hover{color:#ffffff}/* Blog CSS */.loader-ellips__dot{background-color:#e84500}.single-post .background-image-page-header .page-header-inner,.single-post .background-image-page-header .site-breadcrumbs{text-align:left}/* Footer Widgets CSS */#footer-widgets,#footer-widgets p,#footer-widgets li a:before,#footer-widgets .contact-info-widget span.oceanwp-contact-title,#footer-widgets .recent-posts-date,#footer-widgets .recent-posts-comments,#footer-widgets .widget-recent-posts-icons li .fa{color:#ffffff}/* Footer Bottom CSS */#footer-bottom{background-color:rgba(255,255,255,0)}#footer-bottom,#footer-bottom p{color:#353535}/* Typography CSS */body{font-family:Poppins;color:#3a3a3a}h1,h2,h3,h4,h5,h6,.theme-heading,.widget-title,.oceanwp-widget-recent-posts-title,.comment-reply-title,.entry-title,.sidebar-box .widget-title{font-family:Poppins}#site-navigation-wrap .dropdown-menu >li >a,#site-header.full_screen-header .fs-dropdown-menu >li >a,#site-header.top-header #site-navigation-wrap .dropdown-menu >li >a,#site-header.center-header #site-navigation-wrap .dropdown-menu >li >a,#site-header.medium-header #site-navigation-wrap .dropdown-menu >li >a,.oceanwp-mobile-menu-icon a{font-family:Montserrat;font-weight:700;font-size:12px}.sidr-class-dropdown-menu li a,a.sidr-class-toggle-sidr-close,#mobile-dropdown ul li a,body #mobile-fullscreen ul li a{font-family:Montserrat;font-weight:600;text-transform:uppercase}@media (max-width:768px){.sidr-class-dropdown-menu li a,a.sidr-class-toggle-sidr-close,#mobile-dropdown ul li a,body #mobile-fullscreen ul li a{font-size:12px;line-height:1.6;letter-spacing:.8px}}#footer-bottom #copyright{font-weight:600;letter-spacing:.6px;text-transform:uppercase}</style>
+</head>
+<body class="post-template-default single single-post postid-690 single-format-standard wp-embed-responsive oceanwp-theme dropdown-mobile boxed-layout wrap-boxshadow no-header-border default-breakpoint has-sidebar content-left-sidebar post-in-category-behavioral-patterns post-in-category-cocoa post-in-category-cocoatouch post-in-category-design-patterns post-in-category-ios-programming post-in-category-object-oriented-design post-in-category-oop post-in-category-swift page-header-disabled has-breadcrumbs has-blog-grid elementor-default elementor-kit-2146" itemscope="itemscope" itemtype="https://schema.org/Article">
+<div id="outer-wrap" class="site clr"> <a class="skip-link screen-reader-text" href="#main">Skip to content</a><div id="wrap" class="clr">
+<header id="site-header" class="minimal-header has-social effect-one clr" data-height="74" itemscope="itemscope" itemtype="https://schema.org/WPHeader" role="banner"><div id="site-header-inner" class="clr container">
+<div id="site-logo" class="clr" itemscope itemtype="https://schema.org/Brand"><div id="site-logo-inner" class="clr"> <a href="./../../index.html" rel="home" class="site-title site-logo-text">codewithshabib</a>
+</div></div>
+<div class="oceanwp-social-menu clr simple-social"><div class="social-menu-inner clr"><ul aria-label="Social links"></ul></div></div>
+<div id="site-navigation-wrap" class="no-top-border clr"><nav id="site-navigation" class="navigation main-navigation clr" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement" role="navigation"><ul id="menu-navigation-menu" class="main-menu dropdown-menu sf-menu">
+<li id="menu-item-133" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-133"><a href="https://codewithshabib.com/" class="menu-link"><span class="text-wrap">Home</span></a></li>
+<li id="menu-item-132" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132"><a href="./../../about/index.html" class="menu-link"><span class="text-wrap">About</span></a></li>
+<li id="menu-item-1308" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown menu-item-1308 nav-no-click">
+<a class="menu-link"><span class="text-wrap">Portfolio <span class="nav-arrow fa fa-angle-down"></span></span></a><ul class="sub-menu">
+<li id="menu-item-659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-659"><a target="_blank" href="https://www.linkedin.com/in/ahmadshabibulhossain" class="menu-link"><span class="text-wrap">Linkedin</span></a></li>
+<li id="menu-item-660" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-660"><a target="_blank" href="https://github.com/shabib87" class="menu-link"><span class="text-wrap">GitHub</span></a></li>
+<li id="menu-item-661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-661"><a target="_blank" href="https://stackoverflow.com/users/1156026/shabib?tab=profile" class="menu-link"><span class="text-wrap">StackOverflow</span></a></li>
+<li id="menu-item-662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-662"><a target="_blank" href="https://cocoapods.org/owners/14784" class="menu-link"><span class="text-wrap">CocoaPods</span></a></li>
+<li id="menu-item-663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-663"><a target="_blank" href="https://www.cocoacontrols.com/authors/shabib87" class="menu-link"><span class="text-wrap">CocoaControls</span></a></li>
+<li id="menu-item-1071" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1071"><a target="_blank" href="https://www.hackerrank.com/shabib_hossain" class="menu-link"><span class="text-wrap">HackerRank</span></a></li>
+</ul>
+</li>
+</ul></nav></div>
+<div class="oceanwp-mobile-menu-icon clr mobile-right"> <a href="javascript:void(0)" class="mobile-menu" aria-label="Mobile Menu"> <i class="fa fa-bars" aria-hidden="true"></i> <span class="oceanwp-text">Menu</span> <span class="oceanwp-close-text">Menu</span> </a>
+</div>
+</div>
+<div id="mobile-dropdown" class="clr"><nav class="clr has-social" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement"><ul id="menu-navigation-menu-1" class="menu">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-133"><a href="https://codewithshabib.com/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132"><a href="./../../about/index.html">About</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1308">
+<a>Portfolio</a><ul class="sub-menu">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-659"><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/ahmadshabibulhossain">Linkedin</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-660"><a target="_blank" rel="noopener" href="https://github.com/shabib87">GitHub</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-661"><a target="_blank" rel="noopener" href="https://stackoverflow.com/users/1156026/shabib?tab=profile">StackOverflow</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-662"><a target="_blank" rel="noopener" href="https://cocoapods.org/owners/14784">CocoaPods</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-663"><a target="_blank" rel="noopener" href="https://www.cocoacontrols.com/authors/shabib87">CocoaControls</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1071"><a target="_blank" rel="noopener" href="https://www.hackerrank.com/shabib_hossain">HackerRank</a></li>
+</ul>
+</li>
+</ul>
+<div class="oceanwp-social-menu clr simple-social"><div class="social-menu-inner clr"><ul aria-label="Social links"></ul></div></div>
+<div id="mobile-menu-search" class="clr"><form method="get" action="./" class="mobile-searchform" role="search" aria-label="Search for:"> <label for="ocean-mobile-search1"> <input type="search" name="s" autocomplete="off" placeholder="Search"> <button type="submit" class="searchform-submit" aria-label="Submit search"> <i class="icon-magnifier" aria-hidden="true"></i> </button> </label>
+</form></div></nav></div></header><main id="main" class="site-main clr" role="main"><div id="content-wrap" class="container clr">
+<div id="primary" class="content-area clr"><div id="content" class="site-content clr"><article id="post-690"><header class="entry-header clr"><h2 class="single-post-title entry-title" itemprop="headline">Introduction to Strategy Pattern</h2></header><ul class="meta ospm-default clr">
+<li class="meta-author" itemprop="name">
+<span class="screen-reader-text">Post author:</span><i class="icon-user" aria-hidden="true"></i><a href="./../../author/shabibhossain/index.html" title="Posts by Shabib Hossain" rel="author" itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">Shabib Hossain</a>
+</li>
+<li class="meta-date" itemprop="datePublished">
+<span class="screen-reader-text">Post published:</span><i class="icon-clock" aria-hidden="true"></i>February 5, 2017</li>
+<li class="meta-cat">
+<span class="screen-reader-text">Post category:</span><i class="icon-folder" aria-hidden="true"></i><a href="./../../category/oop/design-patterns/behavioral-patterns/index.html" rel="category tag">Behavioral Patterns</a> <span class="owp-sep">/</span> <a href="./../../category/software-development/ios-programming/cocoa/index.html" rel="category tag">Cocoa</a> <span class="owp-sep">/</span> <a href="./../../category/software-development/ios-programming/cocoatouch/index.html" rel="category tag">Cocoatouch</a> <span class="owp-sep">/</span> <a href="./../../category/oop/design-patterns/index.html" rel="category tag">Design Patterns</a> <span class="owp-sep">/</span> <a href="./../../category/software-development/ios-programming/index.html" rel="category tag">iOS Programming</a> <span class="owp-sep">/</span> <a href="./../../category/oop/design-patterns/object-oriented-design/index.html" rel="category tag">Object Oriented Design</a> <span class="owp-sep">/</span> <a href="./../../category/oop/index.html" rel="category tag">OOP</a> <span class="owp-sep">/</span> <a href="./../../category/software-development/ios-programming/swift/index.html" rel="category tag">Swift</a>
+</li>
+<li class="meta-comments">
+<span class="screen-reader-text">Post comments:</span><i class="icon-bubble" aria-hidden="true"></i><a href="./../index.html#comments" class="comments-link">1 Comment</a>
+</li>
+</ul>
+<div class="entry-content clr" itemprop="text">
+<p>In real life software development one particular challenge we developers constantly face is requirement changes. Anyone who is in the software business game knows how frequently and drastically software specification can change in any time. For this reason, in software engineering only one thing is considered as constant: <strong>CHANGE!</strong></p>
+<p>In object oriented world, we have some nice ways to deal with this, i.e. design patterns to the rescue. There are lots and lots of design patterns out there to help us, the developers. Amongst them the most common and widely used one is known as <strong>Strategy Pattern</strong>. Any developer with a few years of experience under his/her belt uses this quite frequently (sometimes even without knowing they are using it!).</p>
+<p>In this post I am going to try to create a scenario, which we can solve using strategy pattern.</p>
+<p>Let us assume we&#8217;re in a software company named BadAss Softwares Inc, where we build some ass kicking great softwares. Now, a client of ours, Mr. Big Boss wants to make a smart car software. His initial requirements are simple:</p>
+<ul>
+<li>I want a smart car.</li>
+<li>It can drive.</li>
+<li>It can talk.</li>
+</ul>
+<p>Getting this requirement, our rockstar developer Johny Doe thinks, boy that&#8217;s easy! So, he writes the following code.</p> <style>.gist table { margin-bottom: 0; }</style>
+<div style="tab-size: 8" id="gist44517842" class="gist"><div class="gist-file" translate="no">
+<div class="gist-data"><div class="js-gist-file-update-container js-task-list-container file-box"><div id="file-smartcar-swift" class="file my-2"><div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  "><div class="js-check-bidi js-blob-code-container blob-code-content"> <template class="js-file-alert-template"><div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> <span> This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters. <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a> </span><div data-view-component="true" class="flash-action"> <a href="./{{ revealButtonHref }}/index.html" data-view-component="true" class="btn-sm btn"> Show hidden characters </a>
+</div>
+</div></template> <template class="js-line-alert-template"> <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> </span></template><table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartCar.swift">
+<tr>
+<td id="file-smartcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+<td id="file-smartcar-swift-LC1" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SmartCar</span> {</td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+<td id="file-smartcar-swift-LC2" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+<td id="file-smartcar-swift-LC3" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+<td id="file-smartcar-swift-LC4" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+<td id="file-smartcar-swift-LC5" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+<td id="file-smartcar-swift-LC6" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">talk</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+<td id="file-smartcar-swift-LC7" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Hi! I am the smart talking car!<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+<td id="file-smartcar-swift-LC8" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartcar-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+<td id="file-smartcar-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+</table>
+</div></div></div></div></div>
+<div class="gist-meta"> <a href="https://gist.github.com/shabib87/75be3b6edca66462625d0de8f1902bc2/raw/e2610960e8aef0fc7de3eeb6521f3eebb889c49b/SmartCar.swift" style="float:right">view raw</a> <a href="https://gist.github.com/shabib87/75be3b6edca66462625d0de8f1902bc2#file-smartcar-swift"> SmartCar.swift </a> hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+</div>
+</div></div>
+<p>Mr. Big is happy, he got what he asked for. And we are happy too. But now comes the challenge; someone gave Mr. Big an idea, why only drive and talk. It&#8217;s a damn smart car, he should aim for more! So  Mr. Big changes this requirement to the following:</p>
+<ul>
+<li>Yes, I want a smart car that can do all the previous stuff.</li>
+<li>I want another super smart car, it should not only drive on road, but also on water! (Well, don&#8217;t laugh!)</li>
+</ul>
+<p>Now, Johny is smart. He likes to reuse as many parts of the code as he can. So, how would he design it? Here comes, our nice friend Inheritance! So, what Johny does is, he makes a subclass of the SmartCar and adds a new method called driveOnWater. Cool, isn&#8217;t it?</p> <style>.gist table { margin-bottom: 0; }</style>
+<div style="tab-size: 8" id="gist44519825" class="gist"><div class="gist-file" translate="no">
+<div class="gist-data"><div class="js-gist-file-update-container js-task-list-container file-box"><div id="file-supersmartcar-swift" class="file my-2"><div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  "><div class="js-check-bidi js-blob-code-container blob-code-content"> <template class="js-file-alert-template"><div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> <span> This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters. <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a> </span><div data-view-component="true" class="flash-action"> <a href="./{{ revealButtonHref }}/index.html" data-view-component="true" class="btn-sm btn"> Show hidden characters </a>
+</div>
+</div></template> <template class="js-line-alert-template"> <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> </span></template><table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SuperSmartCar.swift">
+<tr>
+<td id="file-supersmartcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+<td id="file-supersmartcar-swift-LC1" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SuperSmartCar</span>: <span class="pl-e">SmartCar </span>{</td>
+</tr>
+<tr>
+<td id="file-supersmartcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+<td id="file-supersmartcar-swift-LC2" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+</tr>
+<tr>
+<td id="file-supersmartcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+<td id="file-supersmartcar-swift-LC3" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-supersmartcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+<td id="file-supersmartcar-swift-LC4" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-supersmartcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+<td id="file-supersmartcar-swift-LC5" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+</table>
+</div></div></div></div></div>
+<div class="gist-meta"> <a href="https://gist.github.com/shabib87/e489cf3ed8eb4d28fbf9cbe4da6cb39d/raw/997fe4027ae12714bb728423d86f2304f4c52fca/SuperSmartCar.swift" style="float:right">view raw</a> <a href="https://gist.github.com/shabib87/e489cf3ed8eb4d28fbf9cbe4da6cb39d#file-supersmartcar-swift"> SuperSmartCar.swift </a> hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+</div>
+</div></div>
+<p>Now, we have again made Mr. Big happy! How cool is that!</p>
+<p>But Mr. Big has something bigger in his mind, he now wants make a smart vehicle that can not only run on road, but also fly (but can not run over water)! Now, Johny is in a little trouble, as he can not just make another subclass to support this. How would he deal with this issue? Well, as I said Johny is smart! He knows something called Interface, a nifty tool in OOP (which in our case in swift is known as protocol)! So, as the &#8220;drive on road&#8221; and other features are common, except for &#8220;driving on water&#8221;. He creates a protocol named Flyable and creates another subclass of the SmartCar.</p> <style>.gist table { margin-bottom: 0; }</style>
+<div style="tab-size: 8" id="gist44519799" class="gist"><div class="gist-file" translate="no">
+<div class="gist-data"><div class="js-gist-file-update-container js-task-list-container file-box"><div id="file-smartflyingcar-swift" class="file my-2"><div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  "><div class="js-check-bidi js-blob-code-container blob-code-content"> <template class="js-file-alert-template"><div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> <span> This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters. <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a> </span><div data-view-component="true" class="flash-action"> <a href="./{{ revealButtonHref }}/index.html" data-view-component="true" class="btn-sm btn"> Show hidden characters </a>
+</div>
+</div></template> <template class="js-line-alert-template"> <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> </span></template><table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartFlyingCar.swift">
+<tr>
+<td id="file-smartflyingcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+<td id="file-smartflyingcar-swift-LC1" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">protocol</span> <span class="pl-en">Flyable</span> {</td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+<td id="file-smartflyingcar-swift-LC2" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>()</td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+<td id="file-smartflyingcar-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+<td id="file-smartflyingcar-swift-LC4" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+<td id="file-smartflyingcar-swift-LC5" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SmartFlyingCar</span>: <span class="pl-e">SmartCar</span>, <span class="pl-e">Flyable </span>{</td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+<td id="file-smartflyingcar-swift-LC6" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+<td id="file-smartflyingcar-swift-LC7" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Wohoo! I am flying high!<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+<td id="file-smartflyingcar-swift-LC8" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartflyingcar-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+<td id="file-smartflyingcar-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+</table>
+</div></div></div></div></div>
+<div class="gist-meta"> <a href="https://gist.github.com/shabib87/15f5bd76aeb01112801a5c09ce719d2d/raw/6647685b920d11455837e867f0755b8c0839e49f/SmartFlyingCar.swift" style="float:right">view raw</a> <a href="https://gist.github.com/shabib87/15f5bd76aeb01112801a5c09ce719d2d#file-smartflyingcar-swift"> SmartFlyingCar.swift </a> hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+</div>
+</div></div>
+<p>Now, we have our SmartCar, SuperSmartCar and FlyingSmartCar, which all can run on the road and talk back to you! Mr. Big is happy, our company is happy and Johny got a big fat bonus! But, good days don&#8217;t last long. Due to the complicated features, Mr. Big&#8217;s cars don&#8217;t do so well in the market as people don&#8217;t like it yet. So, Mr. Big does a public survey and finds out people don&#8217;t want all in all cars, they want car that runs on road, boat that runs over water and plane that flies in the air. So, he again calls our firm and changes the requirement again:</p>
+<ul>
+<li>I want some smart vehicles.</li>
+<li>I want a smart car that runs on road.</li>
+<li>I want a smart boat that runs on water.</li>
+<li>I want a smart plane that flies.</li>
+<li>These smart vehicles must talk back.</li>
+</ul>
+<p>Now, Johny is pissed as he has to change a lot of things and he has to redo a lot of stuff. So he sits with a cup of coffee and thinks how he can decouple all the classes and make the changes with the least amount of hassle. Johny finds the following things:</p>
+<ul>
+<li>All products are vehicles and can talk back, so he can write a vehicle class with that option.</li>
+<li>A car can talk and run on road but can not fly or run on water.</li>
+<li>A boat can talk and run over water but can not fly or run on road.</li>
+<li>A plane can talk and fly but can not run on water or road.</li>
+</ul>
+<p>Now, as Johny has learnt the client can change the requirement anytime, he also thinks about the following:</p>
+<ul>
+<li>What if Mr. Big wants another vehicle that can run on both water and road again?</li>
+<li>What if Mr. Big wants another vehicle that can fly and run on road?</li>
+<li>What if Mr. Big wants another vehicle that can do all of those?</li>
+</ul>
+<p class="graf graf--p">So, now to answer these Johny does these:</p>
+<ul>
+<li>Creates separate classes by subclassing the Vehicle class, that&#8217;ll make sure all vehicles are smart and can talk back.</li>
+<li>Makes all run behaviors as interfaces/protocols, that&#8217;ll make sure if any more requirement changes comes up, he only has to implement the protocol to give support to that feature.</li>
+</ul>
+<p>Now, this is Johny&#8217;s final code.</p> <style>.gist table { margin-bottom: 0; }</style>
+<div style="tab-size: 8" id="gist44519866" class="gist"><div class="gist-file" translate="no">
+<div class="gist-data"><div class="js-gist-file-update-container js-task-list-container file-box"><div id="file-smartvehicle-swift" class="file my-2"><div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  "><div class="js-check-bidi js-blob-code-container blob-code-content"> <template class="js-file-alert-template"><div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> <span> This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters. <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a> </span><div data-view-component="true" class="flash-action"> <a href="./{{ revealButtonHref }}/index.html" data-view-component="true" class="btn-sm btn"> Show hidden characters </a>
+</div>
+</div></template> <template class="js-line-alert-template"> <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> </span></template><table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartVehicle.swift">
+<tr>
+<td id="file-smartvehicle-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+<td id="file-smartvehicle-swift-LC1" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">protocol</span> <span class="pl-en">RoadDrivable</span> {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+<td id="file-smartvehicle-swift-LC2" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>()</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+<td id="file-smartvehicle-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+<td id="file-smartvehicle-swift-LC4" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+<td id="file-smartvehicle-swift-LC5" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">protocol</span> <span class="pl-en">WaterDrivable</span> {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+<td id="file-smartvehicle-swift-LC6" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>()</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+<td id="file-smartvehicle-swift-LC7" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+<td id="file-smartvehicle-swift-LC8" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+<td id="file-smartvehicle-swift-LC9" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">protocol</span> <span class="pl-en">Flyable</span> {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+<td id="file-smartvehicle-swift-LC10" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>()</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+<td id="file-smartvehicle-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+<td id="file-smartvehicle-swift-LC12" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+<td id="file-smartvehicle-swift-LC13" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SmartVehicle</span> {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+<td id="file-smartvehicle-swift-LC14" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">talk</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+<td id="file-smartvehicle-swift-LC15" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Hi! I am the smart talking vehicle!<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+<td id="file-smartvehicle-swift-LC16" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+<td id="file-smartvehicle-swift-LC17" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+<td id="file-smartvehicle-swift-LC18" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+<td id="file-smartvehicle-swift-LC19" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SmartCar</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">RoadDrivable </span>{</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+<td id="file-smartvehicle-swift-LC20" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+<td id="file-smartvehicle-swift-LC21" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+<td id="file-smartvehicle-swift-LC22" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+<td id="file-smartvehicle-swift-LC23" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+<td id="file-smartvehicle-swift-LC24" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+<td id="file-smartvehicle-swift-LC25" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SmartBoat</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">WaterDrivable </span>{</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+<td id="file-smartvehicle-swift-LC26" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+<td id="file-smartvehicle-swift-LC27" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+<td id="file-smartvehicle-swift-LC28" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+<td id="file-smartvehicle-swift-LC29" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+<td id="file-smartvehicle-swift-LC30" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+<td id="file-smartvehicle-swift-LC31" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SmartPlane</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">Flyable </span>{</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L32" class="blob-num js-line-number js-code-nav-line-number" data-line-number="32"></td>
+<td id="file-smartvehicle-swift-LC32" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L33" class="blob-num js-line-number js-code-nav-line-number" data-line-number="33"></td>
+<td id="file-smartvehicle-swift-LC33" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Wohoo! I am flying high!<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L34" class="blob-num js-line-number js-code-nav-line-number" data-line-number="34"></td>
+<td id="file-smartvehicle-swift-LC34" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartvehicle-swift-L35" class="blob-num js-line-number js-code-nav-line-number" data-line-number="35"></td>
+<td id="file-smartvehicle-swift-LC35" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+</table>
+</div></div></div></div></div>
+<div class="gist-meta"> <a href="https://gist.github.com/shabib87/3a382c70038353857d0003d8cb611366/raw/09b4724167fc4a9e008541604bc8ebc927dfe11d/SmartVehicle.swift" style="float:right">view raw</a> <a href="https://gist.github.com/shabib87/3a382c70038353857d0003d8cb611366#file-smartvehicle-swift"> SmartVehicle.swift </a> hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+</div>
+</div></div>
+<p>Now again everyone is happy, and Johny gets another fat bonus!</p>
+<p>Six months later Mr. Big decides the market has changed and people want multi functioning vehicles again, so he asks our company to give him the SmartCarBoat again. Now, Johny has no problem with it because all he has to do this implement the protocols!</p> <style>.gist table { margin-bottom: 0; }</style>
+<div style="tab-size: 8" id="gist44519937" class="gist"><div class="gist-file" translate="no">
+<div class="gist-data"><div class="js-gist-file-update-container js-task-list-container file-box"><div id="file-smartcarboat-swift" class="file my-2"><div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  "><div class="js-check-bidi js-blob-code-container blob-code-content"> <template class="js-file-alert-template"><div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> <span> This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters. <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a> </span><div data-view-component="true" class="flash-action"> <a href="./{{ revealButtonHref }}/index.html" data-view-component="true" class="btn-sm btn"> Show hidden characters </a>
+</div>
+</div></template> <template class="js-line-alert-template"> <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> </span></template><table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartCarBoat.swift">
+<tr>
+<td id="file-smartcarboat-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+<td id="file-smartcarboat-swift-LC1" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">SmartBoat</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">RoadDrivable</span>, <span class="pl-e">WaterDrivable </span>{</td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+<td id="file-smartcarboat-swift-LC2" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+<td id="file-smartcarboat-swift-LC3" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+<td id="file-smartcarboat-swift-LC4" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+<td id="file-smartcarboat-swift-LC5" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+<td id="file-smartcarboat-swift-LC6" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+<td id="file-smartcarboat-swift-LC7" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+<td id="file-smartcarboat-swift-LC8" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+<td id="file-smartcarboat-swift-LC9" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-smartcarboat-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+<td id="file-smartcarboat-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+</table>
+</div></div></div></div></div>
+<div class="gist-meta"> <a href="https://gist.github.com/shabib87/5946bc75723572ece692f1df2ea84be1/raw/aced421e21f8711090f6aa1a318b91225594310c/SmartCarBoat.swift" style="float:right">view raw</a> <a href="https://gist.github.com/shabib87/5946bc75723572ece692f1df2ea84be1#file-smartcarboat-swift"> SmartCarBoat.swift </a> hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+</div>
+</div></div>
+<p class="graf graf--p">With this strategy on hand no matter how many times Mr. Big changes his requirement, Johny can kill it anytime!</p>
+<p>I hope I have managed to give an idea on how strategy pattern works and how to use it with a real time scenario. Of course we can improve this by using other ways; I am giving you a hint: Abstract Class. Any questions, feedbacks or if you think I have some improvements to do, feel free to comment!</p>
+<p>Happy coding! 😁</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing">
+<h3 class="sd-title">Share this:</h3>
+<div class="sd-content"><ul>
+<li class="share-linkedin"><a rel="nofollow noopener noreferrer" data-shared="sharing-linkedin-690" class="share-linkedin sd-button share-icon no-text" href="./../index.html?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span></span><span class="sharing-screen-reader-text">Click to share on LinkedIn (Opens in new window)</span></a></li>
+<li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-690" class="share-facebook sd-button share-icon no-text" href="./../index.html?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li>
+<li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-690" class="share-twitter sd-button share-icon no-text" href="./../index.html?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li>
+<li class="share-jetpack-whatsapp"><a rel="nofollow noopener noreferrer" data-shared="" class="share-jetpack-whatsapp sd-button share-icon no-text" href="./../index.html?share=jetpack-whatsapp" target="_blank" title="Click to share on WhatsApp"><span></span><span class="sharing-screen-reader-text">Click to share on WhatsApp (Opens in new window)</span></a></li>
+<li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon no-text" href="./../index.html?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li>
+<li class="share-pinterest"><a rel="nofollow noopener noreferrer" data-shared="sharing-pinterest-690" class="share-pinterest sd-button share-icon no-text" href="./../index.html?share=pinterest" target="_blank" title="Click to share on Pinterest"><span></span><span class="sharing-screen-reader-text">Click to share on Pinterest (Opens in new window)</span></a></li>
+<li class="share-end">
+</ul></div>
+</div></div>
+<div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-172312269-690-61df21f3d15a2" data-src="https://widgets.wp.com/likes/#blog_id=172312269&amp;post_id=690&amp;origin=www.codewithshabib.com&amp;obj_id=172312269-690-61df21f3d15a2" data-name="like-post-frame-172312269-690-61df21f3d15a2" data-title="Like or Reblog">
+<h3 class="sd-title">Like this:</h3>
+<div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;">
+<span class="button"><span>Like</span></span> <span class="loading">Loading...</span>
+</div>
+<span class="sd-text-color"></span><a class="sd-link-color"></a>
+</div>
+<div id="jp-relatedposts" class="jp-relatedposts"><h3 class="jp-relatedposts-headline"><em>Related</em></h3></div>
+</div>
+<div class="post-tags clr"> <span class="owp-tag-text">Tags: </span><a href="./../../tag/basic-oop/index.html" rel="tag">basic oop</a><span class="owp-sep">,</span> <a href="./../../tag/coding/index.html" rel="tag">coding</a><span class="owp-sep">,</span> <a href="./../../tag/development/index.html" rel="tag">development</a><span class="owp-sep">,</span> <a href="./../../tag/encapsulation/index.html" rel="tag">encapsulation</a><span class="owp-sep">,</span> <a href="./../../tag/inheritance/index.html" rel="tag">Inheritance</a><span class="owp-sep">,</span> <a href="./../../tag/object-oriented-design-patterns/index.html" rel="tag">Object Oriented Design Patterns</a><span class="owp-sep">,</span> <a href="./../../tag/polymorphism/index.html" rel="tag">polymorphism</a><span class="owp-sep">,</span> <a href="./../../tag/programming/index.html" rel="tag">programming</a><span class="owp-sep">,</span> <a href="./../../tag/software-design-patterns/index.html" rel="tag">software design patterns</a><span class="owp-sep">,</span> <a href="./../../tag/software-development/index.html" rel="tag">Software Development</a><span class="owp-sep">,</span> <a href="./../../tag/strategy-pattern/index.html" rel="tag">strategy pattern</a>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Read more articles"><h2 class="screen-reader-text">Read more articles</h2>
+<div class="nav-links">
+<div class="nav-previous"><a href="./../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html" rel="prev"><span class="title"><i class="fas fa-long-arrow-alt-left" aria-hidden="true"></i>Previous Post</span><span class="post-title">UITextView similar to rounded UITextField with dynamic height</span></a></div>
+<div class="nav-next"><a href="./../../singletons-pattern-or-anti-pattern/index.html" rel="next"><span class="title"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>Next Post</span><span class="post-title">Singletons: Pattern or Anti-pattern?</span></a></div>
+</div></nav><section id="comments" class="comments-area clr has-comments"><h3 class="theme-heading comments-title"> <span class="text">This Post Has One Comment</span>
+</h3>
+<ol class="comment-list"><li class="pingback even thread-even depth-1" id="comment-24"><article id="comment-24" class="comment-container"><p>Pingback: <span itemprop="name"><a href="http://codewithshabib.com/2019/06/12/better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/" rel="external nofollow ugc" class="url">Better Architecture in iOS: Breaking down Massive View Controller using SOLID &amp; MVP for Dummies &#8211; codewithshabib</a></span></p></article></li></ol>
+<div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="./index.html#respond" style="display:none;">Cancel reply</a></small>
+</h3>
+<form action="./wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+<div class="comment-textarea">
+<label for="comment" class="screen-reader-text">Comment</label><textarea name="comment" id="comment" cols="39" rows="4" tabindex="0" class="textarea-comment" placeholder="Your comment here..."></textarea>
+</div>
+<div class="comment-form-author">
+<label for="author" class="screen-reader-text">Enter your name or username to comment</label><input type="text" name="author" id="author" value="" placeholder="Name (required)" size="22" tabindex="0" aria-required="true" class="input-name">
+</div>
+<div class="comment-form-email">
+<label for="email" class="screen-reader-text">Enter your email address to comment</label><input type="text" name="email" id="email" value="" placeholder="Email (required)" size="22" tabindex="0" aria-required="true" class="input-email">
+</div>
+<div class="comment-form-url">
+<label for="url" class="screen-reader-text">Enter your website URL (optional)</label><input type="text" name="url" id="url" value="" placeholder="Website" size="22" tabindex="0" class="input-website">
+</div>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="690" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"></p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="fcf7bdc843"></p>
+<p style="display: none !important;"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js" name="ak_js" value="186"><script>document.getElementById( "ak_js" ).setAttribute( "value", ( new Date() ).getTime() );</script></p>
+</form>
+</div>
+<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p></section></article></div></div>
+<aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary" itemscope="itemscope" itemtype="https://schema.org/WPSideBar" role="complementary" aria-label="Primary Sidebar"><div id="right-sidebar-inner" class="clr">
+<div id="search-2" class="sidebar-box widget_search clr"><form role="search" method="get" class="searchform" action="./"> <label for="ocean-search-form-2"> <span class="screen-reader-text">Search for:</span> <input type="search" id="ocean-search-form-2" class="field" autocomplete="off" placeholder="Search" name="s"> </label>
+</form></div>
+<div id="recent-posts-2" class="sidebar-box widget_recent_entries clr">
+<h4 class="widget-title">Recent Posts</h4>
+<ul>
+<li> <a href="./../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html">How to add photos in the iOS Simulator: A cooler automated approach!</a> <span class="post-date">August 4, 2020</span>
+</li>
+<li> <a href="./../../mock-dependencies-in-swift-unit-test/index.html">Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</a> <span class="post-date">June 8, 2020</span>
+</li>
+<li> <a href="./../../how-to-create-a-swiftui-collectionview/index.html">SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</a> <span class="post-date">June 6, 2020</span>
+</li>
+</ul>
+</div>
+<div id="recent-comments-2" class="sidebar-box widget_recent_comments clr">
+<h4 class="widget-title">Recent Comments</h4>
+<ul id="recentcomments">
+<li class="recentcomments">
+<span class="comment-author-link"><a href="http://codewithshabib.com/2019/06/12/better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/" rel="external nofollow ugc" class="url">Better Architecture in iOS: Breaking down Massive View Controller using SOLID &amp; MVP for Dummies &#8211; codewithshabib</a></span> on <a href="./index.html#comment-24">Introduction to Strategy Pattern</a>
+</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="http://codewithshabib.com/2013/05/22/about-delegation-part-3/" rel="external nofollow ugc" class="url">About Delegation Part &#8211; 3 &#8211; codewithshabib</a></span> on <a href="./../../about-delegation-part-2/comment-page-1/index.html#comment-10">About Delegation Part &#8211; 2</a>
+</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="http://codewithshabib.com/2013/05/14/about-delegation-part-2/" rel="external nofollow ugc" class="url">About Delegation Part &#8211; 2 &#8211; codewithshabib</a></span> on <a href="./../../about-delegation-part-3/comment-page-1/index.html#comment-12">About Delegation Part &#8211; 3</a>
+</li>
+</ul>
+</div>
+</div></aside>
+</div></main><footer id="footer" class="site-footer" itemscope="itemscope" itemtype="https://schema.org/WPFooter" role="contentinfo"><div id="footer-inner" class="clr"><div id="footer-bottom" class="clr no-footer-nav"><div id="footer-bottom-inner" class="container clr"><div id="copyright" class="clr" role="contentinfo"> Copyright 2020 - Shabib Hossain</div></div></div></div></footer>
+</div>
+</div> <a id="scroll-top" class="scroll-top-right" href="#"><span class="fa fa-angle-double-up" aria-label="Scroll to the top of the page"></span></a> <script type="text/javascript"> window.WPCOM_sharing_counts = {".\/introduction-to-strategy-pattern\/":690}; </script><link rel="stylesheet" id="jetpack-gist-styling-css" href="https://github.githubassets.com/assets/gist-embed-bfec3232c7f73ef53d8f02e4f5c64fb0.css?ver=10.5" type="text/css" media="all"> <script type="text/javascript" src="./../../wp-content/plugins/sg-cachepress/assets/js/lazysizes.min.js?ver=6.0.5" id="siteground-optimizer-lazy-sizes-js-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/comment-reply.min.js" id="comment-reply-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script> <script type="text/javascript" src="./../../wp-content/themes/oceanwp/assets/js/third/magnific-popup.min.js?ver=2.0.2" id="magnific-popup-js"></script> <script type="text/javascript" src="./../../wp-content/themes/oceanwp/assets/js/third/lightbox.min.js?ver=2.0.2" id="oceanwp-lightbox-js"></script> <script type="text/javascript" id="oceanwp-main-js-extra"> /* <![CDATA[ */
+var oceanwpLocalize = {"isRTL":"","menuSearchStyle":"disabled","sidrSource":null,"sidrDisplace":"1","sidrSide":"left","sidrDropdownTarget":"icon","verticalHeaderTarget":"link","customSelects":".woocommerce-ordering .orderby, #dropdown_product_cat, .widget_categories select, .widget_archive select, .single-product .variations_form .variations select","ajax_url":".\/wp-admin\/admin-ajax.php"};
+/* ]]> */ </script> <script type="text/javascript" src="./../../wp-content/themes/oceanwp/assets/js/main.min.js?ver=2.0.2" id="oceanwp-main-js"></script> <script type="text/javascript" src="./../../wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-lazy-images/dist/intersection-observer.js?minify=false&#038;ver=6ae6d91d4b64fe31e32c2797e7c3dd42" id="jetpack-lazy-images-polyfill-intersectionobserver-js"></script> <script type="text/javascript" id="jetpack-lazy-images-js-extra"> /* <![CDATA[ */
+var jetpackLazyImagesL10n = {"loading_warning":"Images are still loading. Please cancel your print and try again."};
+/* ]]> */ </script> <script type="text/javascript" src="./../../wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-lazy-images/dist/lazy-images.js?minify=false&#038;ver=22d8bb42bcd6edc9c8ef53eb9b087d17" id="jetpack-lazy-images-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/wp-embed.min.js" id="wp-embed-js"></script> <!--[if lt IE 9]> <script type='text/javascript' src='./wp-content/themes/oceanwp/assets/js/third/html5.min.js?ver=2.0.2' id='html5shiv-js'></script> <![endif]--> <script type="text/javascript" src="https://c0.wp.com/p/jetpack/10.5/_inc/build/likes/queuehandler.min.js" id="jetpack_likes_queuehandler-js"></script> <script type="text/javascript" id="sharing-js-js-extra"> /* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */ </script> <script type="text/javascript" src="https://c0.wp.com/p/jetpack/10.5/_inc/build/sharedaddy/sharing.min.js" id="sharing-js-js"></script> <script type="text/javascript" id="sharing-js-js-after"> var windowOpen;
+ ( function () {
+ function matches( el, sel ) {
+ return !! (
+ el.matches && el.matches( sel ) ||
+ el.msMatchesSelector && el.msMatchesSelector( sel )
+ );
+ }  document.body.addEventListener( 'click', function ( event ) {
+ if ( ! event.target ) {
+ return;
+ }  var el;
+ if ( matches( event.target, 'a.share-linkedin' ) ) {
+ el = event.target;
+ } else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-linkedin' ) ) {
+ el = event.target.parentNode;
+ }  if ( el ) {
+ event.preventDefault();  // If there's another sharing window open, close it.
+ if ( typeof windowOpen !== 'undefined' ) {
+ windowOpen.close();
+ }
+ windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+ return false;
+ }
+ } );
+ } )();
+var windowOpen;
+ ( function () {
+ function matches( el, sel ) {
+ return !! (
+ el.matches && el.matches( sel ) ||
+ el.msMatchesSelector && el.msMatchesSelector( sel )
+ );
+ }  document.body.addEventListener( 'click', function ( event ) {
+ if ( ! event.target ) {
+ return;
+ }  var el;
+ if ( matches( event.target, 'a.share-facebook' ) ) {
+ el = event.target;
+ } else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-facebook' ) ) {
+ el = event.target.parentNode;
+ }  if ( el ) {
+ event.preventDefault();  // If there's another sharing window open, close it.
+ if ( typeof windowOpen !== 'undefined' ) {
+ windowOpen.close();
+ }
+ windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+ return false;
+ }
+ } );
+ } )();
+var windowOpen;
+ ( function () {
+ function matches( el, sel ) {
+ return !! (
+ el.matches && el.matches( sel ) ||
+ el.msMatchesSelector && el.msMatchesSelector( sel )
+ );
+ }  document.body.addEventListener( 'click', function ( event ) {
+ if ( ! event.target ) {
+ return;
+ }  var el;
+ if ( matches( event.target, 'a.share-twitter' ) ) {
+ el = event.target;
+ } else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-twitter' ) ) {
+ el = event.target.parentNode;
+ }  if ( el ) {
+ event.preventDefault();  // If there's another sharing window open, close it.
+ if ( typeof windowOpen !== 'undefined' ) {
+ windowOpen.close();
+ }
+ windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+ return false;
+ }
+ } );
+ } )(); </script> <iframe src="https://widgets.wp.com/likes/master.html?ver=202202#ver=202202" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe><div id="likes-other-gravatars">
+<div class="likes-text">
+<span>%d</span> bloggers like this:</div>
+<ul class="wpl-avatars sd-like-gravatars"></ul>
+</div> <script src="https://stats.wp.com/e-202202.js" defer></script> <script> _stq = window._stq || [];
+ _stq.push([ 'view', {v:'ext',j:'1:10.5',blog:'172312269',post:'690',tz:'-5',srv:'www.codewithshabib.com'} ]);
+ _stq.push([ 'clickTrackerInit', '172312269', '690' ]); </script>
+</body>
+</html>

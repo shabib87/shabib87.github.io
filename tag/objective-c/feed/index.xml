@@ -1,0 +1,2141 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Objective-C &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 08 Jun 2020 15:13:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>Objective-C &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Better Architecture in iOS: Breaking down Massive View Controller using SOLID &#038; MVP</title>
+		<link>./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies</link>
+					<comments>./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Thu, 13 Jun 2019 03:45:20 +0000</pubDate>
+				<category><![CDATA[Architectural Patterns]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[MVP]]></category>
+		<category><![CDATA[OOP]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[architectural pattern]]></category>
+		<category><![CDATA[clean architecture]]></category>
+		<category><![CDATA[clean code]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS application development]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[kiss]]></category>
+		<category><![CDATA[MVC]]></category>
+		<category><![CDATA[mvvm]]></category>
+		<category><![CDATA[Object Oriented Design]]></category>
+		<category><![CDATA[Object Oriented Design Patterns]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pattern]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[SOLID]]></category>
+		<category><![CDATA[viper]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=1222</guid>
+
+					<description><![CDATA[<p>MVC; the age old architectural pattern; has been trusted by developers around the world to separate responsibilities of a software program regardless of language and platform. Anyone working in iOS applications starts with this pattern and gets comfortable with it in a really short amount of time. But an iOS developer who has been in [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html">Better Architecture in iOS: Breaking down Massive View Controller using SOLID &#038; MVP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Model–view–controller" target="_blank">MVC</a>; the age old architectural pattern; has been trusted by developers around the world to separate responsibilities of a software program regardless of language and platform. Anyone working in iOS applications starts with this pattern and gets comfortable with it in a really short amount of time. But an iOS developer who has been in the industry for a while would be at least getting started to familiarize with the notorious Massive View Controller paradigm by now. This problem has been here like always, and there are a lot of great articles to understand the problem and how to reduce them. I&#8217;ll list some of them which I found really helpful at the end of this blog post.</p>
+
+
+
+<p>So as we all agree <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://davedelong.com/blog/2017/11/06/a-better-mvc-part-1-the-problems/" target="_blank">Apples MVC is old and has its own issues</a>, let&#8217;s focus on how to solve it for new or evolving projects. There are some great alternatives to MVC; e.g. <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Model–view–presenter" target="_blank">MVP</a>, <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Model–view–viewmodel" target="_blank">MVVM</a> or <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://www.objc.io/issues/13-architecture/viper/" target="_blank">VIPER</a>; which all are kind of based on <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://martinfowler.com/" target="_blank">Uncle Bob&#8217;s</a> <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank">Clean Architecture Pattern</a> (some more and some are more loosely based). There are tons of arguments on which one you should use and which one is better than the others. But at the end of the day in software development only one thing is constant, CHANGE! So like every other thing in the world, it depends which architecture is best suited to solve your particular problem. I will discuss the points I personally focus on to keep my codebase clean, concise and testable.</p>
+
+
+
+<p>First of all, let&#8217;s go back to the basics, shall we? Remember <a href="https://en.wikipedia.org/wiki/SOLID" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">SOLID</a> and <a href="https://en.wikipedia.org/wiki/KISS_principle" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">KISS</a> Principle from OOP? Well basically every clean architectural pattern tries to help you achieve these two things! Let&#8217;s imagine we have a shiny new iOS application to build called <em>Heroes</em>. The initial purpose of the application will be to list out heroes. The app will fetch and show a list of heroes from a remote server and and on selecting a hero from the list, more detailed information will be presented to the user. </p>
+
+
+
+<figure class="wp-block-gallery columns-2 is-cropped"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img width="750" height="1334" src="http://codewithshabib.com/wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09.png" alt="" data-id="1226" data-link="https://codewithshabib.com/simulator-screen-shot-iphone-8-2019-05-08-at-00-04-09/" class="wp-image-1226" srcset="./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09.png 750w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09-169x300.png 169w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09-576x1024.png 576w" sizes="(max-width: 750px) 100vw, 750px" /><figcaption class="blocks-gallery-item__caption">Hero list</figcaption></figure></li><li class="blocks-gallery-item"><figure><img width="750" height="1334" src="http://codewithshabib.com/wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15.png" alt="" data-id="1227" data-link="https://codewithshabib.com/simulator-screen-shot-iphone-8-2019-05-08-at-00-04-15/" class="wp-image-1227" srcset="./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15.png 750w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15-169x300.png 169w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15-576x1024.png 576w" sizes="(max-width: 750px) 100vw, 750px" /><figcaption class="blocks-gallery-item__caption">Hero Details</figcaption></figure></li></ul></figure>
+
+
+
+<p>Let&#8217;s breakdown the requirement a little more from an iOS development perspective:</p>
+
+
+
+<ul><li>We will need two <code>UIViewControllers</code>: one to list out the heroes and one to show the details.</li><li>We will need an <code>UITableView</code> with custom <code>UITableViewCell</code> to display the list.</li><li>We will need to fetch some data from a remote server.</li><li>We will need to make some sort of object representation of the fetched data to display on screen.</li></ul>
+
+
+
+<p>So if we follow Apples MVC pattern, we will end up writing the following classes for our project:</p>
+
+
+
+<ul><li>HeroListViewController </li><li>HeroDetailsViewController</li><li>HeroTableViewCell</li><li>Hero</li></ul>
+
+
+
+<p>We will be dealing with two <code>UIViewControllers</code> acting as both <em>Controllers</em> and <em>Views</em> and an <code>UITableViewCell</code> as a <em>View</em> and one <code>Struct</code> called <code>Hero</code> as <em>Model</em>. The <code>HeroListViewController</code> will be our main <em>ViewController</em> and will be displayed on application launch and it will be responsible for the following things:</p>
+
+
+
+<ol><li>Call web service API on opening the app.</li><li>Display an intermediate empty screen/loading screen while server request is ongoing.</li><li>Display an error message if server request failed.</li><li>Create a list of <code>Hero</code> objects from the response <code>JSON</code> returned by a successful web service call.</li><li>Display selective properties from <code>Hero</code> objects in <code>UITableViewCell</code> inside an <code>UITableView</code>.</li><li>On selecting an <code>UITableViewCell</code> display the selected <code>Hero</code> object in the <code>HeroDetailsViewController</code>.</li><li>Contain all logic for <code>UIViewController</code> and <code>UIView</code> lifecycle and <em>delegate</em> and <em>dataSource</em> codes for <code>UITableView</code>.</li></ol>
+
+
+
+<p>This long list of responsibilities violate the very first rule of <strong>SOLID</strong>: <em>Single Responsibility Principle</em> let alone the the remaining ones. Not only that, the <code>HeroListViewController</code> is neither Simple nor Stupid any longer! Imagine what will happen if the same view controller has to deal with another web service API or a more complex UI, which might be the case in foreseeable future as the app evolves. Right now it is only one out of two view controller classes, and our app might get more view controllers in future. What will happen to these view controller classes? How will we maintain them? Most importantly how will we test them? I have seen some legacy <code>UIViewController</code> classes containing more than 4000 (yeah, you read it right, four thousand) lines of code! And trust me, it is not a pretty sight and a nightmare to work with. The main liability with Apples MVC is the <code>UIViewController</code> is responsible for too many things, it is responsible for dealing with business logic as well as UI logic and UI creation.</p>
+
+
+
+<p>So going back to the basics, let&#8217;s separate our responsibilities:</p>
+
+
+
+<h4>The network request</h4>
+
+
+
+<p>If we follow Apples MVC, <code>HeroListViewController</code> does all the heavy lifting of making the web service call, error handling and processing the response. Which is a lot to ask for a single <em>UIViewController</em>, so the first thing we should do is separate all network codes from our view controller to a separate class, or even better, a separate module. Now, what I prefer doing is using a <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Facade_pattern" target="_blank">Facade Design Pattern</a> to hide all the complexities of network handling and provide the api user class with only two visible methods/response block API- <code>successWithResponse:</code> and <code>errorWithDescription:</code>. It can be a <em>protocol</em> <em>delegate</em> or a simple <em>closure</em>. And this makes more sense because, apart from these two responses the api user class should not much care about the network layer as either the web service call is a successful one or not. And it helps a lot if you for some reason decide to change your network codes from <a href="https://developer.apple.com/documentation/foundation/urlsession"><code>URLSessions</code></a> to <a href="https://github.com/Alamofire/Alamofire"><code>Alamofire</code></a> or <a href="https://github.com/Moya/Moya"><code>Moya</code></a>, because your view controller does not care about how you get the two desired outputs!</p>
+
+
+
+<h4>The response object from JSON</h4>
+
+
+
+<p>When the network layer returns us a raw response <em>JSON</em> string or an error message we need to properly wrap it with our <em>OO</em> model. The network layer should not be responsible for creating the model objects from the <em>JSON</em> string and neither should be the <em>UIViewController</em> class calling the web service, right? Does it make sense? Then who should map the JSON key-value pairs to the model object? The answer is, the model class should create itself from the response! And before <a href="https://developer.apple.com/documentation/swift/codable" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">Swift Codable</a> it was a pretty daunting task, but not anymore!</p>
+
+
+
+<h4>UI creation and dealing with user interaction</h4>
+
+
+
+<p>This part is fairly simple the <em>UIViewController</em> and <em>UIView</em> subclasses should be making the calls for all UI logic.</p>
+
+
+
+<h4>Dealing with navigation by passing appropriate data</h4>
+
+
+
+<p>When we are working with UI in iOS there are three options:</p>
+
+
+
+<ul><li>Storyboards</li><li>Xibs</li><li>Code</li></ul>
+
+
+
+<p>Again, like everything else in the world you&#8217;ll find a lot arguments over which one is better than the others! And yet again, the answer my friend, is it DEPENDS! These are the tools at your disposal and you should use it wisely. Here is a <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://www.toptal.com/ios/ios-user-interfaces-storyboards-vs-nibs-vs-custom-code" target="_blank">great article</a> on this topic that should provide you with more insight. The real reason I bring this up in this section is <em>UI Navigation</em>. I personally use all of the three tools in my projects and mix them up depending on the situation. Now I use <em>Storyboards</em> quite often, but I do realize the major drawback of it- <em>Segues! </em> While it is a great way to simplify navigation process, it messes up <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Dependency_injection" target="_blank">Dependency Injection</a>. Yes, you can set the dependency of the to-be presented <em>UIViewController</em> on the navigation stack via property and <em>prepareForSegue</em>: method, but it is messy and again violates <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">Single Responsibility Principle</a>. So what is the solution? </p>
+
+
+
+<p><em>P.S. <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://developer.apple.com/xcode/swiftui/" target="_blank">SwiftUI</a> has changed the 3 options to 1 and it seems to be the future and a good one!</em></p>
+
+
+
+<h4>Deciding on the <strong>architecture</strong></h4>
+
+
+
+<p>Now that we have listed our responsibilities, it is clear that we have to decide on which architecture we should follow. As I have mentioned before, it always DEPENDS on your NEED! There is no right way to do it, as your application grows you only have one thing constant: CHANGE! So, basically you have to evolve your project with the flow. And if you follow the basics you should be good to go for most of the time, which is following the <strong>SOLID</strong> principle:</p>
+
+
+
+<ol><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">Single responsibility principle (SIP)</a>: Every class or method on your project should be responsible for only one thing and one thing only. If you find any class or method doing multiple things, you need to break it down. (<strong><em>Pro Tip</em></strong>: <em>a simple way to measure if you&#8217;re violating this principle is: if you have a class roughly longer than 150 lines or a method roughly longer than 10 lines, you can probably improve that</em>.)</li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Open–closed_principle" target="_blank">Open-closed principle (OCP)</a>: Every class should be open for extension and closed for modification!</li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Liskov_substitution_principle" target="_blank">Liskov substitution principle (LSP)</a>: Subclasses should be substitutable with super classes. (<em>This principle backs up the <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://codewithshabib.com/2017/02/05/introduction-to-strategy-pattern/" target="_blank">Strategy Pattern</a> a lot.</em>)</li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Interface_segregation_principle" target="_blank">Interface Segregation principle (ISP)</a>: Don&#8217;t force the interface if not needed!</li><li><a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency inversion principle (DIP)</a>: High-level modules should not depend on low-level modules rather depend on abstractions and abstractions should not depend on the details, but the details should depend on the abstractions!</li></ol>
+
+
+
+<p>Right now, I have just stated the text-book definition of the <em>SOLID</em> principle, but what does it actually mean? To understand that, we have to go through an example and for that we have to decide on an architecture to proceed. Our Heroes app is quite simple right now and actually we can just go with Apples MVC using storyboards at this earlier phase, but it will definitely get uglier when the app expands with requirements. With a more modern architectural approach like <em>MVP</em>, <em>MVVM</em> or <em>VIPER</em> it can be solved with ease; codes become more modular and maintainable by separating business logic from the&nbsp;<code>UIViewController</code>&nbsp;subclass and dumbing it down to act as a simple <em>View</em> file. In this case I chose MVP over other mentioned architectures for its simplicity.</p>
+
+
+
+<h4>MVP for the rescue</h4>
+
+
+
+<p>In <em>MVP</em>, as I mentioned earlier the <em>UIViewController</em> is treated as just a simple view file and all business logics are maintained in the <em>Presenter</em> class. Now this introduces a problem with dependency as each <em>UIViewController</em> has a dependency of a <em>Presenter</em> class for feeding it with processed data. If we go with <em>StoryBoards</em> for the UI, our UI will be built quickly but we will have problem with the initialization of the <em>UIViewController</em> classes with the added dependency. So, to solve this we can go full code. But what about using <em>Storyboards</em> as it helps you to keep the related UI stories together but also it can be used with Xibs and view codes as necessary. To do that first, I get rid of the default <code>Main.storyboard</code> file and use my own groupings and <em>Storyboards</em> for each user story. And to handle the <em>segue</em> problem, I do not use it at all! Instead I use the following protocol to enforce dependency injection.</p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96148190" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-storyboardinitializable-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="StoryboardInitializable.swift">
+        <tr>
+          <td id="file-storyboardinitializable-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-storyboardinitializable-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Presenter</span> {}</td>
+        </tr>
+        <tr>
+          <td id="file-storyboardinitializable-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-storyboardinitializable-swift-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">StoryboardInitializable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-storyboardinitializable-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-storyboardinitializable-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">static</span> <span class="pl-k">func</span> <span class="pl-en">instantiateFromStoryboard</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) <span class="pl-k">-&gt;</span> UIViewController</td>
+        </tr>
+        <tr>
+          <td id="file-storyboardinitializable-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-storyboardinitializable-swift-LC4" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/65dc0b631916247a8808e09d08216a86/raw/a8796aa22a75bfe1ec31be152505515486f5c24c/StoryboardInitializable.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/65dc0b631916247a8808e09d08216a86#file-storyboardinitializable-swift">
+          StoryboardInitializable.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>The empty <code>Presenter</code> class is the super class for all the <em>Presenter</em> classes to be used; is declared to support <em>LSP</em> and the <code>StoryboardInitializable</code> is declared as a protocol to support <em>ISP</em>. We want to make sure our <em>UIViewController</em> subclasses do not support segues as that will break our <em>MVP</em> pattern, but we do not want to enforce it to all <em>UIViewController</em> subclasses as for a simple user story we might want to use <em>segues</em> as <em>MVP</em> might be a overkill for the module. So, to support <em>ISP</em>, we use a RootViewController to act as the abstract class that confronts to the above protocol. </p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96148296" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-rootviewcontroller-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RootViewController.swift">
+        <tr>
+          <td id="file-rootviewcontroller-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-rootviewcontroller-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">RootViewController</span>: <span class="pl-e">UIViewController</span>, <span class="pl-e">StoryboardInitializable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-rootviewcontroller-swift-LC2" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-rootviewcontroller-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">class</span> <span class="pl-k">func</span> <span class="pl-en">instantiateFromStoryboard</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) <span class="pl-k">-&gt;</span> UIViewController {</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-rootviewcontroller-swift-LC4" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">fatalError</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Override failed. Dependency injection not processed. Presenter injection hampered.<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-rootviewcontroller-swift-LC5" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-rootviewcontroller-swift-LC6" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-rootviewcontroller-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-c"><span class="pl-c">//</span> Preventing segue to support dependency injection</span></td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-rootviewcontroller-swift-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span>    <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">shouldPerformSegue</span>(<span class="pl-en">withIdentifier</span> <span class="pl-smi">identifier</span>: <span class="pl-c1">String</span>, <span class="pl-smi"><span class="pl-en">sender</span></span>: <span class="pl-c1">Any</span><span class="pl-k">?</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-rootviewcontroller-swift-LC9" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">fatalError</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Segues should not be used. Presenter injection hampered.<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-rootviewcontroller-swift-LC10" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-rootviewcontroller-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/c311d48c206cb013c42ea7d17ef9d189/raw/1fda4939ab75b06fd9a5db0c5cad4ca1158700e7/RootViewController.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/c311d48c206cb013c42ea7d17ef9d189#file-rootviewcontroller-swift">
+          RootViewController.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>The benefit of this is we can use RootViewController with some more common properties, then selectively override the methods to support segues. And we can achieve our navigation with the dependency injection like:</p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96148352" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-herodetailsviewcontroller-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="HeroDetailsViewController.swift">
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">final</span> <span class="pl-k">class</span> <span class="pl-en">HeroDetailsViewController</span>: <span class="pl-e">RootViewController </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">class</span> <span class="pl-k">func</span> <span class="pl-en">instantiateFromStoryboard</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) <span class="pl-k">-&gt;</span> UIViewController {</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC4" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> vc <span class="pl-k">=</span> <span class="pl-c1">UIStoryboard</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>Hero<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">bundle</span>: <span class="pl-c1">nil</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC5" class="blob-code blob-code-inner js-file-line">            .<span class="pl-c1">instantiateViewController</span>(<span class="pl-c1">withIdentifier</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>HeroDetailsViewController<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC6" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">as!</span> HeroDetailsViewController</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC7" class="blob-code blob-code-inner js-file-line">        vc.<span class="pl-smi">presenter</span> <span class="pl-k">=</span> aPresenter <span class="pl-k">as?</span> HeroDetailsPresenter</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> vc</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC9" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/309565f62b3bf75b10ab76a743e069e9/raw/168fe020af774a906ad7e51b920451c6206b03c9/HeroDetailsViewController.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/309565f62b3bf75b10ab76a743e069e9#file-herodetailsviewcontroller-swift">
+          HeroDetailsViewController.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>Now that we have separated the responsibilities, we should start decoupling the <em>UIViewController</em>. </p>
+
+
+
+<p>The <em>Presenter</em> class will be the boss, every intelligent stuff should go inside the presenter, which includes: dealing with network calls, informing the view about data change, dealing user interaction triggered business logic and delegating navigation flow!</p>
+
+
+
+<p>Now if we push all these codes inside the <em>Presenter</em> class, we are decoupling some of the new controller responsibilities but again we are bloating it with codes that should not be inside the <em>Presenter</em>; e.g. Networking code! The Presenter class should only be responsible for kickstarting the API call, kickstart model creation from the response and bind the appropriate data to the designated view. So the role of the Presenter class would be like a mediator, who delegates responsibilities and of parsing/processing models and displaying view. You can look into the image below to have a better understanding. </p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img width="800" height="244" src="http://codewithshabib.com/wp-content/uploads/2019/06/mvp.png" alt="" class="wp-image-1251" srcset="./../../../wp-content/uploads/2019/06/mvp.png 800w, ./../../../wp-content/uploads/2019/06/mvp-300x92.png 300w, ./../../../wp-content/uploads/2019/06/mvp-768x234.png 768w" sizes="(max-width: 800px) 100vw, 800px" /><figcaption>MVP in action</figcaption></figure></div>
+
+
+
+<p><em>IMPORTANT</em>: Remember initially I said the view should be dumb, and it should not be responsible off processing of data before displaying them in the UI. Processing data is part of the business logic, and the view should not be bothered with the actual <em>Model</em> class. To achieve this, only a processed model class holding the processed data (e.g. strings instead of Date, Int, Double, a full name instead of first &amp; last name etc.) should be given to the view. As this is a model that has processed data, it is called <em>ViewData</em>.</p>
+
+
+
+<p>In the image you can see the that the <em>Presenter</em> does not own a <em>UIView</em> or <em>UIViewController</em> subclass rather something called a <em>passive view</em>, because the <em>presenter</em> does not need to hold the reference of the actual <em>UI</em> rather an <em>Interface</em> is enough and that is the passive view <em>protocol</em> that the actual <em>UIView</em> or <em>UIViewController</em> needs to confront to. For example the <em>HeroListViewController</em> should confront to the following passive view protocol to display the hero list.</p>
+
+
+
+<div class="wp-block-jetpack-markdown"><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96698409" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-herolistview-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="HeroListView.swift">
+        <tr>
+          <td id="file-herolistview-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-herolistview-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">HeroListView</span>: <span class="pl-e">NSObjectProtocol </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-herolistview-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">startLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-herolistview-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">finishLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-herolistview-swift-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">reloadHeroList</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-herolistview-swift-LC5" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">showEmptyListMessage</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-herolistview-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">gotoHeroDetails</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: HeroDetailsPresenter)</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-herolistview-swift-LC7" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/deb4de1b1169621f930e87ffc979053a/raw/c14a07d3b740e14a4d05be2bdd1364d62575b312/HeroListView.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/deb4de1b1169621f930e87ffc979053a#file-herolistview-swift">
+          HeroListView.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+
+<p>And the <em>HeroListPresenter</em> class should only have a reference to the <em>HeroListView</em> rather than having a full reference of the <em>HeroListViewController</em> class and should only be updating it via the passive view property reference.</p>
+
+
+
+<div class="wp-block-jetpack-markdown"><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96698516" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-herolistpresenter-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="HeroListPresenter.swift">
+        <tr>
+          <td id="file-herolistpresenter-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-herolistpresenter-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">final</span> <span class="pl-k">class</span> <span class="pl-en">HeroListPresenter</span>: <span class="pl-e">Presenter </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-herolistpresenter-swift-LC2" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-herolistpresenter-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> service: HeroService</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-herolistpresenter-swift-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">weak</span> <span class="pl-k">private</span> <span class="pl-k">var</span> view : HeroListView<span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-herolistpresenter-swift-LC5" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-herolistpresenter-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">service</span></span>: HeroService) {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-herolistpresenter-swift-LC7" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">service</span> <span class="pl-k">=</span> service</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-herolistpresenter-swift-LC8" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-herolistpresenter-swift-LC9" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-herolistpresenter-swift-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">attachView</span>(<span class="pl-smi"><span class="pl-en">view</span></span>: HeroListView) {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-herolistpresenter-swift-LC11" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">view</span> <span class="pl-k">=</span> view</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-herolistpresenter-swift-LC12" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-herolistpresenter-swift-LC13" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-herolistpresenter-swift-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">getHeroes</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-herolistpresenter-swift-LC15" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">startLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-herolistpresenter-swift-LC16" class="blob-code blob-code-inner js-file-line">        service.<span class="pl-smi">getHeroes</span> { [<span class="pl-k">weak</span> <span class="pl-c1">self</span>] heroes <span class="pl-k">in</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-herolistpresenter-swift-LC17" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">finishLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-herolistpresenter-swift-LC18" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">if</span> heroes.<span class="pl-c1">count</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-herolistpresenter-swift-LC19" class="blob-code blob-code-inner js-file-line">                <span class="pl-k">let</span> mappedHeroes <span class="pl-k">=</span> heroes.<span class="pl-c1">map</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-herolistpresenter-swift-LC20" class="blob-code blob-code-inner js-file-line">                    <span class="pl-k">return</span> <span class="pl-c1">HeroViewData</span>(<span class="pl-c1">hero</span>: <span class="pl-c1">$0</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-herolistpresenter-swift-LC21" class="blob-code blob-code-inner js-file-line">                }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-herolistpresenter-swift-LC22" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-smi">heroes</span>.<span class="pl-c1">append</span>(<span class="pl-c1">contentsOf</span>: mappedHeroes)</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-herolistpresenter-swift-LC23" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">reloadHeroList</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-herolistpresenter-swift-LC24" class="blob-code blob-code-inner js-file-line">            } <span class="pl-k">else</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-herolistpresenter-swift-LC25" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">showEmptyListMessage</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-herolistpresenter-swift-LC26" class="blob-code blob-code-inner js-file-line">            }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-herolistpresenter-swift-LC27" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-herolistpresenter-swift-LC28" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-herolistpresenter-swift-LC29" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/a15423badc5640fe6ffdf9a1e4218e53/raw/3b426aece6e832594c7346e2d3e00e0ec2262bfe/HeroListPresenter.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/a15423badc5640fe6ffdf9a1e4218e53#file-herolistpresenter-swift">
+          HeroListPresenter.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+
+<p>The <em>HeroListPresenter</em> has a dependency injection of the API service manager and only kickstarts the network and notifies the passive view about the data change on network success or failure.</p>
+
+
+
+<p><em>DIP</em> is enforced by introducing the <em>Passive View Interface</em> between the <em>Presenter</em> and <em>ViewController</em>. Separating high level module (presenter) from low level/dependent module (view/viewcontroller) via abstraction (view protocol). <em>OCP</em> can be found when we try adding any extra api call or views or functionality as it’ll extend the presenter class without actually modifying the functionality. </p>
+
+
+
+<p>Now dealing with UI navigation is another challenge that can be easily solved using another protocol like the following:</p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96698624" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-routing-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="Routing.swift">
+        <tr>
+          <td id="file-routing-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-routing-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">CanDisplayHeroDetailsScreen</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-routing-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">displayHeroDetailsScreen</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter)</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-routing-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-routing-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-routing-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">extension</span> <span class="pl-en">CanDisplayHeroDetailsScreen</span> <span class="pl-k">where</span> <span class="pl-c1">Self</span><span class="pl-k">:</span> <span class="pl-e">UIViewController</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-routing-swift-LC6" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-routing-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">displayHeroDetailsScreen</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) {</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-routing-swift-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> detailsVC <span class="pl-k">=</span> HeroDetailsViewController.<span class="pl-c1">instantiateFromStoryboard</span>(<span class="pl-c1">presenter</span>: aPresenter)</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-routing-swift-LC9" class="blob-code blob-code-inner js-file-line">        navigationController<span class="pl-k">?</span>.<span class="pl-c1">pushViewController</span>(detailsVC, <span class="pl-c1">animated</span>: <span class="pl-c1">true</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-routing-swift-LC10" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-routing-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/502d3e83f66ffb85b47570a8a606abd9/raw/9952c48d72dcfb976287611d5d6b233a31788031/Routing.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/502d3e83f66ffb85b47570a8a606abd9#file-routing-swift">
+          Routing.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>No class has to bother writing boiler plate codes again and again just to simply push a view controller in the navigation stack, rather just confront to the protocol and call the method with parameters, as simple as that!</p>
+
+
+
+<p>A complete implementation of this project can found in my <a rel="noreferrer noopener" aria-label="GitHub repo (opens in a new tab)" href="https://github.com/shabib87/Heroes" target="_blank">GitHub repo</a>. Feel free to modify or adjust as your need. As promised I am listing out some of the blogs that I found helpful to understand different iOS architectures. Happy Coding!</p>
+
+
+
+<ul><li><a rel="noreferrer noopener" aria-label="Four Rules of Simpler iOS Software Design (opens in a new tab)" href="https://medium.com/flawless-app-stories/four-rules-of-simpler-ios-software-design-c371818d08e0" target="_blank">Four Rules of Simpler iOS Software Design</a></li><li><a rel="noreferrer noopener" aria-label="iOS Architecture Patterns (opens in a new tab)" href="https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52" target="_blank">iOS Architecture Patterns</a></li><li><a rel="noreferrer noopener" aria-label="Best resources for Advanced iOS Developer (Swift) (opens in a new tab)" href="https://medium.com/@PavloShadov/best-resources-for-advanced-ios-developer-swift-ade30374593d" target="_blank">Best resources for Advanced iOS Developer (Swift)</a></li><li><a rel="noreferrer noopener" aria-label="Clean Architecture For iOS Development Using The VIPER Pattern (opens in a new tab)" href="https://medium.com/slalom-engineering/clean-architecture-for-ios-development-using-the-viper-pattern-fac30f5d29fc" target="_blank">Clean Architecture For iOS Development Using The VIPER Pattern</a></li><li><a rel="noreferrer noopener" aria-label="Coordinators, Protocol Oriented Programming and MVVM; Bullet-proof architecture with Swift (opens in a new tab)" href="https://medium.com/@aaron.bikis/coordinators-protocol-oriented-programming-and-mvvm-bullet-proof-architecture-with-swift-629dea5354ce" target="_blank">Coordinators, Protocol Oriented Programming and MVVM; Bullet-proof architecture with Swift</a></li><li><a rel="noreferrer noopener" aria-label="So Swift, So Clean Architecture for iOS (opens in a new tab)" href="https://basememara.com/swift-clean-architecture/" target="_blank">So Swift, So Clean Architecture for iOS</a></li><li><a href="https://medium.com/flawless-app-stories/getting-started-with-moya-f559c406e990" target="_blank" rel="noreferrer noopener" aria-label="Getting Started with Moya (opens in a new tab)">Getting Started with Moya</a></li></ul>
+<p>The post <a rel="nofollow" href="./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html">Better Architecture in iOS: Breaking down Massive View Controller using SOLID &#038; MVP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">1222</post-id>	</item>
+		<item>
+		<title>UITextView similar to rounded UITextField with dynamic height</title>
+		<link>./../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=uitextview-with-similar-look-like-round-rect-uitextfield</link>
+					<comments>./../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 24 Jan 2017 09:35:25 +0000</pubDate>
+				<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[coding]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[expanding textview]]></category>
+		<category><![CDATA[expanding uitextview]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[ipad]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[programming]]></category>
+		<category><![CDATA[rounded textview]]></category>
+		<category><![CDATA[rounded uitextview]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[uitextfield]]></category>
+		<category><![CDATA[uitextview]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=658</guid>
+
+					<description><![CDATA[<p>Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wished it will grow it&#8217;s height as you type your text? Well, you are in luck! Here is the swift file you will need.</p>
+<p>The post <a rel="nofollow" href="./../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html">UITextView similar to rounded UITextField with dynamic height</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wished it will grow it&#8217;s height as you type your text? Well, you are in luck! Here is the swift file you will need.</p>
+<p><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44115242" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-textviewwithplaceholderandexpandingheight-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="TextViewWithPlaceholderAndExpandingHeight.swift">
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC1" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">/*</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> TextViewWithPlaceholderAndExpandingHeight.swift</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> TextViewWithPlaceholderAndExpandingHeight</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Created by Shabib Hossain on 1/24/17.</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Copyright (c) 2017 shabib87 &lt;shabib.sust@gmail.com&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Permission is hereby granted, free of charge, to any person obtaining a copy</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> of this software and associated documentation files (the &quot;Software&quot;), to deal</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> in the Software without restriction, including without limitation the rights</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> copies of the Software, and to permit persons to whom the Software is</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> furnished to do so, subject to the following conditions:</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> The above copyright notice and this permission notice shall be included in</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> all copies or substantial portions of the Software.</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> THE SOFTWARE.</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC27" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC28" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> <span class="pl-c">*/</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC29" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC30" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-en">Foundation</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-en">UIKit</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L32" class="blob-num js-line-number js-code-nav-line-number" data-line-number="32"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC32" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L33" class="blob-num js-line-number js-code-nav-line-number" data-line-number="33"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC33" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">TextViewWithPlaceholderAndExpandingHeight</span>: <span class="pl-e">UITextView </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L34" class="blob-num js-line-number js-code-nav-line-number" data-line-number="34"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC34" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L35" class="blob-num js-line-number js-code-nav-line-number" data-line-number="35"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">@IBInspectable</span> <span class="pl-k">var</span> placeHolderText: <span class="pl-c1">String</span><span class="pl-k">!</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L36" class="blob-num js-line-number js-code-nav-line-number" data-line-number="36"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC36" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">@IBInspectable</span> <span class="pl-k">var</span> placeHolderColor: UIColor<span class="pl-k">!</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L37" class="blob-num js-line-number js-code-nav-line-number" data-line-number="37"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC37" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L38" class="blob-num js-line-number js-code-nav-line-number" data-line-number="38"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC38" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">var</span> placeHolderLabel: UILabel<span class="pl-k">!</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L39" class="blob-num js-line-number js-code-nav-line-number" data-line-number="39"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC39" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> defaultColor <span class="pl-k">=</span> <span class="pl-c1">UIColor</span>(<span class="pl-c1">red</span>:<span class="pl-c1">199.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">green</span>:<span class="pl-c1">199.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">blue</span>:<span class="pl-c1">205.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">alpha</span>:<span class="pl-c1">1.0</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L40" class="blob-num js-line-number js-code-nav-line-number" data-line-number="40"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC40" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> UIPlaceholderTextChangeAnimationDuraiton <span class="pl-k">=</span> <span class="pl-c1">0.25</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L41" class="blob-num js-line-number js-code-nav-line-number" data-line-number="41"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC41" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> UIPlaceHolderLabelTag <span class="pl-k">=</span> <span class="pl-c1">1901</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L42" class="blob-num js-line-number js-code-nav-line-number" data-line-number="42"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC42" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> kMaxHeightForTextView <span class="pl-k">=</span> <span class="pl-c1">90.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L43" class="blob-num js-line-number js-code-nav-line-number" data-line-number="43"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC43" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L44" class="blob-num js-line-number js-code-nav-line-number" data-line-number="44"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC44" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">var</span> currentDynamicHeight: CGFloat {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L45" class="blob-num js-line-number js-code-nav-line-number" data-line-number="45"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC45" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">get</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L46" class="blob-num js-line-number js-code-nav-line-number" data-line-number="46"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC46" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span> <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-smi">height</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L47" class="blob-num js-line-number js-code-nav-line-number" data-line-number="47"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC47" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L48" class="blob-num js-line-number js-code-nav-line-number" data-line-number="48"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC48" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L49" class="blob-num js-line-number js-code-nav-line-number" data-line-number="49"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC49" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L50" class="blob-num js-line-number js-code-nav-line-number" data-line-number="50"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC50" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">var</span> text: <span class="pl-c1">String</span><span class="pl-k">!</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L51" class="blob-num js-line-number js-code-nav-line-number" data-line-number="51"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC51" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">didSet</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L52" class="blob-num js-line-number js-code-nav-line-number" data-line-number="52"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC52" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L53" class="blob-num js-line-number js-code-nav-line-number" data-line-number="53"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC53" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">updateHeight</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L54" class="blob-num js-line-number js-code-nav-line-number" data-line-number="54"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC54" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L55" class="blob-num js-line-number js-code-nav-line-number" data-line-number="55"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC55" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L56" class="blob-num js-line-number js-code-nav-line-number" data-line-number="56"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC56" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L57" class="blob-num js-line-number js-code-nav-line-number" data-line-number="57"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC57" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">draw</span>(<span class="pl-en">_</span> <span class="pl-smi">rect</span>: CGRect) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L58" class="blob-num js-line-number js-code-nav-line-number" data-line-number="58"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC58" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-k">!</span><span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span>.<span class="pl-c1">isEmpty</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L59" class="blob-num js-line-number js-code-nav-line-number" data-line-number="59"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC59" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L60" class="blob-num js-line-number js-code-nav-line-number" data-line-number="60"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC60" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">setupPlaceholderLabel</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L61" class="blob-num js-line-number js-code-nav-line-number" data-line-number="61"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC61" class="blob-code blob-code-inner js-file-line">            }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L62" class="blob-num js-line-number js-code-nav-line-number" data-line-number="62"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC62" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">text</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L63" class="blob-num js-line-number js-code-nav-line-number" data-line-number="63"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC63" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">sizeToFit</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L64" class="blob-num js-line-number js-code-nav-line-number" data-line-number="64"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC64" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">sendSubview</span>(<span class="pl-c1">toBack</span>: <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L65" class="blob-num js-line-number js-code-nav-line-number" data-line-number="65"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC65" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L66" class="blob-num js-line-number js-code-nav-line-number" data-line-number="66"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC66" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">isEmpty</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>(<span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">text</span><span class="pl-k">?</span>.<span class="pl-c1">isEmpty</span>)<span class="pl-k">!</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L67" class="blob-num js-line-number js-code-nav-line-number" data-line-number="67"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC67" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">1</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L68" class="blob-num js-line-number js-code-nav-line-number" data-line-number="68"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC68" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L69" class="blob-num js-line-number js-code-nav-line-number" data-line-number="69"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC69" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-c1">draw</span>(rect)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L70" class="blob-num js-line-number js-code-nav-line-number" data-line-number="70"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC70" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L71" class="blob-num js-line-number js-code-nav-line-number" data-line-number="71"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC71" class="blob-code blob-code-inner js-file-line"> </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L72" class="blob-num js-line-number js-code-nav-line-number" data-line-number="72"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC72" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">setupPlaceholderLabel</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L73" class="blob-num js-line-number js-code-nav-line-number" data-line-number="73"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC73" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span> <span class="pl-k">=</span> <span class="pl-c1">UILabel</span>(<span class="pl-c1">frame</span>: <span class="pl-c1">CGRect</span>(<span class="pl-c1">x</span>: <span class="pl-c1">8</span>, <span class="pl-c1">y</span>: <span class="pl-c1">4</span>, <span class="pl-c1">width</span>: <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-c1">size</span>.<span class="pl-smi">width</span> <span class="pl-k">-</span> <span class="pl-c1">16</span>, <span class="pl-c1">height</span>: <span class="pl-c1">0</span>))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L74" class="blob-num js-line-number js-code-nav-line-number" data-line-number="74"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC74" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">lineBreakMode</span> <span class="pl-k">=</span> .<span class="pl-smi">byWordWrapping</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L75" class="blob-num js-line-number js-code-nav-line-number" data-line-number="75"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC75" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">numberOfLines</span> <span class="pl-k">=</span> <span class="pl-c1">0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L76" class="blob-num js-line-number js-code-nav-line-number" data-line-number="76"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC76" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">font</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">font</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L77" class="blob-num js-line-number js-code-nav-line-number" data-line-number="77"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC77" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">backgroundColor</span> <span class="pl-k">=</span> .<span class="pl-smi">clear</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L78" class="blob-num js-line-number js-code-nav-line-number" data-line-number="78"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC78" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">textColor</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L79" class="blob-num js-line-number js-code-nav-line-number" data-line-number="79"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC79" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L80" class="blob-num js-line-number js-code-nav-line-number" data-line-number="80"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC80" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">tag</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L81" class="blob-num js-line-number js-code-nav-line-number" data-line-number="81"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC81" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">addSubview</span>(<span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L82" class="blob-num js-line-number js-code-nav-line-number" data-line-number="82"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC82" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L83" class="blob-num js-line-number js-code-nav-line-number" data-line-number="83"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC83" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L84" class="blob-num js-line-number js-code-nav-line-number" data-line-number="84"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC84" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">awakeFromNib</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L85" class="blob-num js-line-number js-code-nav-line-number" data-line-number="85"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC85" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-c1">awakeFromNib</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L86" class="blob-num js-line-number js-code-nav-line-number" data-line-number="86"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC86" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L87" class="blob-num js-line-number js-code-nav-line-number" data-line-number="87"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC87" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L88" class="blob-num js-line-number js-code-nav-line-number" data-line-number="88"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC88" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L89" class="blob-num js-line-number js-code-nav-line-number" data-line-number="89"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC89" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">frame</span></span>: CGRect, <span class="pl-smi"><span class="pl-en">textContainer</span></span>: NSTextContainer<span class="pl-k">?</span>) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L90" class="blob-num js-line-number js-code-nav-line-number" data-line-number="90"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC90" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-k">init</span>(<span class="pl-c1">frame</span>: frame, <span class="pl-c1">textContainer</span>: textContainer)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L91" class="blob-num js-line-number js-code-nav-line-number" data-line-number="91"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC91" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L92" class="blob-num js-line-number js-code-nav-line-number" data-line-number="92"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC92" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L93" class="blob-num js-line-number js-code-nav-line-number" data-line-number="93"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC93" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L94" class="blob-num js-line-number js-code-nav-line-number" data-line-number="94"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC94" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">required</span> <span class="pl-k">init?</span>(<span class="pl-en">coder</span> <span class="pl-smi">aDecoder</span>: NSCoder) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L95" class="blob-num js-line-number js-code-nav-line-number" data-line-number="95"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC95" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-k">init</span>(<span class="pl-c1">coder</span>: aDecoder)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L96" class="blob-num js-line-number js-code-nav-line-number" data-line-number="96"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC96" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L97" class="blob-num js-line-number js-code-nav-line-number" data-line-number="97"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC97" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L98" class="blob-num js-line-number js-code-nav-line-number" data-line-number="98"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC98" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L99" class="blob-num js-line-number js-code-nav-line-number" data-line-number="99"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC99" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L100" class="blob-num js-line-number js-code-nav-line-number" data-line-number="100"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC100" class="blob-code blob-code-inner js-file-line">        NotificationCenter.<span class="pl-smi">default</span>.<span class="pl-c1">removeObserver</span>(<span class="pl-c1">self</span>, <span class="pl-c1">name</span>: NSNotification.<span class="pl-smi">Name</span>.<span class="pl-smi">UITextViewTextDidChange</span>, <span class="pl-c1">object</span>: <span class="pl-c1">nil</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L101" class="blob-num js-line-number js-code-nav-line-number" data-line-number="101"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC101" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L102" class="blob-num js-line-number js-code-nav-line-number" data-line-number="102"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC102" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L103" class="blob-num js-line-number js-code-nav-line-number" data-line-number="103"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC103" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">textField</span>(<span class="pl-en">_</span> <span class="pl-smi">textField</span>: UITextField, <span class="pl-en">shouldChangeCharactersIn</span> <span class="pl-smi">range</span>: NSRange, <span class="pl-en">replacementString</span> <span class="pl-smi">string</span>: <span class="pl-c1">String</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L104" class="blob-num js-line-number js-code-nav-line-number" data-line-number="104"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC104" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> whitescpaceSet <span class="pl-k">=</span> NSCharacterSet.<span class="pl-smi">whitespaces</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L105" class="blob-num js-line-number js-code-nav-line-number" data-line-number="105"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC105" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> range <span class="pl-k">=</span> string.<span class="pl-c1">rangeOfCharacter</span>(<span class="pl-c1">from</span>: whitescpaceSet)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L106" class="blob-num js-line-number js-code-nav-line-number" data-line-number="106"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC106" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-k">let</span> <span class="pl-c1">_</span> <span class="pl-k">=</span> range {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L107" class="blob-num js-line-number js-code-nav-line-number" data-line-number="107"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC107" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span> <span class="pl-c1">false</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L108" class="blob-num js-line-number js-code-nav-line-number" data-line-number="108"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC108" class="blob-code blob-code-inner js-file-line">        } <span class="pl-k">else</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L109" class="blob-num js-line-number js-code-nav-line-number" data-line-number="109"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC109" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span> <span class="pl-c1">true</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L110" class="blob-num js-line-number js-code-nav-line-number" data-line-number="110"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC110" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L111" class="blob-num js-line-number js-code-nav-line-number" data-line-number="111"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC111" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L112" class="blob-num js-line-number js-code-nav-line-number" data-line-number="112"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC112" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L113" class="blob-num js-line-number js-code-nav-line-number" data-line-number="113"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC113" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">setupPlaceholder</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L114" class="blob-num js-line-number js-code-nav-line-number" data-line-number="114"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC114" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L115" class="blob-num js-line-number js-code-nav-line-number" data-line-number="115"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC115" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pds">&quot;</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L116" class="blob-num js-line-number js-code-nav-line-number" data-line-number="116"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC116" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L117" class="blob-num js-line-number js-code-nav-line-number" data-line-number="117"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC117" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L118" class="blob-num js-line-number js-code-nav-line-number" data-line-number="118"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC118" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span> <span class="pl-k">=</span> defaultColor</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L119" class="blob-num js-line-number js-code-nav-line-number" data-line-number="119"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC119" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L120" class="blob-num js-line-number js-code-nav-line-number" data-line-number="120"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC120" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">cornerRadius</span> <span class="pl-k">=</span> <span class="pl-c1">5.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L121" class="blob-num js-line-number js-code-nav-line-number" data-line-number="121"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC121" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">borderWidth</span> <span class="pl-k">=</span> <span class="pl-c1">0.5</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L122" class="blob-num js-line-number js-code-nav-line-number" data-line-number="122"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC122" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">borderColor</span> <span class="pl-k">=</span> defaultColor.<span class="pl-smi">cgColor</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L123" class="blob-num js-line-number js-code-nav-line-number" data-line-number="123"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC123" class="blob-code blob-code-inner js-file-line">        NotificationCenter.<span class="pl-smi">default</span>.<span class="pl-c1">addObserver</span>(<span class="pl-c1">self</span>, <span class="pl-c1">selector</span>: <span class="pl-c1">#selector</span>(<span class="pl-c1">self</span>.<span class="pl-smi">textChanged</span>), <span class="pl-c1">name</span>: NSNotification.<span class="pl-smi">Name</span>.<span class="pl-smi">UITextViewTextDidChange</span>, <span class="pl-c1">object</span>: <span class="pl-c1">nil</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L124" class="blob-num js-line-number js-code-nav-line-number" data-line-number="124"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC124" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L125" class="blob-num js-line-number js-code-nav-line-number" data-line-number="125"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC125" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L126" class="blob-num js-line-number js-code-nav-line-number" data-line-number="126"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC126" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">@objc</span> <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">textChanged</span>(<span class="pl-smi"><span class="pl-en">notification</span></span>: Notification<span class="pl-k">?</span>) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L127" class="blob-num js-line-number js-code-nav-line-number" data-line-number="127"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC127" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span>.<span class="pl-c1">isEmpty</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L128" class="blob-num js-line-number js-code-nav-line-number" data-line-number="128"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC128" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L129" class="blob-num js-line-number js-code-nav-line-number" data-line-number="129"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC129" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L130" class="blob-num js-line-number js-code-nav-line-number" data-line-number="130"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC130" class="blob-code blob-code-inner js-file-line">        UIView.<span class="pl-c1">animate</span>(<span class="pl-c1">withDuration</span>: UIPlaceholderTextChangeAnimationDuraiton) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L131" class="blob-num js-line-number js-code-nav-line-number" data-line-number="131"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC131" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">isEmpty</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L132" class="blob-num js-line-number js-code-nav-line-number" data-line-number="132"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC132" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">1.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L133" class="blob-num js-line-number js-code-nav-line-number" data-line-number="133"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC133" class="blob-code blob-code-inner js-file-line">            } <span class="pl-k">else</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L134" class="blob-num js-line-number js-code-nav-line-number" data-line-number="134"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC134" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L135" class="blob-num js-line-number js-code-nav-line-number" data-line-number="135"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC135" class="blob-code blob-code-inner js-file-line">            }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L136" class="blob-num js-line-number js-code-nav-line-number" data-line-number="136"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC136" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">updateHeight</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L137" class="blob-num js-line-number js-code-nav-line-number" data-line-number="137"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC137" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L138" class="blob-num js-line-number js-code-nav-line-number" data-line-number="138"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC138" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L139" class="blob-num js-line-number js-code-nav-line-number" data-line-number="139"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC139" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L140" class="blob-num js-line-number js-code-nav-line-number" data-line-number="140"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC140" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">updateHeight</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L141" class="blob-num js-line-number js-code-nav-line-number" data-line-number="141"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC141" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> fixedWidth <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-c1">size</span>.<span class="pl-smi">width</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L142" class="blob-num js-line-number js-code-nav-line-number" data-line-number="142"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC142" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> newSize <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-c1">sizeThatFits</span>(<span class="pl-c1">CGSize</span>(<span class="pl-c1">width</span>: fixedWidth, <span class="pl-c1">height</span>: CGFloat.<span class="pl-c1">greatestFiniteMagnitude</span>))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L143" class="blob-num js-line-number js-code-nav-line-number" data-line-number="143"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC143" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">var</span> newFrame <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">frame</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L144" class="blob-num js-line-number js-code-nav-line-number" data-line-number="144"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC144" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">var</span> height <span class="pl-k">=</span> newSize.<span class="pl-smi">height</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L145" class="blob-num js-line-number js-code-nav-line-number" data-line-number="145"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC145" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">Double</span>(newSize.<span class="pl-smi">height</span>) <span class="pl-k">&gt;=</span> kMaxHeightForTextView {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L146" class="blob-num js-line-number js-code-nav-line-number" data-line-number="146"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC146" class="blob-code blob-code-inner js-file-line">            height <span class="pl-k">=</span> <span class="pl-c1">CGFloat</span>(kMaxHeightForTextView)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L147" class="blob-num js-line-number js-code-nav-line-number" data-line-number="147"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC147" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L148" class="blob-num js-line-number js-code-nav-line-number" data-line-number="148"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC148" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> maxWidth <span class="pl-k">=</span> <span class="pl-c1">CGFloat</span>(<span class="pl-c1">fmax</span>(<span class="pl-c1">Double</span>(newSize.<span class="pl-smi">width</span>), <span class="pl-c1">Double</span>(fixedWidth)))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L149" class="blob-num js-line-number js-code-nav-line-number" data-line-number="149"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC149" class="blob-code blob-code-inner js-file-line">        newFrame.<span class="pl-c1">size</span> <span class="pl-k">=</span> <span class="pl-c1">CGSize</span>(<span class="pl-c1">width</span>: maxWidth, <span class="pl-c1">height</span>:height)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L150" class="blob-num js-line-number js-code-nav-line-number" data-line-number="150"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC150" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">frame</span> <span class="pl-k">=</span> newFrame</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L151" class="blob-num js-line-number js-code-nav-line-number" data-line-number="151"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC151" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">scrollRangeToVisible</span>(<span class="pl-c1">NSMakeRange</span>(<span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">characters</span>.<span class="pl-c1">count</span>, <span class="pl-c1">0</span>))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L152" class="blob-num js-line-number js-code-nav-line-number" data-line-number="152"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC152" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L153" class="blob-num js-line-number js-code-nav-line-number" data-line-number="153"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC153" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L154" class="blob-num js-line-number js-code-nav-line-number" data-line-number="154"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC154" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L155" class="blob-num js-line-number js-code-nav-line-number" data-line-number="155"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC155" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d/raw/44fa038df3a26f79086fad52742ed667ff70337c/TextViewWithPlaceholderAndExpandingHeight.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d#file-textviewwithplaceholderandexpandingheight-swift">
+          TextViewWithPlaceholderAndExpandingHeight.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+</p>
+<p>The post <a rel="nofollow" href="./../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html">UITextView similar to rounded UITextField with dynamic height</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../uitextview-with-similar-look-like-round-rect-uitextfield/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">658</post-id>	</item>
+		<item>
+		<title>Strong vs Weak Reference in Cocoa</title>
+		<link>./../../../strong-vs-weak-reference-in-cocoa/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=strong-vs-weak-reference-in-cocoa</link>
+					<comments>./../../../strong-vs-weak-reference-in-cocoa/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Sat, 12 Nov 2016 06:20:59 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[arc]]></category>
+		<category><![CDATA[automatic reference counting]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[coding]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[programming]]></category>
+		<category><![CDATA[property]]></category>
+		<category><![CDATA[reference]]></category>
+		<category><![CDATA[retain]]></category>
+		<category><![CDATA[strong]]></category>
+		<category><![CDATA[weak]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=515</guid>
+
+					<description><![CDATA[<p>In iOS we always end up defining our instance variables as  @property (strong) or @property(weak). But what does strong and weak mean, and when to use which one? In cocoa, an objects memory is managed via a system called retain count. When an object is initialized, its retain count is increased by 1 from zero. [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../strong-vs-weak-reference-in-cocoa/index.html">Strong vs Weak Reference in Cocoa</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In iOS we always end up defining our instance variables as  <em><strong><code>@property (strong)</code></strong></em> or <em><strong><code>@property(weak)</code></strong></em>. But what does strong and weak mean, and when to use which one?</p>
+<p>In cocoa, an objects memory is managed via a system called retain count. When an object is initialized, its retain count is increased by 1 from zero. And each time it is strongly referenced by someone, the retain count keeps increasing by 1. In ARC (a compile time feature of Apple&#8217;s version of automated memory management, acronym of Automatic Reference Counting), it only frees up memory for objects when there are zero strong references to them, or simply put, the retain count is zero.</p>
+<p><strong>Now, what is a strong reference?</strong> It is a normal reference (pointer), but it guards the referred object from getting deallocated by ARC by increasing its retain count by 1. As long as any class has a strong reference to an object, it will not be deallocated. Strong references are used almost everywhere in Cocoa. In Objective-C we declare a strong reference as <em><strong><code>@property (strong) ObjectType *variableName</code></strong></em>, where in Swift a property is declared strong by default. We should always use strong references in linear hierarchy relationships of objects (parent to child, parent having a strong reference of the child). But what happens if a child has a strong reference of a parent? It will confuse ARC and the objects won&#8217;t be released properly, causing a memory leak. This is called a <strong>retain cycle</strong>. If two objects have strong references to each other, ARC will not be able to release any of the instances since they are keeping each other alive.</p>
+<p>To solve this,  weak reference is introduced. In Objective-C it is declared as <em><strong><code>@property(weak) ObjectType *variableName</code></strong></em>, and in swift as <code><em><strong>weak var</strong> <strong>variableName: ObjectType</strong></em></code>. Weak references do not change the retain count. When a weak reference is accessed, it will either be a valid object, or nil (as ARC does not guard it from being deallocated on releasing the strong reference). The following example will make it more clear.</p>
+<p>Let&#8217;s assume a scenario, a balloon-man sold a helium balloon to a child. The balloon has a string attached to it, so it does not fly away. The helium balloon here is an object that is being created by  a class (the child) and has a strong reference (the string) to it. Now, imagine the child has two siblings and one of them also wants to hold the balloon. So the balloon-man attaches another string to it (another strong reference by another class). Now, all three siblings can watch the balloon and play with it (access the properties and methods of the object) as long as either of the two siblings have the strings in their hand. If both of them releases the string, the balloon flies away (object deallocated/released)! Now, the third sibling can only watch, point and play with the balloon as long as any of the other two holds the string (a strong reference) to the balloon. When both the strings are released, the third sibling also looses the balloon. The relation between the third sibling and the balloon is a weak reference (third class having a weak reference), where the former two are strong. A weak reference to an object can only access it&#8217;s properties and methods, as long as it has at least one strong reference.</p>
+<p>I hope this clears up when to use a the strong and weak reference and how do they work.</p>
+<p>The post <a rel="nofollow" href="./../../../strong-vs-weak-reference-in-cocoa/index.html">Strong vs Weak Reference in Cocoa</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../strong-vs-weak-reference-in-cocoa/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">515</post-id>	</item>
+		<item>
+		<title>SHViewPager: Android like view pager control for iOS Version 2.0 finally!</title>
+		<link>./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=shviewpager-android-like-view-pager-control-for-ios-version-2-finally</link>
+					<comments>./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Fri, 02 Sep 2016 16:55:44 +0000</pubDate>
+				<category><![CDATA[Cocoapods]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[android]]></category>
+		<category><![CDATA[android-view-pager]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[iOS-view-pager]]></category>
+		<category><![CDATA[iPad view pager]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[iPhone view pager]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[shviewpager]]></category>
+		<category><![CDATA[view-pager]]></category>
+		<category><![CDATA[viewpager]]></category>
+		<category><![CDATA[viewpager for iOS]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=325</guid>
+
+					<description><![CDATA[<p>It has been almost or, more than 2 years I had created this controller called SHViewPager. And to my utmost surprise a lot of people actually got benefited from it. Some of them requested for the support for screen orientation and iPad. I was a bit busy (actually lazy! sorry guys, truly!)  to keep the [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html">SHViewPager: Android like view pager control for iOS Version 2.0 finally!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>It has been almost or, more than 2 years I had created <a href="http://codewithshabib.com/2016/08/23/shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/" target="_blank" rel="noopener noreferrer">this controller</a> called <a href="https://github.com/shabib87/SHViewPager" target="_blank" rel="noopener noreferrer">SHViewPager</a>. And to my utmost surprise a lot of people actually got benefited from it. Some of them requested for the support for screen orientation and iPad. I was a bit busy (actually lazy! sorry guys, truly!)  to keep the request. Finally after a long wait, I was thinking, why am I not doing it?</p>
+<p>So, I got my lazy ass moving and got it done. Now, the <a href="https://github.com/shabib87/SHViewPager" target="_blank" rel="noopener noreferrer">SHViewPager</a> supports:</p>
+<ul>
+<li>All orientations</li>
+<li>iPad</li>
+</ul>
+<p>And it got even better, with:</p>
+<ul>
+<li>Support for both Swift and Objective-C</li>
+<li>Support for Autolayout</li>
+<li>Simple installation via <a href="http://codewithshabib.com/2016/08/16/creating-your-own-cocoapod/" target="_blank" rel="noopener noreferrer">Cocoapods</a>!</li>
+</ul>
+<p>To use it in your app, you have to have Xcode 6+ and support iOS 8+. Here is a gif sample:</p>
+<p><a href="./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html#gallery-325-1-slideshow">Click to view slideshow.</a></p>
+<p>I am planning to keep supporting this library, so any feedback/suggestions are welcome. If you have found any bug, please report an issue for it. This library is under MIT license, so contribute, update, modify as per your need!</p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html">SHViewPager: Android like view pager control for iOS Version 2.0 finally!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">325</post-id>	</item>
+		<item>
+		<title>SHTwoDimensionalArray : A simple and easy to use two dimensional array for iOS applications.</title>
+		<link>./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications</link>
+					<comments>./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 23 Aug 2016 17:17:53 +0000</pubDate>
+				<category><![CDATA[Cocoapods]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[2d array]]></category>
+		<category><![CDATA[array]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Library]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pod]]></category>
+		<category><![CDATA[SHTwoDimensionalArray]]></category>
+		<category><![CDATA[two dimensional array]]></category>
+		<category><![CDATA[twoD array]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=282</guid>
+
+					<description><![CDATA[<p>Ever felt the need to use a two dimensional array in you iOS project? Well, I have. So here is what I had done: Created a NSObject subclass. Taken two private NSMutableArray instances, one for row and one for column. Created a nested for loop to traverse those arrays, and fill them with NSNull objects. Created [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html">SHTwoDimensionalArray : A simple and easy to use two dimensional array for iOS applications.</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Ever felt the need to use a two dimensional array in you iOS project? Well, I have. So here is what I had done:</p>
+<ul>
+<li>Created a NSObject subclass.</li>
+<li>Taken two private NSMutableArray instances, one for row and one for column.</li>
+<li>Created a nested for loop to traverse those arrays, and fill them with NSNull objects.</li>
+<li>Created a method to insert value/object on the [row][column] index.</li>
+</ul>
+<p>So this is fairly easy and straightforward. But wouldn&#8217;t it be nicer if you didn&#8217;t have to do all these steps and figure out how to write those monotonous codes all by yourself?</p>
+<p>My good friend, I have good news for you! I have created <a href="https://github.com/shabib87/SHTwoDimensionalArray" target="_blank" rel="noopener noreferrer">a simple CocoaPod</a> to minimize your task!</p>
+<p>To install it, simply add the following line to your Podfile:</p>
+<pre>pod <span class="pl-s"><span class="pl-pds">'</span>SHTwoDimensionalArray<span class="pl-pds">'</span></span></pre>
+<p>and run</p>
+<pre>pod install</pre>
+<p>command!</p>
+<p>To use this, try the following code snippet:</p>
+<pre>#<span class="pl-k">import</span> <span class="pl-s"><span class="pl-pds">"</span>SHTwoDimensionalArray.h<span class="pl-pds">"
+
+</span></span>SHTwoDimensionalArray *twoDArray = [SHTwoDimensionalArray <span class="pl-c1">arrayWithRows:</span><span class="pl-c1">2</span> <span class="pl-c1">andColumns:</span><span class="pl-c1">2</span>];
+[twoDArray <span class="pl-c1">setObject:</span><span class="pl-s"><span class="pl-pds">@"</span>Foo<span class="pl-pds">"</span></span> <span class="pl-c1">inRow:</span><span class="pl-c1">0</span> <span class="pl-c1">column:</span><span class="pl-c1">0</span>];
+...
+
+<span class="pl-c1">NSString</span> *foo = [twoDArray <span class="pl-c1">objectInRow:</span><span class="pl-c1">0</span> <span class="pl-c1">column:</span><span class="pl-c1">0</span>];</pre>
+<p>I hope you find it helpful and it&#8217;s under MIT license. Feel free to fork, modify and contribute!</p>
+<p>Cheers!</p>
+<p>The post <a rel="nofollow" href="./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/index.html">SHTwoDimensionalArray : A simple and easy to use two dimensional array for iOS applications.</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">282</post-id>	</item>
+		<item>
+		<title>Creating your own COCOAPOD</title>
+		<link>./../../../creating-your-own-cocoapod/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=creating-your-own-cocoapod</link>
+					<comments>./../../../creating-your-own-cocoapod/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 16 Aug 2016 16:34:48 +0000</pubDate>
+				<category><![CDATA[Cocoapods]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[dependency manager]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Library]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pod]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=144</guid>
+
+					<description><![CDATA[<p>Now a days it is fairly common to use CocoaPods to your project as the dependency manager for your iOS and MacOs projects. I have been using it for quite some time now; and to my utter delight, oh boy, I am glad I got to know how to use this masterpiece! Now to a [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../creating-your-own-cocoapod/index.html">Creating your own COCOAPOD</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Now a days it is fairly common to use <strong><a href="https://cocoapods.org/">CocoaPods</a></strong> to your project as the dependency manager for your iOS and MacOs projects. I have been using it for quite some time now; and to my utter delight, oh boy, I am glad I got to know how to use this masterpiece!</p>
+<p><strong>Now to a fairly uncommon scenario, what if you want to create your own pod?</strong></p>
+<p>It is not uncommon for developers like me, who have been working in the industry for quite a few years to have their own tricks and tweaks. You might have made quite some subclasses/libraries/UI controls to make your life easier and have been using them to your projects. Well done sire! But have you ever thought of sharing your awesome work? Oh come on dude! We; the developers; rely so much on the open source community and it&#8217;s pretty damn cool to be one of the contributors! So, how do you make your own awesome pod? Well, I am not going to write all those steps, as it is already in the web!!! The guys from <a href="http://code.tutsplus.com/" target="_blank" rel="noopener noreferrer">http://code.tutsplus.com/</a> have written this awesome tutorial on how to make your own pod! So go check it out here: <a href="http://code.tutsplus.com/tutorials/creating-your-first-cocoapod--cms-24332" target="_blank" rel="noopener noreferrer">Creating Your First CocoaPod</a>.  You can also get a good detailed read from <a href="https://guides.cocoapods.org/making/making-a-cocoapod.html" target="_blank" rel="noopener noreferrer">Official Guide from CocoaPod</a>.</p>
+<p>From the tutorial it is possible, you will face this error on the following command (in the tutorial <strong>Step 3: Pushing to Specs Repository</strong>):</p>
+<pre style="padding-left: 30px;">pod trunk push YOUR_POD.podspec 
+
+[!] You need to register a session first.
+
+</pre>
+<p>Don&#8217;t worry about it, you need to register yourself for the session. Just run:</p>
+<pre><code class="highlight plaintext">$ pod trunk register &lt;Your Email&gt; 'Your Name' --description='Your Description'</code></pre>
+<p>You&#8217;ll have the following output to confirm the session:</p>
+<pre class="p1" style="padding-left: 30px;"><span class="s1">[!] Please verify the session by clicking the link in the verification email that has been sent to YOUR EMAIL</span></pre>
+<p>You must click a link in an email Trunk sends you to verify the connection between your Trunk account and the current computer. You can list your sessions by running:</p>
+<pre style="padding-left: 30px;">pod trunk me</pre>
+<p>Trunk accounts do not have passwords, only per-computer session tokens.</p>
+<p>You can learn more from the <a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html">cocoapods official site here</a>.<br />
+Chiao!!!</p>
+<p>The post <a rel="nofollow" href="./../../../creating-your-own-cocoapod/index.html">Creating your own COCOAPOD</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../creating-your-own-cocoapod/feed/index.html</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">144</post-id>	</item>
+		<item>
+		<title>SHViewPager: Custom Controller for iOS</title>
+		<link>./../../../shviewpager-custom-control-for-ios/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=shviewpager-custom-control-for-ios</link>
+					<comments>./../../../shviewpager-custom-control-for-ios/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Mon, 26 May 2014 13:23:46 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[iOS-view-pager]]></category>
+		<category><![CDATA[ios-viewpager]]></category>
+		<category><![CDATA[iPad view pager]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[iPhone view pager]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pager]]></category>
+		<category><![CDATA[view-pager]]></category>
+		<category><![CDATA[viewpager]]></category>
+		<category><![CDATA[viewpager for iOS]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=113</guid>
+
+					<description><![CDATA[<p>Hello everybody, For a recent project of mine, I had created this custom controller. This is quite similar to the ViewPager control used in Android. I&#8217;ve named this controller SHViewPager, here is the gitHub link. This controller uses a datasource and a delegate protocol. You&#8217;ve to implement at least three datasource protocols (that are required) to avoid exceptions. These [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-custom-control-for-ios/index.html">SHViewPager: Custom Controller for iOS</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello everybody,</p>
+<p>For a recent project of mine, I had created this custom controller. This is quite similar to the ViewPager control used in Android. I&#8217;ve named this controller <code>SHViewPager</code>, <a title="SHViewPager" href="https://github.com/shabib87/SHViewPager" target="_blank" rel="noopener noreferrer">here is the gitHub link</a>.</p>
+<p>This controller uses a <code>datasource</code> and a <code>delegate</code> protocol. You&#8217;ve to implement at least three <code>datasource</code> protocols (that are required) to avoid exceptions. These methods are:</p>
+<p><strong>&#8211; The first one</strong></p>
+<pre>// total number of pages to be displayed by the controller
+-(NSInteger)numberOfPagesInViewPager:(SHViewPager*)viewPager;
+</pre>
+<p>Example:</p>
+<pre>-(NSInteger)numberOfPagesInViewPager:(SHViewPager*)viewPager
+{
+    // 5 pages to be displayed by the controller
+    return 5;
+}
+</pre>
+<p><strong>&#8211; The second one</strong></p>
+<pre>// the viewcontroller that will contain the pages, in most of the cases it will be the same viewcontroller that is acting as the datasource and delegate
+// i.e. return value will be 'self'
+- (UIViewController *)containerControllerForViewPager:(SHViewPager *)viewPager;
+</pre>
+<p>Example:</p>
+<pre>- (UIViewController *)containerControllerForViewPager:(SHViewPager *)viewPager
+{
+    return self;
+}
+</pre>
+<p><strong>&#8211; The third one</strong></p>
+<pre>// the viewcontroller that is to be shown as as a page in the pager
+- (UIViewController *)viewPager:(SHViewPager *)viewPager controllerForPageAtIndex:(NSInteger)index;
+</pre>
+<p>Example:</p>
+<pre>- (UIViewController *)viewPager:(SHViewPager *)viewPager controllerForPageAtIndex:(NSInteger)index
+{
+    UIViewController *viewController = [[UIViewController alloc] initWithNibName:@"UIViewController" bundle:nil];
+    return viewController;
+}
+</pre>
+<p>To display the contents, you need to call the instance method <code>reloadData</code> in your desired method block, typically in <code>viewDidLoad</code>.<br />
+Example:</p>
+<pre>- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // your code
+    [viewPager reloadData];
+}
+</pre>
+<p>This custom controller is under MIT licence. Feel free to use and contribute <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-custom-control-for-ios/index.html">SHViewPager: Custom Controller for iOS</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../shviewpager-custom-control-for-ios/feed/index.html</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">113</post-id>	</item>
+		<item>
+		<title>Objective-C: Space for Every Three Digits of A Number</title>
+		<link>./../../../objective-c-space-for-every-three-digits-of-a-number/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=objective-c-space-for-every-three-digits-of-a-number</link>
+					<comments>./../../../objective-c-space-for-every-three-digits-of-a-number/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 18:47:31 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[NSNumberDecimalStyle]]></category>
+		<category><![CDATA[NSNumberFormatter]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[space after three digit]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=104</guid>
+
+					<description><![CDATA[<p>Hi everyone and welcome again to my blog. Today I am going to discuss a quick fix with you guys. Recently I was working in one my projects and came to a point where I had to use a formatter, which will put spaces after every three digit of a decimal number. For example, if [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../objective-c-space-for-every-three-digits-of-a-number/index.html">Objective-C: Space for Every Three Digits of A Number</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hi everyone and welcome again to my blog. Today I am going to discuss a quick fix with you guys. Recently I was working in one my projects and came to a point where I had to use a formatter, which will put spaces after every three digit of a decimal number. For example, if the number is 20000, it will make it look like 200 000. Simple and it is vastly used, isn’t it?</p>
+<p>But what surprised me was, iOS doesn’t give a built-in support to format the number in this manner! Java has a built in method for this, but Objective-C doesn’t! So I had to write the following method to accomplish the job. Here’s the code:<br />
+<code><br />
+-(void)formatAmount:(CGFloat)amount<br />
+{<br />
+NSNumberFormatter *formatter = [NSNumberFormatter new];<br />
+formatter.numberStyle = NSNumberFormatterDecimalStyle;<br />
+formatter.allowsFloats = YES;<br />
+formatter.minimumFractionDigits = 2;</code></p>
+<p><code><code></code></code></p>
+<p>NSString *formatted = [formatter stringFromNumber:[NSNumber numberWithFloat:amount]];<br />
+NSArray *substring = [formatted componentsSeparatedByString:@&#8221;,&#8221;];<br />
+formatted = @&#8221;&#8221;;</p>
+<p><code><code></code></code></p>
+<p>for (int i = 0; i &lt; substring.count; i++)<br />
+{<br />
+NSString *newString = @&#8221;&#8221;;</p>
+<p><code><code></code></code></p>
+<p>if (i == 0)<br />
+{<br />
+newString = [NSString stringWithFormat:@&#8221;%@&#8221;, [substring objectAtIndex:i]];<br />
+}<br />
+else<br />
+{<br />
+newString = [NSString stringWithFormat:@&#8221; %@&#8221;, [substring objectAtIndex:i]];<br />
+}</p>
+<p><code><code></code></code></p>
+<p>formatted = [formatted stringByAppendingString:newString];<br />
+}</p>
+<p><code><br />
+</code></p>
+<p><code>NSLog(@"%@",formatted);<br />
+}<br />
+</code><br />
+The method is quite simple; it takes a float and formats it as demanded. Firstly iOS supports number formatting with comma separation after every third digit and it is the <b><i>NSNumberFormatterDecimalStyle</i></b>. What I’ve done is, I’ve formatted the float value in <b><i>NSNumberFormatterDecimalStyle</i></b> and then replaced the commas (,) with spaces. Easy, right? Oh, I needed the tailing zeros of the float value (i.e. 20000.00), but the <b><i>NSNumberFormatterDecimalStyle</i></b> truncates them if it is a full number (i.e. is the number is 20000.00, it will show only 20000). I got that fixed by setting the minimumFractionDigits property of <b><i>NSNumberFormatter</i></b>.</p>
+<p>Well, that was a quick fix! Until next time, happy coding :)!</p>
+<p>The post <a rel="nofollow" href="./../../../objective-c-space-for-every-three-digits-of-a-number/index.html">Objective-C: Space for Every Three Digits of A Number</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../objective-c-space-for-every-three-digits-of-a-number/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">104</post-id>	</item>
+		<item>
+		<title>About Delegation Part &#8211; 3</title>
+		<link>./../../../about-delegation-part-3/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=about-delegation-part-3</link>
+					<comments>./../../../about-delegation-part-3/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 08:11:07 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[delegates]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS delegate]]></category>
+		<category><![CDATA[iOS protocol]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[objective-c protocol]]></category>
+		<category><![CDATA[protocol]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=97</guid>
+
+					<description><![CDATA[<p>Hello guys and welcome to the third and final part of our discussion on Objective-C protocols and delegation. On the last part we had finished our code and left the discussion for this part. Well, what are we waiting for? Open the project and run  it  on the simulator, you’ll see something like this: When [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-3/index.html">About Delegation Part &#8211; 3</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello guys and welcome to the third and final part of our discussion on Objective-C protocols and delegation. On the <a title="http://codewithshabib.wordpress.com/2013/05/14/about-delegation-part-2/" href="https://codewithshabib.com/2013/05/14/about-delegation-part-2/" target="_blank" rel="noopener noreferrer">last part</a> we had finished our code and left the discussion for this part. Well, what are we waiting for? Open the project and run  it  on the simulator, you’ll see something like this:</p>
+<p><figure id="attachment_98" aria-describedby="caption-attachment-98" style="width: 200px" class="wp-caption aligncenter"><a href="http://codewithshabib.com/wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm.png"><img class="size-medium wp-image-98" src="http://codewithshabib.com/wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm.png?w=200" alt="UnderstandingDelegate running on simulator" width="200" height="300" srcset="./../../../wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm.png 640w, ./../../../wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm-200x300.png 200w" sizes="(max-width: 200px) 100vw, 200px" /></a><figcaption id="caption-attachment-98" class="wp-caption-text">UnderstandingDelegate running on simulator</figcaption></figure></p>
+<p>When you click on the “Buy” button on any row, an alert pops up telling you which car you bought, see? Now tell me, you’ve written a single class named <b><i>CarFactory</i></b> which has a button called “Buy”. How does this button know which car you actually bought? Can you tell me? No? Okay, let me explain.</p>
+<p>The <b><i>CarFactory </i></b>does not know how many cars it has to produce and which one is bought by the user. So what it does is, it signs a contract with the <b><i>MarketViewController</i></b> to determine how many cars it has to provide and which car is bought by the user (factory has to sell cars and market has to make profit, business right? ;)). Now, <b><i>MarketViewController</i></b> signs a bond named <b><i>CarRegisterDelegate</i></b> with <b><i>CarFactory</i></b> to make sure that this business takes place and both factory and market makes profit ;). <b><i>MarketViewController</i></b> tells <b><i>CarFactory</i></b> how many cars it has to make and how the car should look like by providing information like the car number and name. By the contract (delegate protocol of <b><i>CarFactory</i></b>) <b><i>MarketViewController</i></b> is bound to implement the method <b><i>orderedCarIs</i></b>:, which will help the <b><i>CarFactory</i></b> to know which car it has to sell.</p>
+<p>Let’s have a look the method <b><i>tableView: cellForRowAtIndexPath. </i></b>See we’ve written <b><i>cell.delegate = self; </i></b>by this line we’re confirming (signing the signature) in the contract with <em><strong>CarFactory</strong></em> that we’re bound to implement orderedCars: method. Then by <em><strong>cell.carNo = indexPath.row;</strong></em> we’re just passing the car number that is ordered. So, what this method means is; the MarketViewController orders CarFactory the following commands:</p>
+<ol>
+<li>We need a new car to show, make one (<em><strong>cell = [[CarFactory alloc] init]</strong></em>)</li>
+<li>This car should be named like this (<em><strong>cell.carNameLabel.text = [cars objectAtIndex:indexPath.row]</strong></em>).</li>
+<li>Here is the car number (<em><strong>cell.carNo = indexPath.row</strong></em>), if you get any message to refer to this car you have to use this number.</li>
+<li>I am signing this contract with you; this is my token (<em><strong>cell.delegate = self</strong></em>) and for further enquiry contact through this token.</li>
+</ol>
+<p>This is now making some sense, right? It should <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Well moving forward, as the <b><i>MarketViewContrller</i></b> has ordered the <b><i>CarFactory</i></b> to supply cars. The <b><i>CarFactory</i></b> starts creating cars on order basis. For each entry of the cars array, a car is made with above instructions. The <b><i>CarFactory</i></b> does not know anything about what <b><i>MarketViewController</i></b> is going to do the cars, how it is going to show them or how it is going to sell them. It just knows, it has an order and it follows it. For each item in the cars array, a car is created and returned to the <b><i>UITableView</i></b> to display.</p>
+<p>When all cars are ready and displayed in a table view to the user, the user sees and chooses a car; “wow…this looks nice, I am going to buy this”, says the user. The user clicks a button titled “Buy”. Now, the button does not know what car it represents, right? It responds to the selector it was instructed to (<b><i>buyButtonPressed:)</i></b> written inside <b><i>CarFactory</i></b>. Which means, the user tells the salesman (the buy button), “I want to buy this car.” The salesman reports to the manager (<b><i>buyButtonPressed:</i></b>) of the factory (<b><i>CarFactory</i></b>) and asks him what to do, the manager tells him go respond to button press method. Now, here comes the contract paper. In the selector method, the salesman asks the market, “do you have the contract?” by this condition: <em><strong>If (delegate)</strong></em></p>
+<p>Now if this condition is satisfied, which in this case is true (yes, we did sign the contract. We’ve it, remember <em><strong>cell.delegate = self</strong></em>?) Now the salesman tells the market, this is the car number and here is the place you should do business:</p>
+<p><em><strong>[delegate orderedCarIs:self.carNo];</strong></em></p>
+<p>This <b><i>delegate </i></b>redirects to the <b><i>MarketViewController</i></b>s delegate method:</p>
+<p><em><strong>-(void)oderedCarIs:(int)_carNo</strong></em></p>
+<p>Now, the market knows which car it has to sell to the user by satisfying a contract with the <b><i>CarFactory</i></b>. Everybody is happy, nice business for everyone <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Now, if the contract were not signed, what would have happened? Comment out the line <em><strong>cell.delegate = self;</strong></em> and check for yourself! See? Nothing happens!!!</p>
+<p>In the <b><i>buyButtonPressed:</i></b> method,<em><strong> if (delegate)</strong></em> condition fails and <b><i>CarFactory</i></b> says, sorry mate! You did not sign the damn contract! I won’t do anything!!!</p>
+<p>Capiche?</p>
+<p>Now, remember I said <b><i>UITableViewController</i></b> by default implements two protocols, <b><i>UITableViewDataSource</i></b> and <b><i>UITableViewDelegate</i></b>? Have a look at the lines under these:</p>
+<p><em><strong>#pragma mark &#8211; Table view data source</strong></em></p>
+<p>and</p>
+<p><em><strong>#pragma mark &#8211; Table view delegate</strong></em></p>
+<p>The methods talk for them selves, don’t they? We’re building cars, how the hell we know, how many? Do we? Yes, we do! Remember implementing <b><i>numberOfSectionsInTableView: </i></b>and <b><i>tableView:numberOfRowsInSection:</i></b>?</p>
+<p>These are the data source methods of a <b><i>UITableView</i></b> which it self is a protocol that serves the data needed to display; that’s why we call this <b><i>dataSource.</i></b></p>
+<p>Command + click the line <b><i>UITableViewDataSource </i></b>and you’ll see the other methods that can help you change stuff in the <em><strong>UITableView</strong></em>. There is also <b><i>UITableViewDelegate</i></b>, take a look at that too. Do you see the words <em><strong>@optional</strong></em> and <em><strong>@required</strong></em> there? I told you before we’ll discuss this later. Well, this is the time. The words speak for them selves, these two words declare that which method implementation is absolutely mandatory for your contract signing and which one is optional. Clear enough right?</p>
+<p>Well this is the end of our long discussion over protocol and delegation in Objective-C. I hope this triumph of mine helped you to understand the topic. You can download the source code from here: <a title="https://github.com/shabib87/UnderstandingDelegates" href="https://github.com/shabib87/UnderstandingDelegates" target="_blank" rel="noopener noreferrer">github.com/shabib87/UnderstandingDelegates</a>. And any advice, response or criticism is utterly welcome. Take care and bye for now. Happy coding folks!</p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-3/index.html">About Delegation Part &#8211; 3</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../about-delegation-part-3/feed/index.html</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">97</post-id>	</item>
+		<item>
+		<title>About Delegation Part &#8211; 2</title>
+		<link>./../../../about-delegation-part-2/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=about-delegation-part-2</link>
+					<comments>./../../../about-delegation-part-2/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 14 May 2013 07:22:58 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[delegates]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS delegate]]></category>
+		<category><![CDATA[iOS protocol]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[objective-c protocol]]></category>
+		<category><![CDATA[protocol]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=78</guid>
+
+					<description><![CDATA[<p>Hello again, welcome to the second part of the discussion on iOS protocol and delegates. On the previous part I left on the theoretical discussion about what are Objective-C protocol and delegates. Here is the link to first part of this discussion. Moving forward, I am going to give a practical example and explain more [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-2/index.html">About Delegation Part &#8211; 2</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello again, welcome to the second part of the discussion on iOS protocol and delegates. On the previous part I left on the theoretical discussion about what are Objective-C protocol and delegates. <a title="Here is the link to first part of this discussion" href="https://codewithshabib.com/2013/05/09/about-delegation-part-1/" target="_blank" rel="noopener noreferrer">Here is the link to first part of this discussion</a>. Moving forward, I am going to give a practical example and explain more on this topic.</p>
+<p>As I am going to be a little eccentric on this, it might feel a bit awkward to you in the beginning of my example. But at the end of the discussion you’ll have a crystal clear knowledge on how delegate works. So, stick with me and see what comes, ok?</p>
+<p>Firstly, create an XCode project (an empty application) named <b><i>UnderstandingDelegates</i></b>. Create a <b><i>UITableViewController</i></b> named <b><i>MarketViewController</i></b> (no core data, no ARC and no unit testing). Go to the .h file and you will see the following lines:</p>
+<p><code><br />
+@interface MarketViewController: UITableViewController</code></p>
+<p>@end</p>
+<p>You can see the <b><i>MarketViewController</i></b> is a subclass of <b><i>UITableViewController</i></b>. By default <b><i>UITableViewController</i></b> supports two protocols into it, <b><i>UITableViewDataSource</i></b> and <b><i>UITableViewDelegate</i></b>. Don’t ask any question now about what are these and why we need them; you’ll have the answer soon.</p>
+<p>Now, create another new file named <b><i>CarFactory</i></b> and subclass it as <b><i>UITableViewCell</i></b>. Write the following code in the .h file:</p>
+<p><code><br />
+@protocol CarRegisterDelegate &lt;NSObject&gt;</code></p>
+<p>-(void)orderedCarIs:(int)_carNo;</p>
+<p>@end</p>
+<p>@interface CarFactory : UITableViewCell<br />
+{<br />
+UIButton *orderCarButton;<br />
+}</p>
+<p>@property (nonatomic, assign) id &lt;CarRegisterDelegate&gt; delegate;</p>
+<p>@property (nonatomic, retain) UILabel *carNameLabel;</p>
+<p>@property (assign) int carNo;</p>
+<p>@end</p>
+<p>Now what does these lines mean? We’re declaring a protocol class named <b><i>CarRegisterDelegate</i></b>, which defines a contract to be signed with the class registering to it. What is the contract? It is the method named <b><i>orderedCarIs:</i></b>, clear?</p>
+<p>This class <b><i>CarFactory</i></b> is a custom <b><i>UITableViewCell</i></b>.  Here we’ve a button, a label, an integer and an id as the property of the class. Did you notice that the button has no getter and setter method but the other three has? It is because, the button is only used by this class; no other class has anything to do with the button. Another thing is the <b><i>UILabel</i></b> is retained but the other two objects aren’t, why? Because an integer is a primitive data type, it does not point to any object so you don’t have to retain it’s memory to use it, instead just assign a value to it. Now, do you see how the object <b><i>delegate</i></b> is written? It says <b><i>id</i></b> <b><i>&lt;CarRegisterDelegate&gt;</i></b>, why is that? Why no <b><i>int</i></b> or, <b><i>UILabel</i></b> or, any other definite object class or data type?</p>
+<p>It is because it is referring to a generic object type, in Objective-C if you don’t know what kind object you’ll have to deal with; you just refer it to <b><i>id</i></b>. Here we don’t know which class is going to be referred by the <b><i>delegate</i></b> object. It can be a <b><i>UIViewController</i></b>, a <b><i>UITableViewController</i></b>, a <b><i>UIView</i></b> or any other object class, clear enough? Another thing to discuss about, why are we assigning this property object, why not retain it? It is because we don’t need to increase the retain count here, this object we’re neither allocating it, nor initializing it. It is an existing object, which is already referring to a memory location; and we just need to know that. So, we simply assign this, not retain. Clear enough I guess. If this still seems a little fuzzy, please do a little more research on iOS memory management.</p>
+<p>In the .m file we do the usual stuff like allocating and initializing objects etc. And here is the code:</p>
+<p><code><br />
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier<br />
+{<br />
+self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];<br />
+if (self)<br />
+{<br />
+carNameLabel = [[UILabel alloc] init];<br />
+carNameLabel.backgroundColor = [UIColor clearColor];<br />
+carNameLabel.textColor = [UIColor brownColor];</code></p>
+<p>orderCarButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];</p>
+<p>[orderCarButton setTitle:@&#8221;Buy&#8221; forState:UIControlStateNormal];</p>
+<p>[orderCarButton addTarget:self         action:@selector(orderCarButtonPressed:)         forControlEvents:UIControlEventTouchUpInside];</p>
+<p>[self.contentView addSubview:carNameLabel];</p>
+<p>[self.contentView addSubview:orderCarButton];<br />
+}</p>
+<p>return self;<br />
+}</p>
+<p>Now, you can see the <b><i>CarFactory</i></b> provides a button, titled “Buy”, and it responds with the selector <b><i>orderCarButtonPressed:</i></b>; Here is the code for the method:</p>
+<p><code><br />
+-(void)orderCarButtonPressed:(id)sender<br />
+{<br />
+if(delegate)<br />
+{<br />
+[delegate orderedCarIs:self.carNo];<br />
+}<br />
+}<br />
+</code></p>
+<p>Ok, I am not going discuss this right now. I’ll be back on this soon. Now we move towards our main controller class <b><i>MarketViewController</i></b>. In the .h file declare an <b><i>NSArray</i></b> called cars. In the init method, we insert values in this array:</p>
+<p><code><br />
+- (id)initWithStyle:(UITableViewStyle)style<br />
+{<br />
+self = [super initWithStyle:style];<br />
+if (self)<br />
+{<br />
+cars = [[NSArray alloc] initWithObjects:@"Aston Martin DB",         @"Corvet Z6", @"Toyota RAV4", @"Camaro SS", @"Mastung GT",         @"Porche Cayman S", @"BMW M5", nil];<br />
+}<br />
+return self;<br />
+}<br />
+</code></p>
+<p>In the <b><i>tableView:numberOfRowsInSection </i></b>put this code:</p>
+<p><code><br />
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section<br />
+{<br />
+return cars.count;<br />
+}<br />
+</code><br />
+Now, go to the .h file and make it look like:</p>
+<p><code><br />
+#import "CarFactory.h"</code></p>
+<p>@interface MarketViewController: UITableViewController &lt;CarRegisterDelegate&gt;<br />
+{<br />
+NSArray *cars;<br />
+}</p>
+<p>Remember, I said protocols inside angle braces? See we’re signing a contract with the <b><i>CarFactory</i></b> class through the <b><i>CarRegisterDelegate</i></b>. Making sense now?</p>
+<p>All right as we’ve signed the contract, we’re now bound to implement the delegate method inside our class. Let’s do it:</p>
+<p><code><br />
+-(void)orderedCarIs:(int)_carNo<br />
+{<br />
+NSString *message = [NSString stringWithFormat:@"You've bought a %@", [cars objectAtIndex:_carNo]];</code></p>
+<p>UIAlertView *alert = [[UIAlertView alloc]<br />
+initWithTitle:@&#8221;Congratulations!&#8221;<br />
+message:message delegate:nil<br />
+cancelButtonTitle:@&#8221;Ok&#8221;<br />
+otherButtonTitles: nil];</p>
+<p>[alert show];<br />
+[alert release];<br />
+}</p>
+<p>Now replace the <b><i>tableView: cellForRowAtIndexPath</i></b> method with the following:</p>
+<p><code><br />
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath<br />
+{<br />
+static NSString *CellIdentifier = @"Cell";</code></p>
+<p>CarFactory *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];</p>
+<p>if (cell == nil)<br />
+{<br />
+cell = [[[CarFactory alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];<br />
+}</p>
+<p>cell.carNameLabel.text = [cars objectAtIndex:indexPath.row];<br />
+cell.carNo = indexPath.row;<br />
+cell.delegate = self;</p>
+<p>return cell;<br />
+}</p>
+<p>Congratulations, our code is now complete. But you’re still not clear about what is going on, right? I know that. Now we’ll go through the mechanism of what is going on under the hood in <a title="http://codewithshabib.wordpress.com/2013/05/22/about-delegation-part-3/" href="http://codewithshabib.com/2013/05/22/about-delegation-part-3/" target="_blank" rel="noopener noreferrer">the next part of this discussion</a> :). Until then happy coding! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-2/index.html">About Delegation Part &#8211; 2</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../about-delegation-part-2/feed/index.html</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">78</post-id>	</item>
+	</channel>
+</rss>

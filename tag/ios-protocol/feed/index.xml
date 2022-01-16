@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>iOS protocol &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:14:59 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>iOS protocol &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Delegation in iOS and Cocoa: Decorator Pattern</title>
+		<link>./../../../delegation-in-ios-and-cocoa/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=delegation-in-ios-and-cocoa</link>
+					<comments>./../../../delegation-in-ios-and-cocoa/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Wed, 02 Nov 2016 17:56:08 +0000</pubDate>
+				<category><![CDATA[Cocoatouch]]></category>
+		<category><![CDATA[Design Patterns]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Object Oriented Design]]></category>
+		<category><![CDATA[OOP]]></category>
+		<category><![CDATA[Structural Patterns]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[decorator pattern]]></category>
+		<category><![CDATA[delegates]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[iOS delegate]]></category>
+		<category><![CDATA[iOS protocol]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[structural pattern]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=455</guid>
+
+					<description><![CDATA[<p>Using delegates in iOS and Cocoa is a very basic and fundamental part and we use them quite frequently in our codes. As like in business, cocoa uses delegates as a formal way to pass data(job) from one object(client) to another(vendor). In business, you want to do make something but you need raw materials to [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../delegation-in-ios-and-cocoa/index.html">Delegation in iOS and Cocoa: Decorator Pattern</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Using delegates in iOS and Cocoa is a very basic and fundamental part and we use them quite frequently in our codes. As like in business, cocoa uses delegates as a formal way to pass data(job) from one object(client) to another(vendor). In business, you want to do make something but you need raw materials to do so. So you ask the supplier to give you raw materials and you sign a contract for that. Same thing goes in cocoa, a class that wants to perform a task that depends on the response of another class acts as the delegate to the later. The first class wants to be the vendor of the later one by signing a contract called protocols (as defined in cocoa).</p>
+<p>As like in business, to be a delegate you need to:</p>
+<ol>
+<li>Know your need and what you have/want to do</li>
+<li>State you can do that</li>
+<li>Have the means to fulfill the contract</li>
+<li>Let the boss know you are ready!</li>
+<li>Do the actual work and let the boss know!</li>
+</ol>
+<p>For example, let&#8217;s assume we have an app that has a view controller with button that takes you to another view controller containing a textfield. When you are done entering text in that textfield, the view controller is dismissed and the first view controller shows the text you entered. Follow the images below:</p>
+
+<a href='./../../../delegation-in-ios-and-cocoa/simulator-screen-shot-nov-2-2016-10-58-07-pm/index.html'><img width="150" height="150" src="./../../../wp-content/uploads/2016/11/simulator-screen-shot-nov-2-2016-10-58-07-pm-150x150.png" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+<a href='./../../../delegation-in-ios-and-cocoa/simulator-screen-shot-nov-2-2016-10-58-19-pm/index.html'><img width="150" height="150" src="./../../../wp-content/uploads/2016/11/simulator-screen-shot-nov-2-2016-10-58-19-pm-150x150.png" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+<a href='./../../../delegation-in-ios-and-cocoa/simulator-screen-shot-nov-2-2016-11-00-05-pm/index.html'><img width="150" height="150" src="./../../../wp-content/uploads/2016/11/simulator-screen-shot-nov-2-2016-11-00-05-pm-150x150.png" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+
+<p>Now, in context of our example, who should be who? The first view controller (RootVC) needs to display the text received from the second view controller (ModalVC). That means it wants to delegate the work from the later; which obviously makes the first view controller (RootVC) as delegate and the second view controller (ModalVC) as the supplier. Now to do business we need to define some rules, that is in context of cocoa we call protocols. So, we will write a protocol that will guarantee the passing of the text from the ModalVC to RootVC. Let&#8217;s write a protocol like the following:</p>
+<pre>protocol ModalVCDelegate {
+
+    func modalVCDidSendMessage(message: String)
+}</pre>
+<p>Now to make RootVC a proper delegate:</p>
+<ol>
+<li style="list-style-type: none;">
+<ol>
+<li>You know you need to implement the protocol ModalVCDelegate</li>
+<li>Declare the protocol extension in RootVC to state you can do it
+<pre>extension RootVC: ModalVCDelegate {}</pre>
+</li>
+<li>Actually implement the protocol
+<pre>extension RootVC: ModalVCDelegate {
+    func modalVCDidSendMessage(message: String) {
+        displayLabel.text = message
+    }
+}</pre>
+</li>
+<li>Let the ModalVC know RootVC is its delegate
+<pre>override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ModalSeague" {
+            let modalVC: ModalVC = segue.destination as! ModalVC
+            modalVC.delegate = self
+        }
+    }</pre>
+</li>
+<li>Finally, do the actual work and let RootVC know about it:</li>
+</ol>
+</li>
+</ol>
+<pre>@IBAction func sendAction(_ sender: Any) {
+        if (delegate != nil) &amp;&amp; textField.text != "" {
+            delegate?.modalVCDidSendMessage(message: textField.text!)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+</pre>
+<p>This approach is also known as <em><strong>Decorator Pattern </strong></em>in terms of OOP:</p>
+<blockquote><p>The Decorator pattern dynamically adds behaviors and responsibilities to an object without modifying its code. It’s an alternative to subclassing where you modify a class’ behavior by wrapping it with another object.</p></blockquote>
+<p>In iOS there are two <i>very</i> common implementations of this pattern: <strong><em>Category (</em></strong><em>Objective-c only, Extensions in Swift though they&#8217;re a little different from their Objective-c cousing</em><strong><em>)</em></strong> and <strong><em>Delegation</em></strong>. I&#8217;ve already talked about <em>Delegation, </em>may be in a later blogpost I&#8217;ll cover <em>Category</em> and <em>Extensions</em>.</p>
+<p>That&#8217;s it! You can get the <a href="https://github.com/shabib87/DelegationInCocoa" target="_blank" rel="noopener noreferrer">sample project from here</a>. I hope this clears up the concept of delegation a little more!</p>
+<p>The post <a rel="nofollow" href="./../../../delegation-in-ios-and-cocoa/index.html">Delegation in iOS and Cocoa: Decorator Pattern</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../delegation-in-ios-and-cocoa/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">455</post-id>	</item>
+		<item>
+		<title>About Delegation Part &#8211; 3</title>
+		<link>./../../../about-delegation-part-3/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=about-delegation-part-3</link>
+					<comments>./../../../about-delegation-part-3/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Wed, 22 May 2013 08:11:07 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[delegates]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS delegate]]></category>
+		<category><![CDATA[iOS protocol]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[objective-c protocol]]></category>
+		<category><![CDATA[protocol]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=97</guid>
+
+					<description><![CDATA[<p>Hello guys and welcome to the third and final part of our discussion on Objective-C protocols and delegation. On the last part we had finished our code and left the discussion for this part. Well, what are we waiting for? Open the project and run  it  on the simulator, you’ll see something like this: When [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-3/index.html">About Delegation Part &#8211; 3</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello guys and welcome to the third and final part of our discussion on Objective-C protocols and delegation. On the <a title="http://codewithshabib.wordpress.com/2013/05/14/about-delegation-part-2/" href="https://codewithshabib.com/2013/05/14/about-delegation-part-2/" target="_blank" rel="noopener noreferrer">last part</a> we had finished our code and left the discussion for this part. Well, what are we waiting for? Open the project and run  it  on the simulator, you’ll see something like this:</p>
+<figure id="attachment_98" aria-describedby="caption-attachment-98" style="width: 200px" class="wp-caption aligncenter"><a href="http://codewithshabib.com/wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm.png"><img class="size-medium wp-image-98" src="http://codewithshabib.com/wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm.png?w=200" alt="UnderstandingDelegate running on simulator" width="200" height="300" srcset="./../../../wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm.png 640w, ./../../../wp-content/uploads/2013/05/ios-simulator-screen-shot-may-22-2013-2-02-39-pm-200x300.png 200w" sizes="(max-width: 200px) 100vw, 200px" /></a><figcaption id="caption-attachment-98" class="wp-caption-text">UnderstandingDelegate running on simulator</figcaption></figure>
+<p>When you click on the “Buy” button on any row, an alert pops up telling you which car you bought, see? Now tell me, you’ve written a single class named <b><i>CarFactory</i></b> which has a button called “Buy”. How does this button know which car you actually bought? Can you tell me? No? Okay, let me explain.</p>
+<p>The <b><i>CarFactory </i></b>does not know how many cars it has to produce and which one is bought by the user. So what it does is, it signs a contract with the <b><i>MarketViewController</i></b> to determine how many cars it has to provide and which car is bought by the user (factory has to sell cars and market has to make profit, business right? ;)). Now, <b><i>MarketViewController</i></b> signs a bond named <b><i>CarRegisterDelegate</i></b> with <b><i>CarFactory</i></b> to make sure that this business takes place and both factory and market makes profit ;). <b><i>MarketViewController</i></b> tells <b><i>CarFactory</i></b> how many cars it has to make and how the car should look like by providing information like the car number and name. By the contract (delegate protocol of <b><i>CarFactory</i></b>) <b><i>MarketViewController</i></b> is bound to implement the method <b><i>orderedCarIs</i></b>:, which will help the <b><i>CarFactory</i></b> to know which car it has to sell.</p>
+<p>Let’s have a look the method <b><i>tableView: cellForRowAtIndexPath. </i></b>See we’ve written <b><i>cell.delegate = self; </i></b>by this line we’re confirming (signing the signature) in the contract with <em><strong>CarFactory</strong></em> that we’re bound to implement orderedCars: method. Then by <em><strong>cell.carNo = indexPath.row;</strong></em> we’re just passing the car number that is ordered. So, what this method means is; the MarketViewController orders CarFactory the following commands:</p>
+<ol>
+<li>We need a new car to show, make one (<em><strong>cell = [[CarFactory alloc] init]</strong></em>)</li>
+<li>This car should be named like this (<em><strong>cell.carNameLabel.text = [cars objectAtIndex:indexPath.row]</strong></em>).</li>
+<li>Here is the car number (<em><strong>cell.carNo = indexPath.row</strong></em>), if you get any message to refer to this car you have to use this number.</li>
+<li>I am signing this contract with you; this is my token (<em><strong>cell.delegate = self</strong></em>) and for further enquiry contact through this token.</li>
+</ol>
+<p>This is now making some sense, right? It should <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Well moving forward, as the <b><i>MarketViewContrller</i></b> has ordered the <b><i>CarFactory</i></b> to supply cars. The <b><i>CarFactory</i></b> starts creating cars on order basis. For each entry of the cars array, a car is made with above instructions. The <b><i>CarFactory</i></b> does not know anything about what <b><i>MarketViewController</i></b> is going to do the cars, how it is going to show them or how it is going to sell them. It just knows, it has an order and it follows it. For each item in the cars array, a car is created and returned to the <b><i>UITableView</i></b> to display.</p>
+<p>When all cars are ready and displayed in a table view to the user, the user sees and chooses a car; “wow…this looks nice, I am going to buy this”, says the user. The user clicks a button titled “Buy”. Now, the button does not know what car it represents, right? It responds to the selector it was instructed to (<b><i>buyButtonPressed:)</i></b> written inside <b><i>CarFactory</i></b>. Which means, the user tells the salesman (the buy button), “I want to buy this car.” The salesman reports to the manager (<b><i>buyButtonPressed:</i></b>) of the factory (<b><i>CarFactory</i></b>) and asks him what to do, the manager tells him go respond to button press method. Now, here comes the contract paper. In the selector method, the salesman asks the market, “do you have the contract?” by this condition: <em><strong>If (delegate)</strong></em></p>
+<p>Now if this condition is satisfied, which in this case is true (yes, we did sign the contract. We’ve it, remember <em><strong>cell.delegate = self</strong></em>?) Now the salesman tells the market, this is the car number and here is the place you should do business:</p>
+<p><em><strong>[delegate orderedCarIs:self.carNo];</strong></em></p>
+<p>This <b><i>delegate </i></b>redirects to the <b><i>MarketViewController</i></b>s delegate method:</p>
+<p><em><strong>-(void)oderedCarIs:(int)_carNo</strong></em></p>
+<p>Now, the market knows which car it has to sell to the user by satisfying a contract with the <b><i>CarFactory</i></b>. Everybody is happy, nice business for everyone <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Now, if the contract were not signed, what would have happened? Comment out the line <em><strong>cell.delegate = self;</strong></em> and check for yourself! See? Nothing happens!!!</p>
+<p>In the <b><i>buyButtonPressed:</i></b> method,<em><strong> if (delegate)</strong></em> condition fails and <b><i>CarFactory</i></b> says, sorry mate! You did not sign the damn contract! I won’t do anything!!!</p>
+<p>Capiche?</p>
+<p>Now, remember I said <b><i>UITableViewController</i></b> by default implements two protocols, <b><i>UITableViewDataSource</i></b> and <b><i>UITableViewDelegate</i></b>? Have a look at the lines under these:</p>
+<p><em><strong>#pragma mark &#8211; Table view data source</strong></em></p>
+<p>and</p>
+<p><em><strong>#pragma mark &#8211; Table view delegate</strong></em></p>
+<p>The methods talk for them selves, don’t they? We’re building cars, how the hell we know, how many? Do we? Yes, we do! Remember implementing <b><i>numberOfSectionsInTableView: </i></b>and <b><i>tableView:numberOfRowsInSection:</i></b>?</p>
+<p>These are the data source methods of a <b><i>UITableView</i></b> which it self is a protocol that serves the data needed to display; that’s why we call this <b><i>dataSource.</i></b></p>
+<p>Command + click the line <b><i>UITableViewDataSource </i></b>and you’ll see the other methods that can help you change stuff in the <em><strong>UITableView</strong></em>. There is also <b><i>UITableViewDelegate</i></b>, take a look at that too. Do you see the words <em><strong>@optional</strong></em> and <em><strong>@required</strong></em> there? I told you before we’ll discuss this later. Well, this is the time. The words speak for them selves, these two words declare that which method implementation is absolutely mandatory for your contract signing and which one is optional. Clear enough right?</p>
+<p>Well this is the end of our long discussion over protocol and delegation in Objective-C. I hope this triumph of mine helped you to understand the topic. You can download the source code from here: <a title="https://github.com/shabib87/UnderstandingDelegates" href="https://github.com/shabib87/UnderstandingDelegates" target="_blank" rel="noopener noreferrer">github.com/shabib87/UnderstandingDelegates</a>. And any advice, response or criticism is utterly welcome. Take care and bye for now. Happy coding folks!</p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-3/index.html">About Delegation Part &#8211; 3</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../about-delegation-part-3/feed/index.html</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">97</post-id>	</item>
+		<item>
+		<title>About Delegation Part &#8211; 2</title>
+		<link>./../../../about-delegation-part-2/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=about-delegation-part-2</link>
+					<comments>./../../../about-delegation-part-2/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 14 May 2013 07:22:58 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[delegates]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS delegate]]></category>
+		<category><![CDATA[iOS protocol]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[objective-c protocol]]></category>
+		<category><![CDATA[protocol]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=78</guid>
+
+					<description><![CDATA[<p>Hello again, welcome to the second part of the discussion on iOS protocol and delegates. On the previous part I left on the theoretical discussion about what are Objective-C protocol and delegates. Here is the link to first part of this discussion. Moving forward, I am going to give a practical example and explain more [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-2/index.html">About Delegation Part &#8211; 2</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello again, welcome to the second part of the discussion on iOS protocol and delegates. On the previous part I left on the theoretical discussion about what are Objective-C protocol and delegates. <a title="Here is the link to first part of this discussion" href="https://codewithshabib.com/2013/05/09/about-delegation-part-1/" target="_blank" rel="noopener noreferrer">Here is the link to first part of this discussion</a>. Moving forward, I am going to give a practical example and explain more on this topic.</p>
+<p>As I am going to be a little eccentric on this, it might feel a bit awkward to you in the beginning of my example. But at the end of the discussion you’ll have a crystal clear knowledge on how delegate works. So, stick with me and see what comes, ok?</p>
+<p>Firstly, create an XCode project (an empty application) named <b><i>UnderstandingDelegates</i></b>. Create a <b><i>UITableViewController</i></b> named <b><i>MarketViewController</i></b> (no core data, no ARC and no unit testing). Go to the .h file and you will see the following lines:</p>
+<p><code><br />
+@interface MarketViewController: UITableViewController</code></p>
+<p>@end</p>
+<p>You can see the <b><i>MarketViewController</i></b> is a subclass of <b><i>UITableViewController</i></b>. By default <b><i>UITableViewController</i></b> supports two protocols into it, <b><i>UITableViewDataSource</i></b> and <b><i>UITableViewDelegate</i></b>. Don’t ask any question now about what are these and why we need them; you’ll have the answer soon.</p>
+<p>Now, create another new file named <b><i>CarFactory</i></b> and subclass it as <b><i>UITableViewCell</i></b>. Write the following code in the .h file:</p>
+<p><code><br />
+@protocol CarRegisterDelegate &lt;NSObject&gt;</code></p>
+<p>-(void)orderedCarIs:(int)_carNo;</p>
+<p>@end</p>
+<p>@interface CarFactory : UITableViewCell<br />
+{<br />
+UIButton *orderCarButton;<br />
+}</p>
+<p>@property (nonatomic, assign) id &lt;CarRegisterDelegate&gt; delegate;</p>
+<p>@property (nonatomic, retain) UILabel *carNameLabel;</p>
+<p>@property (assign) int carNo;</p>
+<p>@end</p>
+<p>Now what does these lines mean? We’re declaring a protocol class named <b><i>CarRegisterDelegate</i></b>, which defines a contract to be signed with the class registering to it. What is the contract? It is the method named <b><i>orderedCarIs:</i></b>, clear?</p>
+<p>This class <b><i>CarFactory</i></b> is a custom <b><i>UITableViewCell</i></b>.  Here we’ve a button, a label, an integer and an id as the property of the class. Did you notice that the button has no getter and setter method but the other three has? It is because, the button is only used by this class; no other class has anything to do with the button. Another thing is the <b><i>UILabel</i></b> is retained but the other two objects aren’t, why? Because an integer is a primitive data type, it does not point to any object so you don’t have to retain it’s memory to use it, instead just assign a value to it. Now, do you see how the object <b><i>delegate</i></b> is written? It says <b><i>id</i></b> <b><i>&lt;CarRegisterDelegate&gt;</i></b>, why is that? Why no <b><i>int</i></b> or, <b><i>UILabel</i></b> or, any other definite object class or data type?</p>
+<p>It is because it is referring to a generic object type, in Objective-C if you don’t know what kind object you’ll have to deal with; you just refer it to <b><i>id</i></b>. Here we don’t know which class is going to be referred by the <b><i>delegate</i></b> object. It can be a <b><i>UIViewController</i></b>, a <b><i>UITableViewController</i></b>, a <b><i>UIView</i></b> or any other object class, clear enough? Another thing to discuss about, why are we assigning this property object, why not retain it? It is because we don’t need to increase the retain count here, this object we’re neither allocating it, nor initializing it. It is an existing object, which is already referring to a memory location; and we just need to know that. So, we simply assign this, not retain. Clear enough I guess. If this still seems a little fuzzy, please do a little more research on iOS memory management.</p>
+<p>In the .m file we do the usual stuff like allocating and initializing objects etc. And here is the code:</p>
+<p><code><br />
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier<br />
+{<br />
+self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];<br />
+if (self)<br />
+{<br />
+carNameLabel = [[UILabel alloc] init];<br />
+carNameLabel.backgroundColor = [UIColor clearColor];<br />
+carNameLabel.textColor = [UIColor brownColor];</code></p>
+<p>orderCarButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];</p>
+<p>[orderCarButton setTitle:@&#8221;Buy&#8221; forState:UIControlStateNormal];</p>
+<p>[orderCarButton addTarget:self         action:@selector(orderCarButtonPressed:)         forControlEvents:UIControlEventTouchUpInside];</p>
+<p>[self.contentView addSubview:carNameLabel];</p>
+<p>[self.contentView addSubview:orderCarButton];<br />
+}</p>
+<p>return self;<br />
+}</p>
+<p>Now, you can see the <b><i>CarFactory</i></b> provides a button, titled “Buy”, and it responds with the selector <b><i>orderCarButtonPressed:</i></b>; Here is the code for the method:</p>
+<p><code><br />
+-(void)orderCarButtonPressed:(id)sender<br />
+{<br />
+if(delegate)<br />
+{<br />
+[delegate orderedCarIs:self.carNo];<br />
+}<br />
+}<br />
+</code></p>
+<p>Ok, I am not going discuss this right now. I’ll be back on this soon. Now we move towards our main controller class <b><i>MarketViewController</i></b>. In the .h file declare an <b><i>NSArray</i></b> called cars. In the init method, we insert values in this array:</p>
+<p><code><br />
+- (id)initWithStyle:(UITableViewStyle)style<br />
+{<br />
+self = [super initWithStyle:style];<br />
+if (self)<br />
+{<br />
+cars = [[NSArray alloc] initWithObjects:@"Aston Martin DB",         @"Corvet Z6", @"Toyota RAV4", @"Camaro SS", @"Mastung GT",         @"Porche Cayman S", @"BMW M5", nil];<br />
+}<br />
+return self;<br />
+}<br />
+</code></p>
+<p>In the <b><i>tableView:numberOfRowsInSection </i></b>put this code:</p>
+<p><code><br />
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section<br />
+{<br />
+return cars.count;<br />
+}<br />
+</code><br />
+Now, go to the .h file and make it look like:</p>
+<p><code><br />
+#import "CarFactory.h"</code></p>
+<p>@interface MarketViewController: UITableViewController &lt;CarRegisterDelegate&gt;<br />
+{<br />
+NSArray *cars;<br />
+}</p>
+<p>Remember, I said protocols inside angle braces? See we’re signing a contract with the <b><i>CarFactory</i></b> class through the <b><i>CarRegisterDelegate</i></b>. Making sense now?</p>
+<p>All right as we’ve signed the contract, we’re now bound to implement the delegate method inside our class. Let’s do it:</p>
+<p><code><br />
+-(void)orderedCarIs:(int)_carNo<br />
+{<br />
+NSString *message = [NSString stringWithFormat:@"You've bought a %@", [cars objectAtIndex:_carNo]];</code></p>
+<p>UIAlertView *alert = [[UIAlertView alloc]<br />
+initWithTitle:@&#8221;Congratulations!&#8221;<br />
+message:message delegate:nil<br />
+cancelButtonTitle:@&#8221;Ok&#8221;<br />
+otherButtonTitles: nil];</p>
+<p>[alert show];<br />
+[alert release];<br />
+}</p>
+<p>Now replace the <b><i>tableView: cellForRowAtIndexPath</i></b> method with the following:</p>
+<p><code><br />
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath<br />
+{<br />
+static NSString *CellIdentifier = @"Cell";</code></p>
+<p>CarFactory *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];</p>
+<p>if (cell == nil)<br />
+{<br />
+cell = [[[CarFactory alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];<br />
+}</p>
+<p>cell.carNameLabel.text = [cars objectAtIndex:indexPath.row];<br />
+cell.carNo = indexPath.row;<br />
+cell.delegate = self;</p>
+<p>return cell;<br />
+}</p>
+<p>Congratulations, our code is now complete. But you’re still not clear about what is going on, right? I know that. Now we’ll go through the mechanism of what is going on under the hood in <a title="http://codewithshabib.wordpress.com/2013/05/22/about-delegation-part-3/" href="http://codewithshabib.com/2013/05/22/about-delegation-part-3/" target="_blank" rel="noopener noreferrer">the next part of this discussion</a> :). Until then happy coding! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-2/index.html">About Delegation Part &#8211; 2</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../about-delegation-part-2/feed/index.html</wfw:commentRss>
+			<slash:comments>4</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">78</post-id>	</item>
+		<item>
+		<title>About Delegation Part -1</title>
+		<link>./../../../about-delegation-part-1/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=about-delegation-part-1</link>
+					<comments>./../../../about-delegation-part-1/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Thu, 09 May 2013 11:12:13 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[delegates]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS delegate]]></category>
+		<category><![CDATA[iOS protocol]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[objective-c protocol]]></category>
+		<category><![CDATA[protocol]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=71</guid>
+
+					<description><![CDATA[<p>Hello again everyone and hope you’re doing fine. Welcome to the first part of my new discussion topic. Today I am going to discuss about the Objective-C protocols and delegates. Anybody new to Objective-C is well aware of the hassle of understanding the concept of delegation. I have heard a lot of people bragging about [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-1/index.html">About Delegation Part -1</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello again everyone and hope you’re doing fine. Welcome to the first part of my new discussion topic. Today I am going to discuss about the Objective-C protocols and delegates. Anybody new to Objective-C is well aware of the hassle of understanding the concept of delegation. I have heard a lot of people bragging about how complex the concept is to them. Well, me myself had a tough time understanding it. But when you come to understand, you will feel how well this concept makes sense. And of course object oriented programming is all about how you feel about the code and how it comes to make sense, isn’t it?</p>
+<p>Well going on to the business, first of all we need to know what is an Objective-C protocol, right? In Objective-C you see some class whose names are written inside the angle brackets (). For example if you go to UIView’s interface, you will see:</p>
+<p><code><br />
+@interface UIView : UIResponder&lt;NSCoding, UIAppearance, UIAppearanceContainer&gt;<br />
+</code></p>
+<p>These are called protocols. The class mentioning the protocols inside the angle brackets adopts these protocols. It is like signing a contract with these classes. You adopt a protocol; you sign a contract with the protocol class that in your class you have to implement some methods of the protocol (you’re bound to it by the contract, unless of course if the methods are not optional, but we’ll discuss that later).</p>
+<p>Protocols define a group of methods that are not associated with any particular class. In the above example UIView class implements a group of methods defined by NSCoding, UIAppearance and UIAppearanceContainer. Since Objective-C supports only single inheritance, protocols are often used to achieve the same goals as multiple inheritance in other languages.</p>
+<p>Protocols aren’t mandatory to define new classes, but you’ll find them used quite a lot when developing a real app. The most common use of protocols is with del- egates; which is our main topic today.</p>
+<p>We all have been through some situation where we don’t know how to do a particular job, true? Remember how we overcame from that? Yes, either we learnt the process all by our self or, we had someone to help us. In Objective–C, that some one is called delegate. Cocoa touch has this design pattern called delegation, that helps your app’s system classes that don’t know what you want to do! How? Very simple, you introduce someone who knows what to do, that “who” is called a delegate. You introduce one object to another object that’s able to answer any questions. By assigning a delegate, you provide links into code that can respond to requests and state changes. The actual protocols for delegation are usually suffixed with Delegate.</p>
+<p>Whoa!!!I hope you understood the theoretical concept of delegation. If you haven&#8217;t, don&#8217;t worry! You&#8217;ll have a clear knowledge when we go through this concept more with a practical example in the next part. Until then have a nice time and happy coding folks!!! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p><a title="Here is the link to the send part!" href="https://codewithshabib.com/2013/05/14/about-delegation-part-2/" target="_blank" rel="noopener noreferrer">Here is the link to the send part!</a></p>
+<p>The post <a rel="nofollow" href="./../../../about-delegation-part-1/index.html">About Delegation Part -1</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../about-delegation-part-1/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">71</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>android &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:14:23 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>android &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>SHViewPager: Android like view pager control for iOS Version 2.0 finally!</title>
+		<link>./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=shviewpager-android-like-view-pager-control-for-ios-version-2-finally</link>
+					<comments>./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Fri, 02 Sep 2016 16:55:44 +0000</pubDate>
+				<category><![CDATA[Cocoapods]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[android]]></category>
+		<category><![CDATA[android-view-pager]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[iOS-view-pager]]></category>
+		<category><![CDATA[iPad view pager]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[iPhone view pager]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[shviewpager]]></category>
+		<category><![CDATA[view-pager]]></category>
+		<category><![CDATA[viewpager]]></category>
+		<category><![CDATA[viewpager for iOS]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=325</guid>
+
+					<description><![CDATA[<p>It has been almost or, more than 2 years I had created this controller called SHViewPager. And to my utmost surprise a lot of people actually got benefited from it. Some of them requested for the support for screen orientation and iPad. I was a bit busy (actually lazy! sorry guys, truly!)  to keep the [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html">SHViewPager: Android like view pager control for iOS Version 2.0 finally!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>It has been almost or, more than 2 years I had created <a href="http://codewithshabib.com/2016/08/23/shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/" target="_blank" rel="noopener noreferrer">this controller</a> called <a href="https://github.com/shabib87/SHViewPager" target="_blank" rel="noopener noreferrer">SHViewPager</a>. And to my utmost surprise a lot of people actually got benefited from it. Some of them requested for the support for screen orientation and iPad. I was a bit busy (actually lazy! sorry guys, truly!)  to keep the request. Finally after a long wait, I was thinking, why am I not doing it?</p>
+<p>So, I got my lazy ass moving and got it done. Now, the <a href="https://github.com/shabib87/SHViewPager" target="_blank" rel="noopener noreferrer">SHViewPager</a> supports:</p>
+<ul>
+<li>All orientations</li>
+<li>iPad</li>
+</ul>
+<p>And it got even better, with:</p>
+<ul>
+<li>Support for both Swift and Objective-C</li>
+<li>Support for Autolayout</li>
+<li>Simple installation via <a href="http://codewithshabib.com/2016/08/16/creating-your-own-cocoapod/" target="_blank" rel="noopener noreferrer">Cocoapods</a>!</li>
+</ul>
+<p>To use it in your app, you have to have Xcode 6+ and support iOS 8+. Here is a gif sample:</p>
+<a href="./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html#gallery-325-1-slideshow">Click to view slideshow.</a>
+<p>I am planning to keep supporting this library, so any feedback/suggestions are welcome. If you have found any bug, please report an issue for it. This library is under MIT license, so contribute, update, modify as per your need!</p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/index.html">SHViewPager: Android like view pager control for iOS Version 2.0 finally!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../shviewpager-android-like-view-pager-control-for-ios-version-2-finally/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">325</post-id>	</item>
+	</channel>
+</rss>

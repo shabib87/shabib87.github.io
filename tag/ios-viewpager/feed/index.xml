@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>ios-viewpager &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:11:25 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>ios-viewpager &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>SHViewPager: Custom Controller for iOS</title>
+		<link>./../../../shviewpager-custom-control-for-ios/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=shviewpager-custom-control-for-ios</link>
+					<comments>./../../../shviewpager-custom-control-for-ios/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Mon, 26 May 2014 13:23:46 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[iOS-view-pager]]></category>
+		<category><![CDATA[ios-viewpager]]></category>
+		<category><![CDATA[iPad view pager]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[iPhone view pager]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pager]]></category>
+		<category><![CDATA[view-pager]]></category>
+		<category><![CDATA[viewpager]]></category>
+		<category><![CDATA[viewpager for iOS]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=113</guid>
+
+					<description><![CDATA[<p>Hello everybody, For a recent project of mine, I had created this custom controller. This is quite similar to the ViewPager control used in Android. I&#8217;ve named this controller SHViewPager, here is the gitHub link. This controller uses a datasource and a delegate protocol. You&#8217;ve to implement at least three datasource protocols (that are required) to avoid exceptions. These [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-custom-control-for-ios/index.html">SHViewPager: Custom Controller for iOS</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Hello everybody,</p>
+<p>For a recent project of mine, I had created this custom controller. This is quite similar to the ViewPager control used in Android. I&#8217;ve named this controller <code>SHViewPager</code>, <a title="SHViewPager" href="https://github.com/shabib87/SHViewPager" target="_blank" rel="noopener noreferrer">here is the gitHub link</a>.</p>
+<p>This controller uses a <code>datasource</code> and a <code>delegate</code> protocol. You&#8217;ve to implement at least three <code>datasource</code> protocols (that are required) to avoid exceptions. These methods are:</p>
+<p><strong>&#8211; The first one</strong></p>
+<pre>// total number of pages to be displayed by the controller
+-(NSInteger)numberOfPagesInViewPager:(SHViewPager*)viewPager;
+</pre>
+<p>Example:</p>
+<pre>-(NSInteger)numberOfPagesInViewPager:(SHViewPager*)viewPager
+{
+    // 5 pages to be displayed by the controller
+    return 5;
+}
+</pre>
+<p><strong>&#8211; The second one</strong></p>
+<pre>// the viewcontroller that will contain the pages, in most of the cases it will be the same viewcontroller that is acting as the datasource and delegate
+// i.e. return value will be 'self'
+- (UIViewController *)containerControllerForViewPager:(SHViewPager *)viewPager;
+</pre>
+<p>Example:</p>
+<pre>- (UIViewController *)containerControllerForViewPager:(SHViewPager *)viewPager
+{
+    return self;
+}
+</pre>
+<p><strong>&#8211; The third one</strong></p>
+<pre>// the viewcontroller that is to be shown as as a page in the pager
+- (UIViewController *)viewPager:(SHViewPager *)viewPager controllerForPageAtIndex:(NSInteger)index;
+</pre>
+<p>Example:</p>
+<pre>- (UIViewController *)viewPager:(SHViewPager *)viewPager controllerForPageAtIndex:(NSInteger)index
+{
+    UIViewController *viewController = [[UIViewController alloc] initWithNibName:@"UIViewController" bundle:nil];
+    return viewController;
+}
+</pre>
+<p>To display the contents, you need to call the instance method <code>reloadData</code> in your desired method block, typically in <code>viewDidLoad</code>.<br />
+Example:</p>
+<pre>- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // your code
+    [viewPager reloadData];
+}
+</pre>
+<p>This custom controller is under MIT licence. Feel free to use and contribute <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../shviewpager-custom-control-for-ios/index.html">SHViewPager: Custom Controller for iOS</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../shviewpager-custom-control-for-ios/feed/index.html</wfw:commentRss>
+			<slash:comments>2</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">113</post-id>	</item>
+	</channel>
+</rss>

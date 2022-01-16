@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>combine &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Tue, 09 Jun 2020 01:54:19 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>combine &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</title>
+		<link>./../../../how-to-create-a-swiftui-collectionview/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-to-create-a-swiftui-collectionview</link>
+					<comments>./../../../how-to-create-a-swiftui-collectionview/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Sat, 06 Jun 2020 05:04:36 +0000</pubDate>
+				<category><![CDATA[Combine]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[SwiftUI]]></category>
+		<category><![CDATA[clean architecture]]></category>
+		<category><![CDATA[clean code]]></category>
+		<category><![CDATA[combine]]></category>
+		<category><![CDATA[ios 13]]></category>
+		<category><![CDATA[swiftui]]></category>
+		<category><![CDATA[uicollectionviewcompositionallayout]]></category>
+		<category><![CDATA[uicollectionviewdiffabledatasource]]></category>
+		<guid isPermaLink="false">./../../../index.html?p=2042</guid>
+
+					<description><![CDATA[<p>Apple released SwiftUI and Combine on last year WWDC 2019. It has been very exciting to see native declarative way to build apps. But unfortunately SwiftUI is missing a key UI component modern apps use quite a lot, the UICollectionView. Another WWDC is on the door and I am as excited as everyone else on [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-create-a-swiftui-collectionview/index.html">SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Apple released <code>SwiftUI</code> and <code>Combine</code> on last year WWDC 2019. It has been very exciting to see native declarative way to build apps. But unfortunately <code>SwiftUI</code> is missing a key UI component modern apps use quite a lot, the <code>UICollectionView</code>. Another WWDC is on the door and I am as excited as everyone else on what Apple does with <code>SwiftUI 2.0</code>. May be we&#8217;ll finally get native SwiftUI CollectionView with that. But until then, using <code>UIViewRepresentable</code> or <code>UIViewControllerRepresentable</code> is the only solution for now.</p>
+
+
+
+<h4>The target result</h4>
+
+
+
+<p>The final result of this example will look the following. A SwiftUI CollectionView with SwiftUI View cell, header and footer and the ability to pull to refresh and paginate.</p>
+
+
+
+<figure class="wp-block-image size-large"><img width="572" height="1024" src="./../../../wp-content/uploads/2020/06/output-572x1024.gif" alt="swiftui collection view" class="wp-image-2049" srcset="./../../../wp-content/uploads/2020/06/output-572x1024.gif 572w, ./../../../wp-content/uploads/2020/06/output-168x300.gif 168w" sizes="(max-width: 572px) 100vw, 572px" /></figure>
+
+
+
+<h4>Shiny iOS 13 UIKit APIs</h4>
+
+
+
+<p>With all the excitement revolving <code>SwiftUI</code> and <code>Combine</code>, a lot of iOS enthusiast almost missed a significant improvement on <code>UIKit</code>. Specifically in <code>UICollectionView</code>: <a rel="noreferrer noopener" href="https://developer.apple.com/documentation/uikit/views_and_controls/collection_views/using_collection_view_compositional_layouts_and_diffable_data_sources" target="_blank"><code>UICollectionViewDiffableDataSource</code> and <code>UICollectionViewCompositionalLayout</code></a>. Now these two APIs have made using <code>UICollectionView</code> way easier than before, eliminating the usage of nasty update blocks inside delegate methods. Like <code>SwiftUI</code> and <code>Combine</code>, these two APIs also require iOS 13.0 as minimum deployment target. This makes these the perfect candidates to create a <code>SwiftUI</code> wrapper view for the missing collection view.</p>
+
+
+
+<h4>A typical collection view</h4>
+
+
+
+<p>A fairly common collection view use-case will have the following behaviours, that we&#8217;ll need to access from our SwiftUI counter part:</p>
+
+
+
+<ul><li>A reusable cell</li><li>A reusable header / footer view</li><li>A cell selection callback</li><li>A pull to refresh callback</li><li>A pagination/ load more callback (assuming it&#8217;s displaying something from an API endpoint)</li></ul>
+
+
+
+<p>There might be other customizations one might need for their app. But I am only focusing on the most common ones.</p>
+
+
+
+<p>I have not focused on how <code>UICollectionViewDiffableDataSource</code> or <code>UICollectionViewCompositionalLayout</code> works or how to customize them. Rather I have focused on how to use these APIs and make a declarative SwiftUI CollectionView. </p>
+
+
+
+<h4>Combine Replacing Delegates: The Declarative Way</h4>
+
+
+
+<p>Now if I was going with the typical imperative approach, I’d have used some delegate methods like following to send the corresponding event updates. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-1" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">FeedViewControllerDelegate</span>: <span class="hljs-title">AnyObject</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">feed</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> feed: UIViewController, 
+        didSelectItemAtIndexPath indexPath: IndexPath
+    )</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">feed</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> feed: UIViewController,
+        didPullToRefresh completion: @escaping <span class="hljs-params">(<span class="hljs-params">()</span></span></span></span> -&gt; <span class="hljs-type">Void</span>)
+    )
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">feedShouldLoadMore</span><span class="hljs-params">(<span class="hljs-number">_</span> feed: UIViewController)</span></span>
+}</code></div><small class="shcb-language" id="shcb-language-1"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>But as promised I’ll be using declarative approach using the power of <code>Combine</code> Framework.  So I’ll be replacing our delegate methods using <code>Publishers</code>, more specifically <code>PassthroughSubject</code>. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-2" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">typealias</span> <span class="hljs-type">PullToRefreshCompletion</span> = () -&gt; <span class="hljs-type">Void</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> loadMoreSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">Void</span>, <span class="hljs-type">Never</span>&gt;?
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> itemSelectionSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">IndexPath</span>, <span class="hljs-type">Never</span>&gt;?
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> pullToRefreshSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">PullToRefreshCompletion</span>, <span class="hljs-type">Never</span>&gt;?</code></div><small class="shcb-language" id="shcb-language-2"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>And instead of calling the delegate methods I&#8217;d be sending publisher events as following:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-3" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift">...
+<span class="hljs-comment">// pagination</span>
+section.visibleItemsInvalidationHandler = {
+    [<span class="hljs-keyword">weak</span> <span class="hljs-keyword">self</span>] visibleItems, <span class="hljs-number">_</span>, <span class="hljs-number">_</span> <span class="hljs-keyword">in</span>
+    <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> <span class="hljs-keyword">self</span> = <span class="hljs-keyword">self</span>,
+        <span class="hljs-keyword">let</span> row = visibleItems.last?.indexPath.row <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+    <span class="hljs-comment">// sending prefetch subscription notice for pagination</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.items.<span class="hljs-built_in">count</span> - <span class="hljs-keyword">self</span>.prefetchLimit &gt; <span class="hljs-number">0</span>,
+        row &gt;= <span class="hljs-keyword">self</span>.items.<span class="hljs-built_in">count</span> - <span class="hljs-keyword">self</span>.prefetchLimit {
+        <span class="hljs-keyword">guard</span> !<span class="hljs-keyword">self</span>.isPaginating <span class="hljs-keyword">else</span> { <span class="hljs-keyword">return</span> }
+        <span class="hljs-keyword">self</span>.isPaginating = <span class="hljs-literal">true</span>
+        <span class="hljs-keyword">self</span>.loadMoreSubject?.send()
+    }
+}
+...
+<span class="hljs-comment">// didSelectItem</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">collectionView</span><span class="hljs-params">(<span class="hljs-number">_</span>: UICollectionView, 
+                    didSelectItemAt indexPath: IndexPath)</span></span> {
+    itemSelectionSubject?.send(indexPath)
+}
+...
+<span class="hljs-comment">// pull to refresh</span>
+<span class="hljs-meta">@objc</span> <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">pullToRefreshAction</span><span class="hljs-params">()</span></span> {
+    pullToRefreshSubject?.send {
+        <span class="hljs-keyword">self</span>.collectionView.refreshControl?.endRefreshing()
+    }
+}
+...</code></div><small class="shcb-language" id="shcb-language-3"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<h4>The FeedView: A SwiftUI CollectionView</h4>
+
+
+
+<p>To make this work I&#8217;ll be pushing the publisher dependencies as constructor injection: for <code>SwiftUI</code> wrapper to <code>FeedCollectionViewControler</code>. So our <code>UIViewControllerRepresentable</code> will look something like this:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-4" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FeedView</span>: <span class="hljs-title">UIViewControllerRepresentable</span> </span>{
+    ...
+
+    <span class="hljs-keyword">init</span>(
+        ...
+        loadMoreSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">Void</span>, <span class="hljs-type">Never</span>&gt;? = <span class="hljs-literal">nil</span>,
+        itemSelectionSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">IndexPath</span>, <span class="hljs-type">Never</span>&gt;? = <span class="hljs-literal">nil</span>,
+        pullToRefreshSubject: <span class="hljs-type">PassthroughSubject</span>&lt;<span class="hljs-type">PullToRefreshCompletion</span>, <span class="hljs-type">Never</span>&gt;? = <span class="hljs-literal">nil</span>,
+        ...
+    ) {
+        ...
+        <span class="hljs-keyword">self</span>.loadMoreSubject = loadMoreSubject
+        <span class="hljs-keyword">self</span>.itemSelectionSubject = itemSelectionSubject
+        <span class="hljs-keyword">self</span>.pullToRefreshSubject = pullToRefreshSubject
+        ...
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">makeUIViewController</span><span class="hljs-params">(context <span class="hljs-number">_</span>: Context)</span></span>
+        -&gt; <span class="hljs-type">FeedViewController</span> {
+        <span class="hljs-type">FeedViewController</span>(
+            ...
+            loadMoreSubject: loadMoreSubject,
+            itemSelectionSubject: itemSelectionSubject,
+            pullToRefreshSubject: pullToRefreshSubject,
+            ...
+        )
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateUIViewController</span><span class="hljs-params">(
+        <span class="hljs-number">_</span> view: FeedViewController,
+        context <span class="hljs-number">_</span>: Context
+    )</span></span> {
+        view.updateSnapshot(items: items)
+    }
+}</code></div><small class="shcb-language" id="shcb-language-4"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The <code>updateSnapshot(items:)</code> method is a crucial method for <code>FeedViewController</code>. Because that&#8217;s the one that&#8217;ll update our diffable datasource snapshot of the <code>UICollectionView</code>.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-5" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">updateSnapshot</span><span class="hljs-params">(items: [FeedViewModel])</span></span> {
+    <span class="hljs-keyword">self</span>.items = items
+    <span class="hljs-keyword">var</span> snapshot = <span class="hljs-type">NSDiffableDataSourceSnapshot</span>&lt;<span class="hljs-type">Section</span>, <span class="hljs-type">FeedViewModel</span>&gt;()
+    snapshot.appendSections([.main])
+    snapshot.appendItems(items)
+    dataSource.apply(snapshot, animatingDifferences: <span class="hljs-literal">false</span>)
+}</code></div><small class="shcb-language" id="shcb-language-5"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>Now we can use our FeedView in a SwiftUI content as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-6" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-type">FeedView</span>(
+    ...,
+    loadMoreSubject: interactor.loadMoreSubject,
+    itemSelectionSubject: interactor.itemSelectionSubject,
+    pullToRefreshSubject: interactor.pullToRefreshSubject,
+    ...
+)
+.onReceive(interactor.loadMoreSubject, perform: {
+    <span class="hljs-keyword">self</span>.interactor.loadMore()
+})
+.onReceive(interactor.itemSelectionSubject, perform: {
+    <span class="hljs-keyword">self</span>.selectedItemName = <span class="hljs-keyword">self</span>.interactor.items[$<span class="hljs-number">0</span>.row].name
+})
+.onReceive(interactor.pullToRefreshSubject, perform: { completion <span class="hljs-keyword">in</span>
+    <span class="hljs-keyword">self</span>.interactor.refresh().sink {
+        completion()
+    }
+    .store(<span class="hljs-keyword">in</span>: &amp;<span class="hljs-keyword">self</span>.interactor.cancellables)
+})</code></div><small class="shcb-language" id="shcb-language-6"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<h4>Final words</h4>
+
+
+
+<p>I have put all these concepts together to create a single view application. You can found the complete implementation in <a rel="noreferrer noopener" href="https://github.com/shabib87/SwiftUICollectionView" target="_blank">my GitHub Repo</a>.</p>
+
+
+
+<p>Feel free to modify or adjust as your need. This example can be further extended using <code>Swift Generics</code> to create a fully customizable collection view replacement for <code>SwiftUI</code>. May be I&#8217;ll talk about it some other day. Happy Coding!</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-create-a-swiftui-collectionview/index.html">SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../how-to-create-a-swiftui-collectionview/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2042</post-id>	</item>
+	</channel>
+</rss>

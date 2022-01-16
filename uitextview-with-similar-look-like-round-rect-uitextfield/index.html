@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html class="html" lang="en-US">
+<head>
+<meta charset="UTF-8">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"> <meta name="google-site-verification" content="./kHUr_GXc00HBxwlXRAWawBaZn2kAX1A_I-nlOozwiv4/index.html">
+<link rel="pingback" href="./../xmlrpc.php">
+<meta name="viewport" content="./width=device-width, initial-scale=1/index.html"> <title>UITextView similar to rounded UITextField with dynamic height - codewithshabib</title>
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<style type="text/css">@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUOjIg1_i6t8kCHKm459WxZqh7k29Y.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZBg_z_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZYgzz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUQjIg1_i6t8kCHKm459WxRyS7j.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZOg3z_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZFgrz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZcgvz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZbgjz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: italic;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUPjIg1_i6t8kCHKm459WxZSgnz_PZ1.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUQjIg1_i6t8kCHKm45_QpRyS7j.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_aZA3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_cJD3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_ZpC3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_bZF3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_dJE3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_c5H3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Montserrat';
+ font-style: normal;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/montserrat/v18/JTURjIg1_i6t8kCHKm45_epG3gnD-w.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiAyp8kv8JHgFVrJJLmE0tCMPc.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmv1pVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLm21lVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiGyp8kv8JHgFVrJJLucHtF.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmg1hVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmr19VF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLmy15VF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLm111VF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: italic;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiDyp8kv8JHgFVrJJLm81xVF9eL.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 100;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiGyp8kv8JHgFVrLPTucHtF.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 200;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLFj_Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 300;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDz8Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 400;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfedw.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 500;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLGT9Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 600;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 700;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLCz7Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 800;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLDD4Z1xlEA.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'Poppins';
+ font-style: normal;
+ font-weight: 900;
+ font-display: swap;
+ src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLBT5Z1xlEA.ttf) format('truetype');
+}</style>
+<link rel="stylesheet" id="siteground-optimizer-combined-css-cd20b16ae1569bbd5c59fe2184d818eb" href="./../wp-content/uploads/siteground-optimizer-assets/siteground-optimizer-combined-css-cd20b16ae1569bbd5c59fe2184d818eb.css" media="all">
+<link rel="canonical" href="./index.html">
+<meta property="og:locale" content="./en_US/index.html">
+<meta property="og:type" content="./article/index.html">
+<meta property="og:title" content="./UITextView similar to rounded UITextField with dynamic height - codewithshabib/index.html">
+<meta property="og:description" content="./Ever wanted to use an UITextView that looks like a rounded UITextFiled/index.html? Also, wished it will grow it&#8217;s height as you type your text? Well, you are in luck! Here is the swift file you will need.">
+<meta property="og:url" content="./index.html">
+<meta property="og:site_name" content="./codewithshabib/index.html">
+<meta property="article:published_time" content="2017-01-24T09:35:25+00:00">
+<meta property="article:modified_time" content="2020-02-03T01:18:57+00:00">
+<meta name="twitter:card" content="./summary_large_image/index.html">
+<meta name="twitter:creator" content="./@hossainshabib/index.html">
+<meta name="twitter:site" content="./@hossainshabib/index.html">
+<meta name="twitter:label1" content="./Written by/index.html">
+<meta name="twitter:data1" content="./Shabib Hossain/index.html"> <script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"./#website","url":"./","name":"codewithshabib","description":"ios and swift blog","publisher":{"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"./?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"./uitextview-with-similar-look-like-round-rect-uitextfield/#webpage","url":"./uitextview-with-similar-look-like-round-rect-uitextfield/","name":"UITextView similar to rounded UITextField with dynamic height - codewithshabib","isPartOf":{"@id":"./#website"},"datePublished":"2017-01-24T09:35:25+00:00","dateModified":"2020-02-03T01:18:57+00:00","breadcrumb":{"@id":"./uitextview-with-similar-look-like-round-rect-uitextfield/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["./uitextview-with-similar-look-like-round-rect-uitextfield/"]}]},{"@type":"BreadcrumbList","@id":"./uitextview-with-similar-look-like-round-rect-uitextfield/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"./"},{"@type":"ListItem","position":2,"name":"UITextView similar to rounded UITextField with dynamic height"}]},{"@type":"Article","@id":"./uitextview-with-similar-look-like-round-rect-uitextfield/#article","isPartOf":{"@id":"./uitextview-with-similar-look-like-round-rect-uitextfield/#webpage"},"author":{"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254"},"headline":"UITextView similar to rounded UITextField with dynamic height","datePublished":"2017-01-24T09:35:25+00:00","dateModified":"2020-02-03T01:18:57+00:00","mainEntityOfPage":{"@id":"./uitextview-with-similar-look-like-round-rect-uitextfield/#webpage"},"wordCount":57,"commentCount":0,"publisher":{"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254"},"keywords":["code","coding","development","expanding textview","expanding uitextview","iOS","iOS programming","ipad","iphone","Objective-C","programming","rounded textview","rounded uitextview","Software Development","uitextfield","uitextview"],"articleSection":["Cocoa","iOS Programming","Swift"],"inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["./uitextview-with-similar-look-like-round-rect-uitextfield/#respond"]}]},{"@type":["Person","Organization"],"@id":"./#/schema/person/e2472e994950e72ee7a2fbce53097254","name":"Shabib Hossain","image":{"@type":"ImageObject","@id":"./#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/ca3a156afda1703176bccbd43004ca3a?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/ca3a156afda1703176bccbd43004ca3a?s=96&d=mm&r=g","caption":"Shabib Hossain"},"logo":{"@id":"./#personlogo"},"sameAs":[".","https://twitter.com/hossainshabib"]}]}</script> <link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//s.w.org">
+<link rel="dns-prefetch" href="//c0.wp.com">
+<link rel="dns-prefetch" href="//widgets.wp.com">
+<link rel="dns-prefetch" href="//s0.wp.com">
+<link rel="dns-prefetch" href="//0.gravatar.com">
+<link rel="dns-prefetch" href="//1.gravatar.com">
+<link rel="dns-prefetch" href="//2.gravatar.com">
+<link rel="dns-prefetch" href="//v0.wordpress.com">
+<link rel="alternate" type="application/rss+xml" title="codewithshabib &raquo; Feed" href="./../feed/index.html">
+<link rel="alternate" type="application/rss+xml" title="codewithshabib &raquo; Comments Feed" href="./../comments/feed/index.html">
+<link rel="alternate" type="application/rss+xml" title="codewithshabib &raquo; UITextView similar to rounded UITextField with dynamic height Comments Feed" href="./feed/index.html">  <script src="//www.googletagmanager.com/gtag/js?id=UA-157554662-1" type="text/javascript" data-cfasync="false" data-wpfc-render="false" async></script> <script type="text/javascript" data-cfasync="false" data-wpfc-render="false"> var mi_version = '8.3.0';
+ var mi_track_user = true;
+ var mi_no_track_reason = ''; 
+ var disableStrs = [
+ 'ga-disable-UA-157554662-1',
+ ];  /* Function to detect opted out users */
+ function __gtagTrackerIsOptedOut() {
+ for ( var index = 0; index < disableStrs.length; index++ ) {
+ if ( document.cookie.indexOf( disableStrs[ index ] + '=true' ) > -1 ) {
+ return true;
+ }
+ }  return false;
+ }  /* Disable tracking if the opt-out cookie exists. */
+ if ( __gtagTrackerIsOptedOut() ) {
+ for ( var index = 0; index < disableStrs.length; index++ ) {
+ window[ disableStrs[ index ] ] = true;
+ }
+ }  /* Opt-out function */
+ function __gtagTrackerOptout() {
+ for ( var index = 0; index < disableStrs.length; index++ ) {
+ document.cookie = disableStrs[ index ] + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+ window[ disableStrs[ index ] ] = true;
+ }
+ }  if ( 'undefined' === typeof gaOptout ) {
+ function gaOptout() {
+ __gtagTrackerOptout();
+ }
+ }
+ window.dataLayer = window.dataLayer || [];  window.MonsterInsightsDualTracker = {
+ helpers: {},
+ trackers: {},
+ };
+ if ( mi_track_user ) {
+ function __gtagDataLayer() {
+ dataLayer.push( arguments );
+ }  function __gtagTracker( type, name, parameters ) {
+ if (!parameters) {
+ parameters = {};
+ }  if (parameters.send_to) {
+ __gtagDataLayer.apply( null, arguments );
+ return;
+ }  if ( type === 'event' ) { 
+ parameters.send_to = monsterinsights_frontend.ua;
+ __gtagDataLayer( type, name, parameters );
+ } else {
+ __gtagDataLayer.apply( null, arguments );
+ }
+ }
+ __gtagTracker( 'js', new Date() );
+ __gtagTracker( 'set', {
+ 'developer_id.dZGIzZG' : true,
+ } );
+ __gtagTracker( 'config', 'UA-157554662-1', {"forceSSL":"true","link_attribution":"true"} );
+ window.gtag = __gtagTracker;											(function () {
+ /* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+ /* ga and __gaTracker compatibility shim. */
+ var noopfn = function () {
+ return null;
+ };
+ var newtracker = function () {
+ return new Tracker();
+ };
+ var Tracker = function () {
+ return null;
+ };
+ var p = Tracker.prototype;
+ p.get = noopfn;
+ p.set = noopfn;
+ p.send = function (){
+ var args = Array.prototype.slice.call(arguments);
+ args.unshift( 'send' );
+ __gaTracker.apply(null, args);
+ };
+ var __gaTracker = function () {
+ var len = arguments.length;
+ if ( len === 0 ) {
+ return;
+ }
+ var f = arguments[len - 1];
+ if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+ if ( 'send' === arguments[0] ) {
+ var hitConverted, hitObject = false, action;
+ if ( 'event' === arguments[1] ) {
+ if ( 'undefined' !== typeof arguments[3] ) {
+ hitObject = {
+ 'eventAction': arguments[3],
+ 'eventCategory': arguments[2],
+ 'eventLabel': arguments[4],
+ 'value': arguments[5] ? arguments[5] : 1,
+ }
+ }
+ }
+ if ( 'pageview' === arguments[1] ) {
+ if ( 'undefined' !== typeof arguments[2] ) {
+ hitObject = {
+ 'eventAction': 'page_view',
+ 'page_path' : arguments[2],
+ }
+ }
+ }
+ if ( typeof arguments[2] === 'object' ) {
+ hitObject = arguments[2];
+ }
+ if ( typeof arguments[5] === 'object' ) {
+ Object.assign( hitObject, arguments[5] );
+ }
+ if ( 'undefined' !== typeof arguments[1].hitType ) {
+ hitObject = arguments[1];
+ if ( 'pageview' === hitObject.hitType ) {
+ hitObject.eventAction = 'page_view';
+ }
+ }
+ if ( hitObject ) {
+ action = 'timing' === arguments[1].hitType ? 'timing_complete' : hitObject.eventAction;
+ hitConverted = mapArgs( hitObject );
+ __gtagTracker( 'event', action, hitConverted );
+ }
+ }
+ return;
+ }  function mapArgs( args ) {
+ var arg, hit = {};
+ var gaMap = {
+ 'eventCategory': 'event_category',
+ 'eventAction': 'event_action',
+ 'eventLabel': 'event_label',
+ 'eventValue': 'event_value',
+ 'nonInteraction': 'non_interaction',
+ 'timingCategory': 'event_category',
+ 'timingVar': 'name',
+ 'timingValue': 'value',
+ 'timingLabel': 'event_label',
+ 'page' : 'page_path',
+ 'location' : 'page_location',
+ 'title' : 'page_title',
+ };
+ for ( arg in args ) {
+ if ( ! ( ! args.hasOwnProperty(arg) || ! gaMap.hasOwnProperty(arg) ) ) {
+ hit[gaMap[arg]] = args[arg];
+ } else {
+ hit[arg] = args[arg];
+ }
+ }
+ return hit;
+ }  try {
+ f.hitCallback();
+ } catch ( ex ) {
+ }
+ };
+ __gaTracker.create = newtracker;
+ __gaTracker.getByName = newtracker;
+ __gaTracker.getAll = function () {
+ return [];
+ };
+ __gaTracker.remove = noopfn;
+ __gaTracker.loaded = true;
+ window['__gaTracker'] = __gaTracker;
+ })();
+ } else {
+ console.log( "" );
+ ( function () {
+ function __gtagTracker() {
+ return null;
+ }
+ window['__gtagTracker'] = __gtagTracker;
+ window['gtag'] = __gtagTracker;
+ } )();
+ }
+ </script>  <script type="text/javascript"> window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":".\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.3"}};
+ !function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+ </script> <style type="text/css">img.wp-smiley,
+img.emoji {
+ display: inline !important;
+ border: none !important;
+ box-shadow: none !important;
+ height: 1em !important;
+ width: 1em !important;
+ margin: 0 .07em !important;
+ vertical-align: -0.1em !important;
+ background: none !important;
+ padding: 0 !important;
+}</style> <style id="wp-block-library-inline-css" type="text/css">.has-text-align-justify{text-align:justify;}</style> <style id="wp-block-library-theme-inline-css" type="text/css">#start-resizable-editor-section{display:none}.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-code{font-family:Menlo,Consolas,monaco,monospace;color:#1e1e1e;padding:.8em 1em;border:1px solid #ddd;border-radius:4px}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-group.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto;opacity:.4}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{padding:.5em;border:1px solid;word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}#end-resizable-editor-section{display:none}</style>
+<link rel="stylesheet" id="social-logos-css" href="https://c0.wp.com/p/jetpack/10.5/_inc/social-logos/social-logos.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack_css-css" href="https://c0.wp.com/p/jetpack/10.5/css/jetpack.css" type="text/css" media="all"> <script type="text/javascript" id="jetpack_related-posts-js-extra"> /* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */ </script> <script type="text/javascript" src="https://c0.wp.com/p/jetpack/10.5/_inc/build/related-posts/related-posts.min.js" id="jetpack_related-posts-js"></script> <script type="text/javascript" id="monsterinsights-frontend-script-js-extra"> /* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":".","hash_tracking":"false","ua":"UA-157554662-1","v4_id":""};
+/* ]]> */ </script> <script type="text/javascript" src="./../wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend-gtag.min.js?ver=8.3.0" id="monsterinsights-frontend-script-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script><link rel="https://api.w.org/" href="./../wp-json/index.html">
+<link rel="alternate" type="application/json" href="./../wp-json/wp/v2/posts/658/index.html">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="./../xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="./../wp-includes/wlwmanifest.xml">
+<meta name="generator" content="./WordPress 5.8.3">
+<link rel="shortlink" href="https://wp.me/pbF0i9-aC">
+<link rel="alternate" type="application/json+oembed" href="./../wp-json/oembed/1.0/embed/index.html?url=https%3A%2F%2F%2Fuitextview-with-similar-look-like-round-rect-uitextfield%2F">
+<link rel="alternate" type="text/xml+oembed" href="./../wp-json/oembed/1.0/embed/index.html?url=https%3A%2F%2F%2Fuitextview-with-similar-look-like-round-rect-uitextfield%2F&#038;format=xml"> <style type="text/css">img#wpstats{display:none}</style> <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<link rel="amphtml" href="./amp/index.html"> <style type="text/css">/* If html does not have either class, do not show lazy loaded images. */
+ html:not( .jetpack-lazy-images-js-enabled ):not( .js ) .jetpack-lazy-image {
+ display: none;
+ }</style> <script> document.documentElement.classList.add(
+ 'jetpack-lazy-images-js-enabled'
+ ); </script><link rel="icon" href="./../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg" sizes="32x32">
+<link rel="icon" href="./../wp-content/uploads/2016/08/cropped-logo1-192x192.jpg" sizes="192x192">
+<link rel="apple-touch-icon" href="./../wp-content/uploads/2016/08/cropped-logo1-180x180.jpg">
+<meta name="msapplication-TileImage" content="./../wp-content/uploads/2016/08/cropped-logo1-270x270.jpg"> <style type="text/css" id="wp-custom-css">/** Center Align Meta and Content **/ul.meta li{float:none;display:inline-block}.single-post .site-content{text-align:center}.entry-content{text-align:justify}/** Color **/#footer .oceanwp-about-me .oceanwp-about-me-name{color:#fff}/** WP Contact Form **/body div.wpforms-container-full .wpforms-form input.wpforms-field-medium,body div.wpforms-container-full .wpforms-form input.wpforms-field-medium,body div.wpforms-container-full .wpforms-form select.wpforms-field-medium,body div.wpforms-container-full .wpforms-form .wpforms-field-row.wpforms-field-medium{max-width:100%}</style>  <style type="text/css">/* General CSS */a:hover,a.light:hover,.theme-heading .text::before,.theme-heading .text::after,#top-bar-content >a:hover,#top-bar-social li.oceanwp-email a:hover,#site-navigation-wrap .dropdown-menu >li >a:hover,#site-header.medium-header #medium-searchform button:hover,.oceanwp-mobile-menu-icon a:hover,.blog-entry.post .blog-entry-header .entry-title a:hover,.blog-entry.post .blog-entry-readmore a:hover,.blog-entry.thumbnail-entry .blog-entry-category a,ul.meta li a:hover,.dropcap,.single nav.post-navigation .nav-links .title,body .related-post-title a:hover,body #wp-calendar caption,body .contact-info-widget.default i,body .contact-info-widget.big-icons i,body .custom-links-widget .oceanwp-custom-links li a:hover,body .custom-links-widget .oceanwp-custom-links li a:hover:before,body .posts-thumbnails-widget li a:hover,body .social-widget li.oceanwp-email a:hover,.comment-author .comment-meta .comment-reply-link,#respond #cancel-comment-reply-link:hover,#footer-widgets .footer-box a:hover,#footer-bottom a:hover,#footer-bottom #footer-bottom-menu a:hover,.sidr a:hover,.sidr-class-dropdown-toggle:hover,.sidr-class-menu-item-has-children.active >a,.sidr-class-menu-item-has-children.active >a >.sidr-class-dropdown-toggle,input[type=checkbox]:checked:before{color:#e84500}input[type="button"],input[type="reset"],input[type="submit"],button[type="submit"],.button,#site-navigation-wrap .dropdown-menu >li.btn >a >span,.thumbnail:hover i,.post-quote-content,.omw-modal .omw-close-modal,body .contact-info-widget.big-icons li:hover i,body div.wpforms-container-full .wpforms-form input[type=submit],body div.wpforms-container-full .wpforms-form button[type=submit],body div.wpforms-container-full .wpforms-form .wpforms-page-button{background-color:#e84500}.widget-title{border-color:#e84500}blockquote{border-color:#e84500}#searchform-dropdown{border-color:#e84500}.dropdown-menu .sub-menu{border-color:#e84500}.blog-entry.large-entry .blog-entry-readmore a:hover{border-color:#e84500}.oceanwp-newsletter-form-wrap input[type="email"]:focus{border-color:#e84500}.social-widget li.oceanwp-email a:hover{border-color:#e84500}#respond #cancel-comment-reply-link:hover{border-color:#e84500}body .contact-info-widget.big-icons li:hover i{border-color:#e84500}#footer-widgets .oceanwp-newsletter-form-wrap input[type="email"]:focus{border-color:#e84500}input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover,button[type="submit"]:hover,input[type="button"]:focus,input[type="reset"]:focus,input[type="submit"]:focus,button[type="submit"]:focus,.button:hover,#site-navigation-wrap .dropdown-menu >li.btn >a:hover >span,.post-quote-author,.omw-modal .omw-close-modal:hover,body div.wpforms-container-full .wpforms-form input[type=submit]:hover,body div.wpforms-container-full .wpforms-form button[type=submit]:hover,body div.wpforms-container-full .wpforms-form .wpforms-page-button:hover{background-color:#dd782a}table th,table td,hr,.content-area,body.content-left-sidebar #content-wrap .content-area,.content-left-sidebar .content-area,#top-bar-wrap,#site-header,#site-header.top-header #search-toggle,.dropdown-menu ul li,.centered-minimal-page-header,.blog-entry.post,.blog-entry.grid-entry .blog-entry-inner,.blog-entry.thumbnail-entry .blog-entry-bottom,.single-post .entry-title,.single .entry-share-wrap .entry-share,.single .entry-share,.single .entry-share ul li a,.single nav.post-navigation,.single nav.post-navigation .nav-links .nav-previous,#author-bio,#author-bio .author-bio-avatar,#author-bio .author-bio-social li a,#related-posts,#comments,.comment-body,#respond #cancel-comment-reply-link,#blog-entries .type-page,.page-numbers a,.page-numbers span:not(.elementor-screen-only),.page-links span,body #wp-calendar caption,body #wp-calendar th,body #wp-calendar tbody,body .contact-info-widget.default i,body .contact-info-widget.big-icons i,body .posts-thumbnails-widget li,body .tagcloud a{border-color:rgba(207,207,207,0.5)}body{background-image:url(https://personalblog.sgwpdemo.com/wp-content/uploads/2018/08/fresh_snow.png)}a{color:#003d54}a:hover{color:#dd782a}.boxed-layout #wrap,.boxed-layout .parallax-footer,.boxed-layout .owp-floating-bar{width:1290px}.container{width:1024px}#main #content-wrap,.separate-layout #main #content-wrap{padding-top:50px;padding-bottom:50px}#scroll-top{bottom:50px}#scroll-top{width:29px;height:29px;line-height:29px}#scroll-top{border-radius:100px}/* Header CSS */#site-header{border-color:#dd3333}#site-header.has-header-media .overlay-header-media{background-color:rgba(0,0,0,0.5)}.effect-one #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-three #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-five #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:before,.effect-five #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-nine #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:before,.effect-nine #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after{background-color:#dd782a}.effect-four #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:before,.effect-four #site-navigation-wrap .dropdown-menu >li >a.menu-link >span:after,.effect-seven #site-navigation-wrap .dropdown-menu >li >a.menu-link:hover >span:after,.effect-seven #site-navigation-wrap .dropdown-menu >li.sfHover >a.menu-link >span:after{color:#dd782a}.effect-seven #site-navigation-wrap .dropdown-menu >li >a.menu-link:hover >span:after,.effect-seven #site-navigation-wrap .dropdown-menu >li.sfHover >a.menu-link >span:after{text-shadow:10px 0 #dd782a,-10px 0 #dd782a}#site-navigation-wrap .dropdown-menu >li >a,.oceanwp-mobile-menu-icon a,#searchform-header-replace-close{color:#e84500}#site-navigation-wrap .dropdown-menu >li >a:hover,.oceanwp-mobile-menu-icon a:hover,#searchform-header-replace-close:hover{color:#dd782a}.dropdown-menu ul li a.menu-link:hover{color:#dd782a}.oceanwp-social-menu ul li a{margin:0 2px 0 3px}.oceanwp-social-menu ul li a{border-radius:100%}.oceanwp-social-menu.simple-social ul li a{color:#ffffff}.oceanwp-social-menu.simple-social ul li a:hover{color:#fff200!important}#sidr,#mobile-dropdown{background-color:#e84500}body .sidr a,body .sidr-class-dropdown-toggle,#mobile-dropdown ul li a,#mobile-dropdown ul li a .dropdown-toggle,#mobile-fullscreen ul li a,#mobile-fullscreen .oceanwp-social-menu.simple-social ul li a{color:#ffffff}#mobile-fullscreen a.close .close-icon-inner,#mobile-fullscreen a.close .close-icon-inner::after{background-color:#ffffff}body .sidr a:hover,body .sidr-class-dropdown-toggle:hover,body .sidr-class-dropdown-toggle .fa,body .sidr-class-menu-item-has-children.active >a,body .sidr-class-menu-item-has-children.active >a >.sidr-class-dropdown-toggle,#mobile-dropdown ul li a:hover,#mobile-dropdown ul li a .dropdown-toggle:hover,#mobile-dropdown .menu-item-has-children.active >a,#mobile-dropdown .menu-item-has-children.active >a >.dropdown-toggle,#mobile-fullscreen ul li a:hover,#mobile-fullscreen .oceanwp-social-menu.simple-social ul li a:hover{color:#dd782a}#mobile-fullscreen a.close:hover .close-icon-inner,#mobile-fullscreen a.close:hover .close-icon-inner::after{background-color:#dd782a}body .sidr-class-mobile-searchform input,body .sidr-class-mobile-searchform input:focus,#mobile-dropdown #mobile-menu-search form input,#mobile-fullscreen #mobile-search input,#mobile-fullscreen #mobile-search label{color:#ffffff}body .sidr-class-mobile-searchform input,#mobile-dropdown #mobile-menu-search form input,#mobile-fullscreen #mobile-search input{border-color:#ffffff}body .sidr-class-mobile-searchform input:focus,#mobile-dropdown #mobile-menu-search form input:focus,#mobile-fullscreen #mobile-search input:focus{border-color:#ffffff}.sidr-class-mobile-searchform button,#mobile-dropdown #mobile-menu-search form button{color:#ffffff}.sidr-class-mobile-searchform button:hover,#mobile-dropdown #mobile-menu-search form button:hover{color:#ffffff}/* Blog CSS */.loader-ellips__dot{background-color:#e84500}.single-post .background-image-page-header .page-header-inner,.single-post .background-image-page-header .site-breadcrumbs{text-align:left}/* Footer Widgets CSS */#footer-widgets,#footer-widgets p,#footer-widgets li a:before,#footer-widgets .contact-info-widget span.oceanwp-contact-title,#footer-widgets .recent-posts-date,#footer-widgets .recent-posts-comments,#footer-widgets .widget-recent-posts-icons li .fa{color:#ffffff}/* Footer Bottom CSS */#footer-bottom{background-color:rgba(255,255,255,0)}#footer-bottom,#footer-bottom p{color:#353535}/* Typography CSS */body{font-family:Poppins;color:#3a3a3a}h1,h2,h3,h4,h5,h6,.theme-heading,.widget-title,.oceanwp-widget-recent-posts-title,.comment-reply-title,.entry-title,.sidebar-box .widget-title{font-family:Poppins}#site-navigation-wrap .dropdown-menu >li >a,#site-header.full_screen-header .fs-dropdown-menu >li >a,#site-header.top-header #site-navigation-wrap .dropdown-menu >li >a,#site-header.center-header #site-navigation-wrap .dropdown-menu >li >a,#site-header.medium-header #site-navigation-wrap .dropdown-menu >li >a,.oceanwp-mobile-menu-icon a{font-family:Montserrat;font-weight:700;font-size:12px}.sidr-class-dropdown-menu li a,a.sidr-class-toggle-sidr-close,#mobile-dropdown ul li a,body #mobile-fullscreen ul li a{font-family:Montserrat;font-weight:600;text-transform:uppercase}@media (max-width:768px){.sidr-class-dropdown-menu li a,a.sidr-class-toggle-sidr-close,#mobile-dropdown ul li a,body #mobile-fullscreen ul li a{font-size:12px;line-height:1.6;letter-spacing:.8px}}#footer-bottom #copyright{font-weight:600;letter-spacing:.6px;text-transform:uppercase}</style>
+</head>
+<body class="post-template-default single single-post postid-658 single-format-standard wp-embed-responsive oceanwp-theme dropdown-mobile boxed-layout wrap-boxshadow no-header-border default-breakpoint has-sidebar content-left-sidebar post-in-category-cocoa post-in-category-ios-programming post-in-category-swift page-header-disabled has-breadcrumbs has-blog-grid elementor-default elementor-kit-2146" itemscope="itemscope" itemtype="https://schema.org/Article">
+<div id="outer-wrap" class="site clr"> <a class="skip-link screen-reader-text" href="#main">Skip to content</a><div id="wrap" class="clr">
+<header id="site-header" class="minimal-header has-social effect-one clr" data-height="74" itemscope="itemscope" itemtype="https://schema.org/WPHeader" role="banner"><div id="site-header-inner" class="clr container">
+<div id="site-logo" class="clr" itemscope itemtype="https://schema.org/Brand"><div id="site-logo-inner" class="clr"> <a href="./../index.html" rel="home" class="site-title site-logo-text">codewithshabib</a>
+</div></div>
+<div class="oceanwp-social-menu clr simple-social"><div class="social-menu-inner clr"><ul aria-label="Social links"></ul></div></div>
+<div id="site-navigation-wrap" class="no-top-border clr"><nav id="site-navigation" class="navigation main-navigation clr" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement" role="navigation"><ul id="menu-navigation-menu" class="main-menu dropdown-menu sf-menu">
+<li id="menu-item-133" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-133"><a href="https://codewithshabib.com/" class="menu-link"><span class="text-wrap">Home</span></a></li>
+<li id="menu-item-132" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132"><a href="./../about/index.html" class="menu-link"><span class="text-wrap">About</span></a></li>
+<li id="menu-item-1308" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children dropdown menu-item-1308 nav-no-click">
+<a class="menu-link"><span class="text-wrap">Portfolio <span class="nav-arrow fa fa-angle-down"></span></span></a><ul class="sub-menu">
+<li id="menu-item-659" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-659"><a target="_blank" href="https://www.linkedin.com/in/ahmadshabibulhossain" class="menu-link"><span class="text-wrap">Linkedin</span></a></li>
+<li id="menu-item-660" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-660"><a target="_blank" href="https://github.com/shabib87" class="menu-link"><span class="text-wrap">GitHub</span></a></li>
+<li id="menu-item-661" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-661"><a target="_blank" href="https://stackoverflow.com/users/1156026/shabib?tab=profile" class="menu-link"><span class="text-wrap">StackOverflow</span></a></li>
+<li id="menu-item-662" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-662"><a target="_blank" href="https://cocoapods.org/owners/14784" class="menu-link"><span class="text-wrap">CocoaPods</span></a></li>
+<li id="menu-item-663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-663"><a target="_blank" href="https://www.cocoacontrols.com/authors/shabib87" class="menu-link"><span class="text-wrap">CocoaControls</span></a></li>
+<li id="menu-item-1071" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1071"><a target="_blank" href="https://www.hackerrank.com/shabib_hossain" class="menu-link"><span class="text-wrap">HackerRank</span></a></li>
+</ul>
+</li>
+</ul></nav></div>
+<div class="oceanwp-mobile-menu-icon clr mobile-right"> <a href="javascript:void(0)" class="mobile-menu" aria-label="Mobile Menu"> <i class="fa fa-bars" aria-hidden="true"></i> <span class="oceanwp-text">Menu</span> <span class="oceanwp-close-text">Menu</span> </a>
+</div>
+</div>
+<div id="mobile-dropdown" class="clr"><nav class="clr has-social" itemscope="itemscope" itemtype="https://schema.org/SiteNavigationElement"><ul id="menu-navigation-menu-1" class="menu">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-133"><a href="https://codewithshabib.com/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132"><a href="./../about/index.html">About</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1308">
+<a>Portfolio</a><ul class="sub-menu">
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-659"><a target="_blank" rel="noopener" href="https://www.linkedin.com/in/ahmadshabibulhossain">Linkedin</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-660"><a target="_blank" rel="noopener" href="https://github.com/shabib87">GitHub</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-661"><a target="_blank" rel="noopener" href="https://stackoverflow.com/users/1156026/shabib?tab=profile">StackOverflow</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-662"><a target="_blank" rel="noopener" href="https://cocoapods.org/owners/14784">CocoaPods</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-663"><a target="_blank" rel="noopener" href="https://www.cocoacontrols.com/authors/shabib87">CocoaControls</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1071"><a target="_blank" rel="noopener" href="https://www.hackerrank.com/shabib_hossain">HackerRank</a></li>
+</ul>
+</li>
+</ul>
+<div class="oceanwp-social-menu clr simple-social"><div class="social-menu-inner clr"><ul aria-label="Social links"></ul></div></div>
+<div id="mobile-menu-search" class="clr"><form method="get" action="./" class="mobile-searchform" role="search" aria-label="Search for:"> <label for="ocean-mobile-search1"> <input type="search" name="s" autocomplete="off" placeholder="Search"> <button type="submit" class="searchform-submit" aria-label="Submit search"> <i class="icon-magnifier" aria-hidden="true"></i> </button> </label>
+</form></div></nav></div></header><main id="main" class="site-main clr" role="main"><div id="content-wrap" class="container clr">
+<div id="primary" class="content-area clr"><div id="content" class="site-content clr"><article id="post-658"><header class="entry-header clr"><h2 class="single-post-title entry-title" itemprop="headline">UITextView similar to rounded UITextField with dynamic height</h2></header><ul class="meta ospm-default clr">
+<li class="meta-author" itemprop="name">
+<span class="screen-reader-text">Post author:</span><i class="icon-user" aria-hidden="true"></i><a href="./../author/shabibhossain/index.html" title="Posts by Shabib Hossain" rel="author" itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">Shabib Hossain</a>
+</li>
+<li class="meta-date" itemprop="datePublished">
+<span class="screen-reader-text">Post published:</span><i class="icon-clock" aria-hidden="true"></i>January 24, 2017</li>
+<li class="meta-cat">
+<span class="screen-reader-text">Post category:</span><i class="icon-folder" aria-hidden="true"></i><a href="./../category/software-development/ios-programming/cocoa/index.html" rel="category tag">Cocoa</a> <span class="owp-sep">/</span> <a href="./../category/software-development/ios-programming/index.html" rel="category tag">iOS Programming</a> <span class="owp-sep">/</span> <a href="./../category/software-development/ios-programming/swift/index.html" rel="category tag">Swift</a>
+</li>
+<li class="meta-comments">
+<span class="screen-reader-text">Post comments:</span><i class="icon-bubble" aria-hidden="true"></i><a href="./index.html#respond" class="comments-link">0 Comments</a>
+</li>
+</ul>
+<div class="entry-content clr" itemprop="text">
+<p>Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wished it will grow it&#8217;s height as you type your text? Well, you are in luck! Here is the swift file you will need.</p> <style>.gist table { margin-bottom: 0; }</style>
+<div style="tab-size: 8" id="gist44115242" class="gist"><div class="gist-file" translate="no">
+<div class="gist-data"><div class="js-gist-file-update-container js-task-list-container file-box"><div id="file-textviewwithplaceholderandexpandingheight-swift" class="file my-2"><div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  "><div class="js-check-bidi js-blob-code-container blob-code-content"> <template class="js-file-alert-template"><div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> <span> This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters. <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a> </span><div data-view-component="true" class="flash-action"> <a href="./{{ revealButtonHref }}/index.html" data-view-component="true" class="btn-sm btn"> Show hidden characters </a>
+</div>
+</div></template> <template class="js-line-alert-template"> <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e"> <svg aria-hidden="true" height="16" viewbox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert"> <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path> </svg> </span></template><table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="TextViewWithPlaceholderAndExpandingHeight.swift">
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC1" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">/*</span></span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> TextViewWithPlaceholderAndExpandingHeight.swift</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> TextViewWithPlaceholderAndExpandingHeight</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Created by Shabib Hossain on 1/24/17.</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Copyright (c) 2017 shabib87 &lt;<a href="./../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="e4978c85868d86ca97919790a48389858d88ca878b89">[email&#160;protected]</a>&gt;</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Permission is hereby granted, free of charge, to any person obtaining a copy</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> of this software and associated documentation files (the &quot;Software&quot;), to deal</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> in the Software without restriction, including without limitation the rights</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> copies of the Software, and to permit persons to whom the Software is</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> furnished to do so, subject to the following conditions:</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> The above copyright notice and this permission notice shall be included in</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> all copies or substantial portions of the Software.</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> THE SOFTWARE.</span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC27" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC28" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> <span class="pl-c">*/</span></span></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC29" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC30" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">import</span> <span class="pl-en">Foundation</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC31" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">import</span> <span class="pl-en">UIKit</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L32" class="blob-num js-line-number js-code-nav-line-number" data-line-number="32"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC32" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L33" class="blob-num js-line-number js-code-nav-line-number" data-line-number="33"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC33" class="blob-code blob-code-inner js-file-line">
+<span class="pl-k">class</span> <span class="pl-en">TextViewWithPlaceholderAndExpandingHeight</span>: <span class="pl-e">UITextView </span>{</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L34" class="blob-num js-line-number js-code-nav-line-number" data-line-number="34"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC34" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L35" class="blob-num js-line-number js-code-nav-line-number" data-line-number="35"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC35" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">@IBInspectable</span> <span class="pl-k">var</span> placeHolderText: <span class="pl-c1">String</span><span class="pl-k">!</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L36" class="blob-num js-line-number js-code-nav-line-number" data-line-number="36"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC36" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">@IBInspectable</span> <span class="pl-k">var</span> placeHolderColor: UIColor<span class="pl-k">!</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L37" class="blob-num js-line-number js-code-nav-line-number" data-line-number="37"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC37" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L38" class="blob-num js-line-number js-code-nav-line-number" data-line-number="38"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC38" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">var</span> placeHolderLabel: UILabel<span class="pl-k">!</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L39" class="blob-num js-line-number js-code-nav-line-number" data-line-number="39"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC39" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">let</span> defaultColor <span class="pl-k">=</span> <span class="pl-c1">UIColor</span>(<span class="pl-c1">red</span>:<span class="pl-c1">199.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">green</span>:<span class="pl-c1">199.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">blue</span>:<span class="pl-c1">205.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">alpha</span>:<span class="pl-c1">1.0</span>)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L40" class="blob-num js-line-number js-code-nav-line-number" data-line-number="40"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC40" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">let</span> UIPlaceholderTextChangeAnimationDuraiton <span class="pl-k">=</span> <span class="pl-c1">0.25</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L41" class="blob-num js-line-number js-code-nav-line-number" data-line-number="41"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC41" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">let</span> UIPlaceHolderLabelTag <span class="pl-k">=</span> <span class="pl-c1">1901</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L42" class="blob-num js-line-number js-code-nav-line-number" data-line-number="42"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC42" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">let</span> kMaxHeightForTextView <span class="pl-k">=</span> <span class="pl-c1">90.0</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L43" class="blob-num js-line-number js-code-nav-line-number" data-line-number="43"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC43" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L44" class="blob-num js-line-number js-code-nav-line-number" data-line-number="44"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC44" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">var</span> currentDynamicHeight: CGFloat {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L45" class="blob-num js-line-number js-code-nav-line-number" data-line-number="45"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC45" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">get</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L46" class="blob-num js-line-number js-code-nav-line-number" data-line-number="46"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC46" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">return</span> <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-smi">height</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L47" class="blob-num js-line-number js-code-nav-line-number" data-line-number="47"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC47" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L48" class="blob-num js-line-number js-code-nav-line-number" data-line-number="48"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC48" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L49" class="blob-num js-line-number js-code-nav-line-number" data-line-number="49"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC49" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L50" class="blob-num js-line-number js-code-nav-line-number" data-line-number="50"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC50" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">override</span> <span class="pl-k">var</span> text: <span class="pl-c1">String</span><span class="pl-k">!</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L51" class="blob-num js-line-number js-code-nav-line-number" data-line-number="51"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC51" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">didSet</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L52" class="blob-num js-line-number js-code-nav-line-number" data-line-number="52"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC52" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0.0</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L53" class="blob-num js-line-number js-code-nav-line-number" data-line-number="53"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC53" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">updateHeight</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L54" class="blob-num js-line-number js-code-nav-line-number" data-line-number="54"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC54" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L55" class="blob-num js-line-number js-code-nav-line-number" data-line-number="55"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC55" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L56" class="blob-num js-line-number js-code-nav-line-number" data-line-number="56"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC56" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L57" class="blob-num js-line-number js-code-nav-line-number" data-line-number="57"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC57" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">draw</span>(<span class="pl-en">_</span> <span class="pl-smi">rect</span>: CGRect) {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L58" class="blob-num js-line-number js-code-nav-line-number" data-line-number="58"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC58" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-k">!</span><span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span>.<span class="pl-c1">isEmpty</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L59" class="blob-num js-line-number js-code-nav-line-number" data-line-number="59"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC59" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L60" class="blob-num js-line-number js-code-nav-line-number" data-line-number="60"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC60" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">setupPlaceholderLabel</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L61" class="blob-num js-line-number js-code-nav-line-number" data-line-number="61"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC61" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L62" class="blob-num js-line-number js-code-nav-line-number" data-line-number="62"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC62" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">text</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L63" class="blob-num js-line-number js-code-nav-line-number" data-line-number="63"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC63" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">sizeToFit</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L64" class="blob-num js-line-number js-code-nav-line-number" data-line-number="64"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC64" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">sendSubview</span>(<span class="pl-c1">toBack</span>: <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L65" class="blob-num js-line-number js-code-nav-line-number" data-line-number="65"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC65" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L66" class="blob-num js-line-number js-code-nav-line-number" data-line-number="66"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC66" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">isEmpty</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>(<span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">text</span><span class="pl-k">?</span>.<span class="pl-c1">isEmpty</span>)<span class="pl-k">!</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L67" class="blob-num js-line-number js-code-nav-line-number" data-line-number="67"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC67" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">1</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L68" class="blob-num js-line-number js-code-nav-line-number" data-line-number="68"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC68" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L69" class="blob-num js-line-number js-code-nav-line-number" data-line-number="69"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC69" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">super</span>.<span class="pl-c1">draw</span>(rect)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L70" class="blob-num js-line-number js-code-nav-line-number" data-line-number="70"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC70" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L71" class="blob-num js-line-number js-code-nav-line-number" data-line-number="71"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC71" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L72" class="blob-num js-line-number js-code-nav-line-number" data-line-number="72"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC72" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">setupPlaceholderLabel</span>() {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L73" class="blob-num js-line-number js-code-nav-line-number" data-line-number="73"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC73" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span> <span class="pl-k">=</span> <span class="pl-c1">UILabel</span>(<span class="pl-c1">frame</span>: <span class="pl-c1">CGRect</span>(<span class="pl-c1">x</span>: <span class="pl-c1">8</span>, <span class="pl-c1">y</span>: <span class="pl-c1">4</span>, <span class="pl-c1">width</span>: <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-c1">size</span>.<span class="pl-smi">width</span> <span class="pl-k">-</span> <span class="pl-c1">16</span>, <span class="pl-c1">height</span>: <span class="pl-c1">0</span>))</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L74" class="blob-num js-line-number js-code-nav-line-number" data-line-number="74"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC74" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">lineBreakMode</span> <span class="pl-k">=</span> .<span class="pl-smi">byWordWrapping</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L75" class="blob-num js-line-number js-code-nav-line-number" data-line-number="75"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC75" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">numberOfLines</span> <span class="pl-k">=</span> <span class="pl-c1">0</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L76" class="blob-num js-line-number js-code-nav-line-number" data-line-number="76"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC76" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">font</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">font</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L77" class="blob-num js-line-number js-code-nav-line-number" data-line-number="77"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC77" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">backgroundColor</span> <span class="pl-k">=</span> .<span class="pl-smi">clear</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L78" class="blob-num js-line-number js-code-nav-line-number" data-line-number="78"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC78" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">textColor</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L79" class="blob-num js-line-number js-code-nav-line-number" data-line-number="79"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC79" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L80" class="blob-num js-line-number js-code-nav-line-number" data-line-number="80"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC80" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">tag</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L81" class="blob-num js-line-number js-code-nav-line-number" data-line-number="81"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC81" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">addSubview</span>(<span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L82" class="blob-num js-line-number js-code-nav-line-number" data-line-number="82"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC82" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L83" class="blob-num js-line-number js-code-nav-line-number" data-line-number="83"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC83" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L84" class="blob-num js-line-number js-code-nav-line-number" data-line-number="84"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC84" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">awakeFromNib</span>() {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L85" class="blob-num js-line-number js-code-nav-line-number" data-line-number="85"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC85" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">super</span>.<span class="pl-c1">awakeFromNib</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L86" class="blob-num js-line-number js-code-nav-line-number" data-line-number="86"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC86" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L87" class="blob-num js-line-number js-code-nav-line-number" data-line-number="87"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC87" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L88" class="blob-num js-line-number js-code-nav-line-number" data-line-number="88"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC88" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L89" class="blob-num js-line-number js-code-nav-line-number" data-line-number="89"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC89" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">override</span> <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">frame</span></span>: CGRect, <span class="pl-smi"><span class="pl-en">textContainer</span></span>: NSTextContainer<span class="pl-k">?</span>) {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L90" class="blob-num js-line-number js-code-nav-line-number" data-line-number="90"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC90" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">super</span>.<span class="pl-k">init</span>(<span class="pl-c1">frame</span>: frame, <span class="pl-c1">textContainer</span>: textContainer)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L91" class="blob-num js-line-number js-code-nav-line-number" data-line-number="91"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC91" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L92" class="blob-num js-line-number js-code-nav-line-number" data-line-number="92"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC92" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L93" class="blob-num js-line-number js-code-nav-line-number" data-line-number="93"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC93" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L94" class="blob-num js-line-number js-code-nav-line-number" data-line-number="94"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC94" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">required</span> <span class="pl-k">init?</span>(<span class="pl-en">coder</span> <span class="pl-smi">aDecoder</span>: NSCoder) {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L95" class="blob-num js-line-number js-code-nav-line-number" data-line-number="95"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC95" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">super</span>.<span class="pl-k">init</span>(<span class="pl-c1">coder</span>: aDecoder)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L96" class="blob-num js-line-number js-code-nav-line-number" data-line-number="96"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC96" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L97" class="blob-num js-line-number js-code-nav-line-number" data-line-number="97"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC97" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L98" class="blob-num js-line-number js-code-nav-line-number" data-line-number="98"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC98" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L99" class="blob-num js-line-number js-code-nav-line-number" data-line-number="99"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC99" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">deinit</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L100" class="blob-num js-line-number js-code-nav-line-number" data-line-number="100"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC100" class="blob-code blob-code-inner js-file-line"> NotificationCenter.<span class="pl-smi">default</span>.<span class="pl-c1">removeObserver</span>(<span class="pl-c1">self</span>, <span class="pl-c1">name</span>: NSNotification.<span class="pl-smi">Name</span>.<span class="pl-smi">UITextViewTextDidChange</span>, <span class="pl-c1">object</span>: <span class="pl-c1">nil</span>)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L101" class="blob-num js-line-number js-code-nav-line-number" data-line-number="101"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC101" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L102" class="blob-num js-line-number js-code-nav-line-number" data-line-number="102"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC102" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L103" class="blob-num js-line-number js-code-nav-line-number" data-line-number="103"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC103" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">textField</span>(<span class="pl-en">_</span> <span class="pl-smi">textField</span>: UITextField, <span class="pl-en">shouldChangeCharactersIn</span> <span class="pl-smi">range</span>: NSRange, <span class="pl-en">replacementString</span> <span class="pl-smi">string</span>: <span class="pl-c1">String</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L104" class="blob-num js-line-number js-code-nav-line-number" data-line-number="104"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC104" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">let</span> whitescpaceSet <span class="pl-k">=</span> NSCharacterSet.<span class="pl-smi">whitespaces</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L105" class="blob-num js-line-number js-code-nav-line-number" data-line-number="105"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC105" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">let</span> range <span class="pl-k">=</span> string.<span class="pl-c1">rangeOfCharacter</span>(<span class="pl-c1">from</span>: whitescpaceSet)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L106" class="blob-num js-line-number js-code-nav-line-number" data-line-number="106"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC106" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-k">let</span> <span class="pl-c1">_</span> <span class="pl-k">=</span> range {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L107" class="blob-num js-line-number js-code-nav-line-number" data-line-number="107"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC107" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">return</span> <span class="pl-c1">false</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L108" class="blob-num js-line-number js-code-nav-line-number" data-line-number="108"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC108" class="blob-code blob-code-inner js-file-line"> } <span class="pl-k">else</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L109" class="blob-num js-line-number js-code-nav-line-number" data-line-number="109"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC109" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">return</span> <span class="pl-c1">true</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L110" class="blob-num js-line-number js-code-nav-line-number" data-line-number="110"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC110" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L111" class="blob-num js-line-number js-code-nav-line-number" data-line-number="111"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC111" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L112" class="blob-num js-line-number js-code-nav-line-number" data-line-number="112"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC112" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L113" class="blob-num js-line-number js-code-nav-line-number" data-line-number="113"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC113" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">setupPlaceholder</span>() {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L114" class="blob-num js-line-number js-code-nav-line-number" data-line-number="114"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC114" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L115" class="blob-num js-line-number js-code-nav-line-number" data-line-number="115"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC115" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pds">&quot;</span></span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L116" class="blob-num js-line-number js-code-nav-line-number" data-line-number="116"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC116" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L117" class="blob-num js-line-number js-code-nav-line-number" data-line-number="117"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC117" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L118" class="blob-num js-line-number js-code-nav-line-number" data-line-number="118"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC118" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span> <span class="pl-k">=</span> defaultColor</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L119" class="blob-num js-line-number js-code-nav-line-number" data-line-number="119"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC119" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L120" class="blob-num js-line-number js-code-nav-line-number" data-line-number="120"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC120" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">cornerRadius</span> <span class="pl-k">=</span> <span class="pl-c1">5.0</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L121" class="blob-num js-line-number js-code-nav-line-number" data-line-number="121"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC121" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">borderWidth</span> <span class="pl-k">=</span> <span class="pl-c1">0.5</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L122" class="blob-num js-line-number js-code-nav-line-number" data-line-number="122"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC122" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">borderColor</span> <span class="pl-k">=</span> defaultColor.<span class="pl-smi">cgColor</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L123" class="blob-num js-line-number js-code-nav-line-number" data-line-number="123"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC123" class="blob-code blob-code-inner js-file-line"> NotificationCenter.<span class="pl-smi">default</span>.<span class="pl-c1">addObserver</span>(<span class="pl-c1">self</span>, <span class="pl-c1">selector</span>: <span class="pl-c1">#selector</span>(<span class="pl-c1">self</span>.<span class="pl-smi">textChanged</span>), <span class="pl-c1">name</span>: NSNotification.<span class="pl-smi">Name</span>.<span class="pl-smi">UITextViewTextDidChange</span>, <span class="pl-c1">object</span>: <span class="pl-c1">nil</span>)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L124" class="blob-num js-line-number js-code-nav-line-number" data-line-number="124"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC124" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L125" class="blob-num js-line-number js-code-nav-line-number" data-line-number="125"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC125" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L126" class="blob-num js-line-number js-code-nav-line-number" data-line-number="126"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC126" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">@objc</span> <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">textChanged</span>(<span class="pl-smi"><span class="pl-en">notification</span></span>: Notification<span class="pl-k">?</span>) {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L127" class="blob-num js-line-number js-code-nav-line-number" data-line-number="127"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC127" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span>.<span class="pl-c1">isEmpty</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L128" class="blob-num js-line-number js-code-nav-line-number" data-line-number="128"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC128" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">return</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L129" class="blob-num js-line-number js-code-nav-line-number" data-line-number="129"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC129" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L130" class="blob-num js-line-number js-code-nav-line-number" data-line-number="130"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC130" class="blob-code blob-code-inner js-file-line"> UIView.<span class="pl-c1">animate</span>(<span class="pl-c1">withDuration</span>: UIPlaceholderTextChangeAnimationDuraiton) {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L131" class="blob-num js-line-number js-code-nav-line-number" data-line-number="131"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC131" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">isEmpty</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L132" class="blob-num js-line-number js-code-nav-line-number" data-line-number="132"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC132" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">1.0</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L133" class="blob-num js-line-number js-code-nav-line-number" data-line-number="133"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC133" class="blob-code blob-code-inner js-file-line"> } <span class="pl-k">else</span> {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L134" class="blob-num js-line-number js-code-nav-line-number" data-line-number="134"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC134" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0.0</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L135" class="blob-num js-line-number js-code-nav-line-number" data-line-number="135"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC135" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L136" class="blob-num js-line-number js-code-nav-line-number" data-line-number="136"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC136" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">updateHeight</span>()</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L137" class="blob-num js-line-number js-code-nav-line-number" data-line-number="137"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC137" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L138" class="blob-num js-line-number js-code-nav-line-number" data-line-number="138"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC138" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L139" class="blob-num js-line-number js-code-nav-line-number" data-line-number="139"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC139" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L140" class="blob-num js-line-number js-code-nav-line-number" data-line-number="140"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC140" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">updateHeight</span>() {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L141" class="blob-num js-line-number js-code-nav-line-number" data-line-number="141"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC141" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">let</span> fixedWidth <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-c1">size</span>.<span class="pl-smi">width</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L142" class="blob-num js-line-number js-code-nav-line-number" data-line-number="142"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC142" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">let</span> newSize <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-c1">sizeThatFits</span>(<span class="pl-c1">CGSize</span>(<span class="pl-c1">width</span>: fixedWidth, <span class="pl-c1">height</span>: CGFloat.<span class="pl-c1">greatestFiniteMagnitude</span>))</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L143" class="blob-num js-line-number js-code-nav-line-number" data-line-number="143"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC143" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">var</span> newFrame <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">frame</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L144" class="blob-num js-line-number js-code-nav-line-number" data-line-number="144"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC144" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">var</span> height <span class="pl-k">=</span> newSize.<span class="pl-smi">height</span>
+</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L145" class="blob-num js-line-number js-code-nav-line-number" data-line-number="145"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC145" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">if</span> <span class="pl-c1">Double</span>(newSize.<span class="pl-smi">height</span>) <span class="pl-k">&gt;=</span> kMaxHeightForTextView {</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L146" class="blob-num js-line-number js-code-nav-line-number" data-line-number="146"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC146" class="blob-code blob-code-inner js-file-line"> height <span class="pl-k">=</span> <span class="pl-c1">CGFloat</span>(kMaxHeightForTextView)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L147" class="blob-num js-line-number js-code-nav-line-number" data-line-number="147"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC147" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L148" class="blob-num js-line-number js-code-nav-line-number" data-line-number="148"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC148" class="blob-code blob-code-inner js-file-line"> <span class="pl-k">let</span> maxWidth <span class="pl-k">=</span> <span class="pl-c1">CGFloat</span>(<span class="pl-c1">fmax</span>(<span class="pl-c1">Double</span>(newSize.<span class="pl-smi">width</span>), <span class="pl-c1">Double</span>(fixedWidth)))</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L149" class="blob-num js-line-number js-code-nav-line-number" data-line-number="149"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC149" class="blob-code blob-code-inner js-file-line"> newFrame.<span class="pl-c1">size</span> <span class="pl-k">=</span> <span class="pl-c1">CGSize</span>(<span class="pl-c1">width</span>: maxWidth, <span class="pl-c1">height</span>:height)</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L150" class="blob-num js-line-number js-code-nav-line-number" data-line-number="150"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC150" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-smi">frame</span> <span class="pl-k">=</span> newFrame</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L151" class="blob-num js-line-number js-code-nav-line-number" data-line-number="151"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC151" class="blob-code blob-code-inner js-file-line"> <span class="pl-c1">self</span>.<span class="pl-c1">scrollRangeToVisible</span>(<span class="pl-c1">NSMakeRange</span>(<span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">characters</span>.<span class="pl-c1">count</span>, <span class="pl-c1">0</span>))</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L152" class="blob-num js-line-number js-code-nav-line-number" data-line-number="152"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC152" class="blob-code blob-code-inner js-file-line"> }</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L153" class="blob-num js-line-number js-code-nav-line-number" data-line-number="153"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC153" class="blob-code blob-code-inner js-file-line">}</td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L154" class="blob-num js-line-number js-code-nav-line-number" data-line-number="154"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC154" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+<tr>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-L155" class="blob-num js-line-number js-code-nav-line-number" data-line-number="155"></td>
+<td id="file-textviewwithplaceholderandexpandingheight-swift-LC155" class="blob-code blob-code-inner js-file-line"></td>
+</tr>
+</table>
+</div></div></div></div></div>
+<div class="gist-meta"> <a href="https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d/raw/44fa038df3a26f79086fad52742ed667ff70337c/TextViewWithPlaceholderAndExpandingHeight.swift" style="float:right">view raw</a> <a href="https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d#file-textviewwithplaceholderandexpandingheight-swift"> TextViewWithPlaceholderAndExpandingHeight.swift </a> hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+</div>
+</div></div>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing">
+<h3 class="sd-title">Share this:</h3>
+<div class="sd-content"><ul>
+<li class="share-linkedin"><a rel="nofollow noopener noreferrer" data-shared="sharing-linkedin-658" class="share-linkedin sd-button share-icon no-text" href="./index.html?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span></span><span class="sharing-screen-reader-text">Click to share on LinkedIn (Opens in new window)</span></a></li>
+<li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-658" class="share-facebook sd-button share-icon no-text" href="./index.html?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li>
+<li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-658" class="share-twitter sd-button share-icon no-text" href="./index.html?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li>
+<li class="share-jetpack-whatsapp"><a rel="nofollow noopener noreferrer" data-shared="" class="share-jetpack-whatsapp sd-button share-icon no-text" href="./index.html?share=jetpack-whatsapp" target="_blank" title="Click to share on WhatsApp"><span></span><span class="sharing-screen-reader-text">Click to share on WhatsApp (Opens in new window)</span></a></li>
+<li class="share-reddit"><a rel="nofollow noopener noreferrer" data-shared="" class="share-reddit sd-button share-icon no-text" href="./index.html?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li>
+<li class="share-pinterest"><a rel="nofollow noopener noreferrer" data-shared="sharing-pinterest-658" class="share-pinterest sd-button share-icon no-text" href="./index.html?share=pinterest" target="_blank" title="Click to share on Pinterest"><span></span><span class="sharing-screen-reader-text">Click to share on Pinterest (Opens in new window)</span></a></li>
+<li class="share-end">
+</ul></div>
+</div></div>
+<div class="sharedaddy sd-block sd-like jetpack-likes-widget-wrapper jetpack-likes-widget-unloaded" id="like-post-wrapper-172312269-658-61df226fa23f3" data-src="https://widgets.wp.com/likes/#blog_id=172312269&amp;post_id=658&amp;origin=www.codewithshabib.com&amp;obj_id=172312269-658-61df226fa23f3" data-name="like-post-frame-172312269-658-61df226fa23f3" data-title="Like or Reblog">
+<h3 class="sd-title">Like this:</h3>
+<div class="likes-widget-placeholder post-likes-widget-placeholder" style="height: 55px;">
+<span class="button"><span>Like</span></span> <span class="loading">Loading...</span>
+</div>
+<span class="sd-text-color"></span><a class="sd-link-color"></a>
+</div>
+<div id="jp-relatedposts" class="jp-relatedposts"><h3 class="jp-relatedposts-headline"><em>Related</em></h3></div>
+</div>
+<div class="post-tags clr"> <span class="owp-tag-text">Tags: </span><a href="./../tag/code/index.html" rel="tag">code</a><span class="owp-sep">,</span> <a href="./../tag/coding/index.html" rel="tag">coding</a><span class="owp-sep">,</span> <a href="./../tag/development/index.html" rel="tag">development</a><span class="owp-sep">,</span> <a href="./../tag/expanding-textview/index.html" rel="tag">expanding textview</a><span class="owp-sep">,</span> <a href="./../tag/expanding-uitextview/index.html" rel="tag">expanding uitextview</a><span class="owp-sep">,</span> <a href="./../tag/ios/index.html" rel="tag">iOS</a><span class="owp-sep">,</span> <a href="./../tag/ios-programming/index.html" rel="tag">iOS programming</a><span class="owp-sep">,</span> <a href="./../tag/ipad/index.html" rel="tag">ipad</a><span class="owp-sep">,</span> <a href="./../tag/iphone/index.html" rel="tag">iphone</a><span class="owp-sep">,</span> <a href="./../tag/objective-c/index.html" rel="tag">Objective-C</a><span class="owp-sep">,</span> <a href="./../tag/programming/index.html" rel="tag">programming</a><span class="owp-sep">,</span> <a href="./../tag/rounded-textview/index.html" rel="tag">rounded textview</a><span class="owp-sep">,</span> <a href="./../tag/rounded-uitextview/index.html" rel="tag">rounded uitextview</a><span class="owp-sep">,</span> <a href="./../tag/software-development/index.html" rel="tag">Software Development</a><span class="owp-sep">,</span> <a href="./../tag/uitextfield/index.html" rel="tag">uitextfield</a><span class="owp-sep">,</span> <a href="./../tag/uitextview/index.html" rel="tag">uitextview</a>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Read more articles"><h2 class="screen-reader-text">Read more articles</h2>
+<div class="nav-links">
+<div class="nav-previous"><a href="./../strong-vs-weak-reference-in-cocoa/index.html" rel="prev"><span class="title"><i class="fas fa-long-arrow-alt-left" aria-hidden="true"></i>Previous Post</span><span class="post-title">Strong vs Weak Reference in Cocoa</span></a></div>
+<div class="nav-next"><a href="./../introduction-to-strategy-pattern/index.html" rel="next"><span class="title"><i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>Next Post</span><span class="post-title">Introduction to Strategy Pattern</span></a></div>
+</div></nav><section id="comments" class="comments-area clr has-comments"><div id="respond" class="comment-respond">
+<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="./index.html#respond" style="display:none;">Cancel reply</a></small>
+</h3>
+<form action="./wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+<div class="comment-textarea">
+<label for="comment" class="screen-reader-text">Comment</label><textarea name="comment" id="comment" cols="39" rows="4" tabindex="0" class="textarea-comment" placeholder="Your comment here..."></textarea>
+</div>
+<div class="comment-form-author">
+<label for="author" class="screen-reader-text">Enter your name or username to comment</label><input type="text" name="author" id="author" value="" placeholder="Name (required)" size="22" tabindex="0" aria-required="true" class="input-name">
+</div>
+<div class="comment-form-email">
+<label for="email" class="screen-reader-text">Enter your email address to comment</label><input type="text" name="email" id="email" value="" placeholder="Email (required)" size="22" tabindex="0" aria-required="true" class="input-email">
+</div>
+<div class="comment-form-url">
+<label for="url" class="screen-reader-text">Enter your website URL (optional)</label><input type="text" name="url" id="url" value="" placeholder="Website" size="22" tabindex="0" class="input-website">
+</div>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="comment-submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="658" id="comment_post_ID"> <input type="hidden" name="comment_parent" id="comment_parent" value="0"></p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="3ed2b2e79d"></p>
+<p style="display: none !important;"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js" name="ak_js" value="227"><script data-cfasync="false" src="./../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.getElementById( "ak_js" ).setAttribute( "value", ( new Date() ).getTime() );</script></p>
+</form>
+</div>
+<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p></section></article></div></div>
+<aside id="right-sidebar" class="sidebar-container widget-area sidebar-primary" itemscope="itemscope" itemtype="https://schema.org/WPSideBar" role="complementary" aria-label="Primary Sidebar"><div id="right-sidebar-inner" class="clr">
+<div id="search-2" class="sidebar-box widget_search clr"><form role="search" method="get" class="searchform" action="./"> <label for="ocean-search-form-2"> <span class="screen-reader-text">Search for:</span> <input type="search" id="ocean-search-form-2" class="field" autocomplete="off" placeholder="Search" name="s"> </label>
+</form></div>
+<div id="recent-posts-2" class="sidebar-box widget_recent_entries clr">
+<h4 class="widget-title">Recent Posts</h4>
+<ul>
+<li> <a href="./../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html">How to add photos in the iOS Simulator: A cooler automated approach!</a> <span class="post-date">August 4, 2020</span>
+</li>
+<li> <a href="./../mock-dependencies-in-swift-unit-test/index.html">Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</a> <span class="post-date">June 8, 2020</span>
+</li>
+<li> <a href="./../how-to-create-a-swiftui-collectionview/index.html">SwiftUI, Combine and UICollectionView using Diffable DataSource and Compositional Layout</a> <span class="post-date">June 6, 2020</span>
+</li>
+</ul>
+</div>
+<div id="recent-comments-2" class="sidebar-box widget_recent_comments clr">
+<h4 class="widget-title">Recent Comments</h4>
+<ul id="recentcomments">
+<li class="recentcomments">
+<span class="comment-author-link"><a href="http://codewithshabib.com/2019/06/12/better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/" rel="external nofollow ugc" class="url">Better Architecture in iOS: Breaking down Massive View Controller using SOLID &amp; MVP for Dummies &#8211; codewithshabib</a></span> on <a href="./../introduction-to-strategy-pattern/comment-page-1/index.html#comment-24">Introduction to Strategy Pattern</a>
+</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="http://codewithshabib.com/2013/05/22/about-delegation-part-3/" rel="external nofollow ugc" class="url">About Delegation Part &#8211; 3 &#8211; codewithshabib</a></span> on <a href="./../about-delegation-part-2/comment-page-1/index.html#comment-10">About Delegation Part &#8211; 2</a>
+</li>
+<li class="recentcomments">
+<span class="comment-author-link"><a href="http://codewithshabib.com/2013/05/14/about-delegation-part-2/" rel="external nofollow ugc" class="url">About Delegation Part &#8211; 2 &#8211; codewithshabib</a></span> on <a href="./../about-delegation-part-3/comment-page-1/index.html#comment-12">About Delegation Part &#8211; 3</a>
+</li>
+</ul>
+</div>
+</div></aside>
+</div></main><footer id="footer" class="site-footer" itemscope="itemscope" itemtype="https://schema.org/WPFooter" role="contentinfo"><div id="footer-inner" class="clr"><div id="footer-bottom" class="clr no-footer-nav"><div id="footer-bottom-inner" class="container clr"><div id="copyright" class="clr" role="contentinfo"> Copyright 2020 - Shabib Hossain</div></div></div></div></footer>
+</div>
+</div> <a id="scroll-top" class="scroll-top-right" href="#"><span class="fa fa-angle-double-up" aria-label="Scroll to the top of the page"></span></a> <script type="text/javascript"> window.WPCOM_sharing_counts = {".\/uitextview-with-similar-look-like-round-rect-uitextfield\/":658}; </script><link rel="stylesheet" id="jetpack-gist-styling-css" href="https://github.githubassets.com/assets/gist-embed-bfec3232c7f73ef53d8f02e4f5c64fb0.css?ver=10.5" type="text/css" media="all"> <script type="text/javascript" src="./../wp-content/plugins/sg-cachepress/assets/js/lazysizes.min.js?ver=6.0.5" id="siteground-optimizer-lazy-sizes-js-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/comment-reply.min.js" id="comment-reply-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/imagesloaded.min.js" id="imagesloaded-js"></script> <script type="text/javascript" src="./../wp-content/themes/oceanwp/assets/js/third/magnific-popup.min.js?ver=2.0.2" id="magnific-popup-js"></script> <script type="text/javascript" src="./../wp-content/themes/oceanwp/assets/js/third/lightbox.min.js?ver=2.0.2" id="oceanwp-lightbox-js"></script> <script type="text/javascript" id="oceanwp-main-js-extra"> /* <![CDATA[ */
+var oceanwpLocalize = {"isRTL":"","menuSearchStyle":"disabled","sidrSource":null,"sidrDisplace":"1","sidrSide":"left","sidrDropdownTarget":"icon","verticalHeaderTarget":"link","customSelects":".woocommerce-ordering .orderby, #dropdown_product_cat, .widget_categories select, .widget_archive select, .single-product .variations_form .variations select","ajax_url":".\/wp-admin\/admin-ajax.php"};
+/* ]]> */ </script> <script type="text/javascript" src="./../wp-content/themes/oceanwp/assets/js/main.min.js?ver=2.0.2" id="oceanwp-main-js"></script> <script type="text/javascript" src="./../wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-lazy-images/dist/intersection-observer.js?minify=false&#038;ver=6ae6d91d4b64fe31e32c2797e7c3dd42" id="jetpack-lazy-images-polyfill-intersectionobserver-js"></script> <script type="text/javascript" id="jetpack-lazy-images-js-extra"> /* <![CDATA[ */
+var jetpackLazyImagesL10n = {"loading_warning":"Images are still loading. Please cancel your print and try again."};
+/* ]]> */ </script> <script type="text/javascript" src="./../wp-content/plugins/jetpack/jetpack_vendor/automattic/jetpack-lazy-images/dist/lazy-images.js?minify=false&#038;ver=22d8bb42bcd6edc9c8ef53eb9b087d17" id="jetpack-lazy-images-js"></script> <script type="text/javascript" src="https://c0.wp.com/c/5.8.3/wp-includes/js/wp-embed.min.js" id="wp-embed-js"></script> <!--[if lt IE 9]> <script type='text/javascript' src='./wp-content/themes/oceanwp/assets/js/third/html5.min.js?ver=2.0.2' id='html5shiv-js'></script> <![endif]--> <script type="text/javascript" src="https://c0.wp.com/p/jetpack/10.5/_inc/build/likes/queuehandler.min.js" id="jetpack_likes_queuehandler-js"></script> <script type="text/javascript" id="sharing-js-js-extra"> /* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1","is_stats_active":"1"};
+/* ]]> */ </script> <script type="text/javascript" src="https://c0.wp.com/p/jetpack/10.5/_inc/build/sharedaddy/sharing.min.js" id="sharing-js-js"></script> <script type="text/javascript" id="sharing-js-js-after"> var windowOpen;
+ ( function () {
+ function matches( el, sel ) {
+ return !! (
+ el.matches && el.matches( sel ) ||
+ el.msMatchesSelector && el.msMatchesSelector( sel )
+ );
+ }  document.body.addEventListener( 'click', function ( event ) {
+ if ( ! event.target ) {
+ return;
+ }  var el;
+ if ( matches( event.target, 'a.share-linkedin' ) ) {
+ el = event.target;
+ } else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-linkedin' ) ) {
+ el = event.target.parentNode;
+ }  if ( el ) {
+ event.preventDefault();  // If there's another sharing window open, close it.
+ if ( typeof windowOpen !== 'undefined' ) {
+ windowOpen.close();
+ }
+ windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+ return false;
+ }
+ } );
+ } )();
+var windowOpen;
+ ( function () {
+ function matches( el, sel ) {
+ return !! (
+ el.matches && el.matches( sel ) ||
+ el.msMatchesSelector && el.msMatchesSelector( sel )
+ );
+ }  document.body.addEventListener( 'click', function ( event ) {
+ if ( ! event.target ) {
+ return;
+ }  var el;
+ if ( matches( event.target, 'a.share-facebook' ) ) {
+ el = event.target;
+ } else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-facebook' ) ) {
+ el = event.target.parentNode;
+ }  if ( el ) {
+ event.preventDefault();  // If there's another sharing window open, close it.
+ if ( typeof windowOpen !== 'undefined' ) {
+ windowOpen.close();
+ }
+ windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+ return false;
+ }
+ } );
+ } )();
+var windowOpen;
+ ( function () {
+ function matches( el, sel ) {
+ return !! (
+ el.matches && el.matches( sel ) ||
+ el.msMatchesSelector && el.msMatchesSelector( sel )
+ );
+ }  document.body.addEventListener( 'click', function ( event ) {
+ if ( ! event.target ) {
+ return;
+ }  var el;
+ if ( matches( event.target, 'a.share-twitter' ) ) {
+ el = event.target;
+ } else if ( event.target.parentNode && matches( event.target.parentNode, 'a.share-twitter' ) ) {
+ el = event.target.parentNode;
+ }  if ( el ) {
+ event.preventDefault();  // If there's another sharing window open, close it.
+ if ( typeof windowOpen !== 'undefined' ) {
+ windowOpen.close();
+ }
+ windowOpen = window.open( el.getAttribute( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+ return false;
+ }
+ } );
+ } )(); </script> <iframe src="https://widgets.wp.com/likes/master.html?ver=202202#ver=202202" scrolling="no" id="likes-master" name="likes-master" style="display:none;"></iframe><div id="likes-other-gravatars">
+<div class="likes-text">
+<span>%d</span> bloggers like this:</div>
+<ul class="wpl-avatars sd-like-gravatars"></ul>
+</div> <script src="https://stats.wp.com/e-202202.js" defer></script> <script> _stq = window._stq || [];
+ _stq.push([ 'view', {v:'ext',j:'1:10.5',blog:'172312269',post:'658',tz:'-5',srv:'www.codewithshabib.com'} ]);
+ _stq.push([ 'clickTrackerInit', '172312269', '658' ]); </script>
+</body>
+</html>

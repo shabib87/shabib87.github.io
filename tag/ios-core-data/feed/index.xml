@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>iOS core data &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:07:41 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>iOS core data &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Reset Core data database inside application</title>
+		<link>./../../../reset-core-data-database-inside-application/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=reset-core-data-database-inside-application</link>
+					<comments>./../../../reset-core-data-database-inside-application/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 07 May 2013 11:08:17 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[clear core data]]></category>
+		<category><![CDATA[core data]]></category>
+		<category><![CDATA[Core Data reset]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS core data]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[NSUserDefault reset]]></category>
+		<category><![CDATA[nsuserdefaults]]></category>
+		<category><![CDATA[reset]]></category>
+		<category><![CDATA[reset core data]]></category>
+		<category><![CDATA[reset nsuserdefaults]]></category>
+		<guid isPermaLink="false">http://codewithshabib.wordpress.com/?p=2</guid>
+
+					<description><![CDATA[<p>In iOS app development you might get into a point where you need to reset your full database; which in this case is in core data, quite commonly used in iOS application development. Now the question comes in mind, how do you achieve it? First of all I am assuming, you are not a newbie [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../reset-core-data-database-inside-application/index.html">Reset Core data database inside application</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In iOS app development you might get into a point where you need to reset your full database; which in this case is in core data, quite commonly used in iOS application development. Now the question comes in mind, how do you achieve it? First of all I am assuming, you are not a newbie with iOS and Core Data. Next thing, I am also assuming, you are well aware of core data entity and data persistency.</p>
+<p>Now, if you want to remove all your data form the core data object model first thing that pops into your mind might be, query down each and every entity and then delete the data within! Whoa, wait a second dear!!! There is a much easier way, with less hassle (almost none)!</p>
+<p>Well, as you&#8217;re familiar with core data object model you should probably know, core data has an &#8220;sqlite&#8221; file working under the hood. To reset the application, you just need to remove the file and recreate it, as simple as that! Amazing, isn&#8217;t it?</p>
+<p>Okay lets go down to the business right now. Go to the view controller file where you want all the reset thing to take place. Place an action method named resetAllData connected with some user interaction, say button press. The code might look like this:</p>
+<p><code><br />
+- (void) resetAllData: (id) sender{</code><code><br />
+AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];<br />
+[appDelegate resetCoreData];<br />
+}<br />
+</code></p>
+<p>Core data is managed in your application delegate, so it is better to implement the method resetCoreData there.</p>
+<p>Now in your AppDelegate class implement the method,<br />
+<code><br />
+- (void) resetCoreData{<br />
+NSURL *storeURL = [[self applicationDocumentsDirectory]       URLByAppendingPathComponent:@"YouApp.sqlite"];<br />
+NSFileManager *fileManager = [NSFileManager defaultManager];<br />
+[fileManager removeItemAtURL:storeURL error:NULL];</code></p>
+<p><code><code></code></code></p>
+<p>NSError* error = nil;</p>
+<p><code><code></code></code></p>
+<p>if([fileManager fileExistsAtPath:[NSString stringWithContentsOfURL:storeURL encoding:NSASCIIStringEncoding error:&amp;error]]){<br />
+[fileManager removeItemAtURL:storeURL error:nil];<br />
+}</p>
+<p><code><br />
+</code></p>
+<p><code>    self.managedObjectContext = nil;<br />
+self.persistentStoreCoordinator = nil;<br />
+}<br />
+</code></p>
+<p>In this code block we are searching for the sqlite file that your application is using under core data&#8217;s layer. Then, if the file exists we are removing it.</p>
+<p><strong>N.B.</strong> the <em><strong>managedObjectContext</strong></em> and the <em><strong>persistentStoreCoordinator</strong></em> instances are normally set <em><strong>readonly</strong></em>, you might need to change them as <em><strong>readwrite</strong></em>.</p>
+<p>We have successfully removed all data now, but we have also removed the sqlite file which is necessary for further work in our applications context, right?</p>
+<p>Ok, now we need to do something that will recreate the sqlite file. To achieve that, we have to modify our resetAllData method like below:</p>
+<p><code><br />
+- (void) resetAllData: (id) sender{<br />
+AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];<br />
+[appDelegate resetCoreData];<br />
+[appDelegate managedObjectContext];<br />
+}<br />
+</code></p>
+<p>As you can see, we&#8217;re just calling the AppDelegate&#8217;s managedObjectContext to recreate it (as simple as that, isn&#8217;t it?).</p>
+<p>Now, lets move on a little further. When we mean we want to reset all application data, it means every data, including the <em><strong>userDefaults</strong></em>, right? We do use <em><strong>NSUserDefaults</strong></em> a lot to store tiny but useful data, like if the application should run in a silent mode or not etc. Now to clear the userDefaults, just add the following code in the resetAllData method:</p>
+<p><code><br />
+- (void) resetAllData: (id) sender{<br />
+NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];<br />
+[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];</code></p>
+<p><code><br />
+</code></p>
+<p><code>    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];<br />
+[appDelegate resetCoreData];<br />
+[appDelegate managedObjectContext];<br />
+}<br />
+</code></p>
+<p>Congrats dear, reset process is in working condition now <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>That&#8217;s all for today, see you next time! Happy coding <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../reset-core-data-database-inside-application/index.html">Reset Core data database inside application</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../reset-core-data-database-inside-application/feed/index.html</wfw:commentRss>
+			<slash:comments>3</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>protocol oriented programming &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Tue, 09 Jun 2020 15:31:09 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>protocol oriented programming &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</title>
+		<link>./../../../mock-dependencies-in-swift-unit-test/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=mock-dependencies-in-swift-unit-test</link>
+					<comments>./../../../mock-dependencies-in-swift-unit-test/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Mon, 08 Jun 2020 15:00:10 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Protocol Oriented Programming]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[SOLID]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[Unit Testing]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS application development]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[mocking]]></category>
+		<category><![CDATA[pop]]></category>
+		<category><![CDATA[protocol]]></category>
+		<category><![CDATA[protocol oriented programming]]></category>
+		<category><![CDATA[unit test]]></category>
+		<guid isPermaLink="false">./../../../index.html?p=2075</guid>
+
+					<description><![CDATA[<p>We should always write unit test for our code. We all know that, right? But sometimes having external dependencies make it very hard to test a class. Sometimes even almost impossible. Today I am going to discuss on how to solve this problem using mock dependencies in swift unit test. The Problem The root of [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../mock-dependencies-in-swift-unit-test/index.html">Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>We should always write unit test for our code. We all know that, right? But sometimes having external dependencies make it very hard to test a class. Sometimes even almost impossible. Today I am going to discuss on how to solve this problem using mock dependencies in swift unit test.</p>
+
+
+
+<h4>The Problem</h4>
+
+
+
+<p>The root of the problem is actually not the dependencies. But how we manage them. To write testable code, dependencies should always be decoupled and isolated. In other words &#8220;Dependencies should be Inverted&#8221;. Rings any bell? Yes, it&#8217;s the <a rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/Dependency_inversion_principle" target="_blank">Dependency Inversion Rule</a> from the <a rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/SOLID" target="_blank">SOLID</a> principle.</p>
+
+
+
+<h4>Dependency Injection to the rescue&#8230;</h4>
+
+
+
+<p>We should inject all dependencies to decouple code. It can be <a rel="noreferrer noopener" href="https://cocoacasts.com/dependency-injection-in-swift" target="_blank">constructor injection, property injection or method injection</a>. I prefer to use constructor injection over the others whenever possible. Because it enforces the dependency requirement by making it container-agnostic.</p>
+
+
+
+<h4>A use-case scenario</h4>
+
+
+
+<p>Let&#8217;s assume we have an app that relies on user login via <code>OAUTH2</code> authentication. The authentication is handled in a struct named <code>AuthManager</code>. After a successful login/signup it saves users <code>accessToken</code> and <code>refreshToken</code>  using a <code>AuthToken</code> object. The token object is then securely stored in users keychain. The storing and retrieving mechanism of the keychain is handled in another struct called <code>KeychainManager</code>.</p>
+
+
+
+<p>Now if we didn&#8217;t know anything about dependency inversion and unit testing, we could create the instances as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-1" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AuthToken</span> </span>{
+    <span class="hljs-keyword">let</span> accessToken: <span class="hljs-type">String</span>
+    <span class="hljs-keyword">let</span> refreshToken: <span class="hljs-type">String</span>
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AuthManager</span> </span>{
+    ...
+    <span class="hljs-keyword">var</span> authToken: <span class="hljs-type">AuthToken</span> {
+        <span class="hljs-keyword">get</span> { getTokenFromKeychain() }
+        <span class="hljs-keyword">set</span> { setTokenInKeychain(token: newValue) }
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> keychainManager = <span class="hljs-type">KeychainManager</span>()
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getTokenFromKeychain</span><span class="hljs-params">()</span></span> -&gt; <span class="hljs-type">AuthToken</span> {
+        <span class="hljs-keyword">let</span> accessToken = keychainManager.<span class="hljs-keyword">get</span>(valueByKey: .accessToken)                            
+        <span class="hljs-keyword">let</span> refreshToken = keychainManager.<span class="hljs-keyword">get</span>(valueByKey: .refreshToken)
+        <span class="hljs-keyword">return</span> <span class="hljs-type">AuthToken</span>(accessToken: accessToken, refreshToken: refreshToken)
+    }
+    
+    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setTokenInKeychain</span><span class="hljs-params">(token: AuthToken)</span></span> {
+        keychainManager.<span class="hljs-keyword">set</span>(asValue: token.accessToken, byKey: .accessToken)
+        keychainManager.<span class="hljs-keyword">set</span>(asValue: token.refreshToken, byKey: .refreshToken)
+    }
+    ...
+}
+
+<span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Key</span>: <span class="hljs-title">String</span> </span>{
+    <span class="hljs-keyword">case</span> accessToken, refreshToken
+}
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">KeychainManager</span> </span>{
+    <span class="hljs-comment">// the actual keychain as an example object instance</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">let</span> keychain: <span class="hljs-type">Keychain</span>
+    
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">get</span><span class="hljs-params">(valueByKey key: Key)</span></span> -&gt; <span class="hljs-type">String</span> {
+        keychain.getString(key.rawValue)
+    }
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">set</span><span class="hljs-params">(asValue value: String, byKey key: Key)</span></span> {
+        keychain.<span class="hljs-keyword">set</span>(value, key: key.rawValue)
+    }
+}</code></div><small class="shcb-language" id="shcb-language-1"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>On surface this code looks pretty good. However there are two problems:</p>
+
+
+
+<ul><li>The <code>KeychainManager</code> instance is a private variable initialized by the <code>AuthManager</code> struct itself. This results a tightly coupled property. </li></ul>
+
+
+
+<p>Which leads us to our second problem:</p>
+
+
+
+<ul><li>We cannot test the <code>AuthManager</code> get/set token behaviour without reading or writing in the actual keychain. And if we write tests using the current implementation, it&#8217;ll read/write in keychain every time unit tests are run. This is definitely something we don&#8217;t want to do.</li></ul>
+
+
+
+<p>Meanwhile, if we omit writing unit tests, it is possible to make the mistake inside <code>setTokenInKeychain</code> method as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-2" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setTokenInKeychain</span><span class="hljs-params">(token: AuthToken)</span></span> {
+    keychainManager.<span class="hljs-keyword">set</span>(asValue: token.accessToken, byKey: .refreshToken)
+    keychainManager.<span class="hljs-keyword">set</span>(asValue: token.refreshToken, byKey: .accessToken)
+}</code></div><small class="shcb-language" id="shcb-language-2"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>And it will get pretty hard to catch this sneaky bug.</p>
+
+
+
+<h4>The solution: Protocol Oriented Programming</h4>
+
+
+
+<p>The general idea is to rely on swift <code>protocol</code>s to decouple dependency and make a class/struct testable in isolation.</p>
+
+
+
+<p>For instance, in our example use-case the dependency graph is:<br><code>AuthManager</code> depends on <code>KeychainManager</code>. Some other instance (e.g. <code>UserService</code>) could depend on <code>AuthManager</code>. So how do we decouple the dependencies? In addition, how do we test these instances in isolation?</p>
+
+
+
+<p>To solve this, we need to-</p>
+
+
+
+<ul><li>Separate the dependency as protocol and</li><li>Push the protocol as constructor injection</li></ul>
+
+
+
+<p>Therefore each instance can have their own set of swift unit test, that can run in isolation.</p>
+
+
+
+<p>If we take the relation between <code>keychainManager</code> and <code>AuthManager</code>, and separate the keychain dependency behaviour as protocol:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-3" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">KeychainManageable</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">get</span><span class="hljs-params">(valueByKey key: Key)</span></span> -&gt; <span class="hljs-type">String?</span>
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">set</span><span class="hljs-params">(asValue value: String, byKey key: Key)</span></span>
+}</code></div><small class="shcb-language" id="shcb-language-3"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The <code>AuthManager</code> can use it via constructor injection as:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-4" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">init</span>(keychainManager: <span class="hljs-type">KeychainManageable</span>) {
+    <span class="hljs-keyword">self</span>.keychainManager = keychainManager
+}</code></div><small class="shcb-language" id="shcb-language-4"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>In our real application we can initialize it with the real <code>KeychainManager</code>. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-5" data-shcb-language-name="JavaScript" data-shcb-language-slug="javascript"><div><code class="hljs language-javascript"><span class="hljs-keyword">let</span> manager = AuthManager(keychainManager: KeychainManager())</code></div><small class="shcb-language" id="shcb-language-5"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">JavaScript</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">javascript</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>In addition, we can now write unit tests for it by passing a mock <code>KeychainManager</code> dependency.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-6" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-keyword">let</span> sut = <span class="hljs-type">AuthManager</span>(keychainManager: <span class="hljs-type">MockKeychainManager</span>())</code></div><small class="shcb-language" id="shcb-language-6"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The <code>MockKeychainManager</code> has to implement the <code>KeychainManageable</code> protocol to mimic the behaviour of  users <code>keychain</code>.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-7" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MockKeychainManager</span>: <span class="hljs-title">KeychainManageable</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">var</span> storage = [<span class="hljs-type">Key</span>: <span class="hljs-type">String</span>]()
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">get</span><span class="hljs-params">(valueByKey key: Key)</span></span> -&gt; <span class="hljs-type">String</span> {
+        storage[key]
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">set</span><span class="hljs-params">(asValue value: String, byKey key: Key)</span></span> {
+        storage[key] = value
+    }
+}</code></div><small class="shcb-language" id="shcb-language-7"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>As a result, we can now make sure our test cases cover the behaviour of the <code>AuthManager</code> instance without enforcing/exposing the real dependency. </p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-8" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthManagerTests</span>: <span class="hljs-title">XCTestCase</span> </span>{
+    <span class="hljs-keyword">var</span> sut: <span class="hljs-type">AuthManager!</span>
+    <span class="hljs-keyword">var</span> token: <span class="hljs-type">AuthToken!</span>
+   
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span></span> {
+        token = <span class="hljs-type">AuthToken</span>(accessToken: <span class="hljs-string">"AccessToken"</span>,
+                          refreshToken: <span class="hljs-string">"RefreshToken"</span>)
+        sut = <span class="hljs-type">AuthManager</span>(keychainManager: <span class="hljs-type">MockKecychainManager</span>())
+        sut.authToken = token
+    }
+
+    <span class="hljs-keyword">override</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">tearDown</span><span class="hljs-params">()</span></span> {
+        sut = <span class="hljs-literal">nil</span>
+        token = <span class="hljs-literal">nil</span>
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testAuthManagerDidSetCorrectAccessToken</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-type">XCTAssertEqual</span>(sut.authToken.accessToken, token.accessToken)
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testAuthManagerDidSetCorrectRefreshToken</span><span class="hljs-params">()</span></span> {
+        <span class="hljs-type">XCTAssertEqual</span>(sut.authToken.refreshToken, token.refreshToken)
+    }
+}</code></div><small class="shcb-language" id="shcb-language-8"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>We can now easily avoid making the mistake of setting wrong token value to keychain. If we do that, our unit tests <code>testAuthManagerDidSetCorrectAccessToken</code> and <code>testAuthManagerDidSetCorrectRefreshToken</code> will fail.</p>
+
+
+
+<p>Similarly, we can also mock the <code>AuthManager</code> by  defining a <code>AuthManageable</code> protocol.</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-9" data-shcb-language-name="Swift" data-shcb-language-slug="swift"><div><code class="hljs language-swift"><span class="hljs-class"><span class="hljs-keyword">protocol</span> <span class="hljs-title">AuthManageable</span> </span>{
+    <span class="hljs-keyword">init</span>(keychainManager: <span class="hljs-type">KeychainManageable</span>)
+    <span class="hljs-keyword">var</span> authToken: <span class="hljs-type">AuthToken</span> { <span class="hljs-keyword">get</span> <span class="hljs-keyword">set</span> }
+}</code></div><small class="shcb-language" id="shcb-language-9"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">Swift</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">swift</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>This way we&#8217;d be able to construct the <code>UserService</code> by passing <code>AuthManageable</code> as dependency. As a result, we&#8217;d be able to unit it test by passing a <code>MockAuthManager</code> instance.</p>
+
+
+
+<h4>Final words</h4>
+
+
+
+<p>In conclusion, to write testable and decoupled code, we have to always remember:</p>
+
+
+
+<blockquote class="wp-block-quote"><p>Dependencies should be passed down instead of initiated. </p></blockquote>
+
+
+
+<p>Above all, for long running projects, we can run into situations where we&#8217;ve to replace a dependency entirely. In scenarios like that; decoupling instances not only helps us with writing unit tests, but also helps us to get away with minimal changes. </p>
+
+
+
+<p>I hope this blog will help someone to understand the concepts of <code>Mocking</code> and <code>Dependency Injection</code> a little better. As well as understanding the importance of writing unit tests for you application.</p>
+
+
+
+<p>Happy coding!</p>
+<p>The post <a rel="nofollow" href="./../../../mock-dependencies-in-swift-unit-test/index.html">Mocking Dependencies in Swift Unit Tests: Write Testable Code following POP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../mock-dependencies-in-swift-unit-test/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2075</post-id>	</item>
+	</channel>
+</rss>

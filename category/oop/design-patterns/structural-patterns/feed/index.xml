@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Structural Patterns &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:14:59 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>Structural Patterns &#8211; codewithshabib</title>
+	<link>./../../../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Delegation in iOS and Cocoa: Decorator Pattern</title>
+		<link>./../../../../../delegation-in-ios-and-cocoa/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=delegation-in-ios-and-cocoa</link>
+					<comments>./../../../../../delegation-in-ios-and-cocoa/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Wed, 02 Nov 2016 17:56:08 +0000</pubDate>
+				<category><![CDATA[Cocoatouch]]></category>
+		<category><![CDATA[Design Patterns]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Object Oriented Design]]></category>
+		<category><![CDATA[OOP]]></category>
+		<category><![CDATA[Structural Patterns]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[decorator pattern]]></category>
+		<category><![CDATA[delegates]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[iOS delegate]]></category>
+		<category><![CDATA[iOS protocol]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[structural pattern]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=455</guid>
+
+					<description><![CDATA[<p>Using delegates in iOS and Cocoa is a very basic and fundamental part and we use them quite frequently in our codes. As like in business, cocoa uses delegates as a formal way to pass data(job) from one object(client) to another(vendor). In business, you want to do make something but you need raw materials to [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../../../delegation-in-ios-and-cocoa/index.html">Delegation in iOS and Cocoa: Decorator Pattern</a> appeared first on <a rel="nofollow" href="./../../../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Using delegates in iOS and Cocoa is a very basic and fundamental part and we use them quite frequently in our codes. As like in business, cocoa uses delegates as a formal way to pass data(job) from one object(client) to another(vendor). In business, you want to do make something but you need raw materials to do so. So you ask the supplier to give you raw materials and you sign a contract for that. Same thing goes in cocoa, a class that wants to perform a task that depends on the response of another class acts as the delegate to the later. The first class wants to be the vendor of the later one by signing a contract called protocols (as defined in cocoa).</p>
+<p>As like in business, to be a delegate you need to:</p>
+<ol>
+<li>Know your need and what you have/want to do</li>
+<li>State you can do that</li>
+<li>Have the means to fulfill the contract</li>
+<li>Let the boss know you are ready!</li>
+<li>Do the actual work and let the boss know!</li>
+</ol>
+<p>For example, let&#8217;s assume we have an app that has a view controller with button that takes you to another view controller containing a textfield. When you are done entering text in that textfield, the view controller is dismissed and the first view controller shows the text you entered. Follow the images below:</p>
+
+<a href='./../../../../../delegation-in-ios-and-cocoa/simulator-screen-shot-nov-2-2016-10-58-07-pm/index.html'><img width="150" height="150" src="./../../../../../wp-content/uploads/2016/11/simulator-screen-shot-nov-2-2016-10-58-07-pm-150x150.png" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+<a href='./../../../../../delegation-in-ios-and-cocoa/simulator-screen-shot-nov-2-2016-10-58-19-pm/index.html'><img width="150" height="150" src="./../../../../../wp-content/uploads/2016/11/simulator-screen-shot-nov-2-2016-10-58-19-pm-150x150.png" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+<a href='./../../../../../delegation-in-ios-and-cocoa/simulator-screen-shot-nov-2-2016-11-00-05-pm/index.html'><img width="150" height="150" src="./../../../../../wp-content/uploads/2016/11/simulator-screen-shot-nov-2-2016-11-00-05-pm-150x150.png" class="attachment-thumbnail size-thumbnail" alt="" /></a>
+
+<p>Now, in context of our example, who should be who? The first view controller (RootVC) needs to display the text received from the second view controller (ModalVC). That means it wants to delegate the work from the later; which obviously makes the first view controller (RootVC) as delegate and the second view controller (ModalVC) as the supplier. Now to do business we need to define some rules, that is in context of cocoa we call protocols. So, we will write a protocol that will guarantee the passing of the text from the ModalVC to RootVC. Let&#8217;s write a protocol like the following:</p>
+<pre>protocol ModalVCDelegate {
+
+    func modalVCDidSendMessage(message: String)
+}</pre>
+<p>Now to make RootVC a proper delegate:</p>
+<ol>
+<li style="list-style-type: none;">
+<ol>
+<li>You know you need to implement the protocol ModalVCDelegate</li>
+<li>Declare the protocol extension in RootVC to state you can do it
+<pre>extension RootVC: ModalVCDelegate {}</pre>
+</li>
+<li>Actually implement the protocol
+<pre>extension RootVC: ModalVCDelegate {
+    func modalVCDidSendMessage(message: String) {
+        displayLabel.text = message
+    }
+}</pre>
+</li>
+<li>Let the ModalVC know RootVC is its delegate
+<pre>override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ModalSeague" {
+            let modalVC: ModalVC = segue.destination as! ModalVC
+            modalVC.delegate = self
+        }
+    }</pre>
+</li>
+<li>Finally, do the actual work and let RootVC know about it:</li>
+</ol>
+</li>
+</ol>
+<pre>@IBAction func sendAction(_ sender: Any) {
+        if (delegate != nil) &amp;&amp; textField.text != "" {
+            delegate?.modalVCDidSendMessage(message: textField.text!)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+</pre>
+<p>This approach is also known as <em><strong>Decorator Pattern </strong></em>in terms of OOP:</p>
+<blockquote><p>The Decorator pattern dynamically adds behaviors and responsibilities to an object without modifying its code. It’s an alternative to subclassing where you modify a class’ behavior by wrapping it with another object.</p></blockquote>
+<p>In iOS there are two <i>very</i> common implementations of this pattern: <strong><em>Category (</em></strong><em>Objective-c only, Extensions in Swift though they&#8217;re a little different from their Objective-c cousing</em><strong><em>)</em></strong> and <strong><em>Delegation</em></strong>. I&#8217;ve already talked about <em>Delegation, </em>may be in a later blogpost I&#8217;ll cover <em>Category</em> and <em>Extensions</em>.</p>
+<p>That&#8217;s it! You can get the <a href="https://github.com/shabib87/DelegationInCocoa" target="_blank" rel="noopener noreferrer">sample project from here</a>. I hope this clears up the concept of delegation a little more!</p>
+<p>The post <a rel="nofollow" href="./../../../../../delegation-in-ios-and-cocoa/index.html">Delegation in iOS and Cocoa: Decorator Pattern</a> appeared first on <a rel="nofollow" href="./../../../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../../../delegation-in-ios-and-cocoa/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">455</post-id>	</item>
+	</channel>
+</rss>

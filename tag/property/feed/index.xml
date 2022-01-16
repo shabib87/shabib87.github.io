@@ -1,0 +1,1329 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>property &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:21:49 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>property &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Memory management in Swift: Strong Reference &#038; Retain Cycle</title>
+		<link>./../../../memory-management-in-swift-strong-reference-retain-cycle/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=memory-management-in-swift-strong-reference-retain-cycle</link>
+					<comments>./../../../memory-management-in-swift-strong-reference-retain-cycle/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Mon, 13 Mar 2017 10:36:13 +0000</pubDate>
+				<category><![CDATA[Cocoatouch]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[arc]]></category>
+		<category><![CDATA[capture list]]></category>
+		<category><![CDATA[closure]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[coding]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[ipad]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[programming]]></category>
+		<category><![CDATA[property]]></category>
+		<category><![CDATA[reference]]></category>
+		<category><![CDATA[retain cycle]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[strong]]></category>
+		<category><![CDATA[strong reference cycle]]></category>
+		<category><![CDATA[weak]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=1070</guid>
+
+					<description><![CDATA[<p>Swift uses ARC (Automatic Reference Counting) similar to Objective-C to track and manage application memory. In most cases, we don&#8217;t need to bother about memory management by ourselves, the swift compiler will take care of it. But there are some cases where we need to deal with it  by ourselves. I am going to discuss some of the [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../memory-management-in-swift-strong-reference-retain-cycle/index.html">Memory management in Swift: Strong Reference &#038; Retain Cycle</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Swift uses <a href="https://developer.apple.com/library/content/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html" target="_blank" rel="noopener noreferrer">ARC (Automatic Reference Counting)</a> similar to Objective-C to track and manage application memory. In most cases, we don&#8217;t need to bother about memory management by ourselves, the swift compiler will take care of it. But there are some cases where we need to deal with it  by ourselves. I am going to discuss some of the common cases from those.</p>
+<p>Let&#8217;s imagine we have two classes Person and Apartment:</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45586395" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle1-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle1.swift">
+        <tr>
+          <td id="file-retaincycle1-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle1-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Person</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle1-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> name: <span class="pl-c1">String</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle1-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">name</span></span>: <span class="pl-c1">String</span>) { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle1-swift-LC4" class="blob-code blob-code-inner js-file-line">      <span class="pl-c1">self</span>.<span class="pl-smi">name</span> <span class="pl-k">=</span> name </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle1-swift-LC5" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle1-swift-LC6" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle1-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle1-swift-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pse">\(</span><span class="pl-s1">name</span><span class="pl-pse"><span class="pl-s1">)</span></span> is being deinitialized<span class="pl-pds">&quot;</span></span>) </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle1-swift-LC9" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle1-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-retaincycle1-swift-LC11" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-retaincycle1-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Apartment</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-retaincycle1-swift-LC13" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> number: <span class="pl-c1">Int</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-retaincycle1-swift-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">number</span></span>: <span class="pl-c1">Int</span>) { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-retaincycle1-swift-LC15" class="blob-code blob-code-inner js-file-line">      <span class="pl-c1">self</span>.<span class="pl-smi">number</span> <span class="pl-k">=</span> number </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-retaincycle1-swift-LC16" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-retaincycle1-swift-LC17" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-retaincycle1-swift-LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-retaincycle1-swift-LC19" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Apartment <span class="pl-pse">\(</span><span class="pl-s1">number</span><span class="pl-pse"><span class="pl-s1">)</span></span> is being deinitialized<span class="pl-pds">&quot;</span></span>) </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-retaincycle1-swift-LC20" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-retaincycle1-swift-LC21" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-retaincycle1-swift-LC22" class="blob-code blob-code-inner js-file-line"> </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-retaincycle1-swift-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> person: Person<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Person</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>John Doe<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-retaincycle1-swift-LC24" class="blob-code blob-code-inner js-file-line">person <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-retaincycle1-swift-LC25" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-retaincycle1-swift-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> apartment: Apartment<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Apartment</span>(<span class="pl-c1">number</span>: <span class="pl-c1">123</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-retaincycle1-swift-LC27" class="blob-code blob-code-inner js-file-line">apartment <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-retaincycle1-swift-LC28" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-retaincycle1-swift-LC29" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> output:</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+          <td id="file-retaincycle1-swift-LC30" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> John Doe is being deinitialized</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+          <td id="file-retaincycle1-swift-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> Apartment 123 is being deinitialized</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle1-swift-L32" class="blob-num js-line-number js-code-nav-line-number" data-line-number="32"></td>
+          <td id="file-retaincycle1-swift-LC32" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span></td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/851506d65f9ff92b9d711bd972672185/raw/7518a4da4aa059828a26cc40cf9cb40b7b00cacc/RetainCycle1.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/851506d65f9ff92b9d711bd972672185#file-retaincycle1-swift">
+          RetainCycle1.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>The deinit method is called when a class is deallocated and set to nil. Now so far so good, we have our code clean and leak free as both deinit methods are being called.</p>
+<p>ARC tracks the number of references to a object created and deallocates the instance when no longer needed. But it is possible to achieve a situation where an instance of a class never reaches to a point where it has no <a href="http://codewithshabib.com/2016/11/12/strong-vs-weak-reference-in-cocoa/" target="_blank" rel="noopener noreferrer">strong references</a>.</p>
+<p>Consider the following change:</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45652412" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle2-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle2.swift">
+        <tr>
+          <td id="file-retaincycle2-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle2-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Person</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle2-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> name: <span class="pl-c1">String</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle2-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">name</span></span>: <span class="pl-c1">String</span>) { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle2-swift-LC4" class="blob-code blob-code-inner js-file-line">      <span class="pl-c1">self</span>.<span class="pl-smi">name</span> <span class="pl-k">=</span> name </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle2-swift-LC5" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle2-swift-LC6" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle2-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle2-swift-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pse">\(</span><span class="pl-s1">name</span><span class="pl-pse"><span class="pl-s1">)</span></span> is being deinitialized<span class="pl-pds">&quot;</span></span>) </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle2-swift-LC9" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle2-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-retaincycle2-swift-LC11" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-retaincycle2-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Apartment</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-retaincycle2-swift-LC13" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> number: <span class="pl-c1">Int</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-retaincycle2-swift-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">var</span> person: Person<span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-retaincycle2-swift-LC15" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">number</span></span>: <span class="pl-c1">Int</span>) { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-retaincycle2-swift-LC16" class="blob-code blob-code-inner js-file-line">      <span class="pl-c1">self</span>.<span class="pl-smi">number</span> <span class="pl-k">=</span> number </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-retaincycle2-swift-LC17" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-retaincycle2-swift-LC18" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-retaincycle2-swift-LC19" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-retaincycle2-swift-LC20" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Apartment <span class="pl-pse">\(</span><span class="pl-s1">number</span><span class="pl-pse"><span class="pl-s1">)</span></span> is being deinitialized<span class="pl-pds">&quot;</span></span>) </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-retaincycle2-swift-LC21" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-retaincycle2-swift-LC22" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-retaincycle2-swift-LC23" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-retaincycle2-swift-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> person: Person<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Person</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>John Doe<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-retaincycle2-swift-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> apartment: Apartment<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Apartment</span>(<span class="pl-c1">number</span>: <span class="pl-c1">123</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-retaincycle2-swift-LC26" class="blob-code blob-code-inner js-file-line">apartment.<span class="pl-smi">person</span> <span class="pl-k">=</span> person</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-retaincycle2-swift-LC27" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-retaincycle2-swift-LC28" class="blob-code blob-code-inner js-file-line">person <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-retaincycle2-swift-LC29" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+          <td id="file-retaincycle2-swift-LC30" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> output:</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle2-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+          <td id="file-retaincycle2-swift-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span></span></td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/e920c4f053a659f4c57cbaf2f9bca751/raw/98f0da06bcd830d39f3f2d875d61add525e22609/RetainCycle2.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/e920c4f053a659f4c57cbaf2f9bca751#file-retaincycle2-swift">
+          RetainCycle2.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>We can see the deinit is not getting called anymore, i.e. the person instance is not getting rid of the memory completely. Somewhere someone is holding a strong reference to it. This is happening because we are holding a strong reference of the Person class instance in the Apartment class instance. Now if we change the reference from strong to weak:</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45652526" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle3-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle3.swift">
+        <tr>
+          <td id="file-retaincycle3-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle3-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Person</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle3-swift-LC2" class="blob-code blob-code-inner js-file-line">  <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle3-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle3-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle3-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Apartment</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle3-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle3-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">weak</span> <span class="pl-k">var</span> person: Person<span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle3-swift-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle3-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle3-swift-LC10" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-retaincycle3-swift-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> person: Person<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Person</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>John Doe<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-retaincycle3-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> apartment: Apartment<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Apartment</span>(<span class="pl-c1">number</span>: <span class="pl-c1">123</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-retaincycle3-swift-LC13" class="blob-code blob-code-inner js-file-line">apartment.<span class="pl-smi">person</span> <span class="pl-k">=</span> person</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-retaincycle3-swift-LC14" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-retaincycle3-swift-LC15" class="blob-code blob-code-inner js-file-line">person <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-retaincycle3-swift-LC16" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-retaincycle3-swift-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> output:</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-retaincycle3-swift-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> John Doe is being deinitialized</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-retaincycle3-swift-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle3-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-retaincycle3-swift-LC20" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/a42a1c09c99ea891b240e37ebfeef5f4/raw/9fb9f343002c4e15019d031e9bb76a8597d5867c/RetainCycle3.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/a42a1c09c99ea891b240e37ebfeef5f4#file-retaincycle3-swift">
+          RetainCycle3.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>We magically start to get our output again! Now again, if we modify our classes like this:</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45586801" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle4-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle4.swift">
+        <tr>
+          <td id="file-retaincycle4-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle4-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Person</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle4-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> name: <span class="pl-c1">String</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle4-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">var</span> apartment: Apartment<span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle4-swift-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">name</span></span>: <span class="pl-c1">String</span>) { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle4-swift-LC5" class="blob-code blob-code-inner js-file-line">      <span class="pl-c1">self</span>.<span class="pl-smi">name</span> <span class="pl-k">=</span> name </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle4-swift-LC6" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle4-swift-LC7" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle4-swift-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle4-swift-LC9" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pse">\(</span><span class="pl-s1">name</span><span class="pl-pse"><span class="pl-s1">)</span></span> is being deinitialized<span class="pl-pds">&quot;</span></span>) </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle4-swift-LC10" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-retaincycle4-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-retaincycle4-swift-LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-retaincycle4-swift-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Apartment</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-retaincycle4-swift-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> number: <span class="pl-c1">Int</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-retaincycle4-swift-LC15" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">var</span> person: Person<span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-retaincycle4-swift-LC16" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">number</span></span>: <span class="pl-c1">Int</span>) { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-retaincycle4-swift-LC17" class="blob-code blob-code-inner js-file-line">      <span class="pl-c1">self</span>.<span class="pl-smi">number</span> <span class="pl-k">=</span> number </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-retaincycle4-swift-LC18" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-retaincycle4-swift-LC19" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-retaincycle4-swift-LC20" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> { </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-retaincycle4-swift-LC21" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Apartment <span class="pl-pse">\(</span><span class="pl-s1">number</span><span class="pl-pse"><span class="pl-s1">)</span></span> is being deinitialized<span class="pl-pds">&quot;</span></span>) </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-retaincycle4-swift-LC22" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-retaincycle4-swift-LC23" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle4-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-retaincycle4-swift-LC24" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/91bbb82fabcbcb4e805103665ae3adad/raw/2351e1041b55c22db773af8df03659adcfb065ab/RetainCycle4.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/91bbb82fabcbcb4e805103665ae3adad#file-retaincycle4-swift">
+          RetainCycle4.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>We have both classes referring to each other as strong reference. If two class instances hold a strong reference to each other, such that each instance keeps the other one alive, these instances never reaches a <em>zero(0)</em> reference situation. This is known as a <em>strong reference cycle/ retain cycle</em>.</p>
+<p>If we run the following code block, it never reaches the deinit method again.</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45586966" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle5-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle5.swift">
+        <tr>
+          <td id="file-retaincycle5-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle5-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> person: Person<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Person</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>John Doe<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle5-swift-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> apartment: Apartment<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Apartment</span>(<span class="pl-c1">number</span>: <span class="pl-c1">123</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle5-swift-LC3" class="blob-code blob-code-inner js-file-line">person<span class="pl-k">?</span>.<span class="pl-smi">apartment</span> <span class="pl-k">=</span> apartment</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle5-swift-LC4" class="blob-code blob-code-inner js-file-line">apartment<span class="pl-k">?</span>.<span class="pl-smi">person</span> <span class="pl-k">=</span> person</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle5-swift-LC5" class="blob-code blob-code-inner js-file-line">person <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle5-swift-LC6" class="blob-code blob-code-inner js-file-line">apartment <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle5-swift-LC7" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle5-swift-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> output:</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle5-swift-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle5-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle5-swift-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span></td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/ff237e074408961ab034d37ac50d153b/raw/47a79b71bb844c4e7f94413ee5b9232d6342c5ab/RetainCycle5.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/ff237e074408961ab034d37ac50d153b#file-retaincycle5-swift">
+          RetainCycle5.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>The retain cycle causes both object instances to live in memory and no way to free them and ultimately causing a memory leak.</p>
+<p>We resolve strong reference cycles by defining some of the relationships between classes as weak or unowned reference instead of as strong reference.</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45587146" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle6-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle6.swift">
+        <tr>
+          <td id="file-retaincycle6-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle6-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Person</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle6-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle6-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle6-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle6-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Apartment</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle6-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle6-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">weak</span> <span class="pl-k">var</span> person: Person<span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle6-swift-LC8" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle6-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle6-swift-LC10" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-retaincycle6-swift-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> person: Person<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Person</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>John Doe<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-retaincycle6-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> apartment: Apartment<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">Apartment</span>(<span class="pl-c1">number</span>: <span class="pl-c1">123</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-retaincycle6-swift-LC13" class="blob-code blob-code-inner js-file-line">person<span class="pl-k">?</span>.<span class="pl-smi">apartment</span> <span class="pl-k">=</span> apartment</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-retaincycle6-swift-LC14" class="blob-code blob-code-inner js-file-line">apartment<span class="pl-k">?</span>.<span class="pl-smi">person</span> <span class="pl-k">=</span> person</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-retaincycle6-swift-LC15" class="blob-code blob-code-inner js-file-line">person <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-retaincycle6-swift-LC16" class="blob-code blob-code-inner js-file-line">apartment <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-retaincycle6-swift-LC17" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-retaincycle6-swift-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> output:</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-retaincycle6-swift-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> John Doe is being deinitialized</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-retaincycle6-swift-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> Apartment 123 is being deinitialized</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle6-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-retaincycle6-swift-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span></td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/30f20430345da916f6116578ab7a9a6b/raw/851211130f1c93bfc48cae06a6af38a33c6a220d/RetainCycle6.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/30f20430345da916f6116578ab7a9a6b#file-retaincycle6-swift">
+          RetainCycle6.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>By defining the person variable in Apartment class as weak, we&#8217;re stopping the increment on person vars reference count and thus breaking the retain cycle. (I&#8217;ll discuss more on weak and unowned in a future blogpost.)</p>
+<p>A strong reference cycle can also occur if a closure variable calls its class instance inside the closure body. Consider the following example:</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45587348" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle7-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle7.swift">
+        <tr>
+          <td id="file-retaincycle7-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle7-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">HTMLElement</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle7-swift-LC2" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle7-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> name: <span class="pl-c1">String</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle7-swift-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">let</span> text: <span class="pl-c1">String</span><span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle7-swift-LC5" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle7-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">lazy</span> <span class="pl-k">var</span> asHTML: () <span class="pl-k">-&gt;</span> <span class="pl-c1">String</span> <span class="pl-k">=</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle7-swift-LC7" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">&quot;</span>&lt;<span class="pl-pse">\(</span><span class="pl-s1"><span class="pl-c1">self</span>.<span class="pl-smi">name</span></span><span class="pl-pse"><span class="pl-s1">)</span></span>&gt;<span class="pl-pse">\(</span><span class="pl-s1"><span class="pl-c1">self</span>.<span class="pl-c1">text</span></span><span class="pl-pse"><span class="pl-s1">)</span></span>&lt;/<span class="pl-pse">\(</span><span class="pl-s1"><span class="pl-c1">self</span>.<span class="pl-smi">name</span></span><span class="pl-pse"><span class="pl-s1">)</span></span>&gt;<span class="pl-pds">&quot;</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle7-swift-LC8" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle7-swift-LC9" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle7-swift-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">name</span></span>: <span class="pl-c1">String</span>, <span class="pl-smi"><span class="pl-en">text</span></span>: <span class="pl-c1">String</span><span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">nil</span>) {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-retaincycle7-swift-LC11" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">name</span> <span class="pl-k">=</span> name</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-retaincycle7-swift-LC12" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">text</span> <span class="pl-k">=</span> text</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-retaincycle7-swift-LC13" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-retaincycle7-swift-LC14" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-retaincycle7-swift-LC15" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-retaincycle7-swift-LC16" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>HTMLElement <span class="pl-pse">\(</span><span class="pl-s1">name</span><span class="pl-pse"><span class="pl-s1">)</span></span> is being deinitialized<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-retaincycle7-swift-LC17" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-retaincycle7-swift-LC18" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-retaincycle7-swift-LC19" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-retaincycle7-swift-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> paragraph: HTMLElement<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">HTMLElement</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>p<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">text</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>hello, world<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-retaincycle7-swift-LC21" class="blob-code blob-code-inner js-file-line">paragraph<span class="pl-k">?</span>.<span class="pl-c1">asHTML</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-retaincycle7-swift-LC22" class="blob-code blob-code-inner js-file-line">paragraph <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-retaincycle7-swift-LC23" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-retaincycle7-swift-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> Output:</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-retaincycle7-swift-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> </span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle7-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-retaincycle7-swift-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span></td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/1461c799b769ec9630360883a1dacae7/raw/52a0f2ae7faf634163f6e271d7038f1ec542cf49/RetainCycle7.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/1461c799b769ec9630360883a1dacae7#file-retaincycle7-swift">
+          RetainCycle7.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>The <code class="code-voice">asHTML</code> property is declared as a lazy property, because it is only needed when if and only if the element actually needs to be rendered as a string value for some HTML output target; thus lazily initialized. The fact <code class="code-voice">asHTML</code> is a lazy property means we can refer to <code class="code-voice">self</code> within the default closure, because the lazy property will not be accessed until the initialization has been completed and <code class="code-voice">self</code> is known to exist.</p>
+<p>If we run the code, we&#8217;ll see the deinit method is not being called, again! The instance’s <code class="code-voice">asHTML</code> property holds a strong reference to its closure. However, because the closure refers to <code class="code-voice">self</code> within its body (as a way to reference <code class="code-voice">self.name</code> and <code class="code-voice">self.text</code>), the closure <em>captures</em> self, which means, it holds a strong reference back to the <code class="code-voice">HTMLElement</code> instance and thus a strong reference cycle is created between the two.</p>
+<p>We can resolve this strong reference cycle between the closure and the class instance by defining a <em>capture list</em> as part of the closure’s definition.</p>
+<blockquote><p>A capture list defines the rules to use when capturing one or more reference types within the closure’s body.</p></blockquote>
+<p>As with strong reference cycles between two class instances, we declare each captured reference to be a weak or unowned reference rather than a strong reference. The appropriate choice of weak or unowned depends on the relationships between the different parts of the code.</p>
+<p>This implementation of <code class="code-voice">HTMLElement</code> is identical to the previous implementation, apart from the addition of a capture list within the <code class="code-voice">asHTML</code> closure. In this case, the capture list is <code class="code-voice">[weak self]</code>, which means “capture self as an weak reference rather than a strong reference”.</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist45588038" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-retaincycle8-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RetainCycle8.swift">
+        <tr>
+          <td id="file-retaincycle8-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-retaincycle8-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">HTMLElement</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-retaincycle8-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-retaincycle8-swift-LC3" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-retaincycle8-swift-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">lazy</span> <span class="pl-k">var</span> asHTML: () <span class="pl-k">-&gt;</span> <span class="pl-c1">String</span> <span class="pl-k">=</span> { [<span class="pl-k">weak</span> <span class="pl-c1">self</span>] <span class="pl-k">in</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-retaincycle8-swift-LC5" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">guard</span> <span class="pl-k">let</span> htmlElement <span class="pl-k">=</span> <span class="pl-c1">self</span> <span class="pl-k">else</span> { <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pds">&quot;</span></span> }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-retaincycle8-swift-LC6" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> <span class="pl-s"><span class="pl-pds">&quot;</span>&lt;<span class="pl-pse">\(</span><span class="pl-s1">htmlElement.<span class="pl-smi">name</span></span><span class="pl-pse"><span class="pl-s1">)</span></span>&gt;<span class="pl-pse">\(</span><span class="pl-s1">htmlElement.<span class="pl-c1">text</span></span><span class="pl-pse"><span class="pl-s1">)</span></span>&lt;/<span class="pl-pse">\(</span><span class="pl-s1">htmlElement.<span class="pl-smi">name</span></span><span class="pl-pse"><span class="pl-s1">)</span></span>&gt;<span class="pl-pds">&quot;</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-retaincycle8-swift-LC7" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-retaincycle8-swift-LC8" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-retaincycle8-swift-LC9" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-retaincycle8-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-retaincycle8-swift-LC11" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-retaincycle8-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-k">var</span> paragraph: HTMLElement<span class="pl-k">?</span> <span class="pl-k">=</span> <span class="pl-c1">HTMLElement</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>p<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">text</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>hello, world<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-retaincycle8-swift-LC13" class="blob-code blob-code-inner js-file-line">paragraph<span class="pl-k">?</span>.<span class="pl-c1">asHTML</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-retaincycle8-swift-LC14" class="blob-code blob-code-inner js-file-line">paragraph <span class="pl-k">=</span> <span class="pl-c1">nil</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-retaincycle8-swift-LC15" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-retaincycle8-swift-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> Output:</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-retaincycle8-swift-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">//</span> HTMLElement p is being deinitialized</span></td>
+        </tr>
+        <tr>
+          <td id="file-retaincycle8-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-retaincycle8-swift-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span></td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/305325781d76f991b7376ec7cc916915/raw/afeec36c94822858a511fa7b3c75f745cc86a0fc/RetainCycle8.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/305325781d76f991b7376ec7cc916915#file-retaincycle8-swift">
+          RetainCycle8.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>This time, the capture of <code class="code-voice">self</code> by the closure is an weak reference, and does not keep a strong hold on the <code class="code-voice">HTMLElement</code> instance it has captured. If we set the strong reference from the <code class="code-voice">paragraph</code> variable to <code class="code-voice">nil</code>, the <code class="code-voice">HTMLElement</code> instance is deallocated, as can be seen from the printing of its deinitializer message in the example above.</p>
+<p>A more detailed example and explanation can be found in <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID48" target="_blank" rel="noopener noreferrer">Apple&#8217;s Swift 3 Documentation</a>. All the examples used here are taken from the documentation and been simplified for convenience.</p>
+<p>Happy coding <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../memory-management-in-swift-strong-reference-retain-cycle/index.html">Memory management in Swift: Strong Reference &#038; Retain Cycle</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../memory-management-in-swift-strong-reference-retain-cycle/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">1070</post-id>	</item>
+		<item>
+		<title>Strong vs Weak Reference in Cocoa</title>
+		<link>./../../../strong-vs-weak-reference-in-cocoa/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=strong-vs-weak-reference-in-cocoa</link>
+					<comments>./../../../strong-vs-weak-reference-in-cocoa/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Sat, 12 Nov 2016 06:20:59 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[arc]]></category>
+		<category><![CDATA[automatic reference counting]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[coding]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[programming]]></category>
+		<category><![CDATA[property]]></category>
+		<category><![CDATA[reference]]></category>
+		<category><![CDATA[retain]]></category>
+		<category><![CDATA[strong]]></category>
+		<category><![CDATA[weak]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=515</guid>
+
+					<description><![CDATA[<p>In iOS we always end up defining our instance variables as  @property (strong) or @property(weak). But what does strong and weak mean, and when to use which one? In cocoa, an objects memory is managed via a system called retain count. When an object is initialized, its retain count is increased by 1 from zero. [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../strong-vs-weak-reference-in-cocoa/index.html">Strong vs Weak Reference in Cocoa</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In iOS we always end up defining our instance variables as  <em><strong><code>@property (strong)</code></strong></em> or <em><strong><code>@property(weak)</code></strong></em>. But what does strong and weak mean, and when to use which one?</p>
+<p>In cocoa, an objects memory is managed via a system called retain count. When an object is initialized, its retain count is increased by 1 from zero. And each time it is strongly referenced by someone, the retain count keeps increasing by 1. In ARC (a compile time feature of Apple&#8217;s version of automated memory management, acronym of Automatic Reference Counting), it only frees up memory for objects when there are zero strong references to them, or simply put, the retain count is zero.</p>
+<p><strong>Now, what is a strong reference?</strong> It is a normal reference (pointer), but it guards the referred object from getting deallocated by ARC by increasing its retain count by 1. As long as any class has a strong reference to an object, it will not be deallocated. Strong references are used almost everywhere in Cocoa. In Objective-C we declare a strong reference as <em><strong><code>@property (strong) ObjectType *variableName</code></strong></em>, where in Swift a property is declared strong by default. We should always use strong references in linear hierarchy relationships of objects (parent to child, parent having a strong reference of the child). But what happens if a child has a strong reference of a parent? It will confuse ARC and the objects won&#8217;t be released properly, causing a memory leak. This is called a <strong>retain cycle</strong>. If two objects have strong references to each other, ARC will not be able to release any of the instances since they are keeping each other alive.</p>
+<p>To solve this,  weak reference is introduced. In Objective-C it is declared as <em><strong><code>@property(weak) ObjectType *variableName</code></strong></em>, and in swift as <code><em><strong>weak var</strong> <strong>variableName: ObjectType</strong></em></code>. Weak references do not change the retain count. When a weak reference is accessed, it will either be a valid object, or nil (as ARC does not guard it from being deallocated on releasing the strong reference). The following example will make it more clear.</p>
+<p>Let&#8217;s assume a scenario, a balloon-man sold a helium balloon to a child. The balloon has a string attached to it, so it does not fly away. The helium balloon here is an object that is being created by  a class (the child) and has a strong reference (the string) to it. Now, imagine the child has two siblings and one of them also wants to hold the balloon. So the balloon-man attaches another string to it (another strong reference by another class). Now, all three siblings can watch the balloon and play with it (access the properties and methods of the object) as long as either of the two siblings have the strings in their hand. If both of them releases the string, the balloon flies away (object deallocated/released)! Now, the third sibling can only watch, point and play with the balloon as long as any of the other two holds the string (a strong reference) to the balloon. When both the strings are released, the third sibling also looses the balloon. The relation between the third sibling and the balloon is a weak reference (third class having a weak reference), where the former two are strong. A weak reference to an object can only access it&#8217;s properties and methods, as long as it has at least one strong reference.</p>
+<p>I hope this clears up when to use a the strong and weak reference and how do they work.</p>
+<p>The post <a rel="nofollow" href="./../../../strong-vs-weak-reference-in-cocoa/index.html">Strong vs Weak Reference in Cocoa</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../strong-vs-weak-reference-in-cocoa/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">515</post-id>	</item>
+	</channel>
+</rss>
