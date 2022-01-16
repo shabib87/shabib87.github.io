@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>shell &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Tue, 04 Aug 2020 22:39:52 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>shell &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>How to add photos in the iOS Simulator: A cooler automated approach!</title>
+		<link>./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach</link>
+					<comments>./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 04 Aug 2020 22:39:50 +0000</pubDate>
+				<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[add photos]]></category>
+		<category><![CDATA[awk]]></category>
+		<category><![CDATA[bash]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[shell]]></category>
+		<category><![CDATA[simulator]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[terminal]]></category>
+		<guid isPermaLink="false">./../../../index.html?p=2125</guid>
+
+					<description><![CDATA[<p>Whenever anyone worked on an app that deals with the photo library, they did a google search on how to add photos to the iOS simulator at least once! The boring way! 🙄 The most common approach would be to search for an image in safari. Then long-press the image and save to photos. Another [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html">How to add photos in the iOS Simulator: A cooler automated approach!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Whenever anyone worked on an app that deals with the photo library, they did a google search on how to add photos to the iOS simulator at least once! </p>
+
+
+
+<h4>The boring way! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f644.png" alt="🙄" class="wp-smiley" style="height: 1em; max-height: 1em;" /></h4>
+
+
+
+<p>The most common approach would be to search for an image in safari. Then long-press the image and save to photos. Another approach would be to download the photo in your mac, drag it to the simulator. Then do the same thing as before! This is cumbersome and tiring at the same time. What if you need to download multiple images? Annoying steps, right?</p>
+
+
+
+<h4>The cooler way: <code>xcrun simctl</code> to the rescue! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f9b8-200d-2642-fe0f.png" alt="🦸‍♂️" class="wp-smiley" style="height: 1em; max-height: 1em;" /><img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f9b8-200d-2640-fe0f.png" alt="🦸‍♀️" class="wp-smiley" style="height: 1em; max-height: 1em;" /></h4>
+
+
+
+<p>There is a much easier and cooler way to add photos in the iOS Simulator. That is by using the <code>xcrun simctl</code> command. </p>
+
+
+
+<p>To add a single photo to the currently running simulator, first, navigate to the destination directory. Then use the command below in terminal (replace the <code>&lt;image_name></code> with the actual name of the image):</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-1" data-shcb-language-name="HTML, XML" data-shcb-language-slug="xml"><div><code class="hljs language-xml">$ xcrun simctl addmedia booted ./<span class="hljs-tag">&lt;<span class="hljs-name">image_name</span>&gt;</span>.jpg</code></div><small class="shcb-language" id="shcb-language-1"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">HTML, XML</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">xml</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>If you want to add this image to a specific simulator, you need to pass its device id. The device id of the available simulators can be found by running:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-2" data-shcb-language-name="PHP" data-shcb-language-slug="php"><div><code class="hljs language-php">$ xcrun simctl <span class="hljs-keyword">list</span></code></div><small class="shcb-language" id="shcb-language-2"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">PHP</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">php</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<figure class="wp-block-image size-large"><img width="1024" height="330" src="./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-1024x330.png" alt="add photos to the iOS simulator, listed device id of available simulators in the terminal" class="wp-image-2130" title="add photos to the iOS simulator, listed device id of available simulators in the terminal" srcset="./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-1024x330.png 1024w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-300x97.png 300w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-768x247.png 768w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-1536x494.png 1536w, ./../../../wp-content/uploads/2020/08/Screen-Shot-2020-08-04-at-17.56.57-2048x659.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>Available Simulator List</figcaption></figure>
+
+
+
+<p>Next, you need to run the following command along with the simulator id as following:</p>
+
+
+<pre class="wp-block-code"><div><code class="hljs">$ xcrun simctl addmedia D0BD5CE0-FC24-4DD4-B688-2A882D4A69A7 ./image_name.jpg</code></div></pre>
+
+
+<p>Replace <code>D0BD5CE0-FC24-4DD4-B688-2A882D4A69A7</code> with your desired simulator device id.</p>
+
+
+
+<h4>Save multiple photos: unleash the Bash! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f60e.png" alt="😎" class="wp-smiley" style="height: 1em; max-height: 1em;" /></h4>
+
+
+
+<p>Let&#8217;s say you need 20 (n) images to be added to the simulator. Downloading and adding them 1 by 1 would be annoying and repetitive. The good news is, whenever you have a repetitive task, you can automate it! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f643.png" alt="🙃" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+
+
+
+<p>Let&#8217;s assume you have got <code>n</code> images downloaded in a folder called <code>SimulatorGallery</code>. Now, you need a way to iterate through these images to automate the above process. Thankfully, the bash script comes with a really cool tool called  <code>awk</code>, which makes it super easy. To use <code>awk</code> you need to state a begin, end and the execution block as</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-3" data-shcb-language-name="HTML, XML" data-shcb-language-slug="xml"><div><code class="hljs language-xml">$ awk 'BEGIN { <span class="hljs-tag">&lt;<span class="hljs-name">CONDITION</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">STATEMENT</span>&gt;</span> } { <span class="hljs-tag">&lt;<span class="hljs-name">EXECUTION_STATEMENT</span>&gt;</span> } END { <span class="hljs-tag">&lt;<span class="hljs-name">STATEMENT</span> }</span></code></div><small class="shcb-language" id="shcb-language-3"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">HTML, XML</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">xml</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>You can specify a command to find all <code>.jpg</code> images in this folder and add them to your specified/booted simulator. Run the following command:</p>
+
+
+<pre class="wp-block-code" aria-describedby="shcb-language-4" data-shcb-language-name="JavaScript" data-shcb-language-slug="javascript"><div><code class="hljs language-javascript">$ awk <span class="hljs-string">'BEGIN{} { print "xcrun simctl addmedia booted ./"FILENAME; nextfile } END{} '</span> *.jpg | sh</code></div><small class="shcb-language" id="shcb-language-4"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">JavaScript</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">javascript</span><span class="shcb-language__paren">)</span></small></pre>
+
+
+<p>The pipe <code>| sh</code> is specifying that the <code>print</code> statement should actually be a shell command.</p>
+
+
+
+<h4>Finally</h4>
+
+
+
+<p>Now if you visit your simulators <code>Photos</code> app, you&#8217;ll see all the photos there. It&#8217;s pretty damn cool, isn&#8217;t it? It doesn&#8217;t matter how many photos you want to add, you just need to specify the file format and visit that directory from the terminal.</p>
+
+
+
+<p>Happy coding!</p>
+<p>The post <a rel="nofollow" href="./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/index.html">How to add photos in the iOS Simulator: A cooler automated approach!</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../how-to-add-photos-in-the-ios-simulator-a-cooler-automated-approach/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">2125</post-id>	</item>
+	</channel>
+</rss>

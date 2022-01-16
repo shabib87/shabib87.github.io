@@ -1,0 +1,1397 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Cocoa &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:19:32 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>Cocoa &#8211; codewithshabib</title>
+	<link>./../../../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Introduction to Strategy Pattern</title>
+		<link>./../../../../../introduction-to-strategy-pattern/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=introduction-to-strategy-pattern</link>
+					<comments>./../../../../../introduction-to-strategy-pattern/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Sun, 05 Feb 2017 06:30:51 +0000</pubDate>
+				<category><![CDATA[Behavioral Patterns]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[Cocoatouch]]></category>
+		<category><![CDATA[Design Patterns]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Object Oriented Design]]></category>
+		<category><![CDATA[OOP]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[basic oop]]></category>
+		<category><![CDATA[coding]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[encapsulation]]></category>
+		<category><![CDATA[Inheritance]]></category>
+		<category><![CDATA[Object Oriented Design Patterns]]></category>
+		<category><![CDATA[polymorphism]]></category>
+		<category><![CDATA[programming]]></category>
+		<category><![CDATA[software design patterns]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[strategy pattern]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=690</guid>
+
+					<description><![CDATA[<p>In real life software development one particular challenge we developers constantly face is requirement changes. Anyone who is in the software business game knows how frequently and drastically software specification can change in any time. For this reason, in software engineering only one thing is considered as constant: CHANGE! In object oriented world, we have [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../../../introduction-to-strategy-pattern/index.html">Introduction to Strategy Pattern</a> appeared first on <a rel="nofollow" href="./../../../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In real life software development one particular challenge we developers constantly face is requirement changes. Anyone who is in the software business game knows how frequently and drastically software specification can change in any time. For this reason, in software engineering only one thing is considered as constant: <strong>CHANGE!</strong></p>
+<p>In object oriented world, we have some nice ways to deal with this, i.e. design patterns to the rescue. There are lots and lots of design patterns out there to help us, the developers. Amongst them the most common and widely used one is known as <strong>Strategy Pattern</strong>. Any developer with a few years of experience under his/her belt uses this quite frequently (sometimes even without knowing they are using it!).</p>
+<p>In this post I am going to try to create a scenario, which we can solve using strategy pattern.</p>
+<p>Let us assume we&#8217;re in a software company named BadAss Softwares Inc, where we build some ass kicking great softwares. Now, a client of ours, Mr. Big Boss wants to make a smart car software. His initial requirements are simple:</p>
+<ul>
+<li>I want a smart car.</li>
+<li>It can drive.</li>
+<li>It can talk.</li>
+</ul>
+<p>Getting this requirement, our rockstar developer Johny Doe thinks, boy that&#8217;s easy! So, he writes the following code.</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44517842" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartcar-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartCar.swift">
+        <tr>
+          <td id="file-smartcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartcar-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartCar</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartcar-swift-LC2" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartcar-swift-LC3" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartcar-swift-LC4" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartcar-swift-LC5" class="blob-code blob-code-inner js-file-line">	</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartcar-swift-LC6" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">talk</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartcar-swift-LC7" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Hi! I am the smart talking car!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartcar-swift-LC8" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartcar-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/75be3b6edca66462625d0de8f1902bc2/raw/e2610960e8aef0fc7de3eeb6521f3eebb889c49b/SmartCar.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/75be3b6edca66462625d0de8f1902bc2#file-smartcar-swift">
+          SmartCar.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>Mr. Big is happy, he got what he asked for. And we are happy too. But now comes the challenge; someone gave Mr. Big an idea, why only drive and talk. It&#8217;s a damn smart car, he should aim for more! So  Mr. Big changes this requirement to the following:</p>
+<ul>
+<li>Yes, I want a smart car that can do all the previous stuff.</li>
+<li>I want another super smart car, it should not only drive on road, but also on water! (Well, don&#8217;t laugh!)</li>
+</ul>
+<p>Now, Johny is smart. He likes to reuse as many parts of the code as he can. So, how would he design it? Here comes, our nice friend Inheritance! So, what Johny does is, he makes a subclass of the SmartCar and adds a new method called driveOnWater. Cool, isn&#8217;t it?</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519825" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-supersmartcar-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SuperSmartCar.swift">
+        <tr>
+          <td id="file-supersmartcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-supersmartcar-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SuperSmartCar</span>: <span class="pl-e">SmartCar </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-supersmartcar-swift-LC2" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-supersmartcar-swift-LC3" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-supersmartcar-swift-LC4" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-supersmartcar-swift-LC5" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/e489cf3ed8eb4d28fbf9cbe4da6cb39d/raw/997fe4027ae12714bb728423d86f2304f4c52fca/SuperSmartCar.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/e489cf3ed8eb4d28fbf9cbe4da6cb39d#file-supersmartcar-swift">
+          SuperSmartCar.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>Now, we have again made Mr. Big happy! How cool is that!</p>
+<p>But Mr. Big has something bigger in his mind, he now wants make a smart vehicle that can not only run on road, but also fly (but can not run over water)! Now, Johny is in a little trouble, as he can not just make another subclass to support this. How would he deal with this issue? Well, as I said Johny is smart! He knows something called Interface, a nifty tool in OOP (which in our case in swift is known as protocol)! So, as the &#8220;drive on road&#8221; and other features are common, except for &#8220;driving on water&#8221;. He creates a protocol named Flyable and creates another subclass of the SmartCar.</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519799" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartflyingcar-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartFlyingCar.swift">
+        <tr>
+          <td id="file-smartflyingcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartflyingcar-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">Flyable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartflyingcar-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartflyingcar-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartflyingcar-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartflyingcar-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartFlyingCar</span>: <span class="pl-e">SmartCar</span>, <span class="pl-e">Flyable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartflyingcar-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartflyingcar-swift-LC7" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Wohoo! I am flying high!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartflyingcar-swift-LC8" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartflyingcar-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/15f5bd76aeb01112801a5c09ce719d2d/raw/6647685b920d11455837e867f0755b8c0839e49f/SmartFlyingCar.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/15f5bd76aeb01112801a5c09ce719d2d#file-smartflyingcar-swift">
+          SmartFlyingCar.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>Now, we have our SmartCar, SuperSmartCar and FlyingSmartCar, which all can run on the road and talk back to you! Mr. Big is happy, our company is happy and Johny got a big fat bonus! But, good days don&#8217;t last long. Due to the complicated features, Mr. Big&#8217;s cars don&#8217;t do so well in the market as people don&#8217;t like it yet. So, Mr. Big does a public survey and finds out people don&#8217;t want all in all cars, they want car that runs on road, boat that runs over water and plane that flies in the air. So, he again calls our firm and changes the requirement again:</p>
+<ul>
+<li>I want some smart vehicles.</li>
+<li>I want a smart car that runs on road.</li>
+<li>I want a smart boat that runs on water.</li>
+<li>I want a smart plane that flies.</li>
+<li>These smart vehicles must talk back.</li>
+</ul>
+<p>Now, Johny is pissed as he has to change a lot of things and he has to redo a lot of stuff. So he sits with a cup of coffee and thinks how he can decouple all the classes and make the changes with the least amount of hassle. Johny finds the following things:</p>
+<ul>
+<li>All products are vehicles and can talk back, so he can write a vehicle class with that option.</li>
+<li>A car can talk and run on road but can not fly or run on water.</li>
+<li>A boat can talk and run over water but can not fly or run on road.</li>
+<li>A plane can talk and fly but can not run on water or road.</li>
+</ul>
+<p>Now, as Johny has learnt the client can change the requirement anytime, he also thinks about the following:</p>
+<ul>
+<li>What if Mr. Big wants another vehicle that can run on both water and road again?</li>
+<li>What if Mr. Big wants another vehicle that can fly and run on road?</li>
+<li>What if Mr. Big wants another vehicle that can do all of those?</li>
+</ul>
+<p class="graf graf--p">So, now to answer these Johny does these:</p>
+<ul>
+<li>Creates separate classes by subclassing the Vehicle class, that&#8217;ll make sure all vehicles are smart and can talk back.</li>
+<li>Makes all run behaviors as interfaces/protocols, that&#8217;ll make sure if any more requirement changes comes up, he only has to implement the protocol to give support to that feature.</li>
+</ul>
+<p>Now, this is Johny&#8217;s final code.</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519866" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartvehicle-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartVehicle.swift">
+        <tr>
+          <td id="file-smartvehicle-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartvehicle-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">RoadDrivable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartvehicle-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartvehicle-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartvehicle-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartvehicle-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">WaterDrivable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartvehicle-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartvehicle-swift-LC7" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartvehicle-swift-LC8" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartvehicle-swift-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">Flyable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-smartvehicle-swift-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-smartvehicle-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-smartvehicle-swift-LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-smartvehicle-swift-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartVehicle</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-smartvehicle-swift-LC14" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">talk</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-smartvehicle-swift-LC15" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Hi! I am the smart talking vehicle!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-smartvehicle-swift-LC16" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-smartvehicle-swift-LC17" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-smartvehicle-swift-LC18" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-smartvehicle-swift-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartCar</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">RoadDrivable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-smartvehicle-swift-LC20" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-smartvehicle-swift-LC21" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-smartvehicle-swift-LC22" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-smartvehicle-swift-LC23" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-smartvehicle-swift-LC24" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-smartvehicle-swift-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartBoat</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">WaterDrivable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-smartvehicle-swift-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-smartvehicle-swift-LC27" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-smartvehicle-swift-LC28" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-smartvehicle-swift-LC29" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+          <td id="file-smartvehicle-swift-LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+          <td id="file-smartvehicle-swift-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartPlane</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">Flyable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L32" class="blob-num js-line-number js-code-nav-line-number" data-line-number="32"></td>
+          <td id="file-smartvehicle-swift-LC32" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L33" class="blob-num js-line-number js-code-nav-line-number" data-line-number="33"></td>
+          <td id="file-smartvehicle-swift-LC33" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Wohoo! I am flying high!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L34" class="blob-num js-line-number js-code-nav-line-number" data-line-number="34"></td>
+          <td id="file-smartvehicle-swift-LC34" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L35" class="blob-num js-line-number js-code-nav-line-number" data-line-number="35"></td>
+          <td id="file-smartvehicle-swift-LC35" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/3a382c70038353857d0003d8cb611366/raw/09b4724167fc4a9e008541604bc8ebc927dfe11d/SmartVehicle.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/3a382c70038353857d0003d8cb611366#file-smartvehicle-swift">
+          SmartVehicle.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>Now again everyone is happy, and Johny gets another fat bonus!</p>
+<p>Six months later Mr. Big decides the market has changed and people want multi functioning vehicles again, so he asks our company to give him the SmartCarBoat again. Now, Johny has no problem with it because all he has to do this implement the protocols!</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519937" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartcarboat-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartCarBoat.swift">
+        <tr>
+          <td id="file-smartcarboat-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartcarboat-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartBoat</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">RoadDrivable</span>, <span class="pl-e">WaterDrivable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartcarboat-swift-LC2" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartcarboat-swift-LC3" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartcarboat-swift-LC4" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartcarboat-swift-LC5" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartcarboat-swift-LC6" class="blob-code blob-code-inner js-file-line">	</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartcarboat-swift-LC7" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartcarboat-swift-LC8" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartcarboat-swift-LC9" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-smartcarboat-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/5946bc75723572ece692f1df2ea84be1/raw/aced421e21f8711090f6aa1a318b91225594310c/SmartCarBoat.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/5946bc75723572ece692f1df2ea84be1#file-smartcarboat-swift">
+          SmartCarBoat.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p class="graf graf--p">With this strategy on hand no matter how many times Mr. Big changes his requirement, Johny can kill it anytime!</p>
+<p>I hope I have managed to give an idea on how strategy pattern works and how to use it with a real time scenario. Of course we can improve this by using other ways; I am giving you a hint: Abstract Class. Any questions, feedbacks or if you think I have some improvements to do, feel free to comment!</p>
+<p>Happy coding! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f601.png" alt="😁" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../../../introduction-to-strategy-pattern/index.html">Introduction to Strategy Pattern</a> appeared first on <a rel="nofollow" href="./../../../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../../../introduction-to-strategy-pattern/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">690</post-id>	</item>
+		<item>
+		<title>UITextView similar to rounded UITextField with dynamic height</title>
+		<link>./../../../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=uitextview-with-similar-look-like-round-rect-uitextfield</link>
+					<comments>./../../../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 24 Jan 2017 09:35:25 +0000</pubDate>
+				<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[coding]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[expanding textview]]></category>
+		<category><![CDATA[expanding uitextview]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[ipad]]></category>
+		<category><![CDATA[iphone]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[programming]]></category>
+		<category><![CDATA[rounded textview]]></category>
+		<category><![CDATA[rounded uitextview]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[uitextfield]]></category>
+		<category><![CDATA[uitextview]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=658</guid>
+
+					<description><![CDATA[<p>Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wished it will grow it&#8217;s height as you type your text? Well, you are in luck! Here is the swift file you will need.</p>
+<p>The post <a rel="nofollow" href="./../../../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html">UITextView similar to rounded UITextField with dynamic height</a> appeared first on <a rel="nofollow" href="./../../../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wished it will grow it&#8217;s height as you type your text? Well, you are in luck! Here is the swift file you will need.</p>
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44115242" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-textviewwithplaceholderandexpandingheight-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="TextViewWithPlaceholderAndExpandingHeight.swift">
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC1" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-c"><span class="pl-c">/*</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> TextViewWithPlaceholderAndExpandingHeight.swift</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> TextViewWithPlaceholderAndExpandingHeight</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Created by Shabib Hossain on 1/24/17.</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Copyright (c) 2017 shabib87 &lt;shabib.sust@gmail.com&gt;</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> Permission is hereby granted, free of charge, to any person obtaining a copy</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> of this software and associated documentation files (the &quot;Software&quot;), to deal</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> in the Software without restriction, including without limitation the rights</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC14" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> copies of the Software, and to permit persons to whom the Software is</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC15" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> furnished to do so, subject to the following conditions:</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC16" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> The above copyright notice and this permission notice shall be included in</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> all copies or substantial portions of the Software.</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> THE SOFTWARE.</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC27" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> </span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC28" class="blob-code blob-code-inner js-file-line"><span class="pl-c"> <span class="pl-c">*/</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC29" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC30" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-en">Foundation</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-k">import</span> <span class="pl-en">UIKit</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L32" class="blob-num js-line-number js-code-nav-line-number" data-line-number="32"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC32" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L33" class="blob-num js-line-number js-code-nav-line-number" data-line-number="33"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC33" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">TextViewWithPlaceholderAndExpandingHeight</span>: <span class="pl-e">UITextView </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L34" class="blob-num js-line-number js-code-nav-line-number" data-line-number="34"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC34" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L35" class="blob-num js-line-number js-code-nav-line-number" data-line-number="35"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC35" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">@IBInspectable</span> <span class="pl-k">var</span> placeHolderText: <span class="pl-c1">String</span><span class="pl-k">!</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L36" class="blob-num js-line-number js-code-nav-line-number" data-line-number="36"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC36" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">@IBInspectable</span> <span class="pl-k">var</span> placeHolderColor: UIColor<span class="pl-k">!</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L37" class="blob-num js-line-number js-code-nav-line-number" data-line-number="37"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC37" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L38" class="blob-num js-line-number js-code-nav-line-number" data-line-number="38"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC38" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">var</span> placeHolderLabel: UILabel<span class="pl-k">!</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L39" class="blob-num js-line-number js-code-nav-line-number" data-line-number="39"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC39" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> defaultColor <span class="pl-k">=</span> <span class="pl-c1">UIColor</span>(<span class="pl-c1">red</span>:<span class="pl-c1">199.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">green</span>:<span class="pl-c1">199.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">blue</span>:<span class="pl-c1">205.0</span><span class="pl-k">/</span><span class="pl-c1">255.0</span>, <span class="pl-c1">alpha</span>:<span class="pl-c1">1.0</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L40" class="blob-num js-line-number js-code-nav-line-number" data-line-number="40"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC40" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> UIPlaceholderTextChangeAnimationDuraiton <span class="pl-k">=</span> <span class="pl-c1">0.25</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L41" class="blob-num js-line-number js-code-nav-line-number" data-line-number="41"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC41" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> UIPlaceHolderLabelTag <span class="pl-k">=</span> <span class="pl-c1">1901</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L42" class="blob-num js-line-number js-code-nav-line-number" data-line-number="42"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC42" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> kMaxHeightForTextView <span class="pl-k">=</span> <span class="pl-c1">90.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L43" class="blob-num js-line-number js-code-nav-line-number" data-line-number="43"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC43" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L44" class="blob-num js-line-number js-code-nav-line-number" data-line-number="44"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC44" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">var</span> currentDynamicHeight: CGFloat {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L45" class="blob-num js-line-number js-code-nav-line-number" data-line-number="45"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC45" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">get</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L46" class="blob-num js-line-number js-code-nav-line-number" data-line-number="46"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC46" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span> <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-smi">height</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L47" class="blob-num js-line-number js-code-nav-line-number" data-line-number="47"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC47" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L48" class="blob-num js-line-number js-code-nav-line-number" data-line-number="48"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC48" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L49" class="blob-num js-line-number js-code-nav-line-number" data-line-number="49"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC49" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L50" class="blob-num js-line-number js-code-nav-line-number" data-line-number="50"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC50" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">var</span> text: <span class="pl-c1">String</span><span class="pl-k">!</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L51" class="blob-num js-line-number js-code-nav-line-number" data-line-number="51"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC51" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">didSet</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L52" class="blob-num js-line-number js-code-nav-line-number" data-line-number="52"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC52" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L53" class="blob-num js-line-number js-code-nav-line-number" data-line-number="53"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC53" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">updateHeight</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L54" class="blob-num js-line-number js-code-nav-line-number" data-line-number="54"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC54" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L55" class="blob-num js-line-number js-code-nav-line-number" data-line-number="55"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC55" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L56" class="blob-num js-line-number js-code-nav-line-number" data-line-number="56"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC56" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L57" class="blob-num js-line-number js-code-nav-line-number" data-line-number="57"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC57" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">draw</span>(<span class="pl-en">_</span> <span class="pl-smi">rect</span>: CGRect) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L58" class="blob-num js-line-number js-code-nav-line-number" data-line-number="58"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC58" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-k">!</span><span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span>.<span class="pl-c1">isEmpty</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L59" class="blob-num js-line-number js-code-nav-line-number" data-line-number="59"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC59" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L60" class="blob-num js-line-number js-code-nav-line-number" data-line-number="60"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC60" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">setupPlaceholderLabel</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L61" class="blob-num js-line-number js-code-nav-line-number" data-line-number="61"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC61" class="blob-code blob-code-inner js-file-line">            }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L62" class="blob-num js-line-number js-code-nav-line-number" data-line-number="62"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC62" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">text</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L63" class="blob-num js-line-number js-code-nav-line-number" data-line-number="63"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC63" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">sizeToFit</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L64" class="blob-num js-line-number js-code-nav-line-number" data-line-number="64"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC64" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">sendSubview</span>(<span class="pl-c1">toBack</span>: <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L65" class="blob-num js-line-number js-code-nav-line-number" data-line-number="65"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC65" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L66" class="blob-num js-line-number js-code-nav-line-number" data-line-number="66"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC66" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">isEmpty</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-k">!</span>(<span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-c1">text</span><span class="pl-k">?</span>.<span class="pl-c1">isEmpty</span>)<span class="pl-k">!</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L67" class="blob-num js-line-number js-code-nav-line-number" data-line-number="67"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC67" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">1</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L68" class="blob-num js-line-number js-code-nav-line-number" data-line-number="68"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC68" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L69" class="blob-num js-line-number js-code-nav-line-number" data-line-number="69"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC69" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-c1">draw</span>(rect)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L70" class="blob-num js-line-number js-code-nav-line-number" data-line-number="70"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC70" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L71" class="blob-num js-line-number js-code-nav-line-number" data-line-number="71"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC71" class="blob-code blob-code-inner js-file-line"> </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L72" class="blob-num js-line-number js-code-nav-line-number" data-line-number="72"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC72" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">setupPlaceholderLabel</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L73" class="blob-num js-line-number js-code-nav-line-number" data-line-number="73"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC73" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span> <span class="pl-k">=</span> <span class="pl-c1">UILabel</span>(<span class="pl-c1">frame</span>: <span class="pl-c1">CGRect</span>(<span class="pl-c1">x</span>: <span class="pl-c1">8</span>, <span class="pl-c1">y</span>: <span class="pl-c1">4</span>, <span class="pl-c1">width</span>: <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-c1">size</span>.<span class="pl-smi">width</span> <span class="pl-k">-</span> <span class="pl-c1">16</span>, <span class="pl-c1">height</span>: <span class="pl-c1">0</span>))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L74" class="blob-num js-line-number js-code-nav-line-number" data-line-number="74"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC74" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">lineBreakMode</span> <span class="pl-k">=</span> .<span class="pl-smi">byWordWrapping</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L75" class="blob-num js-line-number js-code-nav-line-number" data-line-number="75"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC75" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">numberOfLines</span> <span class="pl-k">=</span> <span class="pl-c1">0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L76" class="blob-num js-line-number js-code-nav-line-number" data-line-number="76"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC76" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">font</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">font</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L77" class="blob-num js-line-number js-code-nav-line-number" data-line-number="77"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC77" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">backgroundColor</span> <span class="pl-k">=</span> .<span class="pl-smi">clear</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L78" class="blob-num js-line-number js-code-nav-line-number" data-line-number="78"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC78" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">textColor</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L79" class="blob-num js-line-number js-code-nav-line-number" data-line-number="79"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC79" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L80" class="blob-num js-line-number js-code-nav-line-number" data-line-number="80"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC80" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>.<span class="pl-smi">tag</span> <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L81" class="blob-num js-line-number js-code-nav-line-number" data-line-number="81"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC81" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">addSubview</span>(<span class="pl-c1">self</span>.<span class="pl-smi">placeHolderLabel</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L82" class="blob-num js-line-number js-code-nav-line-number" data-line-number="82"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC82" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L83" class="blob-num js-line-number js-code-nav-line-number" data-line-number="83"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC83" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L84" class="blob-num js-line-number js-code-nav-line-number" data-line-number="84"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC84" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">awakeFromNib</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L85" class="blob-num js-line-number js-code-nav-line-number" data-line-number="85"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC85" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-c1">awakeFromNib</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L86" class="blob-num js-line-number js-code-nav-line-number" data-line-number="86"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC86" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L87" class="blob-num js-line-number js-code-nav-line-number" data-line-number="87"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC87" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L88" class="blob-num js-line-number js-code-nav-line-number" data-line-number="88"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC88" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L89" class="blob-num js-line-number js-code-nav-line-number" data-line-number="89"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC89" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">frame</span></span>: CGRect, <span class="pl-smi"><span class="pl-en">textContainer</span></span>: NSTextContainer<span class="pl-k">?</span>) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L90" class="blob-num js-line-number js-code-nav-line-number" data-line-number="90"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC90" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-k">init</span>(<span class="pl-c1">frame</span>: frame, <span class="pl-c1">textContainer</span>: textContainer)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L91" class="blob-num js-line-number js-code-nav-line-number" data-line-number="91"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC91" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L92" class="blob-num js-line-number js-code-nav-line-number" data-line-number="92"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC92" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L93" class="blob-num js-line-number js-code-nav-line-number" data-line-number="93"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC93" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L94" class="blob-num js-line-number js-code-nav-line-number" data-line-number="94"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC94" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">required</span> <span class="pl-k">init?</span>(<span class="pl-en">coder</span> <span class="pl-smi">aDecoder</span>: NSCoder) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L95" class="blob-num js-line-number js-code-nav-line-number" data-line-number="95"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC95" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">super</span>.<span class="pl-k">init</span>(<span class="pl-c1">coder</span>: aDecoder)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L96" class="blob-num js-line-number js-code-nav-line-number" data-line-number="96"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC96" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">setupPlaceholder</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L97" class="blob-num js-line-number js-code-nav-line-number" data-line-number="97"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC97" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L98" class="blob-num js-line-number js-code-nav-line-number" data-line-number="98"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC98" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L99" class="blob-num js-line-number js-code-nav-line-number" data-line-number="99"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC99" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">deinit</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L100" class="blob-num js-line-number js-code-nav-line-number" data-line-number="100"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC100" class="blob-code blob-code-inner js-file-line">        NotificationCenter.<span class="pl-smi">default</span>.<span class="pl-c1">removeObserver</span>(<span class="pl-c1">self</span>, <span class="pl-c1">name</span>: NSNotification.<span class="pl-smi">Name</span>.<span class="pl-smi">UITextViewTextDidChange</span>, <span class="pl-c1">object</span>: <span class="pl-c1">nil</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L101" class="blob-num js-line-number js-code-nav-line-number" data-line-number="101"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC101" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L102" class="blob-num js-line-number js-code-nav-line-number" data-line-number="102"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC102" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L103" class="blob-num js-line-number js-code-nav-line-number" data-line-number="103"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC103" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">textField</span>(<span class="pl-en">_</span> <span class="pl-smi">textField</span>: UITextField, <span class="pl-en">shouldChangeCharactersIn</span> <span class="pl-smi">range</span>: NSRange, <span class="pl-en">replacementString</span> <span class="pl-smi">string</span>: <span class="pl-c1">String</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L104" class="blob-num js-line-number js-code-nav-line-number" data-line-number="104"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC104" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> whitescpaceSet <span class="pl-k">=</span> NSCharacterSet.<span class="pl-smi">whitespaces</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L105" class="blob-num js-line-number js-code-nav-line-number" data-line-number="105"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC105" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> range <span class="pl-k">=</span> string.<span class="pl-c1">rangeOfCharacter</span>(<span class="pl-c1">from</span>: whitescpaceSet)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L106" class="blob-num js-line-number js-code-nav-line-number" data-line-number="106"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC106" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-k">let</span> <span class="pl-c1">_</span> <span class="pl-k">=</span> range {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L107" class="blob-num js-line-number js-code-nav-line-number" data-line-number="107"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC107" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span> <span class="pl-c1">false</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L108" class="blob-num js-line-number js-code-nav-line-number" data-line-number="108"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC108" class="blob-code blob-code-inner js-file-line">        } <span class="pl-k">else</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L109" class="blob-num js-line-number js-code-nav-line-number" data-line-number="109"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC109" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span> <span class="pl-c1">true</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L110" class="blob-num js-line-number js-code-nav-line-number" data-line-number="110"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC110" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L111" class="blob-num js-line-number js-code-nav-line-number" data-line-number="111"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC111" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L112" class="blob-num js-line-number js-code-nav-line-number" data-line-number="112"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC112" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L113" class="blob-num js-line-number js-code-nav-line-number" data-line-number="113"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC113" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">setupPlaceholder</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L114" class="blob-num js-line-number js-code-nav-line-number" data-line-number="114"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC114" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L115" class="blob-num js-line-number js-code-nav-line-number" data-line-number="115"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC115" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pds">&quot;</span></span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L116" class="blob-num js-line-number js-code-nav-line-number" data-line-number="116"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC116" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L117" class="blob-num js-line-number js-code-nav-line-number" data-line-number="117"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC117" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span> <span class="pl-k">==</span> <span class="pl-c1">nil</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L118" class="blob-num js-line-number js-code-nav-line-number" data-line-number="118"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC118" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderColor</span> <span class="pl-k">=</span> defaultColor</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L119" class="blob-num js-line-number js-code-nav-line-number" data-line-number="119"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC119" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L120" class="blob-num js-line-number js-code-nav-line-number" data-line-number="120"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC120" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">cornerRadius</span> <span class="pl-k">=</span> <span class="pl-c1">5.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L121" class="blob-num js-line-number js-code-nav-line-number" data-line-number="121"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC121" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">borderWidth</span> <span class="pl-k">=</span> <span class="pl-c1">0.5</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L122" class="blob-num js-line-number js-code-nav-line-number" data-line-number="122"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC122" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">layer</span>.<span class="pl-smi">borderColor</span> <span class="pl-k">=</span> defaultColor.<span class="pl-smi">cgColor</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L123" class="blob-num js-line-number js-code-nav-line-number" data-line-number="123"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC123" class="blob-code blob-code-inner js-file-line">        NotificationCenter.<span class="pl-smi">default</span>.<span class="pl-c1">addObserver</span>(<span class="pl-c1">self</span>, <span class="pl-c1">selector</span>: <span class="pl-c1">#selector</span>(<span class="pl-c1">self</span>.<span class="pl-smi">textChanged</span>), <span class="pl-c1">name</span>: NSNotification.<span class="pl-smi">Name</span>.<span class="pl-smi">UITextViewTextDidChange</span>, <span class="pl-c1">object</span>: <span class="pl-c1">nil</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L124" class="blob-num js-line-number js-code-nav-line-number" data-line-number="124"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC124" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L125" class="blob-num js-line-number js-code-nav-line-number" data-line-number="125"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC125" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L126" class="blob-num js-line-number js-code-nav-line-number" data-line-number="126"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC126" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">@objc</span> <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">textChanged</span>(<span class="pl-smi"><span class="pl-en">notification</span></span>: Notification<span class="pl-k">?</span>) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L127" class="blob-num js-line-number js-code-nav-line-number" data-line-number="127"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC127" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-smi">placeHolderText</span>.<span class="pl-c1">isEmpty</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L128" class="blob-num js-line-number js-code-nav-line-number" data-line-number="128"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC128" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L129" class="blob-num js-line-number js-code-nav-line-number" data-line-number="129"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC129" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L130" class="blob-num js-line-number js-code-nav-line-number" data-line-number="130"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC130" class="blob-code blob-code-inner js-file-line">        UIView.<span class="pl-c1">animate</span>(<span class="pl-c1">withDuration</span>: UIPlaceholderTextChangeAnimationDuraiton) {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L131" class="blob-num js-line-number js-code-nav-line-number" data-line-number="131"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC131" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">if</span> <span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">isEmpty</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L132" class="blob-num js-line-number js-code-nav-line-number" data-line-number="132"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC132" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">1.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L133" class="blob-num js-line-number js-code-nav-line-number" data-line-number="133"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC133" class="blob-code blob-code-inner js-file-line">            } <span class="pl-k">else</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L134" class="blob-num js-line-number js-code-nav-line-number" data-line-number="134"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC134" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span>.<span class="pl-c1">viewWithTag</span>(<span class="pl-c1">self</span>.<span class="pl-smi">UIPlaceHolderLabelTag</span>)<span class="pl-k">?</span>.<span class="pl-smi">alpha</span> <span class="pl-k">=</span> <span class="pl-c1">0.0</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L135" class="blob-num js-line-number js-code-nav-line-number" data-line-number="135"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC135" class="blob-code blob-code-inner js-file-line">            }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L136" class="blob-num js-line-number js-code-nav-line-number" data-line-number="136"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC136" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span>.<span class="pl-c1">updateHeight</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L137" class="blob-num js-line-number js-code-nav-line-number" data-line-number="137"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC137" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L138" class="blob-num js-line-number js-code-nav-line-number" data-line-number="138"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC138" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L139" class="blob-num js-line-number js-code-nav-line-number" data-line-number="139"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC139" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L140" class="blob-num js-line-number js-code-nav-line-number" data-line-number="140"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC140" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">func</span> <span class="pl-en">updateHeight</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L141" class="blob-num js-line-number js-code-nav-line-number" data-line-number="141"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC141" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> fixedWidth <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">bounds</span>.<span class="pl-c1">size</span>.<span class="pl-smi">width</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L142" class="blob-num js-line-number js-code-nav-line-number" data-line-number="142"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC142" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> newSize <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-c1">sizeThatFits</span>(<span class="pl-c1">CGSize</span>(<span class="pl-c1">width</span>: fixedWidth, <span class="pl-c1">height</span>: CGFloat.<span class="pl-c1">greatestFiniteMagnitude</span>))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L143" class="blob-num js-line-number js-code-nav-line-number" data-line-number="143"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC143" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">var</span> newFrame <span class="pl-k">=</span> <span class="pl-c1">self</span>.<span class="pl-smi">frame</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L144" class="blob-num js-line-number js-code-nav-line-number" data-line-number="144"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC144" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">var</span> height <span class="pl-k">=</span> newSize.<span class="pl-smi">height</span></td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L145" class="blob-num js-line-number js-code-nav-line-number" data-line-number="145"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC145" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> <span class="pl-c1">Double</span>(newSize.<span class="pl-smi">height</span>) <span class="pl-k">&gt;=</span> kMaxHeightForTextView {</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L146" class="blob-num js-line-number js-code-nav-line-number" data-line-number="146"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC146" class="blob-code blob-code-inner js-file-line">            height <span class="pl-k">=</span> <span class="pl-c1">CGFloat</span>(kMaxHeightForTextView)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L147" class="blob-num js-line-number js-code-nav-line-number" data-line-number="147"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC147" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L148" class="blob-num js-line-number js-code-nav-line-number" data-line-number="148"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC148" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> maxWidth <span class="pl-k">=</span> <span class="pl-c1">CGFloat</span>(<span class="pl-c1">fmax</span>(<span class="pl-c1">Double</span>(newSize.<span class="pl-smi">width</span>), <span class="pl-c1">Double</span>(fixedWidth)))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L149" class="blob-num js-line-number js-code-nav-line-number" data-line-number="149"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC149" class="blob-code blob-code-inner js-file-line">        newFrame.<span class="pl-c1">size</span> <span class="pl-k">=</span> <span class="pl-c1">CGSize</span>(<span class="pl-c1">width</span>: maxWidth, <span class="pl-c1">height</span>:height)</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L150" class="blob-num js-line-number js-code-nav-line-number" data-line-number="150"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC150" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">frame</span> <span class="pl-k">=</span> newFrame</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L151" class="blob-num js-line-number js-code-nav-line-number" data-line-number="151"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC151" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">scrollRangeToVisible</span>(<span class="pl-c1">NSMakeRange</span>(<span class="pl-c1">self</span>.<span class="pl-c1">text</span>.<span class="pl-c1">characters</span>.<span class="pl-c1">count</span>, <span class="pl-c1">0</span>))</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L152" class="blob-num js-line-number js-code-nav-line-number" data-line-number="152"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC152" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L153" class="blob-num js-line-number js-code-nav-line-number" data-line-number="153"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC153" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L154" class="blob-num js-line-number js-code-nav-line-number" data-line-number="154"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC154" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-L155" class="blob-num js-line-number js-code-nav-line-number" data-line-number="155"></td>
+          <td id="file-textviewwithplaceholderandexpandingheight-swift-LC155" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d/raw/44fa038df3a26f79086fad52742ed667ff70337c/TextViewWithPlaceholderAndExpandingHeight.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d#file-textviewwithplaceholderandexpandingheight-swift">
+          TextViewWithPlaceholderAndExpandingHeight.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+<p>The post <a rel="nofollow" href="./../../../../../uitextview-with-similar-look-like-round-rect-uitextfield/index.html">UITextView similar to rounded UITextField with dynamic height</a> appeared first on <a rel="nofollow" href="./../../../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../../../uitextview-with-similar-look-like-round-rect-uitextfield/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">658</post-id>	</item>
+	</channel>
+</rss>

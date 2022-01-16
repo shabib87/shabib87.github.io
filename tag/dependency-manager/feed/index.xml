@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>dependency manager &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:11:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>dependency manager &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Creating your own COCOAPOD</title>
+		<link>./../../../creating-your-own-cocoapod/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=creating-your-own-cocoapod</link>
+					<comments>./../../../creating-your-own-cocoapod/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Tue, 16 Aug 2016 16:34:48 +0000</pubDate>
+				<category><![CDATA[Cocoapods]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[dependency manager]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[Library]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pod]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=144</guid>
+
+					<description><![CDATA[<p>Now a days it is fairly common to use CocoaPods to your project as the dependency manager for your iOS and MacOs projects. I have been using it for quite some time now; and to my utter delight, oh boy, I am glad I got to know how to use this masterpiece! Now to a [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../creating-your-own-cocoapod/index.html">Creating your own COCOAPOD</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>Now a days it is fairly common to use <strong><a href="https://cocoapods.org/">CocoaPods</a></strong> to your project as the dependency manager for your iOS and MacOs projects. I have been using it for quite some time now; and to my utter delight, oh boy, I am glad I got to know how to use this masterpiece!</p>
+<p><strong>Now to a fairly uncommon scenario, what if you want to create your own pod?</strong></p>
+<p>It is not uncommon for developers like me, who have been working in the industry for quite a few years to have their own tricks and tweaks. You might have made quite some subclasses/libraries/UI controls to make your life easier and have been using them to your projects. Well done sire! But have you ever thought of sharing your awesome work? Oh come on dude! We; the developers; rely so much on the open source community and it&#8217;s pretty damn cool to be one of the contributors! So, how do you make your own awesome pod? Well, I am not going to write all those steps, as it is already in the web!!! The guys from <a href="http://code.tutsplus.com/" target="_blank" rel="noopener noreferrer">http://code.tutsplus.com/</a> have written this awesome tutorial on how to make your own pod! So go check it out here: <a href="http://code.tutsplus.com/tutorials/creating-your-first-cocoapod--cms-24332" target="_blank" rel="noopener noreferrer">Creating Your First CocoaPod</a>.  You can also get a good detailed read from <a href="https://guides.cocoapods.org/making/making-a-cocoapod.html" target="_blank" rel="noopener noreferrer">Official Guide from CocoaPod</a>.</p>
+<p>From the tutorial it is possible, you will face this error on the following command (in the tutorial <strong>Step 3: Pushing to Specs Repository</strong>):</p>
+<pre style="padding-left: 30px;">pod trunk push YOUR_POD.podspec 
+
+[!] You need to register a session first.
+
+</pre>
+<p>Don&#8217;t worry about it, you need to register yourself for the session. Just run:</p>
+<pre><code class="highlight plaintext">$ pod trunk register &lt;Your Email&gt; 'Your Name' --description='Your Description'</code></pre>
+<p>You&#8217;ll have the following output to confirm the session:</p>
+<pre class="p1" style="padding-left: 30px;"><span class="s1">[!] Please verify the session by clicking the link in the verification email that has been sent to YOUR EMAIL</span></pre>
+<p>You must click a link in an email Trunk sends you to verify the connection between your Trunk account and the current computer. You can list your sessions by running:</p>
+<pre style="padding-left: 30px;">pod trunk me</pre>
+<p>Trunk accounts do not have passwords, only per-computer session tokens.</p>
+<p>You can learn more from the <a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html">cocoapods official site here</a>.<br />
+Chiao!!!</p>
+<p>The post <a rel="nofollow" href="./../../../creating-your-own-cocoapod/index.html">Creating your own COCOAPOD</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../creating-your-own-cocoapod/feed/index.html</wfw:commentRss>
+			<slash:comments>7</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">144</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	
+	>
+<channel>
+	<title>
+	Comments on: SHTwoDimensionalArray : A simple and easy to use two dimensional array for iOS applications.	</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 03 Feb 2020 01:13:31 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+	<item>
+		<title>
+		By: SHViewPager: Android like view pager control for iOS Version 2 finally! &#124; codewithshabib		</title>
+		<link>./../comment-page-1/index.html#comment-22</link>
+
+		<dc:creator><![CDATA[SHViewPager: Android like view pager control for iOS Version 2 finally! &#124; codewithshabib]]></dc:creator>
+		<pubDate>Fri, 02 Sep 2016 16:55:54 +0000</pubDate>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=282#comment-22</guid>
+
+					<description><![CDATA[[&#8230;] has been almost or, more than 2 years I had created this controller called SHViewPager. And to my utmost surprise a lot of people got actually benefited from it. Some [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] has been almost or, more than 2 years I had created this controller called SHViewPager. And to my utmost surprise a lot of people got actually benefited from it. Some [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

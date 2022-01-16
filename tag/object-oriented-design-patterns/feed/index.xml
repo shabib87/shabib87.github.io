@@ -1,0 +1,1532 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	
+	xmlns:georss="http://www.georss.org/georss"
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+	>
+
+<channel>
+	<title>Object Oriented Design Patterns &#8211; codewithshabib</title>
+	<atom:link href="./index.html" rel="self" type="application/rss+xml" />
+	<link>./../../../index.html</link>
+	<description>ios and swift blog</description>
+	<lastBuildDate>Mon, 08 Jun 2020 15:13:31 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.8.3</generator>
+
+<image>
+	<url>./../../../wp-content/uploads/2016/08/cropped-logo1-32x32.jpg</url>
+	<title>Object Oriented Design Patterns &#8211; codewithshabib</title>
+	<link>./../../../index.html</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">172312269</site>	<item>
+		<title>Better Architecture in iOS: Breaking down Massive View Controller using SOLID &#038; MVP</title>
+		<link>./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies</link>
+					<comments>./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html#respond</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Thu, 13 Jun 2019 03:45:20 +0000</pubDate>
+				<category><![CDATA[Architectural Patterns]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[MVP]]></category>
+		<category><![CDATA[OOP]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[architectural pattern]]></category>
+		<category><![CDATA[clean architecture]]></category>
+		<category><![CDATA[clean code]]></category>
+		<category><![CDATA[iOS]]></category>
+		<category><![CDATA[iOS application development]]></category>
+		<category><![CDATA[iOS programming]]></category>
+		<category><![CDATA[kiss]]></category>
+		<category><![CDATA[MVC]]></category>
+		<category><![CDATA[mvvm]]></category>
+		<category><![CDATA[Object Oriented Design]]></category>
+		<category><![CDATA[Object Oriented Design Patterns]]></category>
+		<category><![CDATA[Objective-C]]></category>
+		<category><![CDATA[pattern]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[SOLID]]></category>
+		<category><![CDATA[viper]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=1222</guid>
+
+					<description><![CDATA[<p>MVC; the age old architectural pattern; has been trusted by developers around the world to separate responsibilities of a software program regardless of language and platform. Anyone working in iOS applications starts with this pattern and gets comfortable with it in a really short amount of time. But an iOS developer who has been in [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html">Better Architecture in iOS: Breaking down Massive View Controller using SOLID &#038; MVP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Model–view–controller" target="_blank">MVC</a>; the age old architectural pattern; has been trusted by developers around the world to separate responsibilities of a software program regardless of language and platform. Anyone working in iOS applications starts with this pattern and gets comfortable with it in a really short amount of time. But an iOS developer who has been in the industry for a while would be at least getting started to familiarize with the notorious Massive View Controller paradigm by now. This problem has been here like always, and there are a lot of great articles to understand the problem and how to reduce them. I&#8217;ll list some of them which I found really helpful at the end of this blog post.</p>
+
+
+
+<p>So as we all agree <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://davedelong.com/blog/2017/11/06/a-better-mvc-part-1-the-problems/" target="_blank">Apples MVC is old and has its own issues</a>, let&#8217;s focus on how to solve it for new or evolving projects. There are some great alternatives to MVC; e.g. <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Model–view–presenter" target="_blank">MVP</a>, <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Model–view–viewmodel" target="_blank">MVVM</a> or <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://www.objc.io/issues/13-architecture/viper/" target="_blank">VIPER</a>; which all are kind of based on <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://martinfowler.com/" target="_blank">Uncle Bob&#8217;s</a> <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank">Clean Architecture Pattern</a> (some more and some are more loosely based). There are tons of arguments on which one you should use and which one is better than the others. But at the end of the day in software development only one thing is constant, CHANGE! So like every other thing in the world, it depends which architecture is best suited to solve your particular problem. I will discuss the points I personally focus on to keep my codebase clean, concise and testable.</p>
+
+
+
+<p>First of all, let&#8217;s go back to the basics, shall we? Remember <a href="https://en.wikipedia.org/wiki/SOLID" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">SOLID</a> and <a href="https://en.wikipedia.org/wiki/KISS_principle" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">KISS</a> Principle from OOP? Well basically every clean architectural pattern tries to help you achieve these two things! Let&#8217;s imagine we have a shiny new iOS application to build called <em>Heroes</em>. The initial purpose of the application will be to list out heroes. The app will fetch and show a list of heroes from a remote server and and on selecting a hero from the list, more detailed information will be presented to the user. </p>
+
+
+
+<figure class="wp-block-gallery columns-2 is-cropped"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img width="750" height="1334" src="http://codewithshabib.com/wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09.png" alt="" data-id="1226" data-link="https://codewithshabib.com/simulator-screen-shot-iphone-8-2019-05-08-at-00-04-09/" class="wp-image-1226" srcset="./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09.png 750w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09-169x300.png 169w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.09-576x1024.png 576w" sizes="(max-width: 750px) 100vw, 750px" /><figcaption class="blocks-gallery-item__caption">Hero list</figcaption></figure></li><li class="blocks-gallery-item"><figure><img width="750" height="1334" src="http://codewithshabib.com/wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15.png" alt="" data-id="1227" data-link="https://codewithshabib.com/simulator-screen-shot-iphone-8-2019-05-08-at-00-04-15/" class="wp-image-1227" srcset="./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15.png 750w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15-169x300.png 169w, ./../../../wp-content/uploads/2019/05/simulator-screen-shot-iphone-8-2019-05-08-at-00.04.15-576x1024.png 576w" sizes="(max-width: 750px) 100vw, 750px" /><figcaption class="blocks-gallery-item__caption">Hero Details</figcaption></figure></li></ul></figure>
+
+
+
+<p>Let&#8217;s breakdown the requirement a little more from an iOS development perspective:</p>
+
+
+
+<ul><li>We will need two <code>UIViewControllers</code>: one to list out the heroes and one to show the details.</li><li>We will need an <code>UITableView</code> with custom <code>UITableViewCell</code> to display the list.</li><li>We will need to fetch some data from a remote server.</li><li>We will need to make some sort of object representation of the fetched data to display on screen.</li></ul>
+
+
+
+<p>So if we follow Apples MVC pattern, we will end up writing the following classes for our project:</p>
+
+
+
+<ul><li>HeroListViewController </li><li>HeroDetailsViewController</li><li>HeroTableViewCell</li><li>Hero</li></ul>
+
+
+
+<p>We will be dealing with two <code>UIViewControllers</code> acting as both <em>Controllers</em> and <em>Views</em> and an <code>UITableViewCell</code> as a <em>View</em> and one <code>Struct</code> called <code>Hero</code> as <em>Model</em>. The <code>HeroListViewController</code> will be our main <em>ViewController</em> and will be displayed on application launch and it will be responsible for the following things:</p>
+
+
+
+<ol><li>Call web service API on opening the app.</li><li>Display an intermediate empty screen/loading screen while server request is ongoing.</li><li>Display an error message if server request failed.</li><li>Create a list of <code>Hero</code> objects from the response <code>JSON</code> returned by a successful web service call.</li><li>Display selective properties from <code>Hero</code> objects in <code>UITableViewCell</code> inside an <code>UITableView</code>.</li><li>On selecting an <code>UITableViewCell</code> display the selected <code>Hero</code> object in the <code>HeroDetailsViewController</code>.</li><li>Contain all logic for <code>UIViewController</code> and <code>UIView</code> lifecycle and <em>delegate</em> and <em>dataSource</em> codes for <code>UITableView</code>.</li></ol>
+
+
+
+<p>This long list of responsibilities violate the very first rule of <strong>SOLID</strong>: <em>Single Responsibility Principle</em> let alone the the remaining ones. Not only that, the <code>HeroListViewController</code> is neither Simple nor Stupid any longer! Imagine what will happen if the same view controller has to deal with another web service API or a more complex UI, which might be the case in foreseeable future as the app evolves. Right now it is only one out of two view controller classes, and our app might get more view controllers in future. What will happen to these view controller classes? How will we maintain them? Most importantly how will we test them? I have seen some legacy <code>UIViewController</code> classes containing more than 4000 (yeah, you read it right, four thousand) lines of code! And trust me, it is not a pretty sight and a nightmare to work with. The main liability with Apples MVC is the <code>UIViewController</code> is responsible for too many things, it is responsible for dealing with business logic as well as UI logic and UI creation.</p>
+
+
+
+<p>So going back to the basics, let&#8217;s separate our responsibilities:</p>
+
+
+
+<h4>The network request</h4>
+
+
+
+<p>If we follow Apples MVC, <code>HeroListViewController</code> does all the heavy lifting of making the web service call, error handling and processing the response. Which is a lot to ask for a single <em>UIViewController</em>, so the first thing we should do is separate all network codes from our view controller to a separate class, or even better, a separate module. Now, what I prefer doing is using a <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Facade_pattern" target="_blank">Facade Design Pattern</a> to hide all the complexities of network handling and provide the api user class with only two visible methods/response block API- <code>successWithResponse:</code> and <code>errorWithDescription:</code>. It can be a <em>protocol</em> <em>delegate</em> or a simple <em>closure</em>. And this makes more sense because, apart from these two responses the api user class should not much care about the network layer as either the web service call is a successful one or not. And it helps a lot if you for some reason decide to change your network codes from <a href="https://developer.apple.com/documentation/foundation/urlsession"><code>URLSessions</code></a> to <a href="https://github.com/Alamofire/Alamofire"><code>Alamofire</code></a> or <a href="https://github.com/Moya/Moya"><code>Moya</code></a>, because your view controller does not care about how you get the two desired outputs!</p>
+
+
+
+<h4>The response object from JSON</h4>
+
+
+
+<p>When the network layer returns us a raw response <em>JSON</em> string or an error message we need to properly wrap it with our <em>OO</em> model. The network layer should not be responsible for creating the model objects from the <em>JSON</em> string and neither should be the <em>UIViewController</em> class calling the web service, right? Does it make sense? Then who should map the JSON key-value pairs to the model object? The answer is, the model class should create itself from the response! And before <a href="https://developer.apple.com/documentation/swift/codable" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">Swift Codable</a> it was a pretty daunting task, but not anymore!</p>
+
+
+
+<h4>UI creation and dealing with user interaction</h4>
+
+
+
+<p>This part is fairly simple the <em>UIViewController</em> and <em>UIView</em> subclasses should be making the calls for all UI logic.</p>
+
+
+
+<h4>Dealing with navigation by passing appropriate data</h4>
+
+
+
+<p>When we are working with UI in iOS there are three options:</p>
+
+
+
+<ul><li>Storyboards</li><li>Xibs</li><li>Code</li></ul>
+
+
+
+<p>Again, like everything else in the world you&#8217;ll find a lot arguments over which one is better than the others! And yet again, the answer my friend, is it DEPENDS! These are the tools at your disposal and you should use it wisely. Here is a <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://www.toptal.com/ios/ios-user-interfaces-storyboards-vs-nibs-vs-custom-code" target="_blank">great article</a> on this topic that should provide you with more insight. The real reason I bring this up in this section is <em>UI Navigation</em>. I personally use all of the three tools in my projects and mix them up depending on the situation. Now I use <em>Storyboards</em> quite often, but I do realize the major drawback of it- <em>Segues! </em> While it is a great way to simplify navigation process, it messes up <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Dependency_injection" target="_blank">Dependency Injection</a>. Yes, you can set the dependency of the to-be presented <em>UIViewController</em> on the navigation stack via property and <em>prepareForSegue</em>: method, but it is messy and again violates <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">Single Responsibility Principle</a>. So what is the solution? </p>
+
+
+
+<p><em>P.S. <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://developer.apple.com/xcode/swiftui/" target="_blank">SwiftUI</a> has changed the 3 options to 1 and it seems to be the future and a good one!</em></p>
+
+
+
+<h4>Deciding on the <strong>architecture</strong></h4>
+
+
+
+<p>Now that we have listed our responsibilities, it is clear that we have to decide on which architecture we should follow. As I have mentioned before, it always DEPENDS on your NEED! There is no right way to do it, as your application grows you only have one thing constant: CHANGE! So, basically you have to evolve your project with the flow. And if you follow the basics you should be good to go for most of the time, which is following the <strong>SOLID</strong> principle:</p>
+
+
+
+<ol><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Single_responsibility_principle" target="_blank">Single responsibility principle (SIP)</a>: Every class or method on your project should be responsible for only one thing and one thing only. If you find any class or method doing multiple things, you need to break it down. (<strong><em>Pro Tip</em></strong>: <em>a simple way to measure if you&#8217;re violating this principle is: if you have a class roughly longer than 150 lines or a method roughly longer than 10 lines, you can probably improve that</em>.)</li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Open–closed_principle" target="_blank">Open-closed principle (OCP)</a>: Every class should be open for extension and closed for modification!</li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Liskov_substitution_principle" target="_blank">Liskov substitution principle (LSP)</a>: Subclasses should be substitutable with super classes. (<em>This principle backs up the <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://codewithshabib.com/2017/02/05/introduction-to-strategy-pattern/" target="_blank">Strategy Pattern</a> a lot.</em>)</li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="https://en.wikipedia.org/wiki/Interface_segregation_principle" target="_blank">Interface Segregation principle (ISP)</a>: Don&#8217;t force the interface if not needed!</li><li><a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency inversion principle (DIP)</a>: High-level modules should not depend on low-level modules rather depend on abstractions and abstractions should not depend on the details, but the details should depend on the abstractions!</li></ol>
+
+
+
+<p>Right now, I have just stated the text-book definition of the <em>SOLID</em> principle, but what does it actually mean? To understand that, we have to go through an example and for that we have to decide on an architecture to proceed. Our Heroes app is quite simple right now and actually we can just go with Apples MVC using storyboards at this earlier phase, but it will definitely get uglier when the app expands with requirements. With a more modern architectural approach like <em>MVP</em>, <em>MVVM</em> or <em>VIPER</em> it can be solved with ease; codes become more modular and maintainable by separating business logic from the&nbsp;<code>UIViewController</code>&nbsp;subclass and dumbing it down to act as a simple <em>View</em> file. In this case I chose MVP over other mentioned architectures for its simplicity.</p>
+
+
+
+<h4>MVP for the rescue</h4>
+
+
+
+<p>In <em>MVP</em>, as I mentioned earlier the <em>UIViewController</em> is treated as just a simple view file and all business logics are maintained in the <em>Presenter</em> class. Now this introduces a problem with dependency as each <em>UIViewController</em> has a dependency of a <em>Presenter</em> class for feeding it with processed data. If we go with <em>StoryBoards</em> for the UI, our UI will be built quickly but we will have problem with the initialization of the <em>UIViewController</em> classes with the added dependency. So, to solve this we can go full code. But what about using <em>Storyboards</em> as it helps you to keep the related UI stories together but also it can be used with Xibs and view codes as necessary. To do that first, I get rid of the default <code>Main.storyboard</code> file and use my own groupings and <em>Storyboards</em> for each user story. And to handle the <em>segue</em> problem, I do not use it at all! Instead I use the following protocol to enforce dependency injection.</p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96148190" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-storyboardinitializable-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="StoryboardInitializable.swift">
+        <tr>
+          <td id="file-storyboardinitializable-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-storyboardinitializable-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">Presenter</span> {}</td>
+        </tr>
+        <tr>
+          <td id="file-storyboardinitializable-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-storyboardinitializable-swift-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">StoryboardInitializable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-storyboardinitializable-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-storyboardinitializable-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">static</span> <span class="pl-k">func</span> <span class="pl-en">instantiateFromStoryboard</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) <span class="pl-k">-&gt;</span> UIViewController</td>
+        </tr>
+        <tr>
+          <td id="file-storyboardinitializable-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-storyboardinitializable-swift-LC4" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/65dc0b631916247a8808e09d08216a86/raw/a8796aa22a75bfe1ec31be152505515486f5c24c/StoryboardInitializable.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/65dc0b631916247a8808e09d08216a86#file-storyboardinitializable-swift">
+          StoryboardInitializable.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>The empty <code>Presenter</code> class is the super class for all the <em>Presenter</em> classes to be used; is declared to support <em>LSP</em> and the <code>StoryboardInitializable</code> is declared as a protocol to support <em>ISP</em>. We want to make sure our <em>UIViewController</em> subclasses do not support segues as that will break our <em>MVP</em> pattern, but we do not want to enforce it to all <em>UIViewController</em> subclasses as for a simple user story we might want to use <em>segues</em> as <em>MVP</em> might be a overkill for the module. So, to support <em>ISP</em>, we use a RootViewController to act as the abstract class that confronts to the above protocol. </p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96148296" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-rootviewcontroller-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="RootViewController.swift">
+        <tr>
+          <td id="file-rootviewcontroller-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-rootviewcontroller-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">RootViewController</span>: <span class="pl-e">UIViewController</span>, <span class="pl-e">StoryboardInitializable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-rootviewcontroller-swift-LC2" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-rootviewcontroller-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">class</span> <span class="pl-k">func</span> <span class="pl-en">instantiateFromStoryboard</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) <span class="pl-k">-&gt;</span> UIViewController {</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-rootviewcontroller-swift-LC4" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">fatalError</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Override failed. Dependency injection not processed. Presenter injection hampered.<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-rootviewcontroller-swift-LC5" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-rootviewcontroller-swift-LC6" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-rootviewcontroller-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-c"><span class="pl-c">//</span> Preventing segue to support dependency injection</span></td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-rootviewcontroller-swift-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c"></span>    <span class="pl-k">override</span> <span class="pl-k">func</span> <span class="pl-en">shouldPerformSegue</span>(<span class="pl-en">withIdentifier</span> <span class="pl-smi">identifier</span>: <span class="pl-c1">String</span>, <span class="pl-smi"><span class="pl-en">sender</span></span>: <span class="pl-c1">Any</span><span class="pl-k">?</span>) <span class="pl-k">-&gt;</span> <span class="pl-c1">Bool</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-rootviewcontroller-swift-LC9" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">fatalError</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Segues should not be used. Presenter injection hampered.<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-rootviewcontroller-swift-LC10" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-rootviewcontroller-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-rootviewcontroller-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/c311d48c206cb013c42ea7d17ef9d189/raw/1fda4939ab75b06fd9a5db0c5cad4ca1158700e7/RootViewController.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/c311d48c206cb013c42ea7d17ef9d189#file-rootviewcontroller-swift">
+          RootViewController.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>The benefit of this is we can use RootViewController with some more common properties, then selectively override the methods to support segues. And we can achieve our navigation with the dependency injection like:</p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96148352" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-herodetailsviewcontroller-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="HeroDetailsViewController.swift">
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">final</span> <span class="pl-k">class</span> <span class="pl-en">HeroDetailsViewController</span>: <span class="pl-e">RootViewController </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">override</span> <span class="pl-k">class</span> <span class="pl-k">func</span> <span class="pl-en">instantiateFromStoryboard</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) <span class="pl-k">-&gt;</span> UIViewController {</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC4" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> vc <span class="pl-k">=</span> <span class="pl-c1">UIStoryboard</span>(<span class="pl-c1">name</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>Hero<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">bundle</span>: <span class="pl-c1">nil</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC5" class="blob-code blob-code-inner js-file-line">            .<span class="pl-c1">instantiateViewController</span>(<span class="pl-c1">withIdentifier</span>: <span class="pl-s"><span class="pl-pds">&quot;</span>HeroDetailsViewController<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC6" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">as!</span> HeroDetailsViewController</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC7" class="blob-code blob-code-inner js-file-line">        vc.<span class="pl-smi">presenter</span> <span class="pl-k">=</span> aPresenter <span class="pl-k">as?</span> HeroDetailsPresenter</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> vc</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC9" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herodetailsviewcontroller-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-herodetailsviewcontroller-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/309565f62b3bf75b10ab76a743e069e9/raw/168fe020af774a906ad7e51b920451c6206b03c9/HeroDetailsViewController.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/309565f62b3bf75b10ab76a743e069e9#file-herodetailsviewcontroller-swift">
+          HeroDetailsViewController.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>Now that we have separated the responsibilities, we should start decoupling the <em>UIViewController</em>. </p>
+
+
+
+<p>The <em>Presenter</em> class will be the boss, every intelligent stuff should go inside the presenter, which includes: dealing with network calls, informing the view about data change, dealing user interaction triggered business logic and delegating navigation flow!</p>
+
+
+
+<p>Now if we push all these codes inside the <em>Presenter</em> class, we are decoupling some of the new controller responsibilities but again we are bloating it with codes that should not be inside the <em>Presenter</em>; e.g. Networking code! The Presenter class should only be responsible for kickstarting the API call, kickstart model creation from the response and bind the appropriate data to the designated view. So the role of the Presenter class would be like a mediator, who delegates responsibilities and of parsing/processing models and displaying view. You can look into the image below to have a better understanding. </p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><img width="800" height="244" src="http://codewithshabib.com/wp-content/uploads/2019/06/mvp.png" alt="" class="wp-image-1251" srcset="./../../../wp-content/uploads/2019/06/mvp.png 800w, ./../../../wp-content/uploads/2019/06/mvp-300x92.png 300w, ./../../../wp-content/uploads/2019/06/mvp-768x234.png 768w" sizes="(max-width: 800px) 100vw, 800px" /><figcaption>MVP in action</figcaption></figure></div>
+
+
+
+<p><em>IMPORTANT</em>: Remember initially I said the view should be dumb, and it should not be responsible off processing of data before displaying them in the UI. Processing data is part of the business logic, and the view should not be bothered with the actual <em>Model</em> class. To achieve this, only a processed model class holding the processed data (e.g. strings instead of Date, Int, Double, a full name instead of first &amp; last name etc.) should be given to the view. As this is a model that has processed data, it is called <em>ViewData</em>.</p>
+
+
+
+<p>In the image you can see the that the <em>Presenter</em> does not own a <em>UIView</em> or <em>UIViewController</em> subclass rather something called a <em>passive view</em>, because the <em>presenter</em> does not need to hold the reference of the actual <em>UI</em> rather an <em>Interface</em> is enough and that is the passive view <em>protocol</em> that the actual <em>UIView</em> or <em>UIViewController</em> needs to confront to. For example the <em>HeroListViewController</em> should confront to the following passive view protocol to display the hero list.</p>
+
+
+
+<div class="wp-block-jetpack-markdown"><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96698409" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-herolistview-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="HeroListView.swift">
+        <tr>
+          <td id="file-herolistview-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-herolistview-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">HeroListView</span>: <span class="pl-e">NSObjectProtocol </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-herolistview-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">startLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-herolistview-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">finishLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-herolistview-swift-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">reloadHeroList</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-herolistview-swift-LC5" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">showEmptyListMessage</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-herolistview-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">gotoHeroDetails</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: HeroDetailsPresenter)</td>
+        </tr>
+        <tr>
+          <td id="file-herolistview-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-herolistview-swift-LC7" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/deb4de1b1169621f930e87ffc979053a/raw/c14a07d3b740e14a4d05be2bdd1364d62575b312/HeroListView.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/deb4de1b1169621f930e87ffc979053a#file-herolistview-swift">
+          HeroListView.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+
+<p>And the <em>HeroListPresenter</em> class should only have a reference to the <em>HeroListView</em> rather than having a full reference of the <em>HeroListViewController</em> class and should only be updating it via the passive view property reference.</p>
+
+
+
+<div class="wp-block-jetpack-markdown"><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96698516" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-herolistpresenter-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="HeroListPresenter.swift">
+        <tr>
+          <td id="file-herolistpresenter-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-herolistpresenter-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">final</span> <span class="pl-k">class</span> <span class="pl-en">HeroListPresenter</span>: <span class="pl-e">Presenter </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-herolistpresenter-swift-LC2" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-herolistpresenter-swift-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">private</span> <span class="pl-k">let</span> service: HeroService</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-herolistpresenter-swift-LC4" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">weak</span> <span class="pl-k">private</span> <span class="pl-k">var</span> view : HeroListView<span class="pl-k">?</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-herolistpresenter-swift-LC5" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-herolistpresenter-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">init</span>(<span class="pl-smi"><span class="pl-en">service</span></span>: HeroService) {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-herolistpresenter-swift-LC7" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-smi">service</span> <span class="pl-k">=</span> service</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-herolistpresenter-swift-LC8" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-herolistpresenter-swift-LC9" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-herolistpresenter-swift-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">attachView</span>(<span class="pl-smi"><span class="pl-en">view</span></span>: HeroListView) {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-herolistpresenter-swift-LC11" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">view</span> <span class="pl-k">=</span> view</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-herolistpresenter-swift-LC12" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-herolistpresenter-swift-LC13" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">...</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-herolistpresenter-swift-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">getHeroes</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-herolistpresenter-swift-LC15" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">self</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">startLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-herolistpresenter-swift-LC16" class="blob-code blob-code-inner js-file-line">        service.<span class="pl-smi">getHeroes</span> { [<span class="pl-k">weak</span> <span class="pl-c1">self</span>] heroes <span class="pl-k">in</span></td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-herolistpresenter-swift-LC17" class="blob-code blob-code-inner js-file-line">            <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">finishLoading</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-herolistpresenter-swift-LC18" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">if</span> heroes.<span class="pl-c1">count</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-herolistpresenter-swift-LC19" class="blob-code blob-code-inner js-file-line">                <span class="pl-k">let</span> mappedHeroes <span class="pl-k">=</span> heroes.<span class="pl-c1">map</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-herolistpresenter-swift-LC20" class="blob-code blob-code-inner js-file-line">                    <span class="pl-k">return</span> <span class="pl-c1">HeroViewData</span>(<span class="pl-c1">hero</span>: <span class="pl-c1">$0</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-herolistpresenter-swift-LC21" class="blob-code blob-code-inner js-file-line">                }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-herolistpresenter-swift-LC22" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-smi">heroes</span>.<span class="pl-c1">append</span>(<span class="pl-c1">contentsOf</span>: mappedHeroes)</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-herolistpresenter-swift-LC23" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">reloadHeroList</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-herolistpresenter-swift-LC24" class="blob-code blob-code-inner js-file-line">            } <span class="pl-k">else</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-herolistpresenter-swift-LC25" class="blob-code blob-code-inner js-file-line">                <span class="pl-c1">self</span><span class="pl-k">?</span>.<span class="pl-c1">view</span><span class="pl-k">?</span>.<span class="pl-c1">showEmptyListMessage</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-herolistpresenter-swift-LC26" class="blob-code blob-code-inner js-file-line">            }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-herolistpresenter-swift-LC27" class="blob-code blob-code-inner js-file-line">        }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-herolistpresenter-swift-LC28" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-herolistpresenter-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-herolistpresenter-swift-LC29" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/a15423badc5640fe6ffdf9a1e4218e53/raw/3b426aece6e832594c7346e2d3e00e0ec2262bfe/HeroListPresenter.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/a15423badc5640fe6ffdf9a1e4218e53#file-herolistpresenter-swift">
+          HeroListPresenter.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+</div>
+
+
+
+<p>The <em>HeroListPresenter</em> has a dependency injection of the API service manager and only kickstarts the network and notifies the passive view about the data change on network success or failure.</p>
+
+
+
+<p><em>DIP</em> is enforced by introducing the <em>Passive View Interface</em> between the <em>Presenter</em> and <em>ViewController</em>. Separating high level module (presenter) from low level/dependent module (view/viewcontroller) via abstraction (view protocol). <em>OCP</em> can be found when we try adding any extra api call or views or functionality as it’ll extend the presenter class without actually modifying the functionality. </p>
+
+
+
+<p>Now dealing with UI navigation is another challenge that can be easily solved using another protocol like the following:</p>
+
+
+
+<style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist96698624" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-routing-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="Routing.swift">
+        <tr>
+          <td id="file-routing-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-routing-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">CanDisplayHeroDetailsScreen</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-routing-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">displayHeroDetailsScreen</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter)</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-routing-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-routing-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-routing-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">extension</span> <span class="pl-en">CanDisplayHeroDetailsScreen</span> <span class="pl-k">where</span> <span class="pl-c1">Self</span><span class="pl-k">:</span> <span class="pl-e">UIViewController</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-routing-swift-LC6" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-routing-swift-LC7" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">displayHeroDetailsScreen</span>(<span class="pl-en">presenter</span> <span class="pl-smi">aPresenter</span>: Presenter) {</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-routing-swift-LC8" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">let</span> detailsVC <span class="pl-k">=</span> HeroDetailsViewController.<span class="pl-c1">instantiateFromStoryboard</span>(<span class="pl-c1">presenter</span>: aPresenter)</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-routing-swift-LC9" class="blob-code blob-code-inner js-file-line">        navigationController<span class="pl-k">?</span>.<span class="pl-c1">pushViewController</span>(detailsVC, <span class="pl-c1">animated</span>: <span class="pl-c1">true</span>)</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-routing-swift-LC10" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-routing-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-routing-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/502d3e83f66ffb85b47570a8a606abd9/raw/9952c48d72dcfb976287611d5d6b233a31788031/Routing.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/502d3e83f66ffb85b47570a8a606abd9#file-routing-swift">
+          Routing.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+
+
+
+
+<p>No class has to bother writing boiler plate codes again and again just to simply push a view controller in the navigation stack, rather just confront to the protocol and call the method with parameters, as simple as that!</p>
+
+
+
+<p>A complete implementation of this project can found in my <a rel="noreferrer noopener" aria-label="GitHub repo (opens in a new tab)" href="https://github.com/shabib87/Heroes" target="_blank">GitHub repo</a>. Feel free to modify or adjust as your need. As promised I am listing out some of the blogs that I found helpful to understand different iOS architectures. Happy Coding!</p>
+
+
+
+<ul><li><a rel="noreferrer noopener" aria-label="Four Rules of Simpler iOS Software Design (opens in a new tab)" href="https://medium.com/flawless-app-stories/four-rules-of-simpler-ios-software-design-c371818d08e0" target="_blank">Four Rules of Simpler iOS Software Design</a></li><li><a rel="noreferrer noopener" aria-label="iOS Architecture Patterns (opens in a new tab)" href="https://medium.com/ios-os-x-development/ios-architecture-patterns-ecba4c38de52" target="_blank">iOS Architecture Patterns</a></li><li><a rel="noreferrer noopener" aria-label="Best resources for Advanced iOS Developer (Swift) (opens in a new tab)" href="https://medium.com/@PavloShadov/best-resources-for-advanced-ios-developer-swift-ade30374593d" target="_blank">Best resources for Advanced iOS Developer (Swift)</a></li><li><a rel="noreferrer noopener" aria-label="Clean Architecture For iOS Development Using The VIPER Pattern (opens in a new tab)" href="https://medium.com/slalom-engineering/clean-architecture-for-ios-development-using-the-viper-pattern-fac30f5d29fc" target="_blank">Clean Architecture For iOS Development Using The VIPER Pattern</a></li><li><a rel="noreferrer noopener" aria-label="Coordinators, Protocol Oriented Programming and MVVM; Bullet-proof architecture with Swift (opens in a new tab)" href="https://medium.com/@aaron.bikis/coordinators-protocol-oriented-programming-and-mvvm-bullet-proof-architecture-with-swift-629dea5354ce" target="_blank">Coordinators, Protocol Oriented Programming and MVVM; Bullet-proof architecture with Swift</a></li><li><a rel="noreferrer noopener" aria-label="So Swift, So Clean Architecture for iOS (opens in a new tab)" href="https://basememara.com/swift-clean-architecture/" target="_blank">So Swift, So Clean Architecture for iOS</a></li><li><a href="https://medium.com/flawless-app-stories/getting-started-with-moya-f559c406e990" target="_blank" rel="noreferrer noopener" aria-label="Getting Started with Moya (opens in a new tab)">Getting Started with Moya</a></li></ul>
+<p>The post <a rel="nofollow" href="./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/index.html">Better Architecture in iOS: Breaking down Massive View Controller using SOLID &#038; MVP</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../better-architecture-in-ios-breaking-down-massive-view-controller-using-solid-mvp-for-dummies/feed/index.html</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">1222</post-id>	</item>
+		<item>
+		<title>Introduction to Strategy Pattern</title>
+		<link>./../../../introduction-to-strategy-pattern/index.html?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=introduction-to-strategy-pattern</link>
+					<comments>./../../../introduction-to-strategy-pattern/index.html#comments</comments>
+		
+		<dc:creator><![CDATA[Shabib Hossain]]></dc:creator>
+		<pubDate>Sun, 05 Feb 2017 06:30:51 +0000</pubDate>
+				<category><![CDATA[Behavioral Patterns]]></category>
+		<category><![CDATA[Cocoa]]></category>
+		<category><![CDATA[Cocoatouch]]></category>
+		<category><![CDATA[Design Patterns]]></category>
+		<category><![CDATA[iOS Programming]]></category>
+		<category><![CDATA[Object Oriented Design]]></category>
+		<category><![CDATA[OOP]]></category>
+		<category><![CDATA[Swift]]></category>
+		<category><![CDATA[basic oop]]></category>
+		<category><![CDATA[coding]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[encapsulation]]></category>
+		<category><![CDATA[Inheritance]]></category>
+		<category><![CDATA[Object Oriented Design Patterns]]></category>
+		<category><![CDATA[polymorphism]]></category>
+		<category><![CDATA[programming]]></category>
+		<category><![CDATA[software design patterns]]></category>
+		<category><![CDATA[Software Development]]></category>
+		<category><![CDATA[strategy pattern]]></category>
+		<guid isPermaLink="false">http://codewithshabib.com/?p=690</guid>
+
+					<description><![CDATA[<p>In real life software development one particular challenge we developers constantly face is requirement changes. Anyone who is in the software business game knows how frequently and drastically software specification can change in any time. For this reason, in software engineering only one thing is considered as constant: CHANGE! In object oriented world, we have [&#8230;]</p>
+<p>The post <a rel="nofollow" href="./../../../introduction-to-strategy-pattern/index.html">Introduction to Strategy Pattern</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p>In real life software development one particular challenge we developers constantly face is requirement changes. Anyone who is in the software business game knows how frequently and drastically software specification can change in any time. For this reason, in software engineering only one thing is considered as constant: <strong>CHANGE!</strong></p>
+<p>In object oriented world, we have some nice ways to deal with this, i.e. design patterns to the rescue. There are lots and lots of design patterns out there to help us, the developers. Amongst them the most common and widely used one is known as <strong>Strategy Pattern</strong>. Any developer with a few years of experience under his/her belt uses this quite frequently (sometimes even without knowing they are using it!).</p>
+<p>In this post I am going to try to create a scenario, which we can solve using strategy pattern.</p>
+<p>Let us assume we&#8217;re in a software company named BadAss Softwares Inc, where we build some ass kicking great softwares. Now, a client of ours, Mr. Big Boss wants to make a smart car software. His initial requirements are simple:</p>
+<ul>
+<li>I want a smart car.</li>
+<li>It can drive.</li>
+<li>It can talk.</li>
+</ul>
+<p>Getting this requirement, our rockstar developer Johny Doe thinks, boy that&#8217;s easy! So, he writes the following code.</p>
+<p><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44517842" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartcar-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartCar.swift">
+        <tr>
+          <td id="file-smartcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartcar-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartCar</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartcar-swift-LC2" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartcar-swift-LC3" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartcar-swift-LC4" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartcar-swift-LC5" class="blob-code blob-code-inner js-file-line">	</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartcar-swift-LC6" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">talk</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartcar-swift-LC7" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Hi! I am the smart talking car!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartcar-swift-LC8" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcar-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartcar-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/75be3b6edca66462625d0de8f1902bc2/raw/e2610960e8aef0fc7de3eeb6521f3eebb889c49b/SmartCar.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/75be3b6edca66462625d0de8f1902bc2#file-smartcar-swift">
+          SmartCar.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+</p>
+<p>Mr. Big is happy, he got what he asked for. And we are happy too. But now comes the challenge; someone gave Mr. Big an idea, why only drive and talk. It&#8217;s a damn smart car, he should aim for more! So  Mr. Big changes this requirement to the following:</p>
+<ul>
+<li>Yes, I want a smart car that can do all the previous stuff.</li>
+<li>I want another super smart car, it should not only drive on road, but also on water! (Well, don&#8217;t laugh!)</li>
+</ul>
+<p>Now, Johny is smart. He likes to reuse as many parts of the code as he can. So, how would he design it? Here comes, our nice friend Inheritance! So, what Johny does is, he makes a subclass of the SmartCar and adds a new method called driveOnWater. Cool, isn&#8217;t it?</p>
+<p><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519825" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-supersmartcar-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SuperSmartCar.swift">
+        <tr>
+          <td id="file-supersmartcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-supersmartcar-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SuperSmartCar</span>: <span class="pl-e">SmartCar </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-supersmartcar-swift-LC2" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-supersmartcar-swift-LC3" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-supersmartcar-swift-LC4" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-supersmartcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-supersmartcar-swift-LC5" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/e489cf3ed8eb4d28fbf9cbe4da6cb39d/raw/997fe4027ae12714bb728423d86f2304f4c52fca/SuperSmartCar.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/e489cf3ed8eb4d28fbf9cbe4da6cb39d#file-supersmartcar-swift">
+          SuperSmartCar.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+</p>
+<p>Now, we have again made Mr. Big happy! How cool is that!</p>
+<p>But Mr. Big has something bigger in his mind, he now wants make a smart vehicle that can not only run on road, but also fly (but can not run over water)! Now, Johny is in a little trouble, as he can not just make another subclass to support this. How would he deal with this issue? Well, as I said Johny is smart! He knows something called Interface, a nifty tool in OOP (which in our case in swift is known as protocol)! So, as the &#8220;drive on road&#8221; and other features are common, except for &#8220;driving on water&#8221;. He creates a protocol named Flyable and creates another subclass of the SmartCar.</p>
+<p><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519799" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartflyingcar-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartFlyingCar.swift">
+        <tr>
+          <td id="file-smartflyingcar-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartflyingcar-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">Flyable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartflyingcar-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartflyingcar-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartflyingcar-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartflyingcar-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartFlyingCar</span>: <span class="pl-e">SmartCar</span>, <span class="pl-e">Flyable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartflyingcar-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartflyingcar-swift-LC7" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Wohoo! I am flying high!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartflyingcar-swift-LC8" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-smartflyingcar-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartflyingcar-swift-LC9" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/15f5bd76aeb01112801a5c09ce719d2d/raw/6647685b920d11455837e867f0755b8c0839e49f/SmartFlyingCar.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/15f5bd76aeb01112801a5c09ce719d2d#file-smartflyingcar-swift">
+          SmartFlyingCar.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+</p>
+<p>Now, we have our SmartCar, SuperSmartCar and FlyingSmartCar, which all can run on the road and talk back to you! Mr. Big is happy, our company is happy and Johny got a big fat bonus! But, good days don&#8217;t last long. Due to the complicated features, Mr. Big&#8217;s cars don&#8217;t do so well in the market as people don&#8217;t like it yet. So, Mr. Big does a public survey and finds out people don&#8217;t want all in all cars, they want car that runs on road, boat that runs over water and plane that flies in the air. So, he again calls our firm and changes the requirement again:</p>
+<ul>
+<li>I want some smart vehicles.</li>
+<li>I want a smart car that runs on road.</li>
+<li>I want a smart boat that runs on water.</li>
+<li>I want a smart plane that flies.</li>
+<li>These smart vehicles must talk back.</li>
+</ul>
+<p>Now, Johny is pissed as he has to change a lot of things and he has to redo a lot of stuff. So he sits with a cup of coffee and thinks how he can decouple all the classes and make the changes with the least amount of hassle. Johny finds the following things:</p>
+<ul>
+<li>All products are vehicles and can talk back, so he can write a vehicle class with that option.</li>
+<li>A car can talk and run on road but can not fly or run on water.</li>
+<li>A boat can talk and run over water but can not fly or run on road.</li>
+<li>A plane can talk and fly but can not run on water or road.</li>
+</ul>
+<p>Now, as Johny has learnt the client can change the requirement anytime, he also thinks about the following:</p>
+<ul>
+<li>What if Mr. Big wants another vehicle that can run on both water and road again?</li>
+<li>What if Mr. Big wants another vehicle that can fly and run on road?</li>
+<li>What if Mr. Big wants another vehicle that can do all of those?</li>
+</ul>
+<p class="graf graf--p">So, now to answer these Johny does these:</p>
+<ul>
+<li>Creates separate classes by subclassing the Vehicle class, that&#8217;ll make sure all vehicles are smart and can talk back.</li>
+<li>Makes all run behaviors as interfaces/protocols, that&#8217;ll make sure if any more requirement changes comes up, he only has to implement the protocol to give support to that feature.</li>
+</ul>
+<p>Now, this is Johny&#8217;s final code.</p>
+<p><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519866" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartvehicle-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartVehicle.swift">
+        <tr>
+          <td id="file-smartvehicle-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartvehicle-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">RoadDrivable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartvehicle-swift-LC2" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartvehicle-swift-LC3" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartvehicle-swift-LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartvehicle-swift-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">WaterDrivable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartvehicle-swift-LC6" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartvehicle-swift-LC7" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartvehicle-swift-LC8" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartvehicle-swift-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-k">protocol</span> <span class="pl-en">Flyable</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-smartvehicle-swift-LC10" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>()</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L11" class="blob-num js-line-number js-code-nav-line-number" data-line-number="11"></td>
+          <td id="file-smartvehicle-swift-LC11" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L12" class="blob-num js-line-number js-code-nav-line-number" data-line-number="12"></td>
+          <td id="file-smartvehicle-swift-LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L13" class="blob-num js-line-number js-code-nav-line-number" data-line-number="13"></td>
+          <td id="file-smartvehicle-swift-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartVehicle</span> {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L14" class="blob-num js-line-number js-code-nav-line-number" data-line-number="14"></td>
+          <td id="file-smartvehicle-swift-LC14" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">talk</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L15" class="blob-num js-line-number js-code-nav-line-number" data-line-number="15"></td>
+          <td id="file-smartvehicle-swift-LC15" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Hi! I am the smart talking vehicle!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L16" class="blob-num js-line-number js-code-nav-line-number" data-line-number="16"></td>
+          <td id="file-smartvehicle-swift-LC16" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L17" class="blob-num js-line-number js-code-nav-line-number" data-line-number="17"></td>
+          <td id="file-smartvehicle-swift-LC17" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L18" class="blob-num js-line-number js-code-nav-line-number" data-line-number="18"></td>
+          <td id="file-smartvehicle-swift-LC18" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L19" class="blob-num js-line-number js-code-nav-line-number" data-line-number="19"></td>
+          <td id="file-smartvehicle-swift-LC19" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartCar</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">RoadDrivable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L20" class="blob-num js-line-number js-code-nav-line-number" data-line-number="20"></td>
+          <td id="file-smartvehicle-swift-LC20" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L21" class="blob-num js-line-number js-code-nav-line-number" data-line-number="21"></td>
+          <td id="file-smartvehicle-swift-LC21" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L22" class="blob-num js-line-number js-code-nav-line-number" data-line-number="22"></td>
+          <td id="file-smartvehicle-swift-LC22" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L23" class="blob-num js-line-number js-code-nav-line-number" data-line-number="23"></td>
+          <td id="file-smartvehicle-swift-LC23" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L24" class="blob-num js-line-number js-code-nav-line-number" data-line-number="24"></td>
+          <td id="file-smartvehicle-swift-LC24" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L25" class="blob-num js-line-number js-code-nav-line-number" data-line-number="25"></td>
+          <td id="file-smartvehicle-swift-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartBoat</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">WaterDrivable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L26" class="blob-num js-line-number js-code-nav-line-number" data-line-number="26"></td>
+          <td id="file-smartvehicle-swift-LC26" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L27" class="blob-num js-line-number js-code-nav-line-number" data-line-number="27"></td>
+          <td id="file-smartvehicle-swift-LC27" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L28" class="blob-num js-line-number js-code-nav-line-number" data-line-number="28"></td>
+          <td id="file-smartvehicle-swift-LC28" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L29" class="blob-num js-line-number js-code-nav-line-number" data-line-number="29"></td>
+          <td id="file-smartvehicle-swift-LC29" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L30" class="blob-num js-line-number js-code-nav-line-number" data-line-number="30"></td>
+          <td id="file-smartvehicle-swift-LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L31" class="blob-num js-line-number js-code-nav-line-number" data-line-number="31"></td>
+          <td id="file-smartvehicle-swift-LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartPlane</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">Flyable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L32" class="blob-num js-line-number js-code-nav-line-number" data-line-number="32"></td>
+          <td id="file-smartvehicle-swift-LC32" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">func</span> <span class="pl-en">flyOnAir</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L33" class="blob-num js-line-number js-code-nav-line-number" data-line-number="33"></td>
+          <td id="file-smartvehicle-swift-LC33" class="blob-code blob-code-inner js-file-line">        <span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Wohoo! I am flying high!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L34" class="blob-num js-line-number js-code-nav-line-number" data-line-number="34"></td>
+          <td id="file-smartvehicle-swift-LC34" class="blob-code blob-code-inner js-file-line">    }</td>
+        </tr>
+        <tr>
+          <td id="file-smartvehicle-swift-L35" class="blob-num js-line-number js-code-nav-line-number" data-line-number="35"></td>
+          <td id="file-smartvehicle-swift-LC35" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/3a382c70038353857d0003d8cb611366/raw/09b4724167fc4a9e008541604bc8ebc927dfe11d/SmartVehicle.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/3a382c70038353857d0003d8cb611366#file-smartvehicle-swift">
+          SmartVehicle.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+</p>
+<p>Now again everyone is happy, and Johny gets another fat bonus!</p>
+<p>Six months later Mr. Big decides the market has changed and people want multi functioning vehicles again, so he asks our company to give him the SmartCarBoat again. Now, Johny has no problem with it because all he has to do this implement the protocols!</p>
+<p><style>.gist table { margin-bottom: 0; }</style><div style="tab-size: 8" id="gist44519937" class="gist">
+    <div class="gist-file" translate="no">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-smartcarboat-swift" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-swift  ">
+
+      
+<div class="js-check-bidi js-blob-code-container blob-code-content">
+
+  <template class="js-file-alert-template">
+  <div data-view-component="true" class="flash flash-warn flash-full d-flex flex-items-center">
+  <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+  
+    <span>
+      This file contains bidirectional Unicode text that may be interpreted or compiled differently than what appears below. To review, open the file in an editor that reveals hidden Unicode characters.
+      <a href="https://github.co/hiddenchars" target="_blank">Learn more about bidirectional Unicode characters</a>
+    </span>
+
+
+  <div data-view-component="true" class="flash-action">        <a href="{{ revealButtonHref }}" data-view-component="true" class="btn-sm btn">  Show hidden characters
+</a>
+</div>
+</div></template>
+<template class="js-line-alert-template">
+  <span aria-label="This line has hidden Unicode characters" data-view-component="true" class="line-alert tooltipped tooltipped-e">
+    <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-alert">
+    <path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 00-.44 0L1.698 13.132a.25.25 0 00.22.368h12.164a.25.25 0 00.22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0114.082 15H1.918a1.75 1.75 0 01-1.543-2.575L6.457 1.047zM9 11a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.25a.75.75 0 00-1.5 0v2.5a.75.75 0 001.5 0v-2.5z"></path>
+</svg>
+</span></template>
+
+  <table class="highlight tab-size js-file-line-container js-code-nav-container js-tagsearch-file" data-tab-size="8" data-paste-markdown-skip data-tagsearch-lang="Swift" data-tagsearch-path="SmartCarBoat.swift">
+        <tr>
+          <td id="file-smartcarboat-swift-L1" class="blob-num js-line-number js-code-nav-line-number" data-line-number="1"></td>
+          <td id="file-smartcarboat-swift-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">SmartBoat</span>: <span class="pl-e">SmartVehicle</span>, <span class="pl-e">RoadDrivable</span>, <span class="pl-e">WaterDrivable </span>{</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L2" class="blob-num js-line-number js-code-nav-line-number" data-line-number="2"></td>
+          <td id="file-smartcarboat-swift-LC2" class="blob-code blob-code-inner js-file-line">    </td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L3" class="blob-num js-line-number js-code-nav-line-number" data-line-number="3"></td>
+          <td id="file-smartcarboat-swift-LC3" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnRoad</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L4" class="blob-num js-line-number js-code-nav-line-number" data-line-number="4"></td>
+          <td id="file-smartcarboat-swift-LC4" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>Vroom!<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L5" class="blob-num js-line-number js-code-nav-line-number" data-line-number="5"></td>
+          <td id="file-smartcarboat-swift-LC5" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L6" class="blob-num js-line-number js-code-nav-line-number" data-line-number="6"></td>
+          <td id="file-smartcarboat-swift-LC6" class="blob-code blob-code-inner js-file-line">	</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L7" class="blob-num js-line-number js-code-nav-line-number" data-line-number="7"></td>
+          <td id="file-smartcarboat-swift-LC7" class="blob-code blob-code-inner js-file-line">	<span class="pl-k">func</span> <span class="pl-en">driveOnWater</span>() {</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L8" class="blob-num js-line-number js-code-nav-line-number" data-line-number="8"></td>
+          <td id="file-smartcarboat-swift-LC8" class="blob-code blob-code-inner js-file-line">		<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>I can run over water, because I can! B-)<span class="pl-pds">&quot;</span></span>)</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L9" class="blob-num js-line-number js-code-nav-line-number" data-line-number="9"></td>
+          <td id="file-smartcarboat-swift-LC9" class="blob-code blob-code-inner js-file-line">	}</td>
+        </tr>
+        <tr>
+          <td id="file-smartcarboat-swift-L10" class="blob-num js-line-number js-code-nav-line-number" data-line-number="10"></td>
+          <td id="file-smartcarboat-swift-LC10" class="blob-code blob-code-inner js-file-line">}</td>
+        </tr>
+  </table>
+</div>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/shabib87/5946bc75723572ece692f1df2ea84be1/raw/aced421e21f8711090f6aa1a318b91225594310c/SmartCarBoat.swift" style="float:right">view raw</a>
+        <a href="https://gist.github.com/shabib87/5946bc75723572ece692f1df2ea84be1#file-smartcarboat-swift">
+          SmartCarBoat.swift
+        </a>
+        hosted with &#10084; by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+</p>
+<p class="graf graf--p">With this strategy on hand no matter how many times Mr. Big changes his requirement, Johny can kill it anytime!</p>
+<p>I hope I have managed to give an idea on how strategy pattern works and how to use it with a real time scenario. Of course we can improve this by using other ways; I am giving you a hint: Abstract Class. Any questions, feedbacks or if you think I have some improvements to do, feel free to comment!</p>
+<p>Happy coding! <img src="https://s.w.org/images/core/emoji/13.1.0/72x72/1f601.png" alt="😁" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>The post <a rel="nofollow" href="./../../../introduction-to-strategy-pattern/index.html">Introduction to Strategy Pattern</a> appeared first on <a rel="nofollow" href="./../../../index.html">codewithshabib</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>./../../../introduction-to-strategy-pattern/feed/index.html</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+		<post-id xmlns="com-wordpress:feed-additions:1">690</post-id>	</item>
+	</channel>
+</rss>
