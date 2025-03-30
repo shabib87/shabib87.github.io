@@ -15,7 +15,7 @@ tags:
   - swift
   - ios-programming
   - code-quality
-last_modified_at: 2017-02-25 
+last_modified_at: 2017-02-25 01:19:32 +0000
 ---
 
 We all have been through situations, where we had to create classes with multiple constructors or constructor with a lot of dependencies (parameters). These classes tend to get bloated quickly with the over used constructor methods and too many parameters and starts messing with the default properties values. Whenever you find yourself into this situation you; my friend; have been trapped by a notorious [anti-pattern](https://en.wikipedia.org/wiki/Anti-pattern) called ***Telescopic Constructors*** or, ***Telescopic Initializers***. The initial intention of this pattern was to simplify the process of working with classes with a lot of initializer parameters.
