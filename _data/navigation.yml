@@ -1,9 +1,9 @@
 main:
-  - title: "Posts"
-    url: /posts/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
-  - title: "About"
-    url: /about/
+  - title: "Home"
+    url: /
+  - title: "Blog"
+    url: /year/
+  - title: "LinkedIn"
+    url: https://www.linkedin.com/in/ahmadshabibulhossain
+  - title: "GitHub"
+    url: https://github.com/shabib87
