@@ -2,7 +2,7 @@ main:
   - title: "Home"
     url: /
   - title: "Blog"
-    url: /year/
+    url: /posts/
   - title: "LinkedIn"
     url: https://www.linkedin.com/in/ahmadshabibulhossain
   - title: "GitHub"

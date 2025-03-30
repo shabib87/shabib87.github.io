@@ -4,6 +4,7 @@ date: 2017-02-25
 permalink: /singletons-pattern-or-anti-pattern/
 categories:
   - blog
+last_modified_at: 2017-02-25 
 ---
 
 # Singletons: Pattern or Anti-pattern?
@@ -123,4 +124,6 @@ Here, the `EditInfoController` needs the user object to be modified, but the `Ge
 
 Well, it depends! Yes, it completely depends on the situation and the convenience of our project. If used correctly, it is absolutely okay. We just have to remember the main objective: **preserving the state of an object** and not focus on the side-effect: **being globally accessible**.
 
-I hope I have managed to give an idea on how Singleton Pattern works and when and how to use it.
+I hope I have managed to give an idea on how Singleton Pattern works and when and how to use it. Any questions, feedback or if you think I have some improvements to do, feel free to comment!
+
+Happy coding! 😁
