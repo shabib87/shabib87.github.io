@@ -5,11 +5,11 @@ layout: single
 author_profile: true
 ---
 
-I am a staff-level mobile engineer with over a decade of experience building systems across iOS, React Native, and backend services. Projects have ranged from mobile access and credential workflows to CI/CD pipelines and cross-platform architecture.
+I am a seasoned mobile engineer with over a decade of experience building systems across iOS, React Native, and backend services. My work spans from mobile system design, development, to CI/CD pipelines and cross-platform architecture.
 
-Often works at the intersection of product, platform, and mobile teams - figuring out integration paths, planning refactors, writing ADRs (Architecture Decision Records), and supporting SDK roll-outs across stacks.
+I often work at the intersection of product, design, platform, and mobile teams - figuring out system design, planning refactors, writing ADRs (Architecture Decision Records), and supporting feature roll-outs across stacks.
 
-Here I try to occasionally document what I've learned along the way - deep dives into mobile architecture, patterns I’ve found useful (or harmful), and occasional technical musings from the field.
+Here I try to occasionally share what I've learned along the way - deep dives into mobile architecture, patterns I’ve found useful (or harmful), and occasional technical musings from the field.
 
 Check out [my GitHub](https://github.com/shabib87), [connect on LinkedIn](https://www.linkedin.com/in/ahmadshabibulhossain), or browse the blog.
 
