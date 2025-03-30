@@ -1,8 +1,9 @@
 ---
-layout: post
 title: "Singletons: Pattern or Anti-pattern?"
 date: 2017-02-25
 permalink: /singletons-pattern-or-anti-pattern/
+categories:
+  - blog
 ---
 
 # Singletons: Pattern or Anti-pattern?
