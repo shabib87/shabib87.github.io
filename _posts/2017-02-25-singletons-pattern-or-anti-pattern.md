@@ -4,7 +4,20 @@ date: 2017-02-25
 permalink: /singletons-pattern-or-anti-pattern/
 categories:
   - blog
-last_modified_at: 2017-02-25 
+  - programming
+  - design-patterns
+  - ios
+  - swift
+tags:
+  - singleton-pattern
+  - ios-development
+  - cocoa-touch
+  - dependency-injection
+  - swift-patterns
+  - objective-c
+  - anti-pattern
+  - clean-code
+last_modified_at: 2020-02-03 01:20:24 +0000 
 ---
 
 # Singletons: Pattern or Anti-pattern?

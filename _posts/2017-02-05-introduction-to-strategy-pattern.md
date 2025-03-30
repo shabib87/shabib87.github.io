@@ -4,7 +4,22 @@ date: 2017-02-05
 permalink: /introduction-to-strategy-pattern/
 categories:
   - blog
-last_modified_at: 2017-02-05
+  - programming
+  - design-patterns
+  - behavioral-patterns
+  - object-oriented-design
+  - swift
+  - ios-programming
+tags:
+  - strategy-pattern
+  - oop
+  - inheritance
+  - polymorphism
+  - encapsulation
+  - software-development
+  - software-design-patterns
+  - coding
+last_modified_at: 2020-02-03 01:19:32 +0000
 ---
 
 # Introduction to Strategy Pattern
