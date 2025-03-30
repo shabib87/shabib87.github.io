@@ -66,9 +66,6 @@ author:
     - label: "GitHub"
       icon: "fab fa-github"
       url: "https://github.com/shabib87"
-    - label: "Blog"
-      icon: "fas fa-rss"
-      url: "/"
 
 footer:
   links:
