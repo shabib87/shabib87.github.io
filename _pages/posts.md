@@ -1,8 +1,8 @@
 ---
-title: Blog
-layout: collection
+title: "Blog"
 permalink: /posts/
-collection: posts
+layout: home
+author_profile: true
 entries_layout: grid
 classes: wide
 ---
