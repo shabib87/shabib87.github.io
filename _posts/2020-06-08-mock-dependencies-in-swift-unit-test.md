@@ -31,7 +31,7 @@ We should always write unit test for our code. We all know that, right? But some
 
 The root of the problem is actually not the dependencies. But how we manage them. To write testable code, dependencies should always be decoupled and isolated. In other words "Dependencies should be Inverted". Rings any bell? Yes, it's the [Dependency Inversion Rule](https://en.wikipedia.org/wiki/Dependency_inversion_principle) from the [SOLID](https://en.wikipedia.org/wiki/SOLID) principle.
 
-## Dependency Injection to the rescue...
+## Dependency Injection to the rescue
 
 We should inject all dependencies to decouple code. It can be [constructor injection, property injection or method injection](https://cocoacasts.com/dependency-injection-in-swift). I prefer to use constructor injection over the others whenever possible. Because it enforces the dependency requirement by making it container-agnostic.
 
