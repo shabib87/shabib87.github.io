@@ -23,6 +23,18 @@ We all have been through situations, where we had to create classes with multipl
 In this blogpost, I am going to discuss how we get trapped by the telescopic constructor. Let us take a look at the following example code snippet:
 
 ```swift
+enum OrderSize {
+    case small
+    case medium
+    case large
+}
+
+enum SpiceRange {
+    case spicy
+    case hot
+    case extraHot
+}
+
 class Biriyani {
     let count: Int
     let size: OrderSize
@@ -41,17 +53,17 @@ class Restaurant {
 }
 ```
 
-We all love biriaynis, right? If not, what are you doing with your life man! 😱 Go have some biriyani first!
+We all love biriyanis, right? If not, what are you doing with your life man! 😱 Go have some biriyani first!
 
-Jokes apart, here we have a restaurant that sells biriyanis. The Biriyani class defines an initializer with three parameters. This requires calling classes to know what the default values will be for the parameters and set them every time:
+Jokes apart, here we have a restaurant that sells biriyanis. The `Biriyani` class defines an initializer with three parameters. This requires calling classes to know what the default values will be for the parameters and set them every time:
 
 ```swift
 var biriyani = Biriyani(count: 1, size: .medium, spiceRange: .extraHot)
 ```
 
-Though we are forcing the Restaurant class to set all parameters of the Biriyani class every time, most customers won't be giving a lot of customized orders, making it possible to use some default values for the class. For example, most customers will only order a single medium sized dish with only the spice range varied.
+Though we are forcing the `Restaurant` class to set all parameters of the `Biriyani` class every time, most customers won't be giving a lot of customized orders, making it possible to use some default values for the class. For example, most customers will only order a single medium sized dish with only the spice range varied.
 
-So we try to improve our Biriyani class' initialization usability by using telescoping constructors. This pattern tells us to create convenience initializers that will provide default values for our orders.
+So we try to improve our `Biriyani` class' initialization usability by using telescoping constructors. This pattern tells us to create convenience initializers that will provide default values for our orders.
 
 ```swift
 class Biriyani {
@@ -88,7 +100,7 @@ var biriyaniOrder1 = Biriyani(size: .medium, spiceRange: .extraHot)
 var biriyaniOrder2 = Biriyani(spiceRange: .extraHot)
 ```
 
-Savvy, right? So far so good. Now what if the restaurant adds another parameter to the Biriyani class called BiriyaniType? We'll have to add some extra convenience initializers to support more custom orders.
+Savvy, right? So far so good. Now what if the restaurant adds another parameter to the `Biriyani` class called `BiriyaniType`? We'll have to add some extra convenience initializers to support more custom orders.
 
 ```swift
 enum BiriyaniType {
@@ -117,22 +129,39 @@ class Biriyani {
         self.init(count: 1, size: .medium, spiceRange: spiceRange, type: type)
     }
     
+    convenience init(spiceRange: SpiceRange) {
+        self.init(count: 1, size: .medium, spiceRange: spiceRange, type: .nonveg)
+    }
+    
     convenience init(type: BiriyaniType) {
-        self.init(count: 1, size: .medium, spiceRange: .hot, type: type)
+        self.init(count: 1, size: .medium, spiceRange: .spicy, type: type)
     }
 }
 
 class Restaurant {
-    var biriyaniOrder1 = Biriyani(size: .medium, spiceRange: .extraHot, type: .nonveg)
-    var biriyaniOrder2 = Biriyani(spiceRange: .extraHot, type: .nonveg)
-    var biriyaniOrder3 = Biriyani(type: .veg)
+    var biriyaniOrder1 = Biriyani(size: .medium, spiceRange: .hot, type: .veg)
+    var biriyaniOrder2 = Biriyani(spiceRange: .extraHot, type: .veg)
+    var biriyaniOrder3 = Biriyani(spiceRange: .extraHot)
+    var biriyaniOrder4 = Biriyani(type: .veg)
     ...
 }
 ```
 
-Did you notice the code complexity rise? I've already added 3 extra constructors and we're still missing a bunch of other combinations like: (count: Int, spiceRange: SpiceRange, type: BiriyaniType), (count: Int, size: OrderSize, type: BiriyaniType) etc.
+Now the customers have a lot of options to order their biriyanis:
 
-As the system evolves, the constructors keep piling up with more complexity. Imagine what happens if we need to add another parameter like includeSoftDrink: Bool. The number of constructors will explode! This is an example of the telescoping constructor anti-pattern.
+```swift
+var biriyaniOrder1 = Biriyani(size: .medium, spiceRange: .hot, type: .veg)
+
+var biriyaniOrder2 = Biriyani(spiceRange: .extraHot, type: .veg)
+
+var biriyaniOrder3 = Biriyani(spiceRange: .extraHot)
+
+var biriyaniOrder4 = Biriyani(type: .veg)
+```
+
+Did you notice the code complexity rise? I've already added 3 extra constructors and we're still missing a bunch of other combinations like: `(count: Int, spiceRange: SpiceRange, type: BiriyaniType)`, `(count: Int, size: OrderSize, type: BiriyaniType)` etc.
+
+Just by increasing an extra parameter `BiriyaniType`, we’ve been forced the `Biriyani` class to add at least two more constructors to the class. Now consider what if the restaurant has to add more parameters like this? What will happen? This is the pitfall of using Telescoping Constructors. It is considered an Anti-pattern because, it results a large number of initializers that are hard to read and maintain.
 
 ## The Solution: Builder Pattern
 
@@ -212,8 +241,35 @@ The builder pattern gives us a cleaner way to construct complex objects. Each se
 3. **Consistency**: The builder ensures that objects are always created in a valid state.
 4. **Fluent Interface**: The method chaining creates a readable fluent interface.
 
-## Conclusion
+## The more Swifty Solution: Use Default Values
 
-Avoiding the telescopic constructor anti-pattern is important for writing clean, maintainable code. The builder pattern is just one of many ways to handle this situation. In a language like Swift, you might also consider using default parameter values to simplify initialization, but the builder pattern remains a powerful tool for creating complex objects with many optional parameters.
+Fortunately in swift apart from `Builder`pattern we can also solve this issue by providing default values to parameters:
+
+```swift
+class Biriyani {
+    let count: Int
+    let size: OrderSize
+    let spiceRange: SpiceRange
+    let type: BiriyaniType
+    
+    init (count: Int = 1, size: OrderSize = .medium, spiceRange: SpiceRange = .spicy, type: BiriyaniType = .nonveg) {
+        self.count = count
+        self.size = size
+        self.spiceRange = spiceRange
+        self.type = type
+    }
+}
+
+class Restaurant {
+    var biriyaniOrder1 = Biriyani(size: .medium, spiceRange: .extraHot)
+    var biriyaniOrder2 = Biriyani(spiceRange: .extraHot)
+    ...
+}
+```
+
+The default values for the parameters  are used whenever the `Restaurant` class  wants to create a `Biriyani` by omitting them. This is the benefit of defining the default values within the `Biriyani` class without the necessity of defining a permutation of initializers.
+
+
+I hope you have enjoyed and understood the pitfalls of this particular anti-pattern. Any questions, feedbacks or if you think I have some improvements to do, feel free to comment and let me know!
 
 Happy coding! 😁

@@ -63,9 +63,9 @@ This is quite straightforward and quite easy to understand, but what if I tell y
 
 According to Apple:
 
-> The lazy initializer for a global variable (also for static members of structs and enums) is run the first time that global is accessed, and is launched as dispatch_once to make sure that the initialization is atomic.
-
-This enables a cool way to use `dispatch_once` in your code: just declare a global variable with an initializer and mark it `private`.
+> The lazy initializer for a global variable (also for static members of structs and enums) is run the first time that global is accessed, and is launched as `dispatch_once` to make sure that the initialization is atomic.
+>
+> This enables a cool way to use `dispatch_once` in your code: just declare a global variable with an initializer and mark it `private`.
 
 This means we don’t need to do all those complicated stuff we used to do in Objective-C anymore and safely declare a Singleton by using this one-liner:
 
@@ -88,7 +88,7 @@ class Singleton {
 
 As we have discussed earlier, using and declaring singletons seems pretty straightforward and we cannot really go wrong with it, right?
 
-Unfortunately, many developers get the wrong idea about it and vastly misuse this pattern to access an object from anywhere in the project. Providing global access to objects is just a byproduct of the singleton pattern, it is not the main objective (which is: preserving the state of the object). This pattern is so misused, it is often considered as an **anti-pattern**.
+Unfortunately, many developers get the wrong idea about it and vastly misuse this pattern to access an object from anywhere in the project. Providing global access to objects is just a byproduct of the singleton pattern, it is not the main objective (which is: preserving the state of the object). This pattern is so misused, it is often considered as an [anti-pattern](https://en.wikipedia.org/wiki/Anti-pattern).
 
 ## Should we use Singletons?
 
@@ -106,28 +106,30 @@ The above scenario can be managed if we can use the user object as dependency in
 
 ```swift
 class User {
-    var name = ""
-    var age = 0
+  var name = ""
+  var age = 0
 }
 
 class EditUserInfoController {
-    var user: User
-    init(user: User) {
-        self.user = user
-    }
-    func editUserName(_ username: String) {
-        ...
-    }
+  var user: User
+  init (user: User) {
+    self.user = user
+  }
+  
+  func editUserName(_ username: String) {
+    ...
+  }
 }
 
 class GetFriendListController {
-    let user: User
-    init(user: User) {
-        self.user = user
-    }
-    func getFriends() {
-        ...
-    }
+  let user: User
+  init (user: User) {
+    self.user = user
+  }
+  
+  func getFriends () {
+    ...
+  }
 }
 ```
 
