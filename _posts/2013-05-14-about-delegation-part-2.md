@@ -72,7 +72,9 @@ In the `.m` file we do the usual stuff like allocating and initializing objects 
 
     [orderCarButton setTitle:@"Buy" forState:UIControlStateNormal];
 
-    [orderCarButton addTarget:self         action:@selector(orderCarButtonPressed:)         forControlEvents:UIControlEventTouchUpInside];
+    [orderCarButton addTarget:self
+      action:@selector(orderCarButtonPressed:)
+      forControlEvents:UIControlEventTouchUpInside];
 
     [self.contentView addSubview:carNameLabel];
 
@@ -99,7 +101,11 @@ Ok, I am not going discuss this right now. I'll be back on this soon. Now we mov
 - (id)initWithStyle:(UITableViewStyle)style {
   self = [super initWithStyle:style];
   if (self) {
-    cars = [[NSArray alloc] initWithObjects:@"Aston Martin DB",         @"Corvet Z6", @"Toyota RAV4", @"Camaro SS", @"Mastung GT",         @"Porche Cayman S", @"BMW M5", nil];
+    cars = [[NSArray alloc]
+      initWithObjects:@"Aston Martin DB",
+      @"Corvet Z6", @"Toyota RAV4", @"Camaro SS", @"Mastung GT",
+      @"Porche Cayman S", @"BMW M5", nil
+    ];
   }
   return self;
 }
@@ -152,7 +158,10 @@ Now replace the `tableView: cellForRowAtIndexPath` method with the following:
   CarFactory *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
   if (cell == nil) {
-    cell = [[[CarFactory alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[[CarFactory alloc] 
+        initWithStyle:UITableViewCellStyleDefault 
+        reuseIdentifier:CellIdentifier] 
+      autorelease];
   }
 
   cell.carNameLabel.text = [cars objectAtIndex:indexPath.row];
