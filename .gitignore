@@ -1,4 +1,17 @@
-_site
-.sass-cache
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Jekyll build output
+_site/
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-Gemfile.lock
+
+# Bundler
+.bundle/
+vendor/bundle/
+
+# Logs
+*.log
