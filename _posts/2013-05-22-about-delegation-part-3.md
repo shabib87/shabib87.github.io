@@ -18,8 +18,7 @@ last_modified_at: 2013-05-22 01:12:42 +0000
 
 Hello guys and welcome to the third and final part of our discussion on `Objective-C` protocols and delegation. On the last part we had finished our code and left the discussion for this part. Well, what are we waiting for? Open the project and run  it  on the simulator, you'll see something like this:
 
-<MISSING>UnderstandingDelegate running on simulator</MISSING>
-<MISSING>UnderstandingDelegate running on simulator</MISSING>
+![UnderstandingDelegate running on simulator](https://codewithshabib.com/assets/images/2013-05-22-about-delegation-part-3/understanding-delegate-running-on-simulator.png)
 
 When you click on the "Buy" button on any row, an alert pops up telling you which car you bought, see? Now tell me, you've written a single class named `CarFactory` which has a button called "Buy". How does this button know which car you actually bought? Can you tell me? No? Okay, let me explain.
 
