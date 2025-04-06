@@ -25,7 +25,7 @@ last_modified_at: 2014-05-26 01:12:42 +0000
 
 Hello everybody,
 
-For a recent project of mine, I had created this custom controller. This is quite similar to the `ViewPager` control used in Android. I've named this controller `SHViewPager`, here is the gitHub link.
+For a recent project of mine, I had created this custom controller. This is quite similar to the `ViewPager` control used in Android. I've named this controller `SHViewPager`, here is the [gitHub link](https://github.com/shabib87/SHViewPager).
 
 This controller uses a datasource and a delegate protocol. You've to implement at least three datasource protocols (that are required) to avoid exceptions. These methods are:
 
