@@ -5,9 +5,9 @@ permalink: /shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array
 categories:
   - blog
   - programming
-  - object-oriented-design
   - ios-programming
-  - oop
+  - objective-c
+  - cocoapods
 tags:
   - 2d-array
   - array

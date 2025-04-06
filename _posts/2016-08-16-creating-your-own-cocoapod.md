@@ -7,6 +7,7 @@ categories:
   - programming
   - ios-programming
   - objective-c
+  - cocoapods
 tags:
   - cocoapods
   - dependency-manager

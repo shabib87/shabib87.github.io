@@ -7,6 +7,7 @@ categories:
   - programming
   - ios-programming
   - objective-c
+  - cocoapods
 tags:
   - ios
   - ios-programming
