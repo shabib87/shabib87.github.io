@@ -17,6 +17,7 @@ timezone: America/Toronto
 
 include:
   - _pages
+  - googlef46b5fcb1c61719b.html
 
 # Plugins (previously gems:)
 plugins:
