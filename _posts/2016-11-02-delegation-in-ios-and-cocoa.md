@@ -91,7 +91,7 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 This approach is also known as Decorator Pattern in terms of OOP:
 
-The Decorator pattern dynamically adds behaviors and responsibilities to an object without modifying its code. It's an alternative to sub-classing where you modify a class' behavior by wrapping it with another object.
+> The Decorator pattern dynamically adds behaviors and responsibilities to an object without modifying its code. It's an alternative to sub-classing where you modify a class' behavior by wrapping it with another object.
 
 In `iOS` there are two very common implementations of this pattern: `Category` (`Objective-C` only, `Extensions` in `Swift` though they're a little different from their `Objective-C` cousin) and `Delegation`. I've already talked about `Delegation`, may be in a later blogpost I'll cover `Category` and `Extensions`.
 
