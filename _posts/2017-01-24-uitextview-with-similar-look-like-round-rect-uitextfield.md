@@ -25,7 +25,7 @@ tags:
 
 Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wished it will grow it’s height as you type your text? Well, you are in luck! Here is the swift file you will need.
 
-![TextViewWithPlaceholderAndExpandingHeight.swift](https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d#file-textviewwithplaceholderandexpandingheight-swift)
+> [TextViewWithPlaceholderAndExpandingHeight.swift](https://gist.github.com/shabib87/9fdf03eab6bd34f19452163273bb850d#file-textviewwithplaceholderandexpandingheight-swift)
 
 ```swift
 /*
