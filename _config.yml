@@ -37,18 +37,26 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-linkedin"
       url: "https://www.linkedin.com/in/ahmadshabibulhossain/"
+      target: "_blank"
+      rel: "noopener noreferrer"
     - label: "GitHub"
       icon: "fab fa-github"
       url: "https://github.com/shabib87"
+      target: "_blank"
+      rel: "noopener noreferrer"
 
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/shabib87"
+      target: "_blank"
+      rel: "noopener noreferrer"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/ahmadshabibulhossain"
+      target: "_blank"
+      rel: "noopener noreferrer"
 
 # Comments
 comments:
@@ -88,7 +96,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-      comments: true
+      comments: false  # Disable comments on pages
 
 category_archive:
   type: liquid
