@@ -50,6 +50,21 @@ footer:
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/ahmadshabibulhossain"
 
+# Comments
+comments:
+  provider: "giscus"
+  giscus:
+    repo: "shabib87/shabib87.github.io"
+    repo_id: "R_kgDOOQ_c3g"
+    category: "General"
+    category_id: "DIC_kwDOOQ_c3s4CpSY0"
+    mapping: "pathname"
+    reactions_enabled: "1"
+    emit_metadata: "0"
+    input_position: "top"
+    theme: "preferred_color_scheme"
+    lang: "en"
+    loading: "lazy"
 
 defaults:
   # _posts
@@ -61,7 +76,7 @@ defaults:
       author_profile: true
       read_time: true
       show_date: true 
-      comments: false
+      comments: true
       share: false
       related: true
       sidebar:
@@ -73,6 +88,7 @@ defaults:
     values:
       layout: single
       author_profile: true
+      comments: true
 
 category_archive:
   type: liquid
