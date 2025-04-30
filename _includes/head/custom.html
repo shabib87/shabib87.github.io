@@ -1,2 +1,29 @@
 <script data-goatcounter="https://codewithshabib.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            htmlLabels: true
+        });
+
+        // Force render any mermaid diagrams
+        setTimeout(() => {
+            document.querySelectorAll('.language-mermaid').forEach((el) => {
+                // Create wrapper div with mermaid class
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid';
+                wrapper.textContent = el.textContent;
+                
+                // Replace pre element with wrapper
+                el.parentNode.replaceWith(wrapper);
+                
+                // Initialize mermaid on this element
+                mermaid.init(undefined, wrapper);
+            });
+        }, 1000);
+    });
+</script>
