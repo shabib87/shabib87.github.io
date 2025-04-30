@@ -76,6 +76,14 @@ comments:
     lang: "en"
     loading: "lazy"
 
+share:
+  provider: "social-share"
+  target: "_blank"
+  social_share:
+    - "linkedin"
+    - "twitter"
+    - "facebook"
+
 defaults:
   # _posts
   - scope:
@@ -87,7 +95,7 @@ defaults:
       read_time: true
       show_date: true 
       comments: true
-      share: false
+      share: true
       related: true
       sidebar:
         nav: "none"  # This disables navigation in sidebar for posts
