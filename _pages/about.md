@@ -16,3 +16,5 @@ This site is where I occasionally write things down, patterns I’ve used (or av
 Check out [my GitHub](https://github.com/shabib87), [connect on LinkedIn](https://www.linkedin.com/in/ahmadshabibulhossain), or browse the blog.
 
 **P.S.** All my writings are under [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+
+**TL;DR:** You’re welcome to read, quote, share, or adapt my posts — just give proper credit and keep it under the same open license.
