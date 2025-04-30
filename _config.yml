@@ -5,6 +5,8 @@ url: "https://www.codewithshabib.com"
 github_username: shabib87
 minimal_mistakes_skin: "dark"
 search: true
+copyright: "Ahmad Shabibul Hossain"
+copyright_url: "https://www.codewithshabib.com"
 
 # Build settings
 markdown: kramdown
