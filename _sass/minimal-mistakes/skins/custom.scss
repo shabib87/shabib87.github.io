@@ -1,0 +1,6 @@
+@import "minimal-mistakes/skins/dark";
+
+/* Hide the 'Toggle Menu' button on mobile */
+.nav__list {
+  display: none !important;
+}
