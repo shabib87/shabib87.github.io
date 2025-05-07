@@ -4,18 +4,17 @@ date: 2025-04-29
 permalink: /the-invisible-bug-how-silent-assumptions-sabotage-mobile-systems/
 categories:
   - blog
-  - programming
-  - software-development
-  - programming-philosophy
+  - mobile-engineering
   - debugging
-  - advanced-debugging
+  - software-architecture
+  - systems-thinking
 tags:
-  - mobile-development
-  - software-development
-  - software-quality
-  - software-debugging
-  - software-debugging-techniques
-  - debugging-reasoning-techniques
+  - mobile-debugging
+  - cross-layer-bugs
+  - contract-testing
+  - system-design
+  - debugging-strategy
+  - mobile-crash-analysis
 last_modified_at: 2025-04-29 15:31:09 +0000 
 ---
 
