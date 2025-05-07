@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- Don't waste token
+- Don't be chatty
+- Be concise with your response
+- Utilize gpt-4o-mini or cursor-small for responses over premium models unless it's absolutely necessary
