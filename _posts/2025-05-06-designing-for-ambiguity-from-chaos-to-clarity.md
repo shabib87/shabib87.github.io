@@ -227,7 +227,7 @@ But you treated it like a real system, because that’s what scales.
 Want to see the full spec?
 This isn’t a cleaned-up template — it’s the real markdown doc from this case study.
 
-You can download the full [Product Spec](https://github.com/shabib87/docs/ToolCatalog_ProductSpec.md) and [API Contract Sketch](https://github.com/shabib87/docs/ToolCatalog_APIContractSketch.md).
+You can download the full [Product Spec](https://github.com/shabib87/designing-for-ambiguity/blob/main/docs/ToolCatalog_ProductSpec.md) and [API Contract Sketch](https://github.com/shabib87/designing-for-ambiguity/blob/main/docs/api-contract-sketch.md).
 
 
 Use it as a starting point for your own POCs, MVPs, or internal tools.
