@@ -21,6 +21,8 @@ include:
   - _pages
   - googlef46b5fcb1c61719b.html
 
+google_analytics: G-LMPSDMRRVL
+
 # Plugins (previously gems:)
 plugins:
   - jekyll-paginate
@@ -29,6 +31,7 @@ plugins:
   - jekyll-feed
   - jemoji
   - jekyll-include-cache
+  - jekyll-seo-tag
 
 author:
   name: "Ahmad Shabibul Hossain"

@@ -28,6 +28,7 @@ tags:
   - solid
   - swift
   - viper
+description: "Break down massive view controllers in iOS using SOLID principles and MVP architecture. A practical guide for better mobile app structure."
 last_modified_at: 2019-06-12 01:19:32 +0000
 ---
 

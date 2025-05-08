@@ -22,6 +22,7 @@ tags:
   - keychain
   - testable-code
   - solid-principles
+description: "How to mock dependencies in Swift unit tests using protocol-oriented programming and constructor injection for better testability."
 last_modified_at: 2020-06-09 15:31:09 +0000 
 ---
 

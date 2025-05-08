@@ -1,3 +1,9 @@
+{% seo %}
+
+{% if jekyll.environment == 'production' and site.google_analytics %}
+  {% include analytics.html %}
+{% endif %}
+
 <script data-goatcounter="https://codewithshabib.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>

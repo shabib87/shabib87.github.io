@@ -1,11 +1,12 @@
 ---
 title: "Hi, I'm Shabib"
+description: "Engineering blog on mobile system design, debugging philosophy, and cross-platform strategy. Written by a Staff iOS + React Native engineer."
 permalink: /
 layout: single
 author_profile: true
 ---
 
-I like systems that tell clear stories. Over the years, I’ve learned that clear always beats clever.
+I like systems that tell clear stories. Over the years, I’ve learned that clear usually beats clever.
 
 I’ve spent the last decade building and scaling mobile systems across iOS, React Native, and backend layers, from mobile architecture and CI/CD pipelines to cross-platform SDK integrations.
 

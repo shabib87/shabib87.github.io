@@ -15,6 +15,7 @@ tags:
   - swift
   - ios-programming
   - code-quality
+description: "Why telescopic constructors are an anti-pattern in Swift and how to replace them using Builder pattern or default parameters."
 last_modified_at: 2017-02-25 01:19:32 +0000
 ---
 

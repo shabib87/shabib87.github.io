@@ -1,5 +1,6 @@
 ---
 title: "Designing for Ambiguity: From Chaos to Clarity"
+description: "How to take a vague idea and turn it into a spec you can actually build from. A story-driven guide for senior engineers."
 date: 2025-05-06
 permalink: /designing-for-ambiguity-from-chaos-to-clarity/
 categories:

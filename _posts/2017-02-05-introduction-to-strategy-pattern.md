@@ -19,6 +19,7 @@ tags:
   - software-development
   - software-design-patterns
   - coding
+description: "Learn the Strategy Pattern through a fun, real-world Swift example. See how protocol-based design beats rigid inheritance in smart vehicle design."
 last_modified_at: 2020-02-03 01:19:32 +0000
 ---
 

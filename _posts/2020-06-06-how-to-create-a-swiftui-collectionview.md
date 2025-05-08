@@ -16,6 +16,7 @@ tags:
   - compositional-layout
   - collectionview
   - ios
+description: "How to bridge SwiftUI with UICollectionView using Combine, DiffableDataSource, and Compositional Layout to build a modern, declarative list UI."
 last_modified_at: 2020-06-09 15:31:09 +0000 
 ---
 

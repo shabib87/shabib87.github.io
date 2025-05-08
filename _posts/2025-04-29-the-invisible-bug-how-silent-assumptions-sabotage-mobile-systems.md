@@ -1,5 +1,6 @@
 ---
 title: "The Invisible Bug: How Silent Assumptions Sabotage Mobile Systems"
+description: "How hidden assumptions derail mobile systems and how to debug them using scientific reasoning. A story-driven guide for senior engineers."
 date: 2025-04-29
 permalink: /the-invisible-bug-how-silent-assumptions-sabotage-mobile-systems/
 categories:
