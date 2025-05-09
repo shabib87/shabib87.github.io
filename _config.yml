@@ -117,3 +117,11 @@ category_archive:
 tag_archive:
   type: liquid
   path: /tags/
+
+seo:
+  title: "Code with Shabib - Mobile Development Blog"
+  description: "Expert insights on iOS, Swift, and React Native development from a Mobile Architect & Tech Lead"
+  author: "Ahmad Shabibul Hossain"
+  linkedin:
+    username: "ahmadshabibulhossain"
+    card: summary_large_image
