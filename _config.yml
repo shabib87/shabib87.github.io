@@ -125,3 +125,13 @@ seo:
   linkedin:
     username: "ahmadshabibulhossain"
     card: summary_large_image
+
+responsive_image:
+  sizes:
+    - width: 800
+      quality: 80
+    - width: 400
+      quality: 80
+  base_path: assets/images
+  strip: true
+  save_to_site: true
