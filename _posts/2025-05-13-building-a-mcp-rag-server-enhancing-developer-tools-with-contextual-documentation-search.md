@@ -35,9 +35,11 @@ That's what I've been experimenting with recently: an MCP RAG server that lets d
 
 ## What's the Problem?
 
-At SuperNova (our imaginary company), we had a growing documentation problem. Our mobile SDK had hundreds of components, each with its own configuration options, examples, and gotchas. New team members were spending days trying to find the right information, and even experienced devs were wasting time hunting through multiple sources.
+On my previous blogs I had referred an imaginary company called SuperNova. Let's keep that going. Imagine at SuperNova we had a growing documentation problem. 
 
-The problem wasn't the quality of our docs. It was the experience of accessing them.
+Our mobile SDK had hundreds of components, each with its own configuration options, examples, and gotchas. New team members were spending days trying to find the right information, and even experienced devs were wasting time hunting through multiple sources.
+
+The problem isn't the quality of our docs. It's the experience of accessing them.
 
 ## Breaking Down the Solution
 
@@ -76,7 +78,7 @@ No browser tabs. No context switching. Just answers, right there in the editor.
 
 ## Building the Solution
 
-I didn’t plan to build a local RAG server. But once I saw how well MCP plugged into Cursor, it clicked—this could actually work.
+I didn’t plan to build a local RAG server. But once I saw how well MCP plugged into Cursor, it clicked — this could actually work.
 
 ### System Architecture
 
@@ -101,7 +103,7 @@ flowchart LR
 
 ### Setting Up the MCP Server
 
-The heart of our system is the MCP server that exposes a tool for searching documentation. Here's the key code from `mcp.ts`:
+The heart of our system is the MCP server that exposes a tool for searching documentation. Here's the key code snippet from [mcp.ts](https://github.com/shabib87/supernova-mcp-rag/blob/main/mcp-rag-server/src/mcp.ts):
 
 ```typescript
 const mcp = () => {
@@ -154,7 +156,7 @@ The real magic happens in the RAG implementation. Here's where we:
 4. Create embeddings using HuggingFace
 5. Store everything in an in-memory vector database
 
-Here's how the core RAG functionality works in `rag.ts`:
+Here's how the core RAG functionality works in [rag.ts](https://github.com/shabib87/supernova-mcp-rag/blob/main/mcp-rag-server/src/rag.ts):
 
 ```typescript
 async function* getAllHtmlFiles(dir: string): AsyncGenerator<string> {
@@ -174,58 +176,7 @@ I used a generator function here for a reason. When recursively searching throug
 
 This function yields paths one by one as it finds them, rather than building a giant array in memory. It's a small optimization, but these kinds of details matter when you're dealing with potentially thousands of documentation files.
 
-With the files identified, we process them into a format suitable for semantic search:
-
-```typescript
-const initializeVectorStore = async (): Promise<void> => {
-  // Find all HTML files recursively
-  const htmlFiles: string[] = [];
-  for await (const file of getAllHtmlFiles(docsDir)) {
-    htmlFiles.push(file);
-  }
-
-  // Extract text from each HTML file and collect with metadata
-  const allDocs: { pageContent: string; metadata: { source: string } }[] = [];
-  for (const file of htmlFiles) {
-    try {
-      const text = extractTextFromHtml(file);
-      allDocs.push({
-        pageContent: text,
-        metadata: { source: path.relative(docsDir, file) },
-      });
-    } catch (e) {
-      console.warn(`Failed to extract text from ${file}:`, e);
-    }
-  }
-
-  // Split all documents into chunks (preserving metadata)
-  const textSplitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 1000,
-    chunkOverlap: 200,
-  });
-  const chunks = await textSplitter.splitDocuments(allDocs);
-
-  // Create embeddings and vector store
-  const embeddings = new HuggingFaceInferenceEmbeddings({
-    model: 'sentence-transformers/all-MiniLM-L6-v2',
-    apiKey: HUGGINGFACE_API_KEY,
-  });
-
-  try {
-    vectorStore = await MemoryVectorStore.fromDocuments(chunks, embeddings);
-    console.info(
-      'Vector store initialized with',
-      chunks.length,
-      'chunks from',
-      htmlFiles.length,
-      'files.'
-    );
-  } catch (error) {
-    console.error('Error initializing vector store:', error);
-    throw error;
-  }
-};
-```
+With the files identified, we can process them into a [format suitable for semantic search](https://github.com/shabib87/supernova-mcp-rag/blob/main/mcp-rag-server/src/rag.ts#L27).
 
 ## Real-World Considerations
 
@@ -235,7 +186,7 @@ This implementation works well for small to medium documentation sets, but there
 
 The current setup comes with a few deliberate performance tradeoffs:
 
-1. **In-Memory Storage**: Fast for small to medium documentation sets, but not ideal for very large corpora.
+1. **In-Memory Storage**: Fast for small to medium documentation sets, but not ideal for very large sets, e.g. 1000+ files.
 2. **On-the-Fly Embedding**: We generate embeddings at server startup, which makes initial startup slower but ensures all content is searchable.
 3. **Sequential Processing**: Files are processed one after another for simplicity.
 
