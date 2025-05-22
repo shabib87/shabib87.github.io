@@ -1,19 +1,27 @@
 # codewithshabib.com
 
-My personal blog and writing archive. Here I occasionally share my thoughts on programming, technology, and life in general.
+This is my personal blog and writing archive. I occasionally share thoughts on programming, technology, and the craft of building software — with the occasional dive into life and systems thinking.
 
-Built with [Jekyll](https://jekyllrb.com/) and the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme.  
-Published via GitHub Pages at [https://codewithshabib.com](https://codewithshabib.com).
+> 📌 This is a personal project. I’m not accepting issues, pull requests, or contributions.
 
-> 📌 This is a personal project. Contributions, pull requests, or issue reports are not accepted.
+## Acknowledgments
+
+This site is powered by [Jekyll](https://jekyllrb.com/) and the  
+[Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) theme by Michael Rose.  
+Both are open source and licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ---
 
 ## License
 
-All content in this repository is licensed under the  
-[Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+This project uses a hybrid license model:
 
-You’re welcome to read, share, or adapt posts — as long as you give proper credit and keep it under the same license.
+- Content in the `_posts` directory is licensed under the  
+  [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).  
+  You may share or adapt blog posts with proper attribution and the same license.
+
+- All other content in this repository (e.g., layouts, config, assets) is proprietary and not licensed for reuse.
 
 See [`LICENSE.md`](LICENSE.md) for full terms.
+
+© 2025 Ahmad Shabibul Hossain (CodeWithShabib). All rights reserved.
