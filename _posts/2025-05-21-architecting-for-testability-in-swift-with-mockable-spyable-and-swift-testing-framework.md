@@ -112,13 +112,13 @@ Kotlin, the rising star for Android and cross-platform development, despite bein
 ```kotlin
 @Test
 fun `displays weather data`() = runTest {
-    val weatherService = mockk<WeatherService>()
-    coEvery { weatherService.getWeather("Toronto") } returns Weather(24.0, "Cloudy")
+  val weatherService = mockk<WeatherService>()
+  coEvery { weatherService.getWeather("Toronto") } returns Weather(24.0, "Cloudy")
 
-    val viewModel = WeatherViewModel(weatherService)
-    viewModel.loadWeather("Toronto")
+  val viewModel = WeatherViewModel(weatherService)
+  viewModel.loadWeather("Toronto")
 
-    coVerify { weatherService.getWeather("Toronto") }
+  coVerify { weatherService.getWeather("Toronto") }
 }
 ```
 
@@ -218,42 +218,42 @@ Let’s start with a real example from the SimpleWeather app:
 // Define behavior contracts through protocols
 @Mockable
 protocol WeatherRepositoryProtocol: Sendable {
-    func getWeather(for city: String) async throws -> Weather
+  func getWeather(for city: String) async throws -> Weather
 }
 
 @Spyable
 protocol AnalyticsTracker: Sendable {
-    func track(event: String)
+  func track(event: String)
 }
 
 // Domain service with explicit dependencies
 @MainActor
-final class WeatherViewModel: WeatherViewModelProtocol {
-    @Published var weatherViewData: WeatherViewData?
-    @Published var isLoading = false
-    
-    private let fetchWeatherUseCase: FetchWeatherUseCaseProtocol
-    private let analytics: AnalyticsTracker
-    
-    init(
-        fetchWeatherUseCase: FetchWeatherUseCaseProtocol,
-        analytics: AnalyticsTracker = DefaultAnalyticsTracker()
-    ) {
-        self.fetchWeatherUseCase = fetchWeatherUseCase
-        self.analytics = analytics
+nal class WeatherViewModel: WeatherViewModelProtocol {
+  @Published var weatherViewData: WeatherViewData?
+  @Published var isLoading = false
+  
+  private let fetchWeatherUseCase: FetchWeatherUseCaseProtocol
+  private let analytics: AnalyticsTracker
+  
+  init(
+    fetchWeatherUseCase: FetchWeatherUseCaseProtocol,
+    analytics: AnalyticsTracker = DefaultAnalyticsTracker()
+  ) {
+    self.fetchWeatherUseCase = fetchWeatherUseCase
+    self.analytics = analytics
+  }
+  
+  func fetchWeather() async {
+    isLoading = true
+    do {
+      let weather = try await fetchWeatherUseCase.execute(city: "Toronto")
+      weatherViewData = WeatherViewDataMapper.map(from: weather)
+      analytics.track(event: "WeatherFetched")
+    } catch {
+      // Handle error
     }
-    
-    func fetchWeather() async {
-        isLoading = true
-        do {
-            let weather = try await fetchWeatherUseCase.execute(city: "Toronto")
-            weatherViewData = WeatherViewDataMapper.map(from: weather)
-            analytics.track(event: "WeatherFetched")
-        } catch {
-            // Handle error
-        }
-        isLoading = false
-    }
+    isLoading = false
+  }
 }
 ```
 
@@ -286,14 +286,14 @@ let mockUseCase = MockFetchWeatherUseCaseProtocol()
 let spyAnalytics = AnalyticsTrackerSpy()
 
 let viewModel = WeatherViewModel(
-    fetchWeatherUseCase: mockUseCase,
-    analytics: spyAnalytics
+  fetchWeatherUseCase: mockUseCase,
+  analytics: spyAnalytics
 )
 
 let weather = Weather(temperatureCelsius: 24.1, description: "Partly Cloudy")
 given(mockUseCase)
-    .execute(city: .any)
-    .willReturn(weather)
+  .execute(city: .any)
+  .willReturn(weather)
 
 await viewModel.fetchWeather()
 
@@ -322,22 +322,22 @@ Here’s how it looks in the SimpleWeather app:
 
 ```swift
 struct WeatherView_SunnyPreview: PreviewProvider {
-    static var previews: some View {
-        let stub = WeatherAPIServiceStub(
-            weatherToReturn: WeatherResponseDTO(
-                temperature: 28.0,
-                condition: "Sunny"
-            )
-        )
-        let repository = WeatherRepository(api: stub)
-        let useCase = FetchWeatherUseCase(repository: repository)
-        let viewModel = WeatherViewModel(
-            fetchWeatherUseCase: useCase,
-            logger: DummyLogger()
-        )
-        
-        return WeatherView(viewModel: viewModel)
-    }
+  static var previews: some View {
+    let stub = WeatherAPIServiceStub(
+      weatherToReturn: WeatherResponseDTO(
+        temperature: 28.0,
+        condition: "Sunny"
+      )
+    )
+    let repository = WeatherRepository(api: stub)
+    let useCase = FetchWeatherUseCase(repository: repository)
+    let viewModel = WeatherViewModel(
+      fetchWeatherUseCase: useCase,
+      logger: DummyLogger()
+    )
+      
+    return WeatherView(viewModel: viewModel)
+  }
 }
 ```
 
@@ -358,27 +358,27 @@ Let’s take a test from the SimpleWeather suite:
 ```swift
 @Test("Weather fetch workflow test")
 func testWeatherFetchWorkflow() async throws {
-    let mockRepository = MockWeatherRepositoryProtocol()
-    let spyAnalytics = AnalyticsTrackerSpy()
+  let mockRepository = MockWeatherRepositoryProtocol()
+  let spyAnalytics = AnalyticsTrackerSpy()
 
-    given(mockRepository)
-        .getWeather(for: .any)
-        .willReturn(Weather(temperatureCelsius: 20.0, description: "Clear"))
+  given(mockRepository)
+    .getWeather(for: .any)
+    .willReturn(Weather(temperatureCelsius: 20.0, description: "Clear"))
 
-    let useCase = FetchWeatherUseCase(repository: mockRepository)
-    let viewModel = WeatherViewModel(
-        fetchWeatherUseCase: useCase,
-        analytics: spyAnalytics
-    )
+  let useCase = FetchWeatherUseCase(repository: mockRepository)
+  let viewModel = WeatherViewModel(
+    fetchWeatherUseCase: useCase,
+    analytics: spyAnalytics
+  )
 
-    await viewModel.fetchWeather()
+  await viewModel.fetchWeather()
 
-    #expect(viewModel.weatherViewData?.displayTemp == "20°C")
-    #expect(spyAnalytics.trackEventCallsCount == 1)
+  #expect(viewModel.weatherViewData?.displayTemp == "20°C")
+  #expect(spyAnalytics.trackEventCallsCount == 1)
 
-    verify(mockRepository)
-        .getWeather(for: .value("Toronto"))
-        .called(1)
+  verify(mockRepository)
+    .getWeather(for: .value("Toronto"))
+    .called(1)
 }
 ```
 
