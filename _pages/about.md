@@ -5,7 +5,6 @@ permalink: /
 layout: single
 author_profile: true
 image: /assets/images/bio-photo.jpg
-last_modified_at: 2024-03-21
 ---
 
 I like systems that tell clear stories. Over the years, I've learned that clear usually beats clever.
