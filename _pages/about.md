@@ -16,7 +16,18 @@ Most of my work lives at the intersection of teams: product, design, platform, a
 
 This site is where I occasionally write things down, patterns I've used (or avoided), how I think through decisions, and lessons I've picked up along the way.
 
-Check out [my GitHub](https://github.com/shabib87), [connect on LinkedIn](https://www.linkedin.com/in/ahmadshabibulhossain), or browse the blog.
+
+---
+
+### Quick Links
+- 📩 [Contact me](mailto:ahmad@codewithshabib.com)
+- 🧠 [Browse the blog](/blog/)
+- 📄 [View my resume](/resume.pdf)
+- 💼 [Consulting overview](/consulting/) *(coming soon)*
+- 🔗 [GitHub](https://github.com/shabib87)
+- 🔗 [LinkedIn](https://www.linkedin.com/in/ahmadshabibulhossain)
+
+---
 
 **P.S.** All my writings are under [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
