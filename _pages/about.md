@@ -20,7 +20,7 @@ This site is where I occasionally write things down, patterns I've used (or avoi
 
 ### Quick Links
 - 📩 <a href="mailto:ahmad@codewithshabib.com">Contact me</a>
-- 🧠 [Browse the blog](/blog/)
+- 🧠 <a href="https://www.codewithshabib.com/posts/" target="_blank" rel="noopener">Browse the blog</a>
 - 📄 <a href="/assets/files/resume.pdf" target="_blank" rel="noopener">View my resume</a>
 - 💼 <a href="/">Consulting overview</a> *(coming soon)*
 - 🔗 <a href="https://github.com/shabib87" target="_blank" rel="noopener">GitHub</a>
