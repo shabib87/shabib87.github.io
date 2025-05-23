@@ -38,6 +38,7 @@ author:
   avatar : "/assets/images/bio-photo.jpg"
   bio: "Converting ☕️ into code since 2007 👨‍💻"
   location: "Toronto, Canada"
+  email: "ahmad@codewithshabib.com"
   links:
     - label: "LinkedIn"
       icon: "fab fa-linkedin"
