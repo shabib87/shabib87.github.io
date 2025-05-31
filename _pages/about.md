@@ -11,6 +11,8 @@ I believe robust systems tell clear stories. Over a decade of building and scali
 
 My experience spans iOS, React Native, and backend layers, with a deep focus on mobile architecture, CI/CD pipelines, and strategic cross-platform SDK integrations. I've engineered solutions that stand the test of time, from foundational system design to the granular details of implementation.
 
+Lately, I'm super focused on how AI engineering fits into all of this. We're talking LLM applications, RAG pipelines, and finding ways intelligent systems can level up both product capabilities and how we build stuff. It's about spotting those patterns in messy systems and getting to clear, sustainable outcomes, even when AI is in the mix.
+
 The most critical design conversations often unfold at the intersection of diverse teams: product, design, platform, and mobile. This cross-functional space is where I thrive, helping shape long-term system strategies rather than just focusing on immediate releases. My approach involves pattern recognition across messy systems to deliver coherent, sustainable outcomes.
 
 This blog is where I write about these experiences and philosophies. Here, I write about patterns I've observed (and those I've intentionally avoided), how I navigate technical decisions, and the valuable lessons I've collected throughout my journey in mobile system evolution.
