@@ -1,8 +1,6 @@
 main:
   - title: "Blog"
     url: /posts/
-  - title: "Let's Connect"
-    url: https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3MLXQYhF5gxmur6wu0iO_y9eWVOurXICuLtotc0lZ1ne2187DUBKIC-SODRn09BGfYbl418CCU
   - title: "LinkedIn"
     url: https://www.linkedin.com/in/ahmadshabibulhossain
     target: "_blank"
