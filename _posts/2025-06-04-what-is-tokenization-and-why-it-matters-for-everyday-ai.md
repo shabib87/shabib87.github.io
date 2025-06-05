@@ -140,18 +140,24 @@ This blew my mind when I realized it explains so many other weird AI behaviors.
 Understanding tokenization isn't just interesting, it solves real problems you're probably having right now.
 
 **That Moment When Your API Bill Spikes**
+
 If you're using AI APIs, you pay per token. I learned this the hard way when my bill jumped 40% one month. Turns out, I'd started using more technical jargon in my prompts. "_Utilize sophisticated algorithms_" costs 6 tokens, while "_use smart code_" costs 3 tokens for basically the same meaning.
 
 **Why Your Long Conversations Get Weird**
+
 Ever notice how ChatGPT starts giving inconsistent answers in really long conversations? You're hitting the context window limit. The AI literally can't remember what you talked about 20 messages ago because those tokens got pushed out to make room for new ones.
 
 **The Frustrating Mid-Sentence Cutoff**
+
 That moment when the AI stops responding mid-thought? It hit its token limit. Understanding this helped me structure my prompts to leave more room for complete responses.
 
 **Why Some Prompts Just Work Better**
+
 Better understanding of how AI processes text leads to more predictable outcomes. Instead of wondering why one prompt works and another doesn't, you can start to see the patterns.
 
-**Privacy considerations**: While tokenization itself doesn't create privacy risks, the content being tokenized might. Personal information in training data or prompts can potentially lead to privacy breaches, the risk comes from the sensitive content, not the tokenization process itself.
+**Privacy considerations**
+
+While tokenization itself doesn't create privacy risks, the content being tokenized might. Personal information in training data or prompts can potentially lead to privacy breaches, the risk comes from the sensitive content, not the tokenization process itself.
 
 ## The Bottom Line
 
