@@ -112,7 +112,7 @@ So when you hit a token limit, it's not necessarily because your prompt was too 
 
 If you've ever noticed AI seems to work better in English, tokenization is part of the reason why.
 
-Let's say you want to ask "_How are you_?" In English, that's ["_How_", "_are_", "_you_", "_?_", "_"] - 4 tokens. But _"তুমি কেমন আছ?"_ (_tumi kemon acho?_) in Bengali becomes a mess of individual characters and syllables - often 8-12 tokens for the same simple question.
+Let's say you want to ask "_How are you_?" In English, that's ["_How_", "_are_", "_you_", "_?_"] - 4 tokens. But _"তুমি কেমন আছ?"_ (_tumi kemon acho?_) in Bengali becomes a mess of individual characters and syllables - often 8-12 tokens for the same simple question.
 
 This isn't just about cost:
 - Your Bengali prompts hit token limits faster
