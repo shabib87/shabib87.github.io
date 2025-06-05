@@ -2,7 +2,7 @@
 title: "What Is Tokenization? (And Why It Matters for Everyday AI)"
 description: "Tokenization is the process of breaking down text into smaller units called tokens. It's a fundamental concept in natural language processing and is used in a variety of applications, including search engines, chatbots, and voice assistants."
 date: 2025-06-04
-image: assets/images/2025-06-04-what-is-tokenization-and-why-it-matters-for-everyday-ai/banner.png
+image: /assets/images/2025-06-04-what-is-tokenization-and-why-it-matters-for-everyday-ai/banner.png
 permalink: /what-is-tokenization-and-why-it-matters-for-everyday-ai/
 categories:
   - blog
