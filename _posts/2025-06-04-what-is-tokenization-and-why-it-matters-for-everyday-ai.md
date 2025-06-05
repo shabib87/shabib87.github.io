@@ -23,31 +23,6 @@ tags:
 last_modified_at: 2025-06-04 03:25:00 +0000
 ---
 
----
-title: "What Is Tokenization? (And Why It Matters for Everyday AI)"
-description: "Tokenization is the process of breaking down text into smaller units called tokens. It's a fundamental concept in natural language processing and is used in a variety of applications, including search engines, chatbots, and voice assistants."
-date: 2025-06-04
-permalink: /what-is-tokenization-and-why-it-matters-for-everyday-ai/
-categories:
-  - blog
-  - AI
-  - GenerativeAI
-  - PromptEngineering
-  - Tokenization
-tags:
-  - AI
-  - LLMs
-  - GenerativeAI
-  - ArtificialIntelligence
-  - PromptEngineering
-  - MachineLearning
-  - DeepLearning
-  - Tech
-  - Innovation
-  - AIDevelopment
-last_modified_at: 2025-06-04 03:25:00 +0000
----
-
 If you're playing with AI and LLMs, you've probably seen this viral post somewhere:
 
 > Try asking this question to ChatGPT: "How many 'r's are in the word 'strawberry'?"
