@@ -47,8 +47,8 @@ But here's what took me way too long to internalize: this isn't just a preproces
 Think of it like packing a lunchbox. You can't just throw in whole meals, everything needs to be cut into bite-sized pieces first. But once you've chopped everything up, you can never see the original whole sandwich or apple. You only see the individual chopped pieces.
 
 **What are tokens?** They can be:
-- Individual words ("hello")
-- Parts of words ("un-" or "-ing") 
+- Individual words ("_hello_")
+- Parts of words ("_un-_ or _-ing_") 
 - Single characters
 - Punctuation marks
 - Spaces
@@ -60,8 +60,8 @@ Machines don't understand words the way humans do. LLMs are fundamentally number
 Here's what clicked for me: every conversation you have with AI is actually a conversation with a very sophisticated calculator.
 
 The process works like this:
-1. **Your input:** "Chatbots are helpful."
-2. **Tokenization:** Breaks it into ["Chatbots", "are", "helpful", "."]
+1. **Your input:** "_Chatbots are helpful._"
+2. **Tokenization:** Breaks it into ["_Chatbots_", "_are_", "_helpful_", "_._"]
 3. **Numerical mapping:** Each token gets a unique number ID
 4. **AI processing:** The model works with these numbers
 5. **Response generation:** AI outputs number sequences
@@ -73,9 +73,9 @@ This number conversion isn't just a technical detail — it's why AI behaves the
 
 Most current LLMs use **subword tokenization**, which is smarter than just splitting by spaces. Instead of treating every word as one token, it breaks things down further:
 
-- "_unhappiness_" becomes ["un", "happi", "ness"]
-- "_tokenization_" becomes ["token", "ization"] 
-- "_internationalization_" becomes ["inter", "national", "ization"]
+- "_unhappiness_" becomes ["_un", "_happi", "_ness_"]
+- "_tokenization_" becomes ["_token", "_ization_"] 
+- "_internationalization_" becomes ["_inter", "_national", "_ization_"]
 
 This helps AI handle rare words and different languages more efficiently by recognizing familiar word parts.
 
@@ -112,7 +112,7 @@ So when you hit a token limit, it's not necessarily because your prompt was too 
 
 If you've ever noticed AI seems to work better in English, tokenization is part of the reason why.
 
-Let's say you want to ask "_How are you_?" In English, that's ["_How_", "_are_", "_you_", "_?_", "_"] - 4 tokens. But "_তুমি কেমন আছ?_" (_tumi kemon acho?_) in Bengali becomes a mess of individual characters and syllables - often 8-12 tokens for the same simple question.
+Let's say you want to ask "_How are you_?" In English, that's ["_How_", "_are_", "_you_", "_?_", "_"] - 4 tokens. But _"তুমি কেমন আছ?"_ (_tumi kemon acho?_) in Bengali becomes a mess of individual characters and syllables - often 8-12 tokens for the same simple question.
 
 This isn't just about cost:
 - Your Bengali prompts hit token limits faster
