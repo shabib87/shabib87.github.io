@@ -2,8 +2,6 @@
 title: "Understanding LLMs: Context Windows and Token Limits"
 description: "Diving deep into model context and token size, the foundational concepts that explain common frustrations when working with Large Language Models (LLMs)."
 date: 2025-05-31
-image: /assets/images/2025-05-31-understanding-llms-context-windows-and-token-limits/banner.png
-og_image: /assets/images/2025-05-31-understanding-llms-context-windows-and-token-limits/banner.png
 permalink: /understanding-llms-context-windows-and-token-limits/
 categories:
   - blog
