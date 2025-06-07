@@ -1,3 +1,7 @@
+<p align="left">
+  <img src="assets/images/logo-transparent.png" alt="Code with Shabib" width="200">
+</p>
+
 # codewithshabib.com
 
 This is my personal blog and writing archive. I occasionally share thoughts on programming, technology, and the craft of building software — with the occasional dive into life and systems thinking.

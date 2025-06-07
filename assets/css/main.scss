@@ -9,17 +9,17 @@
 /**
 Branding colors:
 
-Primary: #2C4A6B (dark blue-gray) // updated to default minimal mistakes dark 
+Primary: ##282c34 (dark blue-gray)
 Secondary: #4A5D70 (medium blue-gray)
-Accent: #4A90E2 (bright blue) // updated to default minimal mistakes dark 
-Font/Background: #F5F5F5 (light gray/off-white)
+Accent: #4387ab (bright blue)
+Font: #F5F5F5 (light gray/off-white)
 */
 
 /* Override specific MM variables before importing */
 $body-color: #F5F5F5;
-// $background-color: #2C4A6B;
+$background-color: #282c34;
 $text-color: #F5F5F5;
-// $link-color: #2C4A6B;
+$link-color: #4387ab;
 $masthead-link-color: #F5F5F5;
 $masthead-background: #4A5D70;
 

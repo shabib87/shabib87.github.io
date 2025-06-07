@@ -41,7 +41,7 @@
 <meta property="og:description" content="{{ page.description }}">
 <meta property="og:type" content="{% if page.layout == 'single' %}article{% else %}website{% endif %}">
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-{% if page.image %}<meta property="og:image" content="{{ site.url }}{{ page.image }}">{% endif %}
+<meta property="og:image" content="{{ site.url }}{{ page.image | default: site.logo }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta name="author" content="{{ page.author }}">
 
@@ -49,7 +49,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page.title }}">
 <meta name="twitter:description" content="{{ page.description }}">
-{% if page.image %}<meta name="twitter:image" content="{{ site.url }}{{ page.image }}">{% endif %}
+<meta name="twitter:image" content="{{ site.url }}{{ page.image | default: site.logo }}">
 
 <!-- Security Headers -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
