@@ -1,6 +1,8 @@
+locale: "en-CA"
 title: "Code with Shabib"
-email: ""
+logo: "/assets/images/logo.png"
 description: "Mobile Architect & Tech Lead | iOS, Swift, React Native"
+email: "ahmad@codewithshabib.com"
 url: "https://www.codewithshabib.com"
 github_username: shabib87
 minimal_mistakes_skin: "custom"
