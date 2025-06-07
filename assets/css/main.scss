@@ -1,6 +1,16 @@
 /* Custom fonts */
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
 
+
+/**
+Branding colors:
+
+Primary: #2C4A6B (dark blue-gray)
+Secondary: #4A5D70 (medium blue-gray)
+Accent: #4A90E2 (bright blue)
+Font/Background: #F5F5F5 (light gray/off-white)
+*/
+
 /* Override specific MM variables before importing */
 $body-color: #F5F5F5;
 $background-color: #2C4A6B;
