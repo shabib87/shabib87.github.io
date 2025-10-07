@@ -14,7 +14,7 @@
 
 ## Coding Style & Naming Conventions
 - Author Markdown with fenced code blocks and title-case headings (`#`, `##`). Keep line width under ~100 characters to ease diffs.
-- Liquid templates should prefer `{%- %}` trimmed tags to avoid stray whitespace. Keep logic declarative; move complex helpers into `_includes`.
+- Liquid templates should prefer trimmed tag syntax (e.g., `{% raw %}{%- include nav -%}{% endraw %}`) to avoid stray whitespace. Keep logic declarative; move complex helpers into `_includes`.
 - SCSS uses two-space indentation and the Minimal Mistakes variable palette. Name custom partials `_<feature>.scss` and import once.
 - JavaScript snippets (rare) belong under `assets/js/` and should pass ESLint defaults (`eslint:recommended`) if expanded.
 

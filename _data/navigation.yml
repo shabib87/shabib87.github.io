@@ -1,9 +1,13 @@
 main:
   - title: "Blog"
-    url: /posts/
+    url: https://medium.com/@hossainshabib
+    target: "_blank"
   - title: "LinkedIn"
     url: https://www.linkedin.com/in/ahmadshabibulhossain
     target: "_blank"
   - title: "GitHub"
     url: https://github.com/shabib87
+    target: "_blank"
+  - title: "Archive"
+    url: /posts/
     target: "_blank"
