@@ -28,3 +28,4 @@
 - Group related changes per commit; avoid mixing content updates with theme tweaks.
 - Pull requests should include: summary of changes, before/after screenshots for visual tweaks, affected URLs, and links to any tracking issue.
 - Ensure CI (or local build) passes before requesting review. Note any non-default build steps or known limitations in the PR description.
+- Branching model is trunk-based: create short-lived feature/fix branches off `main`, rebase if they drift, and fast-forward merge back to `main` once tests and review pass. Delete the topic branch after merge to keep history linear and the working tree clean.
