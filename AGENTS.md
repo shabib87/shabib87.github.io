@@ -9,7 +9,7 @@
 
 ## Build, Test, and Development Commands
 - `bundle install` ensures all Ruby gems match the versions pinned in `Gemfile.lock`.
-- `bundle exec jekyll serve --livereload` builds the site locally, watches for changes, and serves on `http://localhost:4000`.
+- `bundle exec jekyll serve` builds the site locally, watches for changes, and serves on `http://localhost:4000` (refresh the browser manually; live reload is not bundled with the locked GitHub Pages toolchain).
 - `bundle exec jekyll build` produces the static site in `_site/`. Run this before deploying to verify there are no Liquid or Markdown build errors.
 - `bundle exec htmlproofer ./_site` (optional) checks generated HTML for broken links and accessibility warnings.
 
