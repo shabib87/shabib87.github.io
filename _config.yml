@@ -15,8 +15,6 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
 timezone: America/Toronto
 
 include:
@@ -27,7 +25,6 @@ google_analytics: G-LMPSDMRRVL
 
 # Plugins (previously gems:)
 plugins:
-  - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
