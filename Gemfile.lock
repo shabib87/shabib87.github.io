@@ -344,7 +344,6 @@ DEPENDENCIES
   jekyll-gist
   jekyll-include-cache
   jekyll-minifier
-  jekyll-paginate
   jekyll-seo-tag
   jekyll-sitemap
   jemoji
