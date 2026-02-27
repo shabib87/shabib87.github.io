@@ -18,6 +18,21 @@
             htmlLabels: true
         });
 
+        // Minimal Mistakes does not apply `target` for author sidebar custom links.
+        // Force external sidebar links to open in a new tab.
+        document.querySelectorAll('.author__urls a[href]').forEach((link) => {
+            const href = link.getAttribute('href') || '';
+            if (!/^https?:\/\//i.test(href)) return;
+
+            link.setAttribute('target', '_blank');
+
+            const rel = (link.getAttribute('rel') || '').trim();
+            const relTokens = rel ? rel.split(/\s+/) : [];
+            if (!relTokens.includes('noopener')) relTokens.push('noopener');
+            if (!relTokens.includes('noreferrer')) relTokens.push('noreferrer');
+            link.setAttribute('rel', relTokens.join(' '));
+        });
+
         // Force render any mermaid diagrams
         setTimeout(() => {
             document.querySelectorAll('.language-mermaid').forEach((el) => {
