@@ -35,6 +35,7 @@ if [[ -z "$affected_files" ]]; then
 fi
 
 affected_urls="$(ruby -e '
+require "date"
 require "yaml"
 files = STDIN.read.split("\n")
 urls = []
@@ -44,7 +45,7 @@ files.each do |file|
   content = File.read(file)
   match = content.match(/\A---\s*\n(.*?)\n---\s*\n/m)
   next unless match
-  data = YAML.safe_load(match[1], permitted_classes: [Time], aliases: true) || {}
+  data = YAML.safe_load(match[1], permitted_classes: [Time, Date], aliases: true) || {}
   permalink = data["permalink"].to_s.strip
   urls << permalink unless permalink.empty?
 end
