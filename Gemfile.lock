@@ -349,5 +349,8 @@ DEPENDENCIES
   jemoji
   tzinfo-data
 
+RUBY VERSION
+   ruby 3.4.4p34
+
 BUNDLED WITH
    2.5.14
