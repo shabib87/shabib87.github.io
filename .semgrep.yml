@@ -1,0 +1,40 @@
+rules:
+  - id: no-eval-in-shell-scripts
+    message: Avoid eval in repo automation scripts.
+    severity: ERROR
+    languages: [bash]
+    paths:
+      include:
+        - "scripts/**/*.sh"
+        - ".agents/**/*.sh"
+    pattern: eval $X
+
+  - id: no-curl-pipe-shell
+    message: Do not execute remote scripts via curl piped to a shell.
+    severity: ERROR
+    languages: [bash]
+    paths:
+      include:
+        - "scripts/**/*.sh"
+        - ".agents/**/*.sh"
+    pattern-regex: 'curl\\b[^\\n|]*\\|\\s*(sh|bash)\\b'
+
+  - id: no-wget-pipe-shell
+    message: Do not execute remote scripts via wget piped to a shell.
+    severity: ERROR
+    languages: [bash]
+    paths:
+      include:
+        - "scripts/**/*.sh"
+        - ".agents/**/*.sh"
+    pattern-regex: 'wget\\b[^\\n|]*\\|\\s*(sh|bash)\\b'
+
+  - id: disallow-pull-request-target-workflows
+    message: Avoid pull_request_target in this repo's lightweight workflow setup.
+    severity: WARNING
+    languages: [generic]
+    paths:
+      include:
+        - ".github/workflows/**/*.yml"
+        - ".github/workflows/**/*.yaml"
+    pattern-regex: 'pull_request_target:'

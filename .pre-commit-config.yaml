@@ -1,0 +1,59 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: detect-private-key
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.20.0
+    hooks:
+      - id: markdownlint-cli2
+        args: ["--config", ".markdownlint-cli2.yaml", "--no-globs"]
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        files: (^|/)[^/]+\.sh$
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.8
+    hooks:
+      - id: actionlint
+        files: ^\.github/workflows/.*\.ya?ml$
+  - repo: https://github.com/semgrep/pre-commit
+    rev: v1.151.0
+    hooks:
+      - id: semgrep
+        files: ^(\.semgrep\.yml|(scripts|\.agents|\.codex|\.github/workflows)/.*)$
+        args:
+          - --config
+          - .semgrep.yml
+          - --error
+          - --metrics=off
+          - --skip-unknown-extensions
+  - repo: local
+    hooks:
+      - id: validate-tracked-posts
+        name: validate tracked posts
+        entry: ./.agents/skills/jekyll-post-publisher/scripts/validate-post.sh
+        language: system
+        files: ^_posts/.*\.md$
+        pass_filenames: true
+        require_serial: true
+        stages: [pre-commit]
+      - id: run-checks
+        name: run make check
+        entry: ./scripts/run-checks.sh
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+      - id: run-security-checks
+        name: run targeted semgrep checks
+        entry: ./scripts/run-security-checks.sh
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
