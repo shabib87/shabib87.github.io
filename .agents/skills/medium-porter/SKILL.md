@@ -12,6 +12,7 @@ Use this skill when importing or cleaning up Medium-origin content.
 1. Read `references/migration-checklist.md`.
 2. Read `references/canonical-seo.md`.
 3. Reuse the site's standard front matter and taxonomy conventions.
+4. If the imported article still feels structurally weak or overly Medium-native, hand it to `technical-post-drafter` before final fact checking and publication.
 
 ## Output Expectations
 

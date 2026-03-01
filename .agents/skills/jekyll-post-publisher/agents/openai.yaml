@@ -1,4 +1,4 @@
 interface:
   display_name: "Jekyll Post Publisher"
-  short_description: "Draft and publish site-native Jekyll posts"
-  default_prompt: "Use $jekyll-post-publisher to draft or refine a blog post for this repository."
+  short_description: "Manage Jekyll post metadata and publish workflow"
+  default_prompt: "Use $jekyll-post-publisher to package, validate, or publish a blog post for this repository."

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Technical Post Drafter"
+  short_description: "Draft technical posts from outlines and rough notes"
+  default_prompt: "Use $technical-post-drafter to turn this outline, notes, or rough draft into a strong technical article body."
+
+policy:
+  allow_implicit_invocation: false
