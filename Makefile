@@ -2,6 +2,11 @@ SHELL := /bin/bash
 
 .PHONY: help setup hooks-install lint security validate-draft qa-publish publish-draft start-work check create-pr finalize-merge skill-audit skill-vendor
 
+ifneq (,$(filter skill-audit skill-vendor,$(firstword $(MAKECMDGOALS))))
+SKILL_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+$(foreach arg,$(SKILL_ARGS),$(eval $(arg):;@:))
+endif
+
 help:
 	@echo "Available targets:"
 	@echo "  make setup"
@@ -16,7 +21,9 @@ help:
 	@echo "  make create-pr TYPE=feat"
 	@echo "  make finalize-merge PR=123"
 	@echo "  make skill-audit NAME=example SOURCE=https://github.com/org/repo/tree/main/path"
+	@echo "  make skill-audit example"
 	@echo "  make skill-vendor SOURCE=https://github.com/org/repo/tree/main/path NAME=example"
+	@echo "  make skill-vendor https://github.com/org/repo/tree/main/path example"
 
 setup:
 	@./scripts/setup-dev.sh
@@ -52,7 +59,7 @@ finalize-merge:
 	@./scripts/finalize-merge.sh
 
 skill-audit:
-	@./scripts/audit-skill.sh
+	@./scripts/audit-skill.sh $(SKILL_ARGS)
 
 skill-vendor:
-	@./scripts/vendor-skill.sh
+	@./scripts/vendor-skill.sh $(SKILL_ARGS)
