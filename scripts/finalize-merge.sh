@@ -81,5 +81,17 @@ fi
 
 gh pr merge "$pr" --rebase --delete-branch
 
+main_remote="origin"
+main_remote_branch="main"
+if upstream_ref="$(git rev-parse --abbrev-ref --symbolic-full-name 'main@{upstream}' 2>/dev/null)"; then
+  main_remote="${upstream_ref%%/*}"
+  main_remote_branch="${upstream_ref#*/}"
+fi
+
+if ! git remote get-url "$main_remote" >/dev/null 2>&1; then
+  echo "error: remote $main_remote is not configured for local main" >&2
+  exit 1
+fi
+
 git checkout main
-git pull --ff-only
+git pull --ff-only "$main_remote" "$main_remote_branch"
