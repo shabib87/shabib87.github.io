@@ -1,6 +1,6 @@
 ---
 title: "Hi, I'm Shabib"
-description: "Engineering blog on mobile system design, debugging philosophy, and cross-platform strategy. Written by a Staff iOS + React Native engineer."
+description: "Engineering blog on principal mobile architecture, debugging philosophy, and cross-platform strategy. Written by a principal mobile engineer."
 permalink: /
 layout: single
 author_profile: true
@@ -9,7 +9,7 @@ image: /assets/images/bio-photo.jpg
 
 I believe robust systems tell clear stories. Over a decade of building and scaling mobile platforms, I've learned that this principle, where clarity consistently outperforms cleverness, is the bedrock for enduring solutions. It's how I approach complex problem-solving, even amidst ambiguity.
 
-My experience spans iOS, React Native, and backend layers, with a deep focus on mobile architecture, CI/CD pipelines, and strategic cross-platform SDK integrations. I've engineered solutions that stand the test of time, from foundational system design to the granular details of implementation.
+My experience spans iOS, React Native, and backend layers, with a deep focus on mobile architecture, CI/CD pipelines, and strategic cross-platform SDK integrations. I work at principal depth and scope, from foundational system design and platform strategy to the implementation details that determine whether those systems actually hold up in production.
 
 Lately, I'm super focused on how AI engineering fits into all of this. We're talking LLM applications, RAG pipelines, and finding ways intelligent systems can level up both product capabilities and how we build stuff. It's about spotting those patterns in messy systems and getting to clear, sustainable outcomes, even when AI is in the mix.
 
@@ -19,7 +19,8 @@ This blog is where I write about these experiences and philosophies. Here, I wri
 
 ---
 
-### Quick Links
+## Quick Links
+
 - 📩 <a href="mailto:ahmad@codewithshabib.com">Contact me</a>
 - 🧠 <a href="https://medium.com/@hossainshabib" target="_blank" rel="noopener">Browse the blog</a>
 - 🔗 <a href="https://github.com/shabib87" target="_blank" rel="noopener">GitHub</a>
