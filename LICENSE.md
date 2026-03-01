@@ -8,12 +8,12 @@ All blog content located in the `_posts` directory is licensed under the [Creati
 
 You are free to:
 
-- **Share** — copy and redistribute the material in any medium or format  
+- **Share** — copy and redistribute the material in any medium or format
 - **Adapt** — remix, transform, and build upon the material for any purpose, even commercially
 
 Under the following terms:
 
-- **Attribution** — You must give appropriate credit, provide a link to the original content, and indicate if changes were made. For example:  
+- **Attribution** — You must give appropriate credit, provide a link to the original content, and indicate if changes were made. For example:
   `© Ahmad Shabibul Hossain — Originally published at https://www.codewithshabib.com`
 - **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
 
@@ -33,4 +33,4 @@ If this repository includes a LICENSE file (such as MIT) for technical reasons, 
 
 ---
 
-© 2025 Ahmad Shabibul Hossain (CodeWithShabib). All rights reserved. Governed by Canadian copyright.
+© 2026 Ahmad Shabibul Hossain (CodeWithShabib). All rights reserved. Governed by Canadian copyright.
