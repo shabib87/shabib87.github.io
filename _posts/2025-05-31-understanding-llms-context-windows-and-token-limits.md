@@ -58,7 +58,7 @@ At the jump, the glass is empty—that's the "_amazement_" phase. As the convers
 
 This is a core principle in prompt engineering. There's way more to unpack, like system vs. user prompts, different prompt strategies, and temperature settings, which I'll dig into in future posts.
 
-With AI growing so fast and hyped-up ideas like Model Context Protocols (MCP), RAG, and agent frameworks flying around, it's easy to get swept up. But understanding the basics, like tokens and context, is absolutely essential. 
+With AI growing so fast and hyped-up ideas like Model Context Protocols (MCP), RAG, and agent frameworks flying around, it's easy to get swept up. But understanding the basics, like tokens and context, is absolutely essential.
 
 LLMs are just one piece of the AI puzzle. They matter, for sure, but there's a much bigger picture out there.
 

@@ -43,13 +43,13 @@ You nod. This isn’t a new problem — just a new galaxy.
 
 There’s no formal ask. No Jira ticket. No Figma file. Just friction. But it’s enough. You offer to explore.
 
-The only catch? 
+The only catch?
 
 > *“If you can make something quick and useful, go for it. We just can’t afford a full product cycle.”*
 
 You know the trap: it sounds *“simple”* — a list of internal tools. Maybe a featured one. A few categories. But you’ve been around long enough to know this is where tech debt is born.
 
-You grab 30 minutes with the PM and the lead designer over lunch. They’re swamped, but supportive. You agree on one thing: 
+You grab 30 minutes with the PM and the lead designer over lunch. They’re swamped, but supportive. You agree on one thing:
 
 > *Whatever you build should be small, testable, and clear enough that any new hire could open it and immediately understand what it’s for.*
 
@@ -58,7 +58,7 @@ You grab 30 minutes with the PM and the lead designer over lunch. They’re swam
 
 But enough alignment to write a shared spec.
 
-Before writing anything, you start talking. You loop in a couple ICs from Infra and DevTools who each mention their own *“secret”* tool lists.  
+Before writing anything, you start talking. You loop in a couple ICs from Infra and DevTools who each mention their own *“secret”* tool lists.
 
 You ask a designer if there's any prior exploration — turns out there’s a dead Figma file from 8 months ago. Slowly, a pattern emerges. Not a feature request — a symptom of poor discoverability. Only after these conversations do you start framing a spec.
 
@@ -92,7 +92,7 @@ You start mapping what you actually heard versus what was said. Somewhere betwee
 
 So you ***reframe***.
 
-You pull the scattered conversations into a rough spec. Nothing fancy. Just a clear articulation of what this MVP is, what it isn’t, and what assumptions you're quietly betting on. 
+You pull the scattered conversations into a rough spec. Nothing fancy. Just a clear articulation of what this MVP is, what it isn’t, and what assumptions you're quietly betting on.
 
 You consider calling it the *“Galactic Tool Index,”* but decide clarity wins over branding.
 
@@ -243,4 +243,4 @@ I’ll share how I go from vague ideas to aligned systems: sketching structure, 
 
 You can follow the series or star the repo here: [designing-for-ambiguity](https://github.com/shabib87/designing-for-ambiguity).
 
-> *Next Up: [Decisions Before Code](#coming-soon)* (coming soon)  
+> *Next Up: [Decisions Before Code](#coming-soon)* (coming soon)

@@ -48,7 +48,7 @@ Think of it like packing a lunchbox. You can't just throw in whole meals, everyt
 
 **What are tokens?** They can be:
 - Individual words ("_hello_")
-- Parts of words ("_un-_ or _-ing_") 
+- Parts of words ("_un-_ or _-ing_")
 - Single characters
 - Punctuation marks
 - Spaces
@@ -74,7 +74,7 @@ This number conversion isn't just a technical detail — it's why AI behaves the
 Most current LLMs use **subword tokenization**, which is smarter than just splitting by spaces. Instead of treating every word as one token, it breaks things down further:
 
 - "_unhappiness_" becomes ["_un", "_happi", "_ness_"]
-- "_tokenization_" becomes ["_token", "_ization_"] 
+- "_tokenization_" becomes ["_token", "_ization_"]
 - "_internationalization_" becomes ["_inter", "_national", "_ization_"]
 
 This helps AI handle rare words and different languages more efficiently by recognizing familiar word parts.
@@ -163,7 +163,7 @@ While tokenization itself doesn't create privacy risks, the content being tokeni
 
 Every interaction with an LLM starts and ends with tokenization. Your text gets broken into tokens, converted to numbers, processed by the AI, then decoded back into readable text.
 
-Think of it like packing a lunchbox for AI. You've got a big sandwich, grapes on stems, and whole carrots. You can't just throw them in: you need to slice the sandwich, separate the grapes, and cut the carrots into sticks. 
+Think of it like packing a lunchbox for AI. You've got a big sandwich, grapes on stems, and whole carrots. You can't just throw them in: you need to slice the sandwich, separate the grapes, and cut the carrots into sticks.
 
 Tokenization works the same way. Your text is the whole meal, the tokenizer is your knife, and tokens are the bite-sized pieces that fit into the AI's "_lunchbox_". The AI needs these discrete, numbered pieces to understand and process your input, and it can never reconstruct the original whole from these pieces.
 
@@ -226,7 +226,7 @@ While shorter prompts use fewer tokens, overly compressed prompts can reduce res
 
 **Best practice:** Be concise but complete. Don't sacrifice clarity to save a few tokens.
 
-Every interaction with an LLM starts and ends with tokenization. Your text gets broken into tokens, converted to numbers, processed by the AI, then decoded back into readable text. 
+Every interaction with an LLM starts and ends with tokenization. Your text gets broken into tokens, converted to numbers, processed by the AI, then decoded back into readable text.
 
 Understanding this process helps you:
 - Write more effective prompts

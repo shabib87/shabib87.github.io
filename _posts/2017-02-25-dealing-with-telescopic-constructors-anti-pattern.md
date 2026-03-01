@@ -40,7 +40,7 @@ class Biriyani {
     let count: Int
     let size: OrderSize
     let spiceRange: SpiceRange
-    
+
     init (count: Int, size: OrderSize, spiceRange: SpiceRange) {
         self.count = count
         self.size = size
@@ -71,17 +71,17 @@ class Biriyani {
     let count: Int
     let size: OrderSize
     let spiceRange: SpiceRange
-    
+
     init (count: Int, size: OrderSize, spiceRange: SpiceRange) {
         self.count = count
         self.size = size
         self.spiceRange = spiceRange
     }
-    
+
     convenience init(size: OrderSize, spiceRange: SpiceRange) {
         self.init(count: 1, size: size, spiceRange: spiceRange)
     }
-    
+
     convenience init(spiceRange: SpiceRange) {
         self.init(count: 1, size: .medium, spiceRange: spiceRange)
     }
@@ -114,26 +114,26 @@ class Biriyani {
     let size: OrderSize
     let spiceRange: SpiceRange
     let type: BiriyaniType
-    
+
     init (count: Int, size: OrderSize, spiceRange: SpiceRange, type: BiriyaniType) {
         self.count = count
         self.size = size
         self.spiceRange = spiceRange
         self.type = type
     }
-    
+
     convenience init(size: OrderSize, spiceRange: SpiceRange, type: BiriyaniType) {
         self.init(count: 1, size: size, spiceRange: spiceRange, type: type)
     }
-    
+
     convenience init(spiceRange: SpiceRange, type: BiriyaniType) {
         self.init(count: 1, size: .medium, spiceRange: spiceRange, type: type)
     }
-    
+
     convenience init(spiceRange: SpiceRange) {
         self.init(count: 1, size: .medium, spiceRange: spiceRange, type: .nonveg)
     }
-    
+
     convenience init(type: BiriyaniType) {
         self.init(count: 1, size: .medium, spiceRange: .spicy, type: type)
     }
@@ -174,27 +174,27 @@ class BiriyaniBuilder {
     private var size: OrderSize = .medium
     private var spiceRange: SpiceRange = .hot
     private var type: BiriyaniType = .nonveg
-    
+
     func setCount(_ count: Int) -> BiriyaniBuilder {
         self.count = count
         return self
     }
-    
+
     func setSize(_ size: OrderSize) -> BiriyaniBuilder {
         self.size = size
         return self
     }
-    
+
     func setSpiceRange(_ spiceRange: SpiceRange) -> BiriyaniBuilder {
         self.spiceRange = spiceRange
         return self
     }
-    
+
     func setType(_ type: BiriyaniType) -> BiriyaniBuilder {
         self.type = type
         return self
     }
-    
+
     func build() -> Biriyani {
         return Biriyani(count: count, size: size, spiceRange: spiceRange, type: type)
     }
@@ -205,7 +205,7 @@ class Biriyani {
     let size: OrderSize
     let spiceRange: SpiceRange
     let type: BiriyaniType
-    
+
     init (count: Int, size: OrderSize, spiceRange: SpiceRange, type: BiriyaniType) {
         self.count = count
         self.size = size
@@ -218,12 +218,12 @@ class Restaurant {
     var biriyaniOrder1 = BiriyaniBuilder()
         .setSpiceRange(.extraHot)
         .build()
-    
+
     var biriyaniOrder2 = BiriyaniBuilder()
         .setSpiceRange(.mild)
         .setSize(.large)
         .build()
-    
+
     var biriyaniOrder3 = BiriyaniBuilder()
         .setType(.veg)
         .setCount(2)
@@ -252,7 +252,7 @@ class Biriyani {
     let size: OrderSize
     let spiceRange: SpiceRange
     let type: BiriyaniType
-    
+
     init (count: Int = 1, size: OrderSize = .medium, spiceRange: SpiceRange = .spicy, type: BiriyaniType = .nonveg) {
         self.count = count
         self.size = size

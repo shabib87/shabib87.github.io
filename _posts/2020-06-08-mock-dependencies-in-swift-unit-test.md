@@ -23,7 +23,7 @@ tags:
   - testable-code
   - solid-principles
 description: "How to mock dependencies in Swift unit tests using protocol-oriented programming and constructor injection for better testability."
-last_modified_at: 2020-06-09 15:31:09 +0000 
+last_modified_at: 2020-06-09 15:31:09 +0000
 ---
 
 We should always write unit test for our code. We all know that, right? But sometimes having external dependencies make it very hard to test a class. Sometimes even almost impossible. Today I am going to discuss on how to solve this problem using mock dependencies in swift unit test.
@@ -56,13 +56,13 @@ struct AuthManager {
     }
 
     private let keychainManager = KeychainManager()
-    
+
     private func getTokenFromKeychain() -> AuthToken {
-        let accessToken = keychainManager.get(valueByKey: .accessToken)                            
+        let accessToken = keychainManager.get(valueByKey: .accessToken)
         let refreshToken = keychainManager.get(valueByKey: .refreshToken)
         return AuthToken(accessToken: accessToken, refreshToken: refreshToken)
     }
-    
+
     private func setTokenInKeychain(token: AuthToken) {
         keychainManager.set(asValue: token.accessToken, byKey: .accessToken)
         keychainManager.set(asValue: token.refreshToken, byKey: .refreshToken)
@@ -77,7 +77,7 @@ enum Key: String {
 struct KeychainManager {
     // the actual keychain as an example object instance
     private let keychain: Keychain
-    
+
     func get(valueByKey key: Key) -> String {
         keychain.getString(key.rawValue)
     }
@@ -111,8 +111,8 @@ And it will get pretty hard to catch this sneaky bug.
 The general idea is to rely on swift `protocols` to decouple dependency and make a class/struct testable in isolation.
 
 For instance, in our example use-case the dependency graph is:
-- `AuthManager` depends on `KeychainManager`. 
-- Some other instance (e.g. `UserService`) could depend on `AuthManager`. 
+- `AuthManager` depends on `KeychainManager`.
+- Some other instance (e.g. `UserService`) could depend on `AuthManager`.
 
 So how do we decouple the dependencies? In addition, how do we test these instances in isolation?
 
@@ -173,7 +173,7 @@ As a result, we can now make sure our test cases cover the behavior of the `Auth
 class AuthManagerTests: XCTestCase {
     var sut: AuthManager!
     var token: AuthToken!
-   
+
     override func setup() {
         token = AuthToken(accessToken: "AccessToken",
                           refreshToken: "RefreshToken")
@@ -220,7 +220,3 @@ Above all, for long running projects, we can run into situations where we’ve t
 I hope this blog will help someone to understand the concepts of `Mocking` and `Dependency Injection` a little better. As well as understanding the importance of writing unit tests for you application.
 
 Happy coding! 😁
-
-
-
-

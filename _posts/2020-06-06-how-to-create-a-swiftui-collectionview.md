@@ -17,7 +17,7 @@ tags:
   - collectionview
   - ios
 description: "How to bridge SwiftUI with UICollectionView using Combine, DiffableDataSource, and Compositional Layout to build a modern, declarative list UI."
-last_modified_at: 2020-06-09 15:31:09 +0000 
+last_modified_at: 2020-06-09 15:31:09 +0000
 ---
 
 Apple released `SwiftUI` and `Combine` on last year WWDC 2019. It has been very exciting to see native declarative way to build apps. But unfortunately `SwiftUI` is missing a key UI component modern apps use quite a lot, the `UICollectionView`. Another WWDC is on the door and I am as excited as everyone else on what Apple does with `SwiftUI` 2.0. May be we’ll finally get native `SwiftUI` `CollectionView` with that. But until then, using `UIViewRepresentable` or `UIViewControllerRepresentable` is the only solution for now.
@@ -53,7 +53,7 @@ Now if I was going with the typical imperative approach, I’d have used some de
 ```swift
 protocol FeedViewControllerDelegate: AnyObject {
   func feed(
-      _ feed: UIViewController, 
+      _ feed: UIViewController,
       didSelectItemAtIndexPath indexPath: IndexPath
   )
   func feed(
@@ -93,7 +93,7 @@ section.visibleItemsInvalidationHandler = {
 ...
 // didSelectItem
 func collectionView(
-  _: UICollectionView, 
+  _: UICollectionView,
   didSelectItemAt indexPath: IndexPath) {
   itemSelectionSubject?.send(indexPath)
 }
