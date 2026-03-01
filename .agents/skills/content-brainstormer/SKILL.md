@@ -12,6 +12,7 @@ Use this skill when the user is choosing what to write next.
 1. Read `references/positioning.md`.
 2. Read `references/topic-selection.md`.
 3. Use `references/editorial-calendar.md` when turning ideas into a backlog.
+4. Hand the chosen angle and outline to `technical-post-drafter` when the user is ready to write the article body.
 
 ## Output Expectations
 
@@ -25,7 +26,7 @@ Use this skill when the user is choosing what to write next.
 
 - the user has a shortlist of ideas worth drafting
 - the recommended topic supports authority-building
-- the outline is strong enough to hand to `jekyll-post-publisher`
+- the outline is strong enough to hand to `technical-post-drafter`
 
 ## Rules
 

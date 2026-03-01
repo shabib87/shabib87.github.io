@@ -12,6 +12,8 @@ Use this skill when content accuracy matters.
 1. Read `references/source-policy.md`.
 2. Read `references/citation-format.md`.
 3. Use Context7 whenever the official docs are available there and exact behavior matters.
+4. If the piece is still outline-only or structurally weak, send it to `technical-post-drafter` before spending time on detailed verification.
+5. Return the checked draft to `jekyll-post-publisher` for metadata, QA, and publication.
 
 ## Output Expectations
 

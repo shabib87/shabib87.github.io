@@ -50,7 +50,7 @@
 ## Repo-Local Skills Policy
 
 - Repo-local skills live in `.agents/skills/` and take precedence over user-global skills when both apply.
-- Use repo-local skills first for private draft creation, post editing, brainstorming, fact checking, Medium migration, repo workflow automation, and official documentation verification.
+- Use repo-local skills first for private draft creation, technical draft development, post editing, brainstorming, fact checking, Medium migration, repo workflow automation, and official documentation verification.
 - Keep `SKILL.md` files concise. Put detailed policy in `references/` and deterministic logic in `scripts/`.
 
 ## Context7 And Official Docs Policy
@@ -93,6 +93,7 @@
 
 - `jekyll-post-publisher`: Create private drafts, validate them, run publish QA, and promote them into tracked posts.
 - `content-brainstormer`: Generate authority-first topic ideas, hooks, outlines, and backlog candidates.
+- `technical-post-drafter`: Turn outlines, notes, and rough drafts into strong technical article bodies before fact checking and publish QA.
 - `fact-checker`: Verify technical and time-sensitive claims with primary sources and official documentation.
 - `medium-porter`: Convert and polish Medium posts into site-native Jekyll content.
 - `repo-flow`: Standardize branch creation, local checks, PR authoring, and solo self-review merge completion.
