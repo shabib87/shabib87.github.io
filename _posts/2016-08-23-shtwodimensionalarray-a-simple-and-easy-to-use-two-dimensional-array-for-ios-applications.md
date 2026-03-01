@@ -1,5 +1,6 @@
 ---
 title: "SHTwoDimensionalArray: A Simple and Easy to Use Two Dimensional Array for iOS Applications"
+description: "An overview of SHTwoDimensionalArray, a lightweight helper for managing two-dimensional data in iOS apps."
 date: 2016-08-23
 permalink: /shtwodimensionalarray-a-simple-and-easy-to-use-two-dimensional-array-for-ios-applications/
 categories:

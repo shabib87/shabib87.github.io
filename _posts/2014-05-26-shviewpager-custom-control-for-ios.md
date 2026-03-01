@@ -1,5 +1,6 @@
 ---
 title: "SHViewPager: Custom control for iOS"
+description: "An introduction to SHViewPager, a custom iOS control for building swipeable tab and pager interfaces."
 date: 2014-05-26
 permalink: /shviewpager-custom-control-for-ios/
 categories:

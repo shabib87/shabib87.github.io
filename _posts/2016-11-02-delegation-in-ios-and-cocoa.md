@@ -1,5 +1,6 @@
 ---
 title: "Delegation in iOS and Cocoa: Decorator Pattern"
+description: "A deeper look at delegation in iOS and Cocoa, with discussion of how the pattern compares to related design ideas."
 date: 2016-11-02
 permalink: /delegation-in-ios-and-cocoa/
 categories:

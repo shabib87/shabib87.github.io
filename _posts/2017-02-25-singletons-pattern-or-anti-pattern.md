@@ -1,5 +1,6 @@
 ---
 title: "Singletons: Pattern or Anti-pattern?"
+description: "A discussion of the singleton pattern, where it helps, where it hurts, and how to think about the tradeoffs."
 date: 2017-02-25
 permalink: /singletons-pattern-or-anti-pattern/
 categories:
@@ -17,12 +18,12 @@ tags:
   - objective-c
   - anti-pattern
   - clean-code
-last_modified_at: 2020-02-03 01:20:24 +0000 
+last_modified_at: 2020-02-03 01:20:24 +0000
 ---
 
 # Singletons: Pattern or Anti-pattern?
 
-While talking about design patterns, most developers have fumbled upon this one; especially cocoa developers (both iOS and Mac application developers). Singletons are the most common design pattern you’ll come to see in Cocoa and CocoaTouch frameworks. They are literally everywhere; i.e. `UIApplication.shared`, `UIScreen.main`, `NotificationCenter.default`, `UserDefaults.standard`, `FileManager.default`, `URLSession.shared`, `SKPaymentQueue.default()` and many more. 
+While talking about design patterns, most developers have fumbled upon this one; especially cocoa developers (both iOS and Mac application developers). Singletons are the most common design pattern you’ll come to see in Cocoa and CocoaTouch frameworks. They are literally everywhere; i.e. `UIApplication.shared`, `UIScreen.main`, `NotificationCenter.default`, `UserDefaults.standard`, `FileManager.default`, `URLSession.shared`, `SKPaymentQueue.default()` and many more.
 
 So, what are Singletons? And why are they so special?
 
@@ -115,7 +116,7 @@ class EditUserInfoController {
   init (user: User) {
     self.user = user
   }
-  
+
   func editUserName(_ username: String) {
     ...
   }
@@ -126,7 +127,7 @@ class GetFriendListController {
   init (user: User) {
     self.user = user
   }
-  
+
   func getFriends () {
     ...
   }

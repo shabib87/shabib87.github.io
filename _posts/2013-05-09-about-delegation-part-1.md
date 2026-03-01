@@ -1,5 +1,6 @@
 ---
 title: "About Delegation Part 1"
+description: "An introduction to delegation in Objective-C and iOS, covering protocols, delegates, and the core idea behind the pattern."
 date: 2013-05-09
 permalink: /about-delegation-part-1/
 categories:

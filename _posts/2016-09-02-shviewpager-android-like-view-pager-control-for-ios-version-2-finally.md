@@ -1,5 +1,6 @@
 ---
 title: "SHViewPager: Android Like View Pager Control for iOS Version 2.0 Finally!"
+description: "What changed in SHViewPager 2.0 and how the control brings an Android-style view pager experience to iOS."
 date: 2016-09-02
 permalink: /shviewpager-android-like-view-pager-control-for-ios-version-2-finally/
 categories:

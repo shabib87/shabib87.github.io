@@ -1,5 +1,6 @@
 ---
 title: "About Delegation Part 2"
+description: "A practical Objective-C walkthrough that explains how delegation works in iOS using a table view example."
 date: 2013-05-14
 permalink: /about-delegation-part-2/
 categories:
@@ -158,9 +159,9 @@ Now replace the `tableView: cellForRowAtIndexPath` method with the following:
   CarFactory *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
   if (cell == nil) {
-    cell = [[[CarFactory alloc] 
-        initWithStyle:UITableViewCellStyleDefault 
-        reuseIdentifier:CellIdentifier] 
+    cell = [[[CarFactory alloc]
+        initWithStyle:UITableViewCellStyleDefault
+        reuseIdentifier:CellIdentifier]
       autorelease];
   }
 
