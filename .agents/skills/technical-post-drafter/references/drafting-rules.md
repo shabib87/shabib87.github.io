@@ -2,10 +2,11 @@
 
 ## Voice
 
-- Write like a senior engineer explaining a pattern after seeing it fail in practice.
+- Write like a principal mobile engineer explaining a pattern after seeing it fail in practice across systems, teams, or platform boundaries.
 - Prefer strong nouns and verbs over hype.
 - Keep confidence proportional to evidence.
 - Use first person only when lived experience adds credibility.
+- Favor org-level judgment, platform strategy, and architectural consequence over narrow implementation trivia.
 
 ## Hook And Flow
 

@@ -73,7 +73,7 @@
   - `fact_check_status`
   - final publish QA
 - Cover images are usually remote Unsplash URLs supplied in the prompt. Local image assets are the exception.
-- Topic development should bias toward authority-building topics in mobile architecture, debugging, systems thinking, AI engineering, and staff-level engineering leadership.
+- Topic development should bias toward authority-building topics in mobile architecture, debugging, systems thinking, AI engineering, and principal mobile engineering leadership.
 
 ## Solo Merge Policy
 

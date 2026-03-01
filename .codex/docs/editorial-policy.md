@@ -8,7 +8,7 @@ This site is an authority-building publication for:
 - debugging and failure analysis
 - systems thinking
 - AI engineering
-- staff-level engineering leadership
+- principal mobile engineering leadership
 
 The writing should strengthen that positioning rather than chase generic traffic.
 
@@ -56,6 +56,7 @@ Prioritize ideas that:
 
 - demonstrate original experience
 - reveal systems thinking
+- show principal judgment in architecture, platform strategy, or cross-team technical direction
 - connect real engineering tradeoffs to practical lessons
 - compound reputation in the site's core domains
 
