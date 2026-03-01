@@ -4,6 +4,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# shellcheck disable=SC1091
 . "$repo_root/scripts/lib/tooling.sh"
 
 draft_path="${DRAFT_PATH:-${1:-}}"
@@ -27,7 +28,7 @@ case "$draft_path" in
     ;;
 esac
 
-"$repo_root/.agents/skills/jekyll-post-publisher/scripts/validate-post.sh" "$draft_path"
+STRICT_POST_METADATA=1 "$repo_root/.agents/skills/jekyll-post-publisher/scripts/validate-post.sh" "$draft_path"
 
 if grep -Ein '\b(TODO|TBD|FIXME)\b|lorem ipsum' "$draft_path" >/dev/null 2>&1; then
   echo "error: unresolved placeholders found in $draft_path" >&2

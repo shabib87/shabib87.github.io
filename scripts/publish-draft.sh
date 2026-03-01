@@ -30,6 +30,7 @@ esac
 "$repo_root/scripts/qa-publish.sh" "$draft_path"
 
 target_path="$(ruby - "$draft_path" "$publish_date" "$slug_override" <<'RUBY'
+require "date"
 require "yaml"
 
 path = ARGV.fetch(0)
@@ -39,7 +40,7 @@ content = File.read(path)
 match = content.match(/\A---\s*\n(.*?)\n---\s*\n/m)
 abort("error: missing YAML front matter in #{path}") unless match
 
-data = YAML.safe_load(match[1], permitted_classes: [Time], aliases: true) || {}
+data = YAML.safe_load(match[1], permitted_classes: [Time, Date], aliases: true) || {}
 body = content.sub(match[0], "")
 slug = if !slug_override.nil? && !slug_override.empty?
   slug_override
@@ -58,7 +59,7 @@ puts target_path
 RUBY
 )"
 
-"$repo_root/.agents/skills/jekyll-post-publisher/scripts/validate-post.sh" "$target_path"
+STRICT_POST_METADATA=1 "$repo_root/.agents/skills/jekyll-post-publisher/scripts/validate-post.sh" "$target_path"
 
 echo "published draft to: $target_path"
 echo "next: make check"
