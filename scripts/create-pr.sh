@@ -26,6 +26,16 @@ fi
 
 "$repo_root/scripts/run-checks.sh"
 
+remote_name="origin"
+if upstream_ref="$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
+  remote_name="${upstream_ref%%/*}"
+fi
+
+if ! git ls-remote --exit-code --heads "$remote_name" "$branch" >/dev/null 2>&1; then
+  echo "pushing branch $branch to $remote_name"
+  git push -u "$remote_name" "$branch"
+fi
+
 title_line="$("$repo_root/.agents/skills/repo-flow/scripts/infer-pr-metadata.sh" "$type")"
 title="${title_line#TITLE=}"
 
