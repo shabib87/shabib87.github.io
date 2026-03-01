@@ -1,0 +1,4 @@
+interface:
+  display_name: "Official Doc Verifier"
+  short_description: "Confirm version-sensitive behavior with official docs"
+  default_prompt: "Use $official-doc-verifier to confirm this behavior against official documentation."

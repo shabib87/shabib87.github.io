@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fact Checker"
+  short_description: "Verify technical claims with primary sources"
+  default_prompt: "Use $fact-checker to verify the technical claims in this draft."
