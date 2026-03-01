@@ -1,5 +1,6 @@
 ---
 title: "Strong vs Weak Reference in Cocoa"
+description: "A practical explanation of strong and weak references in Cocoa and when each ownership model should be used."
 date: 2016-11-12
 permalink: /strong-vs-weak-reference-in-cocoa/
 categories:

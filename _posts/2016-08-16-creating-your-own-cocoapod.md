@@ -1,5 +1,6 @@
 ---
 title: "Creating your own Cocoapod"
+description: "A step-by-step guide to packaging, publishing, and maintaining your own CocoaPod for iOS development."
 date: 2016-08-16
 permalink: /creating-your-own-cocoapod/
 categories:
@@ -28,7 +29,7 @@ It is not uncommon for developers like me, who have been working in the industry
 From the tutorial it is possible, you will face this error on the following command (in the tutorial Step 3: Pushing to Specs Repository):
 
 ```bash
-pod trunk push YOUR_POD.podspec 
+pod trunk push YOUR_POD.podspec
 ```
 
 [!] You need to register a session first.

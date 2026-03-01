@@ -1,5 +1,6 @@
 ---
 title: "Objective-C: Space for every three digits of a number"
+description: "A small Objective-C utility for formatting numbers by inserting spacing after every three digits."
 date: 2013-05-22
 permalink: /objective-c-space-for-every-three-digits-of-a-number/
 categories:

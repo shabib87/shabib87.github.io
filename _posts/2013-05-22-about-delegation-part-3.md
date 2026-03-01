@@ -1,5 +1,6 @@
 ---
 title: "About Delegation Part 3"
+description: "The final part of the delegation series, showing how to complete and apply the delegate pattern in an iOS app."
 date: 2013-05-22
 permalink: /about-delegation-part-3/
 categories:

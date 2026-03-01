@@ -1,5 +1,6 @@
 ---
 title: "Memory Management in Swift: Strong Reference & Retain Cycle"
+description: "A practical guide to Swift memory management, ARC, strong references, and how retain cycles happen."
 date: 2017-03-13
 permalink: /memory-management-in-swift-strong-reference-retain-cycle/
 categories:
@@ -39,26 +40,26 @@ Let's imagine we have two `class`es `Person` and `Apartment`:
 ```swift
 class Person {
     let name: String
-    init(name: String) { 
-      self.name = name 
+    init(name: String) {
+      self.name = name
     }
-    
-    deinit { 
-        print("\(name) is being deinitialized") 
+
+    deinit {
+        print("\(name) is being deinitialized")
     }
 }
 
 class Apartment {
     let number: Int
-    init(number: Int) { 
-      self.number = number 
+    init(number: Int) {
+      self.number = number
     }
-    
-    deinit { 
-        print("Apartment \(number) is being deinitialized") 
+
+    deinit {
+        print("Apartment \(number) is being deinitialized")
     }
 }
- 
+
 var person: Person? = Person(name: "John Doe")
 person = nil
 
@@ -79,24 +80,24 @@ Consider the following change:
 ```swift
 class Person {
     let name: String
-    init(name: String) { 
-      self.name = name 
+    init(name: String) {
+      self.name = name
     }
-    
-    deinit { 
-        print("\(name) is being deinitialized") 
+
+    deinit {
+        print("\(name) is being deinitialized")
     }
 }
 
 class Apartment {
     let number: Int
     var person: Person?
-    init(number: Int) { 
-      self.number = number 
+    init(number: Int) {
+      self.number = number
     }
-    
-    deinit { 
-        print("Apartment \(number) is being deinitialized") 
+
+    deinit {
+        print("Apartment \(number) is being deinitialized")
     }
 }
 
@@ -139,24 +140,24 @@ We magically start to get our output again! Now again, if we modify our `class`e
 class Person {
     let name: String
     var apartment: Apartment?
-    init(name: String) { 
-      self.name = name 
+    init(name: String) {
+      self.name = name
     }
-    
-    deinit { 
-        print("\(name) is being deinitialized") 
+
+    deinit {
+        print("\(name) is being deinitialized")
     }
 }
 
 class Apartment {
     let number: Int
     var person: Person?
-    init(number: Int) { 
-      self.number = number 
+    init(number: Int) {
+      self.number = number
     }
-    
-    deinit { 
-        print("Apartment \(number) is being deinitialized") 
+
+    deinit {
+        print("Apartment \(number) is being deinitialized")
     }
 }
 ```
@@ -210,19 +211,19 @@ A strong reference cycle can also occur if a closure variable calls its `class` 
 
 ```swift
 class HTMLElement {
-    
+
     let name: String
     let text: String?
-    
+
     lazy var asHTML: () -> String = {
         return "<\(self.name)>\(self.text)</\(self.name)>"
     }
-    
+
     init(name: String, text: String? = nil) {
         self.name = name
         self.text = text
     }
-    
+
     deinit {
         print("HTMLElement \(name) is being deinitialized")
     }
@@ -233,7 +234,7 @@ paragraph?.asHTML()
 paragraph = nil
 
 // Output:
-// 
+//
 ```
 
 The `asHTML` property is declared as a lazy property, because it is only needed when if and only if the element actually needs to be rendered as a string value for some HTML output target; thus lazily initialized. The fact `asHTML` is a lazy property means we can refer to `self` within the default closure, because the lazy property will not be accessed until the initialization has been completed and `self` is known to exist.
@@ -251,12 +252,12 @@ This implementation of `HTMLElement` is identical to the previous implementation
 ```swift
 class HTMLElement {
     ...
-    
+
     lazy var asHTML: () -> String = { [weak self] in
         guard let htmlElement = self else { return "" }
         return "<\(htmlElement.name)>\(htmlElement.text)</\(htmlElement.name)>"
     }
-    
+
     ...
 }
 
@@ -273,4 +274,3 @@ This time, the capture of `self` by the closure is an weak reference, and does n
 A more detailed example and explanation can be found in [Apple's Swift 3 Documentation](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID48). All the examples used here are taken from the documentation and been simplified for convenience.
 
 Happy coding 🙂
-

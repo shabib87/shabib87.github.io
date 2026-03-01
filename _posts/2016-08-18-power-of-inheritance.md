@@ -1,5 +1,6 @@
 ---
 title: "Power of Inheritance"
+description: "A simple example that shows how inheritance can help coordinate shared behavior across multiple iOS screens."
 date: 2016-08-18
 permalink: /power-of-inheritance/
 categories:
@@ -24,13 +25,13 @@ We all know the three basic principles of `OOP`: `Encapsulation`, `Inheritance` 
 
 Let's assume a scenario: you are working on an application, which has to perform a server call asynchronously and has no direct impact on the UI. But when the server returns a response, you have to make some modification to your application regardless of the present UI.
 
-Now on a detailed note; you have three UIs represented by **class A**, **B** and **C**. These are on a navigation stack: 
-- **A** being the root class (the first one to be displayed) and 
-- **class B** and **C** are pushed on the stack depending on user interaction (top class from the stack is available for user interaction). 
-- When the application launches with **class A** being available for user interaction, 
-  - a server call is made asynchronously with the users location (latitude and longitude) and 
-  - the server will respond with an array of nearby attractions that may interest the user. 
-  
+Now on a detailed note; you have three UIs represented by **class A**, **B** and **C**. These are on a navigation stack:
+- **A** being the root class (the first one to be displayed) and
+- **class B** and **C** are pushed on the stack depending on user interaction (top class from the stack is available for user interaction).
+- When the application launches with **class A** being available for user interaction,
+  - a server call is made asynchronously with the users location (latitude and longitude) and
+  - the server will respond with an array of nearby attractions that may interest the user.
+
 Now, here is the catch: you have to catch the response regardless of the class currently available for user interaction (top of the stack!); i.e. it does not matter if **class A**, **B** or **C** is on top of the stack (in memory!); you have to catch the response, format it and display it to the current screen! Now, how do you do that?
 
 Well there are a lot of possible ways, but using inheritance might be the easiest and most convenient one. How do we do that? Remember the [definition](http://www.artima.com/objectsandjava/webuscript/ClassesObjects1.html):

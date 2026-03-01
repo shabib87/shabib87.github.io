@@ -1,5 +1,6 @@
 ---
 title: "UITextView with similar look like rounded UITextField with dynamic height"
+description: "How to build a rounded UITextView with placeholder support and dynamic height behavior for iOS forms."
 date: 2017-01-24
 permalink: /uitextview-with-similar-look-like-round-rect-uitextfield/
 categories:
@@ -21,6 +22,7 @@ tags:
   - iphone
   - objective-c
   - programming
+last_modified_at: 2017-01-24 01:12:42 +0000
 ---
 
 Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wished it will grow it’s height as you type your text? Well, you are in luck! Here is the swift file you will need.
@@ -29,23 +31,23 @@ Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wi
 
 ```swift
 /*
- 
+
  TextViewWithPlaceholderAndExpandingHeight.swift
  TextViewWithPlaceholderAndExpandingHeight
  Created by Shabib Hossain on 1/24/17.
- 
+
  Copyright (c) 2017 shabib87 <shabib.sust@gmail.com>
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in
  all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -53,36 +55,36 @@ Ever wanted to use an UITextView that looks like a rounded UITextFiled? Also, wi
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
- 
+
  */
 
 import Foundation
 import UIKit
 
 class TextViewWithPlaceholderAndExpandingHeight: UITextView {
-    
+
     @IBInspectable var placeHolderText: String!
     @IBInspectable var placeHolderColor: UIColor!
-    
+
     private var placeHolderLabel: UILabel!
     private let defaultColor = UIColor(red:199.0/255.0, green:199.0/255.0, blue:205.0/255.0, alpha:1.0)
     private let UIPlaceholderTextChangeAnimationDuraiton = 0.25
     private let UIPlaceHolderLabelTag = 1901
     private let kMaxHeightForTextView = 90.0
-    
+
     var currentDynamicHeight: CGFloat {
         get {
             return self.bounds.height
         }
     }
-    
+
     override var text: String! {
         didSet {
             self.viewWithTag(self.UIPlaceHolderLabelTag)?.alpha = 0.0
             self.updateHeight()
         }
     }
-    
+
     override func draw(_ rect: CGRect) {
         if !self.placeHolderText.isEmpty {
             if self.placeHolderLabel == nil {
@@ -97,7 +99,7 @@ class TextViewWithPlaceholderAndExpandingHeight: UITextView {
         }
         super.draw(rect)
     }
- 
+
     private func setupPlaceholderLabel() {
         self.placeHolderLabel = UILabel(frame: CGRect(x: 8, y: 4, width: self.bounds.size.width - 16, height: 0))
         self.placeHolderLabel.lineBreakMode = .byWordWrapping
@@ -109,26 +111,26 @@ class TextViewWithPlaceholderAndExpandingHeight: UITextView {
         self.placeHolderLabel.tag = self.UIPlaceHolderLabelTag
         self.addSubview(self.placeHolderLabel)
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setupPlaceholder()
     }
-    
+
     override init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
         self.setupPlaceholder()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupPlaceholder()
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UITextViewTextDidChange, object: nil)
     }
-    
+
     private func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let whitescpaceSet = NSCharacterSet.whitespaces
         let range = string.rangeOfCharacter(from: whitescpaceSet)
@@ -138,7 +140,7 @@ class TextViewWithPlaceholderAndExpandingHeight: UITextView {
             return true
         }
     }
-    
+
     private func setupPlaceholder() {
         if self.placeHolderText == nil {
             self.placeHolderText = ""
@@ -151,7 +153,7 @@ class TextViewWithPlaceholderAndExpandingHeight: UITextView {
         self.layer.borderColor = defaultColor.cgColor
         NotificationCenter.default.addObserver(self, selector: #selector(self.textChanged), name: NSNotification.Name.UITextViewTextDidChange, object: nil)
     }
-    
+
     @objc private func textChanged(notification: Notification?) {
         if self.placeHolderText.isEmpty {
             return
@@ -165,7 +167,7 @@ class TextViewWithPlaceholderAndExpandingHeight: UITextView {
             self.updateHeight()
         }
     }
-    
+
     private func updateHeight() {
         let fixedWidth = self.bounds.size.width
         let newSize = self.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))

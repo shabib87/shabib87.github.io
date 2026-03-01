@@ -1,5 +1,6 @@
 ---
 title: "Reset Core Data Database Inside Application"
+description: "How to reset a Core Data-backed iOS app by removing the SQLite store and recreating the persistent stack."
 date: 2013-05-07
 permalink: /reset-core-data-database-inside-application/
 categories:
