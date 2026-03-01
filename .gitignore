@@ -15,3 +15,10 @@ vendor/bundle/
 
 # Logs
 *.log
+
+# Private local drafts
+_drafts/
+
+# Local tooling caches
+.pre-commit-cache/
+.venv-tools/
