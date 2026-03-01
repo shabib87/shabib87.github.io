@@ -119,11 +119,11 @@ The empty `Presenter` class is the super class for all the Presenter classes to 
 
 ```swift
 class RootViewController: UIViewController, StoryboardInitializable {
-    
+
     class func instantiateFromStoryboard(presenter aPresenter: Presenter) -> UIViewController {
         fatalError("Override failed. Dependency injection not processed. Presenter injection hampered.")
     }
-    
+
     // Preventing segue to support dependency injection
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         fatalError("Segues should not be used. Presenter injection hampered.")
@@ -172,14 +172,14 @@ And the `HeroListPresenter` class should only have a reference to the `HeroListV
 
 ```swift
 final class HeroListPresenter: Presenter {
-    
+
     private let service: HeroService
     weak private var view : HeroListView?
     ...
     init(service: HeroService) {
         self.service = service
     }
-    
+
     func attachView(view: HeroListView) {
         self.view = view
     }
@@ -214,7 +214,7 @@ protocol CanDisplayHeroDetailsScreen {
 }
 
 extension CanDisplayHeroDetailsScreen where Self: UIViewController {
-    
+
     func displayHeroDetailsScreen(presenter aPresenter: Presenter) {
         let detailsVC = HeroDetailsViewController.instantiateFromStoryboard(presenter: aPresenter)
         navigationController?.pushViewController(detailsVC, animated: true)

@@ -44,7 +44,7 @@ class SmartCar {
 	func driveOnRoad() {
 		print("Vroom!")
 	}
-	
+
 	func talk() {
 		print("Hi! I am the smart talking car!")
 	}
@@ -154,11 +154,11 @@ Six months later Mr. Big decides the market has changed and people want multi fu
 
 ```swift
 class SmartBoat: SmartVehicle, RoadDrivable, WaterDrivable {
-    
+
 	func driveOnRoad() {
 		print("Vroom!")
 	}
-	
+
 	func driveOnWater() {
 		print("I can run over water, because I can! B-)")
 	}
@@ -170,4 +170,3 @@ With this strategy on hand no matter how many times Mr. Big changes his requirem
 I hope I have managed to give an idea on how strategy pattern works and how to use it with a real time scenario. Of course we can improve this by using other ways; I am giving you a hint: Abstract Class. Any questions, feedbacks or if you think I have some improvements to do, feel free to comment!
 
 Happy coding! 😁
-

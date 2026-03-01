@@ -40,7 +40,7 @@ tags:
 last_modified_at: 2025-05-21 12:00:00 +0000
 ---
 
-If you have been working with iOS for a while, you know that testing or testing strategy has not been the easiest aspect of development. iOS has always felt harder than it should be. 
+If you have been working with iOS for a while, you know that testing or testing strategy has not been the easiest aspect of development. iOS has always felt harder than it should be.
 
 While Android and React Native teams have had flexible mocking, fast feedback loops, and tooling that plays well with clean architecture, iOS has lagged behind. Even with Swift’s strong type system, we’ve been stuck writing fragile tests, over-relying on singletons, or skipping tests entirely when the cost felt too high.
 
@@ -97,7 +97,7 @@ test('displays weather data', async () => {
   WeatherService.getWeather.mockResolvedValue({ temperature: 24, condition: 'Cloudy' });
 
   const component = render(<WeatherView city="Toronto" />);
-  
+
   expect(WeatherService.getWeather).toHaveBeenCalledWith('Toronto');
   expect(await screen.findByText('24°C')).toBeInTheDocument();
 });
@@ -132,7 +132,7 @@ So we pay for that safety with more boilerplate: `protocols`, `codegen`, and man
 
 ## The Test Double Spectrum: Strategic Choices
 
-In Swift, choosing the right kind of test double isn’t just about semantics — it’s about working around language-level constraints. You can’t just reach for a mocking library and call it a day. You have to decide: 
+In Swift, choosing the right kind of test double isn’t just about semantics — it’s about working around language-level constraints. You can’t just reach for a mocking library and call it a day. You have to decide:
 
 > _What’s the intent of this test? What’s the role of this dependency?_
 
@@ -170,19 +170,19 @@ The answer isn’t _“add tests later”_. It’s architectural. You need to ma
 
 Here are five core principles that have worked for me when scaling iOS systems:
 
-1. **Protocol-First Design**  
+1. **Protocol-First Design**
    Define contracts up front. Don’t tie your code to concrete types.
 
-2. **Dependency Inversion**  
+2. **Dependency Inversion**
    Your domain logic should never import library or framework types directly. Let infrastructure depend on domain, not the other way around.
 
-3. **Composition Over Inheritance**  
+3. **Composition Over Inheritance**
    Don’t subclass if you can compose. It keeps logic modular and easier to stub or fake.
 
-4. **Clear System Boundaries**  
+4. **Clear System Boundaries**
    Group responsibilities with intent: API logic, mapping, view models, and views should each own one thing.
 
-5. **Minimize Global State**  
+5. **Minimize Global State**
    Avoid singletons for anything you might want to test. Inject dependencies — don’t hide them.
 
 These ideas aren’t just academic. They’re what keep tests readable, reusable, and actually worth maintaining.
@@ -231,10 +231,10 @@ protocol AnalyticsTracker: Sendable {
 nal class WeatherViewModel: WeatherViewModelProtocol {
   @Published var weatherViewData: WeatherViewData?
   @Published var isLoading = false
-  
+
   private let fetchWeatherUseCase: FetchWeatherUseCaseProtocol
   private let analytics: AnalyticsTracker
-  
+
   init(
     fetchWeatherUseCase: FetchWeatherUseCaseProtocol,
     analytics: AnalyticsTracker = DefaultAnalyticsTracker()
@@ -242,7 +242,7 @@ nal class WeatherViewModel: WeatherViewModelProtocol {
     self.fetchWeatherUseCase = fetchWeatherUseCase
     self.analytics = analytics
   }
-  
+
   func fetchWeather() async {
     isLoading = true
     do {
@@ -335,7 +335,7 @@ struct WeatherView_SunnyPreview: PreviewProvider {
       fetchWeatherUseCase: useCase,
       logger: DummyLogger()
     )
-      
+
     return WeatherView(viewModel: viewModel)
   }
 }

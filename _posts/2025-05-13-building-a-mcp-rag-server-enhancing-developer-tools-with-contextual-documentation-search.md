@@ -35,7 +35,7 @@ That's what I've been experimenting with recently: an MCP RAG server that lets d
 
 ## What's the Problem?
 
-On my previous blogs I had referred an imaginary company called SuperNova. Let's keep that going. Imagine at SuperNova we had a growing documentation problem. 
+On my previous blogs I had referred an imaginary company called SuperNova. Let's keep that going. Imagine at SuperNova we had a growing documentation problem.
 
 Our mobile SDK had hundreds of components, each with its own configuration options, examples, and gotchas. New team members were spending days trying to find the right information, and even experienced devs were wasting time hunting through multiple sources.
 

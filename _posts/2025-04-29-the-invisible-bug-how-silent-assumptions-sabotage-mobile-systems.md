@@ -16,7 +16,7 @@ tags:
   - system-design
   - debugging-strategy
   - mobile-crash-analysis
-last_modified_at: 2025-04-29 15:31:09 +0000 
+last_modified_at: 2025-04-29 15:31:09 +0000
 ---
 
 Imagine this: In a parallel universe, you are a mobile engineer working at SuperNova Corp, an intergalactic social media app. We’ve conquered space and made intergalactic connections, but AI still hasn’t taken over our jobs. It’s just as useful as it is in our universe in 2025.
@@ -102,9 +102,9 @@ And more importantly:
 
 > What guardrail was missing that let this ship to prod?
 
-Because the real bug here isn’t in the function call, it’s in the absence of any shared contract between layers. 
-- No lifecycle agreement. 
-- No handshake protocol. 
+Because the real bug here isn’t in the function call, it’s in the absence of any shared contract between layers.
+- No lifecycle agreement.
+- No handshake protocol.
 
 Just vibes and good intentions.
 
@@ -151,7 +151,7 @@ class SessionManager: NSObject {
 
 If the guard fails in staging or test builds, it halts execution with a clear message. No more silent failures. No more ***"how did this even run?"***
 
-Next, your team write integration tests that mimicked cold starts with permission prompts unresolved. No full-blown e2e test rig, just a mocked bridge call in Jest and a GitHub Actions job simulating cold-start timing was enough to trigger it. 
+Next, your team write integration tests that mimicked cold starts with permission prompts unresolved. No full-blown e2e test rig, just a mocked bridge call in Jest and a GitHub Actions job simulating cold-start timing was enough to trigger it.
 
 ```typescript
 describe('SessionManager', () => {
@@ -185,14 +185,14 @@ You didn't fix a crash. You closed a timing gap that had been silently haunting 
 
 ## Beyond the Crash – Fixing Is Easy. Preventing Is Political.
 
-Back on Earth (or whatever planet your team ships from for SuperNova Corp), the fix goes live. The dashboards cool off. But that’s when the real work begins. 
+Back on Earth (or whatever planet your team ships from for SuperNova Corp), the fix goes live. The dashboards cool off. But that’s when the real work begins.
 
 There’s usually a quiet moment — one that rarely makes it into retros. That moment when someone says, ***“We should probably write this down somewhere.”*** That’s the real inflection point.
 
 Because catching the bug was easy. Preventing the next one? That’s where things get messy.
 
 Runtime guards, lifecycle diagrams, cold-start tests — none of that fits neatly into a roadmap.
-- It slows down the ***“real work.”*** 
+- It slows down the ***“real work.”***
 - Raises questions like, ***“Do we need this level of detail?”*** or, ***“Isn’t this overkill for a single module?”***
 
 Maybe, but compare it to three days of debugging and a support queue full of churned users.
@@ -254,7 +254,7 @@ Now ask:
 
 If the answer is **“it probably won’t happen,”** that’s the red flag. Because that’s what everyone said about cold-start crashes, too.
 
-You don’t need a full spec doc or a fancy schema. A shared Markdown file. A lifecycle diagram. Even a one-liner in the code: 
+You don’t need a full spec doc or a fancy schema. A shared Markdown file. A lifecycle diagram. Even a one-liner in the code:
 
 ```typescript
 // Important: Assumes permissions granted before init on TypeScript layer

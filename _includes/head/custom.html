@@ -40,10 +40,10 @@
                 const wrapper = document.createElement('div');
                 wrapper.className = 'mermaid';
                 wrapper.textContent = el.textContent;
-                
+
                 // Replace pre element with wrapper
                 el.parentNode.replaceWith(wrapper);
-                
+
                 // Initialize mermaid on this element
                 mermaid.init(undefined, wrapper);
             });
