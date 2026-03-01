@@ -1,0 +1,28 @@
+name: Semgrep
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install repo-managed pre-commit
+        run: |
+          python -m venv .venv-tools
+          ./.venv-tools/bin/pip install --requirement requirements-dev.txt
+
+      - name: Run targeted Semgrep checks
+        run: ./scripts/run-security-checks.sh
