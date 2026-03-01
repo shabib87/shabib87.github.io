@@ -1,0 +1,4 @@
+interface:
+  display_name: "Medium Porter"
+  short_description: "Port Medium posts into site-native Jekyll content"
+  default_prompt: "Use $medium-porter to migrate this Medium post into the blog repository."
