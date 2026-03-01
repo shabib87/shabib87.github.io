@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repo Flow"
+  short_description: "Run the repo's branch, PR, and merge workflow"
+  default_prompt: "Use $repo-flow to start work, validate changes, and prepare the PR for this repository."
