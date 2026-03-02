@@ -1,6 +1,7 @@
 ---
 title: "The Invisible Bug: How Silent Assumptions Sabotage Mobile Systems"
 description: "How hidden assumptions derail mobile systems and how to debug them using scientific reasoning. A story-driven guide for principal mobile engineers."
+excerpt: "How hidden assumptions derail mobile systems and how to debug them using scientific reasoning. A story-driven guide for principal mobile engineers."
 date: 2025-04-29
 permalink: /the-invisible-bug-how-silent-assumptions-sabotage-mobile-systems/
 categories:
@@ -16,12 +17,20 @@ tags:
   - system-design
   - debugging-strategy
   - mobile-crash-analysis
-last_modified_at: 2026-03-02 15:00:00 +0000
-image: /assets/images/posts/invisible-bug-systems-loop.svg
-image_alt: Systems-thinking diagram showing a safe debugging loop from isolating conditions to adding guardrails across a mobile integration boundary
-image_source: local
+last_modified_at: 2026-03-02 16:20:00 +0000
+image: "https://images.unsplash.com/photo-1649451844931-57e22fc82de3?auto=format&fit=crop&w=1600&q=80"
+image_alt: Code editor glowing on a dark computer screen
+image_source: unsplash
 fact_check_status: not-needed
 ---
+
+<figure class="post-figure">
+  <img
+    src="https://images.unsplash.com/photo-1649451844931-57e22fc82de3?auto=format&fit=crop&w=1600&q=80"
+    alt="Code editor glowing on a dark computer screen"
+  >
+  <figcaption>Photo by <a href="https://unsplash.com/@hdbernd?utm_source=medium&amp;utm_medium=referral">Bernd Dittrich</a> on <a href="https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-lines-on-it-aYosQyFcC8k?utm_source=medium&amp;utm_medium=referral">Unsplash</a></figcaption>
+</figure>
 
 Imagine this: In a parallel universe, you are a mobile engineer working at SuperNova Corp, an intergalactic social media app. We’ve conquered space and made intergalactic connections, but AI still hasn’t taken over our jobs. It’s just as useful as it is in our universe in 2025.
 
@@ -325,13 +334,6 @@ graph LR
 classDef default fill:#2D323E,stroke:#666,stroke-width:2px,color:#fff,rx:5px,ry:5px;
 linkStyle default stroke:#666,stroke-width:2px;
 </div>
-
-<img class="post-inline-image" src="/assets/images/posts/invisible-bug-systems-loop.svg" alt="Systems-thinking diagram showing a safe debugging loop from isolating conditions to adding guardrails across a mobile integration boundary">
-
-<p class="text-center" style="color: #666; margin-top: -20px;">
-<small>Apply this framework to any integration boundary.</small>
-<br/>
-</p>
 
 You can apply this at any boundary: **TS ↔ Native, Mobile ↔ Backend, UI ↔ Business logic**. It’s not a checklist. It’s a way to spot design flaws before they explode at runtime. The goal isn’t to debug faster, it’s to avoid replaying the same failure with new symptoms.
 
