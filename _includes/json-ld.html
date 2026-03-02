@@ -1,36 +1,5 @@
-{% if page.layout == "single" %}
-{%- assign schema_image = page.image | default: site.author.avatar -%}
-{%- assign schema_image_url = schema_image -%}
-{%- unless schema_image contains '://' -%}
-  {%- assign schema_image_url = site.url | append: schema_image -%}
-{%- endunless -%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "{{ page.title }}",
-  "description": "{{ page.description }}",
-  "image": "{{ schema_image_url }}",
-  "author": {
-    "@type": "Person",
-    "name": "{{ site.author.name }}",
-    "url": "{{ site.url }}"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "{{ site.title }}",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ site.url }}/assets/images/logo.png"
-    }
-  },
-  "datePublished": "{{ page.date | date_to_xmlschema }}",
-  "dateModified": "{{ page.last_modified_at | date_to_xmlschema | default: page.date | date_to_xmlschema }}",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ site.url }}{{ page.url }}"
-  },
-  "keywords": "{{ page.tags | join: ', ' }}"
-}
-</script>
-{% endif %}
+{%- comment -%}
+Jekyll SEO Tag already emits canonical JSON-LD for this site. Keep this partial as a documented
+no-op so repo-local audits can require the include without duplicating schema.org BlogPosting
+blocks in the head.
+{%- endcomment -%}
