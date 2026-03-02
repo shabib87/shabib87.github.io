@@ -322,18 +322,13 @@ This isn’t about tools or stack traces. It’s about habits. Here’s the loop
 - ***Spot the missing contract***: If it fails silently, there’s a rule that was never written down.
 - ***Prevent, don’t patch***: Add a guard, a test, a doc — whatever makes the assumption visible and enforceable.
 
-<div class="mermaid" style="width: 100%; height: 100%; margin: 30px 0; font-size: 5em;">
-graph LR
-    A[Isolate Conditions] --> B[List Silent Assumptions]
-    B --> C[Hypothesize & Simulate]
-    C --> D[Identify Missing Contract]
-    D --> E[Prevent, Don't Patch]
-    E --> A
-
-%% Styling
-classDef default fill:#2D323E,stroke:#666,stroke-width:2px,color:#fff,rx:5px,ry:5px;
-linkStyle default stroke:#666,stroke-width:2px;
-</div>
+<figure class="post-figure">
+  <img
+    src="/assets/images/posts/invisible-bug-debugging-loop.svg"
+    alt="Five-step systems debugging loop from isolating conditions to preventing repeat failures"
+  >
+  <figcaption>Debugging loop for turning silent assumptions into explicit cross-layer contracts.</figcaption>
+</figure>
 
 You can apply this at any boundary: **TS ↔ Native, Mobile ↔ Backend, UI ↔ Business logic**. It’s not a checklist. It’s a way to spot design flaws before they explode at runtime. The goal isn’t to debug faster, it’s to avoid replaying the same failure with new symptoms.
 

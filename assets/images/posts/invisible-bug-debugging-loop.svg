@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Systems debugging loop</title>
+  <desc id="desc">A five-step debugging sequence for surfacing hidden contracts across system boundaries.</desc>
+  <defs>
+    <style>
+      text {
+        font-family: "DM Sans", Arial, sans-serif;
+      }
+      .bg {
+        fill: #252c38;
+      }
+      .frame {
+        fill: none;
+        stroke: #3a4352;
+        stroke-width: 2;
+      }
+      .node {
+        fill: #dbe7f3;
+      }
+      .line {
+        fill: none;
+        stroke: #6f7f95;
+        stroke-width: 5;
+        stroke-linecap: round;
+      }
+      .step {
+        fill: #f3f4f6;
+        font-size: 34px;
+        font-weight: 700;
+      }
+      .copy {
+        fill: #cbd5e1;
+        font-size: 23px;
+      }
+      .center-ring {
+        fill: none;
+        stroke: #a8bdd3;
+        stroke-width: 8;
+      }
+      .center-title {
+        fill: #f3f4f6;
+        font-size: 28px;
+        font-weight: 700;
+        text-anchor: middle;
+      }
+      .center-copy {
+        fill: #cbd5e1;
+        font-size: 18px;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" x="1" y="1" width="1398" height="1198" rx="28" ry="28" />
+  <rect class="frame" x="1" y="1" width="1398" height="1198" rx="28" ry="28" />
+
+  <g transform="translate(0 30)">
+    <line class="line" x1="350" y1="220" x2="350" y2="860" />
+
+    <circle class="node" cx="350" cy="220" r="12" />
+    <circle class="node" cx="350" cy="380" r="12" />
+    <circle class="node" cx="350" cy="540" r="12" />
+    <circle class="node" cx="350" cy="700" r="12" />
+    <circle class="node" cx="350" cy="860" r="12" />
+
+    <text class="step" x="420" y="200">1. Isolate Conditions</text>
+    <text class="copy" x="420" y="238">Narrow the failing path.</text>
+
+    <text class="step" x="420" y="360">2. List Silent Assumptions</text>
+    <text class="copy" x="420" y="398">Write down the hidden preconditions.</text>
+
+    <text class="step" x="420" y="520">3. Hypothesize + Simulate</text>
+    <text class="copy" x="420" y="558">Recreate the mismatch on purpose.</text>
+
+    <text class="step" x="420" y="680">4. Identify Missing Contract</text>
+    <text class="copy" x="420" y="718">Find the rule nobody encoded.</text>
+
+    <text class="step" x="420" y="840">5. Prevent, Don't Patch</text>
+    <text class="copy" x="420" y="878">Guard, test, document, repeat.</text>
+
+    <circle class="center-ring" cx="1035" cy="540" r="150" />
+    <text class="center-title" x="1035" y="510">Make It</text>
+    <text class="center-title" x="1035" y="545">Explicit</text>
+    <text class="center-copy" x="1035" y="585">Turn assumptions</text>
+    <text class="center-copy" x="1035" y="611">into contracts.</text>
+  </g>
+</svg>
