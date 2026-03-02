@@ -11,7 +11,8 @@ This is my personal blog and writing archive. I occasionally share thoughts on p
 ## AI Workflow
 
 This repo includes a repo-local AI workflow for brainstorming, drafting, validating, publishing,
-and packaging changes for review. Start with
+auditing site quality, and packaging changes for review. Repo-scoped Codex slash commands live
+under `.codex/prompts/`. Start with
 [`./.codex/docs/README.md`](./.codex/docs/README.md).
 
 ## Local Setup
@@ -38,6 +39,7 @@ That means normal `git commit` and `git push` already run the configured checks.
 Use these commands only when you want an explicit manual verification pass:
 
 ```bash
+make qa-local
 make check
 ./.venv-tools/bin/pre-commit run --all-files
 ./.venv-tools/bin/pre-commit run --hook-stage pre-push --all-files

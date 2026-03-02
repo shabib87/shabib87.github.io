@@ -4,6 +4,12 @@
 
 Use `$content-brainstormer` to generate authority-first ideas, hooks, and outlines.
 
+Slash command:
+
+```text
+/editorial-workflow
+```
+
 ## Create A Private Draft
 
 Create the draft locally under `_drafts/` and include:
@@ -54,14 +60,32 @@ Use `$fact-checker` before publish when the draft contains technical or time-sen
 
 Use `$medium-porter`, then run the same local draft validation and publish flow.
 
-## Create And Merge A PR
+## Audit Site Quality
+
+Use `$site-quality-auditor` or run:
+
+```bash
+make site-audit AUDIT=seo TARGET=site
+```
+
+Use this workflow for source-level SEO, quality, performance, and maintenance review.
+
+## Verify Official Docs
+
+Use `$official-doc-verifier` when a workflow or implementation depends on current official docs.
+
+## Create And Integrate A PR
 
 Run:
 
 ```bash
-make check
+make qa-local
 make create-pr TYPE=feat
 make finalize-merge PR=<number>
 ```
 
-The merge flow is solo self-review based. No external reviewer is required.
+Do not commit until `make qa-local` passes. If site-facing files changed, preview with
+`bundle exec jekyll serve` before commit.
+
+The repo uses trunk-based development with rebase-only integration. No merge commits are part of
+the workflow.
