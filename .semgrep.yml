@@ -5,8 +5,9 @@ rules:
     languages: [bash]
     paths:
       include:
-        - "scripts/**/*.sh"
-        - ".agents/**/*.sh"
+        - "/scripts/*.sh"
+        - "/scripts/**/*.sh"
+        - "/.agents/**/*.sh"
     pattern: eval $X
 
   - id: no-curl-pipe-shell
@@ -15,8 +16,9 @@ rules:
     languages: [bash]
     paths:
       include:
-        - "scripts/**/*.sh"
-        - ".agents/**/*.sh"
+        - "/scripts/*.sh"
+        - "/scripts/**/*.sh"
+        - "/.agents/**/*.sh"
     pattern-regex: 'curl\\b[^\\n|]*\\|\\s*(sh|bash)\\b'
 
   - id: no-wget-pipe-shell
@@ -25,8 +27,9 @@ rules:
     languages: [bash]
     paths:
       include:
-        - "scripts/**/*.sh"
-        - ".agents/**/*.sh"
+        - "/scripts/*.sh"
+        - "/scripts/**/*.sh"
+        - "/.agents/**/*.sh"
     pattern-regex: 'wget\\b[^\\n|]*\\|\\s*(sh|bash)\\b'
 
   - id: disallow-pull-request-target-workflows
@@ -35,6 +38,6 @@ rules:
     languages: [generic]
     paths:
       include:
-        - ".github/workflows/**/*.yml"
-        - ".github/workflows/**/*.yaml"
+        - "/.github/workflows/*.yml"
+        - "/.github/workflows/*.yaml"
     pattern-regex: 'pull_request_target:'
