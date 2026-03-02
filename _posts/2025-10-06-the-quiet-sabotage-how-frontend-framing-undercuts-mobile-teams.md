@@ -15,9 +15,9 @@ tags:
 - frontend-framing
 - mobile-platform
 last_modified_at: 2025-10-06 14:02:04.000000000 +00:00
-image: "/assets/images/posts/2025-10-06-the-quiet-sabotage-how-frontend-framing-undercuts-mobile-teams/lead-image.jpg"
+image: "https://images.unsplash.com/photo-1600856209923-34372e319a5d?auto=format&fit=crop&w=1600&q=80"
 image_alt: Finger tapping on a glowing smartphone screen in the dark
-image_source: local
+image_source: unsplash
 fact_check_status: not-needed
 ---
 
@@ -25,7 +25,7 @@ fact_check_status: not-needed
 
 <figure class="post-figure">
   <img
-    src="/assets/images/posts/2025-10-06-the-quiet-sabotage-how-frontend-framing-undercuts-mobile-teams/lead-image.jpg"
+    src="https://images.unsplash.com/photo-1600856209923-34372e319a5d?auto=format&fit=crop&w=1600&q=80"
     alt="Finger tapping on a glowing smartphone screen in the dark"
   >
   <figcaption>Photo by <a href="https://unsplash.com/@akshar_dave?utm_source=medium&amp;utm_medium=referral">Akshar Dave🌻</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></figcaption>
@@ -144,7 +144,7 @@ frontend” is like staring at the tip of an iceberg and pretending the rest is 
 
 <figure class="post-figure">
   <img
-    src="/assets/images/posts/2025-10-06-the-quiet-sabotage-how-frontend-framing-undercuts-mobile-teams/iceberg-image.jpg"
+    src="https://images.unsplash.com/photo-1636629216656-46e178cc4b2f?auto=format&fit=crop&w=1600&q=80"
     alt="Iceberg floating in dark water with a much larger mass below the surface"
   >
   <figcaption>Photo by <a href="https://unsplash.com/@simonppt?utm_source=medium&amp;utm_medium=referral">SIMON LEE</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></figcaption>
