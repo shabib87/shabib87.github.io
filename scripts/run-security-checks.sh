@@ -9,26 +9,12 @@ cd "$repo_root"
 pre_commit_bin="$(require_repo_pre_commit)"
 export SEMGREP_ENABLE_VERSION_CHECK=0
 export SEMGREP_SEND_METRICS=off
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-/tmp/semgrep-state}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-/tmp/semgrep-state}"
+export SEMGREP_LOG_FILE="${SEMGREP_LOG_FILE:-/tmp/semgrep-state/semgrep.log}"
+export SEMGREP_SETTINGS_FILE="${SEMGREP_SETTINGS_FILE:-/tmp/semgrep-state/settings.yml}"
+export SEMGREP_VERSION_CACHE_PATH="${SEMGREP_VERSION_CACHE_PATH:-/tmp/semgrep-state/version-cache}"
 
-semgrep_targets=()
+mkdir -p "${XDG_CONFIG_HOME}" "${XDG_CACHE_HOME}"
 
-if command -v rg >/dev/null 2>&1; then
-  while IFS= read -r target; do
-    [[ -n "$target" ]] || continue
-    semgrep_targets+=("$target")
-  done < <(rg --files scripts .agents .github/workflows -g '*.sh' -g '*.yml' -g '*.yaml')
-else
-  while IFS= read -r target; do
-    [[ -n "$target" ]] || continue
-    semgrep_targets+=("${target#./}")
-  done < <(
-    find scripts .agents .github/workflows \
-      \( -name '*.sh' -o -name '*.yml' -o -name '*.yaml' \) \
-      -type f \
-      | sort
-  )
-fi
-
-semgrep_targets=(.semgrep.yml "${semgrep_targets[@]}")
-
-"$pre_commit_bin" run semgrep --files "${semgrep_targets[@]}"
+"$pre_commit_bin" run semgrep --all-files

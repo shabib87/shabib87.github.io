@@ -1,0 +1,4 @@
+interface:
+  display_name: "Site Quality Auditor"
+  short_description: "Review this Jekyll site for SEO, quality, and maintenance issues"
+  default_prompt: "Use $site-quality-auditor to review this change for site SEO, quality, performance, or maintenance issues."

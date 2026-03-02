@@ -46,15 +46,9 @@ repos:
         pass_filenames: true
         require_serial: true
         stages: [pre-commit]
-      - id: run-checks
-        name: run make check
-        entry: ./scripts/run-checks.sh
-        language: system
-        pass_filenames: false
-        stages: [pre-push]
-      - id: run-security-checks
-        name: run targeted semgrep checks
-        entry: ./scripts/run-security-checks.sh
+      - id: run-local-qa
+        name: run release-grade local QA
+        entry: ./scripts/run-local-qa.sh
         language: system
         pass_filenames: false
         stages: [pre-push]
