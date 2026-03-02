@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Systems thinking debugging loop</title>
+  <desc id="desc">A flow diagram showing a five-step debugging loop across mobile integration boundaries.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#1f3b4d" />
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#273449" />
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#7dd3fc" />
+    </marker>
+    <style>
+      text {
+        font-family: "DM Sans", Arial, sans-serif;
+      }
+      .eyebrow {
+        fill: #7dd3fc;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+      }
+      .headline {
+        fill: #f9fafb;
+        font-size: 64px;
+        font-weight: 700;
+      }
+      .subhead {
+        fill: #cbd5e1;
+        font-size: 28px;
+      }
+      .card {
+        fill: url(#card);
+        stroke: #7dd3fc;
+        stroke-width: 2;
+      }
+      .step {
+        fill: #f9fafb;
+        font-size: 34px;
+        font-weight: 700;
+      }
+      .detail {
+        fill: #dbe4ee;
+        font-size: 24px;
+      }
+      .path {
+        fill: none;
+        stroke: #7dd3fc;
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        marker-end: url(#arrow);
+      }
+      .accent {
+        fill: #f59e0b;
+      }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)" />
+  <circle cx="1400" cy="150" r="120" fill="#0f766e" opacity="0.18" />
+  <circle cx="200" cy="760" r="180" fill="#2563eb" opacity="0.16" />
+
+  <text x="120" y="120" class="eyebrow">MOBILE SYSTEMS DEBUGGING</text>
+  <text x="120" y="190" class="headline">Make the hidden contract visible</text>
+  <text x="120" y="238" class="subhead">Use the same loop across TypeScript, native, backend, and UI boundaries.</text>
+
+  <path class="path" d="M430 352 C590 250, 820 250, 980 352" />
+  <path class="path" d="M1110 438 C1180 560, 1100 700, 930 760" />
+  <path class="path" d="M660 760 C470 710, 360 590, 420 448" />
+
+  <rect x="180" y="300" rx="28" ry="28" width="300" height="160" class="card" />
+  <text x="220" y="360" class="step">1. Isolate</text>
+  <text x="220" y="398" class="step">conditions</text>
+  <text x="220" y="436" class="detail">Narrow the failing path.</text>
+
+  <rect x="650" y="240" rx="28" ry="28" width="300" height="160" class="card" />
+  <text x="690" y="300" class="step">2. List silent</text>
+  <text x="690" y="338" class="step">assumptions</text>
+  <text x="690" y="376" class="detail">Expose unstated preconditions.</text>
+
+  <rect x="1040" y="360" rx="28" ry="28" width="300" height="160" class="card" />
+  <text x="1080" y="420" class="step">3. Break the</text>
+  <text x="1080" y="458" class="step">handshake</text>
+  <text x="1080" y="496" class="detail">Delay or reorder the boundary.</text>
+
+  <rect x="900" y="650" rx="28" ry="28" width="320" height="160" class="card" />
+  <text x="940" y="710" class="step">4. Spot the</text>
+  <text x="940" y="748" class="step">missing contract</text>
+  <text x="940" y="786" class="detail">Find the rule nobody encoded.</text>
+
+  <rect x="380" y="650" rx="28" ry="28" width="320" height="160" class="card" />
+  <text x="420" y="710" class="step">5. Add guardrails</text>
+  <text x="420" y="748" class="detail">Guard, test, document, repeat.</text>
+
+  <circle cx="800" cy="540" r="88" fill="#0f172a" stroke="#f59e0b" stroke-width="8" />
+  <text x="748" y="530" class="step">VERIFY</text>
+  <text x="740" y="570" class="detail">before trust</text>
+  <circle cx="800" cy="540" r="14" class="accent" />
+</svg>
