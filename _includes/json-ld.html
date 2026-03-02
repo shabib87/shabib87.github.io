@@ -1,11 +1,16 @@
 {% if page.layout == "single" %}
+{%- assign schema_image = page.image | default: site.author.avatar -%}
+{%- assign schema_image_url = schema_image -%}
+{%- unless schema_image contains '://' -%}
+  {%- assign schema_image_url = site.url | append: schema_image -%}
+{%- endunless -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": "{{ page.title }}",
   "description": "{{ page.description }}",
-  "image": "{{ site.url }}{{ page.image | default: site.author.avatar }}",
+  "image": "{{ schema_image_url }}",
   "author": {
     "@type": "Person",
     "name": "{{ site.author.name }}",
