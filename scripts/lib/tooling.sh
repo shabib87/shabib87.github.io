@@ -39,3 +39,29 @@ require_repo_pre_commit() {
 
   printf '%s\n' "$pre_commit_bin"
 }
+
+repo_common_ancestor() {
+  git merge-base main HEAD 2>/dev/null || true
+}
+
+repo_merge_base() {
+  repo_common_ancestor
+}
+
+repo_changed_files() {
+  local common_ancestor
+  common_ancestor="$(repo_common_ancestor)"
+
+  if [[ -n "$common_ancestor" ]]; then
+    git diff --name-only --diff-filter=ACMR "$common_ancestor"...HEAD
+  fi
+
+  git ls-files --others --exclude-standard
+}
+
+repo_site_facing_changes() {
+  repo_changed_files |
+    awk 'NF' |
+    grep -E '^(_config\.yml|_includes/|_layouts/|_pages/|_posts/|assets/|_sass/)' ||
+    true
+}

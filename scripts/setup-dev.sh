@@ -112,5 +112,5 @@ Local setup complete.
 
 Next steps:
 - make validate-draft PATH=_drafts/example.md
-- make check
+- make qa-local
 EOF
