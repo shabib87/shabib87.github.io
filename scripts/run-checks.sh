@@ -4,13 +4,16 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# shellcheck disable=SC1091
+. "$repo_root/scripts/lib/tooling.sh"
+
 export BUNDLE_PATH="$repo_root/vendor/bundle"
 export BUNDLE_FROZEN="true"
 
 validator="$repo_root/.agents/skills/jekyll-post-publisher/scripts/validate-post.sh"
 
-merge_base="$(git merge-base main HEAD 2>/dev/null || printf '')"
-tracked_changed="$(if [[ -n "$merge_base" ]]; then git diff --name-only --diff-filter=ACMR "$merge_base"...HEAD -- '_posts/*.md'; fi)"
+common_ancestor="$(repo_common_ancestor)"
+tracked_changed="$(if [[ -n "$common_ancestor" ]]; then git diff --name-only --diff-filter=ACMR "$common_ancestor"...HEAD -- '_posts/*.md'; fi)"
 untracked_changed="$(git ls-files --others --exclude-standard -- '_posts/*.md')"
 
 while IFS= read -r file; do

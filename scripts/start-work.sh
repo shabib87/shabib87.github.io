@@ -38,8 +38,8 @@ if ! git fetch "$main_remote" "$main_remote_branch" --quiet; then
   exit 1
 fi
 
-git merge --ff-only "$main_remote/$main_remote_branch" >/dev/null
+git rebase "$main_remote/$main_remote_branch" >/dev/null
 git checkout -b "$branch_name"
 
 echo "created branch: $branch_name"
-echo "next: make check"
+echo "next: implement the change, then run make qa-local"

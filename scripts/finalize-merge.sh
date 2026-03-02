@@ -18,7 +18,7 @@ if [[ -z "$pr" ]]; then
   pr="$branch"
 fi
 
-"$repo_root/scripts/run-checks.sh"
+"$repo_root/scripts/run-local-qa.sh"
 
 pr_state="$(gh pr view "$pr" --json statusCheckRollup,isDraft,url)"
 is_draft="$(printf '%s' "$pr_state" | ruby -rjson -e 'data = JSON.parse(STDIN.read); print(data["isDraft"] ? "true" : "false")')"
@@ -66,16 +66,16 @@ fi
 
 cat <<EOF
 Self-review checklist for $pr_url
-- local checks passed
+- full local QA gate passed (\`make qa-local\`)
 - diff reviewed
 - no private drafts or secrets included
 - PR title/body look correct
 - changed files and URLs are expected
 EOF
-printf 'Merge this PR to main? [y/N] '
+printf 'Integrate this PR to main with rebase? [y/N] '
 read -r confirm
 if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
-  echo "merge cancelled"
+  echo "integration cancelled"
   exit 1
 fi
 

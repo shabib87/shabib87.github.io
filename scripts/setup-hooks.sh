@@ -12,6 +12,7 @@ cat <<'EOF'
 Installed git hooks.
 
 Useful commands:
+- make qa-local
 - ./.venv-tools/bin/pre-commit run --all-files
 - ./.venv-tools/bin/pre-commit run --hook-stage pre-push --all-files
 EOF

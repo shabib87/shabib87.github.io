@@ -62,4 +62,4 @@ RUBY
 STRICT_POST_METADATA=1 "$repo_root/.agents/skills/jekyll-post-publisher/scripts/validate-post.sh" "$target_path"
 
 echo "published draft to: $target_path"
-echo "next: make check"
+echo "next: make qa-local"

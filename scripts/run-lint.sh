@@ -8,8 +8,8 @@ cd "$repo_root"
 
 pre_commit_bin="$(require_repo_pre_commit)"
 
-merge_base="$(git merge-base main HEAD 2>/dev/null || printf '')"
-tracked_changed="$(if [[ -n "$merge_base" ]]; then git diff --name-only --diff-filter=ACMR "$merge_base"...HEAD; fi)"
+common_ancestor="$(repo_common_ancestor)"
+tracked_changed="$(if [[ -n "$common_ancestor" ]]; then git diff --name-only --diff-filter=ACMR "$common_ancestor"...HEAD; fi)"
 untracked_changed="$(git ls-files --others --exclude-standard)"
 changed_files="$(
   printf '%s\n%s\n' "$tracked_changed" "$untracked_changed" |

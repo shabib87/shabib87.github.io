@@ -24,7 +24,7 @@ if gh pr view "$branch" >/dev/null 2>&1; then
   exit 1
 fi
 
-"$repo_root/scripts/run-checks.sh"
+"$repo_root/scripts/run-local-qa.sh"
 
 remote_name="origin"
 if upstream_ref="$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
@@ -77,7 +77,7 @@ cat > "$body_file" <<EOF
 
 ## Validation
 
-- \`make check\`
+- \`make qa-local\`
 
 ## Affected Files
 
@@ -93,7 +93,7 @@ $affected_urls
 
 ## Self-review Notes
 
-- Local checks passed
+- Full local QA gate passed
 - Diff reviewed
 - No private drafts or secrets included
 EOF
