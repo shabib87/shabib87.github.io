@@ -35,6 +35,8 @@ Use this skill when importing or cleaning up Medium-origin content.
 - Exact source media is preferred, but a different relevant image is allowed when the original is
   blocked or unavailable.
 - Render article media inline with the standard `figure.post-figure` and `figcaption` pattern.
+- Keep editorial images aligned with the blog's shared fixed-height, flexible-width, cropped
+  presentation without stretching.
 - Re-check time-sensitive technical claims, but treat the results as advisory unless the user
   explicitly approves content edits.
 - Avoid large rewrites unless the user explicitly asks for one.

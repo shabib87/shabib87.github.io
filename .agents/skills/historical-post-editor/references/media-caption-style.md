@@ -16,6 +16,8 @@ Rules:
 - use `figcaption` for photo credit, image subtitle, or AI-generated-image note
 - do not leave caption text as a standalone paragraph
 - do not convert the image into a hero overlay unless explicitly requested
+- use the shared blog image treatment: fixed responsive height, flexible width, and cropped
+  `object-fit: cover` presentation without stretching
 
 Design requirements:
 
@@ -23,3 +25,5 @@ Design requirements:
 - caption is italic
 - caption color is slightly muted
 - caption links inherit the caption tone
+- images should feel visually consistent across posts even when source assets have different aspect
+  ratios
