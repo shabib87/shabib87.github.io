@@ -4,18 +4,19 @@
 
 1. Run `make setup`
    This bootstraps the repo-managed tooling environment and installs git hooks.
-2. Create or edit a private draft in `_drafts/`
-3. Run `make validate-draft PATH=_drafts/your-post.md`
-4. Run `make qa-publish PATH=_drafts/your-post.md`
-5. Run `make publish-draft PATH=_drafts/your-post.md DATE=YYYY-MM-DD`
-6. Run `make check`
-7. Create the PR with `make create-pr TYPE=feat`
-8. Self-review and merge with `make finalize-merge PR=...`
+2. Start repo-changing work from `main` with `make start-work TOPIC="..." TYPE=feat`
+3. Use a repo-local skill or a repo-scoped slash command from `.codex/prompts/`
+4. Run editorial validation or `make site-audit` for site maintenance work
+5. Run `make qa-local`
+6. Create the PR with `make create-pr TYPE=feat`
+7. Self-review and integrate with `make finalize-merge PR=...`
 
 ## Docs Index
 
 - [AI Workflow](./ai-workflow.md)
+- [Codex Usage](./codex-usage.md)
 - [Editorial Policy](./editorial-policy.md)
+- [Site Quality](./site-quality.md)
 - [Tooling](./tooling.md)
 - [Workflows](./workflows.md)
 - [Prompt Recipes](./prompt-recipes.md)
@@ -29,3 +30,4 @@
 - `medium-porter`
 - `repo-flow`
 - `official-doc-verifier`
+- `site-quality-auditor`
