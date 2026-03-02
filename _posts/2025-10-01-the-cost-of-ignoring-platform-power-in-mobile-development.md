@@ -25,8 +25,13 @@ image_source: unsplash
 fact_check_status: complete
 ---
 
-Photo by [Kelly Sikkema](https://unsplash.com/@kellysikkema) on
-[Unsplash](https://unsplash.com/)
+<figure class="post-figure">
+  <img
+    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80"
+    alt="Developer workspace with a laptop, phone, and code editor open on a desk"
+  >
+  <figcaption>Photo by <a href="https://unsplash.com/@kellysikkema">Kelly Sikkema</a> on <a href="https://unsplash.com/">Unsplash</a></figcaption>
+</figure>
 
 Fear mongering and negativity sells more. Truth is often more nuanced.
 
@@ -101,8 +106,13 @@ platforms.
 This creates the permanent tension: platforms push separation, application builders push
 convergence. That is why Liquid Glass and Material You look so different, and why they always will.
 
-The real battle isn’t Native vs Cross-Platform, it’s Separation vs Convergence (Image generated
-with help of AI)
+<figure class="post-figure">
+  <img
+    src="/assets/images/posts/2025-10-01-the-cost-of-ignoring-platform-power-in-mobile-development/separation-vs-convergence.svg"
+    alt="The Permanent Tension in Mobile Development"
+  >
+  <figcaption>The real battle isn’t Native vs Cross-Platform, it’s Separation vs Convergence (Image generated with help of AI)</figcaption>
+</figure>
 
 And it is not just the platforms. Each ecosystem has loyal users who are used to its design
 system. iOS users expect a different rhythm of navigation, controls, and motion than Android users
