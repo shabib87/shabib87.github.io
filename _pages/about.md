@@ -22,7 +22,7 @@ This blog is where I write about these experiences and philosophies. Here, I wri
 ## Quick Links
 
 - 📩 <a href="mailto:ahmad@codewithshabib.com">Contact me</a>
-- 🧠 <a href="https://medium.com/@hossainshabib" target="_blank" rel="noopener">Browse the blog</a>
+- 🧠 <a href="/posts/">Browse the blog</a>
 - 🔗 <a href="https://github.com/shabib87" target="_blank" rel="noopener">GitHub</a>
 - 🔗 <a href="https://www.linkedin.com/in/ahmadshabibulhossain" target="_blank" rel="noopener">LinkedIn</a>
 
