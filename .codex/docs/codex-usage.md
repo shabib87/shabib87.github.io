@@ -34,6 +34,7 @@ file directly:
 - `@.codex/prompts/site-workflow.md`
 - `@.codex/prompts/editorial-workflow.md`
 - `@.codex/prompts/medium-to-blog.md`
+- `@.codex/prompts/preserve-existing-post.md`
 
 These are IDE file references to reusable prompt files in the repo. They are not built-in Codex
 slash commands.
@@ -65,6 +66,12 @@ Medium migration:
 
 ```text
 $medium-porter $fact-checker $jekyll-post-publisher $repo-flow
+```
+
+Existing post preservation edit:
+
+```text
+$historical-post-editor $site-quality-auditor $repo-flow
 ```
 
 If you want the repo prompt-file behavior in the app, paste the prompt file content into the
@@ -134,7 +141,7 @@ Turn this outline into a private draft in _drafts, fact-check the technical clai
 VS Code / Cursor:
 
 ```text
-@.codex/prompts/medium-to-blog.md Migrate this Medium article into a site-native draft, fact-check anything time-sensitive, publish it into _posts, run QA, and open the PR: https://medium.com/example-post
+@.codex/prompts/medium-to-blog.md Faithfully port this Medium article into _posts while preserving the original date, title, description, prose body, and media order; if the exact source image is blocked, use a relevant replacement image, run QA, and open the PR: https://medium.com/example-post
 ```
 
 Codex app:
@@ -142,7 +149,23 @@ Codex app:
 ```text
 $medium-porter $fact-checker $jekyll-post-publisher $repo-flow
 
-Migrate this Medium article into a site-native draft, fact-check anything time-sensitive, publish it into _posts, run QA, group clean commits, and open the PR: https://medium.com/example-post
+Faithfully port this Medium article into _posts while preserving the original date, title, description, prose body, and media order; if the exact source image is blocked, use a relevant replacement image, run QA, group clean commits, and open the PR: https://medium.com/example-post
+```
+
+### Preserve An Existing Published Post
+
+VS Code / Cursor:
+
+```text
+@.codex/prompts/preserve-existing-post.md Add a relevant inline image, convert image notes to styled figure captions, fix SEO metadata, keep the current title, description, publish date, and prose body unchanged, run QA, and open the PR: _posts/2025-10-01-example.md
+```
+
+Codex app:
+
+```text
+$historical-post-editor $site-quality-auditor $repo-flow
+
+Add a relevant inline image, convert image notes to styled figure captions, fix SEO metadata, keep the current title, description, publish date, and prose body unchanged, run QA, group clean commits, and open the PR: _posts/2025-10-01-example.md
 ```
 
 ## Scope Rules
