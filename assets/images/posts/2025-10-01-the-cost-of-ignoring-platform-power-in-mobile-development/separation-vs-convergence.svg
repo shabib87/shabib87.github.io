@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" role="img" aria-labelledby="title desc">
+  <title id="title">The Permanent Tension in Mobile Development</title>
+  <desc id="desc">A diagram showing Apple and Google pushing separation, companies pushing convergence, and cross-platform frameworks in the middle.</desc>
+  <rect width="1600" height="800" fill="#f4f4f4"/>
+  <text x="800" y="110" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#222">
+    The Permanent Tension in Mobile Development
+  </text>
+
+  <text x="170" y="360" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#222">Apple &amp; Google</text>
+  <text x="170" y="398" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#222">Separation</text>
+
+  <text x="1245" y="360" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#222">Companies</text>
+  <text x="1220" y="398" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#222">Convergence</text>
+
+  <line x1="170" y1="440" x2="565" y2="440" stroke="#111" stroke-width="5"/>
+  <polygon points="565,440 546,430 546,450" fill="#111"/>
+
+  <line x1="1430" y1="440" x2="1035" y2="440" stroke="#111" stroke-width="5"/>
+  <polygon points="1035,440 1054,430 1054,450" fill="#111"/>
+
+  <rect x="560" y="390" width="480" height="100" rx="18" fill="#ececec" stroke="#222" stroke-width="3"/>
+  <text x="800" y="430" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#222">
+    Cross-Platform Frameworks
+  </text>
+  <text x="800" y="468" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#222">
+    (RN / Flutter / KMM)
+  </text>
+</svg>
