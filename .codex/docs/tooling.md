@@ -69,8 +69,8 @@ Run:
 make codex-check
 ```
 
-This validates repo-local skills, repo-scoped slash commands under `.codex/prompts/`,
-and required Codex workflow docs.
+This validates repo-local skills, repo workflow prompt files under `.codex/prompts/`, and
+required Codex workflow docs.
 
 ## Site Audit
 

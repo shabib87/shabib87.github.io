@@ -1,91 +1,119 @@
 # Workflows
 
-## Brainstorm A Post
+## Site Work
 
-Use `$content-brainstormer` to generate authority-first ideas, hooks, and outlines.
-
-Slash command:
+### Site Starter In VS Code / Cursor
 
 ```text
-/editorial-workflow
+@.codex/prompts/site-workflow.md Review the about page and tag archive for SEO, metadata, and maintenance issues, make the fixes, run the relevant audits, run make qa-local, and open the PR.
 ```
 
-## Create A Private Draft
+### Site Starter In The Codex App
 
-Create the draft locally under `_drafts/` and include:
+```text
+$site-quality-auditor $official-doc-verifier $repo-flow
 
-- title
-- description
-- categories
-- tags
-- Unsplash image URL
-- `image_alt`
-- `fact_check_status`
-
-## Validate A Draft
-
-Run:
-
-```bash
-make validate-draft PATH=_drafts/your-post.md
+Review the about page and tag archive for SEO, metadata, and maintenance issues, make the fixes, run the relevant audits, run make qa-local, group clean commits, and open the PR.
 ```
 
-This checks metadata, placeholders, image rules, and markdown lint for the private draft.
+### Site Phases
 
-## Publish QA
+1. Start the branch with `make start-work TOPIC="..." TYPE=...`.
+2. Inspect the affected site files.
+3. Run the relevant audits with `make site-audit`.
+4. Make the site changes.
+5. Preview locally with `bundle exec jekyll serve` if site-facing files changed.
+6. Run `make qa-local`.
+7. Group clean commits, re-run `make qa-local`, and run `make create-pr TYPE=...`.
 
-Run:
+### Site Commands
 
-```bash
-make qa-publish PATH=_drafts/your-post.md
+- `make start-work TOPIC="..." TYPE=...`
+- `make site-audit AUDIT=seo TARGET=...`
+- `make site-audit AUDIT=quality TARGET=...`
+- `make site-audit AUDIT=maintenance TARGET=...`
+- `make site-audit AUDIT=performance TARGET=...`
+- `make qa-local`
+- `make create-pr TYPE=...`
+
+### Site Finish
+
+The workflow finishes when the PR is open and ready for self-review.
+
+## Draft + Publish A Blog Post
+
+### Draft Starter In VS Code / Cursor
+
+```text
+@.codex/prompts/editorial-workflow.md Turn this outline into a private draft in _drafts, fact-check the technical claims, publish it into _posts with the correct date, run QA, and open the PR: ...
 ```
 
-This is the final pre-publish gate.
+### Draft Starter In The Codex App
 
-## Publish A Draft
+```text
+$content-brainstormer $technical-post-drafter $fact-checker $jekyll-post-publisher $repo-flow
 
-Run:
-
-```bash
-make publish-draft PATH=_drafts/your-post.md DATE=YYYY-MM-DD
+Turn this outline into a private draft in _drafts, fact-check the technical claims, publish it into _posts with the correct date, run QA, group clean commits, and open the PR: ...
 ```
 
-This creates the tracked `_posts/YYYY-MM-DD-slug.md` file.
+### Draft Phases
 
-## Fact-Check A Draft
+1. Start the branch with `make start-work TOPIC="..." TYPE=feat`.
+2. Brainstorm the angle if needed, then draft the article body.
+3. Fact-check technical and time-sensitive claims.
+4. Create or refine the private draft under `_drafts/`.
+5. Run draft validation and publish QA.
+6. Promote the draft into `_posts/`.
+7. Run `make qa-local`, group clean commits, and open the PR.
 
-Use `$fact-checker` before publish when the draft contains technical or time-sensitive claims.
+### Draft Commands
 
-## Migrate A Medium Post
+- `make start-work TOPIC="..." TYPE=feat`
+- `make validate-draft PATH=_drafts/<draft>.md`
+- `make qa-publish PATH=_drafts/<draft>.md`
+- `make publish-draft PATH=_drafts/<draft>.md DATE=YYYY-MM-DD`
+- `make qa-local`
+- `make create-pr TYPE=feat`
 
-Use `$medium-porter`, then run the same local draft validation and publish flow.
+### Draft Finish
 
-## Audit Site Quality
+The workflow finishes when the post exists in `_posts/` and the PR is open.
 
-Use `$site-quality-auditor` or run:
+## Port A Medium Post
 
-```bash
-make site-audit AUDIT=seo TARGET=site
+### Medium Starter In VS Code / Cursor
+
+```text
+@.codex/prompts/medium-to-blog.md Migrate this Medium article into a site-native draft, fact-check anything time-sensitive, publish it into _posts, run QA, and open the PR: https://medium.com/example-post
 ```
 
-Use this workflow for source-level SEO, quality, performance, and maintenance review.
+### Medium Starter In The Codex App
 
-## Verify Official Docs
+```text
+$medium-porter $fact-checker $jekyll-post-publisher $repo-flow
 
-Use `$official-doc-verifier` when a workflow or implementation depends on current official docs.
-
-## Create And Integrate A PR
-
-Run:
-
-```bash
-make qa-local
-make create-pr TYPE=feat
-make finalize-merge PR=<number>
+Migrate this Medium article into a site-native draft, fact-check anything time-sensitive, publish it into _posts, run QA, group clean commits, and open the PR: https://medium.com/example-post
 ```
 
-Do not commit until `make qa-local` passes. If site-facing files changed, preview with
-`bundle exec jekyll serve` before commit.
+### Medium Phases
 
-The repo uses trunk-based development with rebase-only integration. No merge commits are part of
-the workflow.
+1. Start the branch with `make start-work TOPIC="..." TYPE=feat`.
+2. Convert the Medium article into a private draft under `_drafts/`.
+3. Normalize metadata, taxonomy, and structure for this site.
+4. Fact-check anything time-sensitive or technical.
+5. Run draft validation and publish QA.
+6. Promote the draft into `_posts/`.
+7. Run `make qa-local`, group clean commits, and open the PR.
+
+### Medium Commands
+
+- `make start-work TOPIC="..." TYPE=feat`
+- `make validate-draft PATH=_drafts/<draft>.md`
+- `make qa-publish PATH=_drafts/<draft>.md`
+- `make publish-draft PATH=_drafts/<draft>.md DATE=YYYY-MM-DD`
+- `make qa-local`
+- `make create-pr TYPE=feat`
+
+### Medium Finish
+
+The workflow finishes when the migrated post exists in `_posts/` and the PR is open.

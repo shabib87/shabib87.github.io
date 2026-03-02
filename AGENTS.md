@@ -7,7 +7,7 @@
 - `_posts/` stores published dated blog content in Markdown. Follow the `YYYY-MM-DD-title.md` naming pattern.
 - `_drafts/` is a private local-only workspace for unpublished drafts. It is gitignored on purpose and should not be committed.
 - `.agents/skills/` stores repo-local Codex skills in the official Codex location. Treat these as the source of truth for this repository's AI workflow.
-- `.codex/prompts/` stores repo-scoped custom Codex slash commands for recurring workflow starters.
+- `.codex/prompts/` stores repo workflow prompt files for recurring Codex App and IDE starters.
 - `.codex/docs/` stores repo-owned workflow, tooling, and editorial policy docs.
 - `_includes/` and `_layouts/` (theme overrides) support shared partials. Favor `_includes` for reusable snippets and keep Liquid logic minimal.
 - `_sass/` contains custom SCSS partials layered atop the Minimal Mistakes theme. Import new partials via `assets/css/main.scss`.
