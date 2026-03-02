@@ -207,7 +207,7 @@ requirements, you pay a tax. That does not make cross-platform wrong. It makes a
 conscious decision, not a mantra.
 
 I have shared my thoughts on this topic on a previous post, you can read it
-[here](https://medium.com/@hossainshabib/the-cost-of-ignoring-platform-power-in-mobile-development-0879fb4a99c1)
+<a href="/the-cost-of-ignoring-platform-power-in-mobile-development/" target="_blank" rel="noopener noreferrer">here</a>
 if you want.
 
 ## What Leadership Should Change This Quarter
