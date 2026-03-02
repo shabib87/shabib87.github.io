@@ -11,25 +11,32 @@ Use it for:
 - site-quality review
 - maintainability review
 
-## Entry Points
+## How To Start This Workflow
 
-Skill:
+VS Code / Cursor:
 
 ```text
-$site-quality-auditor
+@.codex/prompts/site-workflow.md
 ```
 
-Command:
+Codex app:
+
+```text
+$site-quality-auditor $official-doc-verifier $repo-flow
+```
+
+Deterministic audit command:
 
 ```bash
 make site-audit AUDIT=seo TARGET=site
 ```
 
-Slash command:
+## Workflow Shapes
 
-```text
-/site-quality
-```
+- `.codex/prompts/site-workflow.md`: full site-change workflow from request to QA, grouped
+  commits, and PR
+- `.codex/prompts/site-quality.md`: focused site QA or a narrower site change prompt
+- `make site-audit`: deterministic source-level audit command
 
 ## Audit Modes
 

@@ -11,8 +11,9 @@ This is my personal blog and writing archive. I occasionally share thoughts on p
 ## AI Workflow
 
 This repo includes a repo-local AI workflow for brainstorming, drafting, validating, publishing,
-auditing site quality, and packaging changes for review. Repo-scoped Codex slash commands live
-under `.codex/prompts/`. Start with
+auditing site quality, and packaging changes for review. Reusable repo workflow prompt files live
+under `.codex/prompts/`. In VS Code or Cursor, reference them with `@.codex/prompts/...`. Start
+with
 [`./.codex/docs/README.md`](./.codex/docs/README.md).
 
 ## Local Setup

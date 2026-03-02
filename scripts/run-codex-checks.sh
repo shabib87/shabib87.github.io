@@ -75,6 +75,23 @@ errors << "missing .codex/prompts directory" unless Dir.exist?(prompt_dir)
   errors << "missing #{prompt_path.delete_prefix("#{repo_root}/")}" unless File.file?(prompt_path)
 end
 
+%w[site-workflow.md medium-to-blog.md].each do |prompt|
+  prompt_path = File.join(prompt_dir, prompt)
+  errors << "missing #{prompt_path.delete_prefix("#{repo_root}/")}" unless File.file?(prompt_path)
+end
+
+codex_usage = File.read(File.join(repo_root, ".codex", "docs", "codex-usage.md"))
+docs_readme = File.read(File.join(repo_root, ".codex", "docs", "README.md"))
+
+[
+  "@.codex/prompts/site-workflow.md",
+  "@.codex/prompts/editorial-workflow.md",
+  "@.codex/prompts/medium-to-blog.md"
+].each do |needle|
+  errors << "missing #{needle} in .codex/docs/codex-usage.md" unless codex_usage.include?(needle)
+  errors << "missing #{needle} in .codex/docs/README.md" unless docs_readme.include?(needle)
+end
+
 if errors.empty?
   puts "codex workflow checks passed"
   puts "validated skills: #{skill_paths.length}"

@@ -3,9 +3,9 @@
 ## Purpose
 
 This repository stores its AI workflow in version control. The root `AGENTS.md`, the
-repo-local skills under `.agents/skills/`, the repo-scoped slash commands under `.codex/prompts/`,
-and the helper commands in `Makefile` and `scripts/` are the canonical source of truth for how
-Codex should work in this repo.
+repo-local skills under `.agents/skills/`, the repo workflow prompt files under
+`.codex/prompts/`, and the helper commands in `Makefile` and `scripts/` are the canonical source
+of truth for how Codex should work in this repo.
 
 ## Draft Privacy
 
@@ -32,7 +32,9 @@ SSH is sufficient for `git push`, but it is not sufficient for `gh pr create` or
 ## Workflow Starters
 
 - Use repo-local skills for reusable repo-specific workflows.
-- Use repo-scoped slash commands from `.codex/prompts/` for short workflow starters.
+- In VS Code or Cursor, use repo workflow prompt files from `.codex/prompts/` via
+  `@.codex/prompts/<workflow>.md`.
+- In the Codex app, use explicit `$skills` prompts for the same workflows.
 - Use `make` targets for deterministic repo mechanics and validation.
 - This repo follows trunk-based development and integrates changes with rebase only.
 
@@ -44,7 +46,8 @@ SSH is sufficient for `git push`, but it is not sufficient for `gh pr create` or
    make start-work TOPIC="describe the work" TYPE=feat
    ```
 
-2. Use a repo-local skill or repo-scoped slash command to start the right workflow.
+2. Use a repo-local skill, a repo workflow prompt file, or an explicit multi-skill prompt to
+   start the right workflow.
 3. Create or refine a private draft in `_drafts/` when the work is editorial.
 4. Validate the draft:
 

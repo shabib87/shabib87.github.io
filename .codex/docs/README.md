@@ -4,12 +4,15 @@
 
 1. Run `make setup`
    This bootstraps the repo-managed tooling environment and installs git hooks.
-2. Start repo-changing work from `main` with `make start-work TOPIC="..." TYPE=feat`
-3. Use a repo-local skill or a repo-scoped slash command from `.codex/prompts/`
-4. Run editorial validation or `make site-audit` for site maintenance work
-5. Run `make qa-local`
-6. Create the PR with `make create-pr TYPE=feat`
-7. Self-review and integrate with `make finalize-merge PR=...`
+2. Open the repo in the Codex IDE extension or the Codex app.
+3. In VS Code or Cursor, start with one of these repo workflow prompt files:
+   - `@.codex/prompts/site-workflow.md`
+   - `@.codex/prompts/editorial-workflow.md`
+   - `@.codex/prompts/medium-to-blog.md`
+4. In the Codex app, start with the equivalent `$skills` prompt from
+   [Codex Usage](./codex-usage.md).
+5. Let Codex use the repo skills and `make` targets for validation, publication, and PR flow.
+6. Finish with the repo flow and PR creation.
 
 ## Docs Index
 
