@@ -19,19 +19,19 @@ tags:
 - cursor
 - claude-code
 - markdown
-last_modified_at: 2026-02-24 13:01:01.000000000 +00:00
-image: https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80
-image_alt: Developer workspace with a laptop, phone, and code editor open on a desk
+last_modified_at: 2026-03-02 00:00:00 +0000
+image: https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?auto=format&fit=crop&w=1600&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+image_alt: MacBook Pro with images of computer language codes
 image_source: unsplash
 fact_check_status: complete
 ---
 
 <figure class="post-figure">
   <img
-    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80"
-    alt="Developer workspace with a laptop, phone, and code editor open on a desk"
+    src="https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?auto=format&fit=crop&w=1600&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    alt="MacBook Pro with images of computer language codes"
   >
-  <figcaption>Photo by <a href="https://unsplash.com/@kellysikkema">Kelly Sikkema</a> on <a href="https://unsplash.com/">Unsplash</a></figcaption>
+  <figcaption>Photo by <a href="https://unsplash.com/@casparrubin">Caspar Camille Rubin</a> on <a href="https://unsplash.com/photos/macbook-pro-with-images-of-computer-language-codes-fPkvU7RDmCo">Unsplash</a></figcaption>
 </figure>
 
 I recently shared a thought on
