@@ -1,0 +1,4 @@
+interface:
+  display_name: "Historical Post Editor"
+  short_description: "Improve existing posts without changing their historical text or dates"
+  default_prompt: "Use $historical-post-editor to update this published post's media, styling, or SEO while preserving its title, description, date, and prose."

@@ -8,9 +8,14 @@ Use this repository's full net-new post workflow from topic or outline to publis
 - Use `$jekyll-post-publisher` for draft creation, front matter, validation, publish QA, and
   promotion into `_posts/`.
 - Use `$repo-flow` once tracked files exist and the work needs branch, commit, and PR packaging.
+- If the work is a Medium migration, use `.codex/prompts/medium-to-blog.md` instead.
+- If the work is an edit to an existing tracked post where the title, description, publish date,
+  and prose must stay intact, use `.codex/prompts/preserve-existing-post.md` instead.
 - Start repo-changing work from `main` with `make start-work TOPIC="..." TYPE=feat`.
 - Create or refine the private draft under `_drafts/`.
 - Ensure the draft has publish-ready metadata before publication.
+- Use the repo's standard article-media pattern for any editorial image blocks:
+  `figure.post-figure` with an attached `figcaption`.
 - Run:
   `make validate-draft PATH=_drafts/<draft>.md`
   `make qa-publish PATH=_drafts/<draft>.md`
@@ -19,5 +24,4 @@ Use this repository's full net-new post workflow from topic or outline to publis
 - Group clean Conventional Commits only after QA passes.
 - Re-run `make qa-local` on the committed tree.
 - Run `make create-pr TYPE=feat`.
-- If the work is actually a Medium migration, use `.codex/prompts/medium-to-blog.md` instead.
 - Finish only when the tracked post exists in `_posts/` and the PR is open.
