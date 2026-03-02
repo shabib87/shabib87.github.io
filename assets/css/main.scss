@@ -56,7 +56,9 @@ blockquote {
 .post-figure img {
   display: block;
   width: 100%;
-  height: auto;
+  height: clamp(240px, 34vw, 420px);
+  object-fit: cover;
+  object-position: center;
 }
 
 .post-figure figcaption {
