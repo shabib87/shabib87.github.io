@@ -16,6 +16,8 @@ Use this repository's full net-new post workflow from topic or outline to publis
 - Ensure the draft has publish-ready metadata before publication.
 - Use the repo's standard article-media pattern for any editorial image blocks:
   `figure.post-figure` with an attached `figcaption`.
+- Editorial images should use the shared blog treatment: fixed responsive height, flexible width,
+  and cropped `object-fit: cover` presentation without stretching.
 - Run:
   `make validate-draft PATH=_drafts/<draft>.md`
   `make qa-publish PATH=_drafts/<draft>.md`

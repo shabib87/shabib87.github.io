@@ -28,6 +28,8 @@ The writing should strengthen that positioning rather than chase generic traffic
   - `image_alt`
   - `image_source`
 - `image_source` should default to `unsplash` for remote cover images.
+- Unsplash images are third-party remote assets this repo does not own. Do not download or commit
+  them locally unless the user explicitly asks for a local fallback.
 - Local `assets/images/posts/*` files are fallback-only.
 
 ## Metadata Quality Bar

@@ -16,10 +16,15 @@ post and PR.
   - description
   - prose body
   - media order
+- If a preserved or replacement image is from Unsplash, keep it as a remote Unsplash URL.
+- Do not download or commit Unsplash images locally unless the user explicitly asks for a local
+  fallback.
 - Use a different but relevant image only when the exact original image cannot be recovered from
   Medium or its source.
 - Render article media inline with the repo's standard `figure.post-figure` and `figcaption`
   pattern. Do not use hero overlays unless the user explicitly asks for that presentation.
+- Editorial images should follow the shared blog image treatment: fixed responsive height,
+  flexible width, and cropped `object-fit: cover` presentation without stretching.
 - Do not rewrite body text, change publish dates, or change title/description unless the user
   explicitly asks for adaptation.
 - Ingest the Medium URL and convert it into a private draft under `_drafts/`.

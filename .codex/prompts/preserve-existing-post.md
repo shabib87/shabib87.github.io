@@ -19,6 +19,7 @@ changing its historical text or dates.
   - add or replace a relevant header image when explicitly requested
   - convert image credit or subtitle text into `figure.post-figure` and `figcaption`
   - apply the standard smaller italic caption styling
+  - normalize inline images to the shared fixed-height, flexible-width, cropped blog style
   - fix OG, Twitter, JSON-LD, canonical, and related metadata behavior
   - normalize media rendering bugs
   - update categories, tags, and `last_modified_at` when appropriate

@@ -4,7 +4,8 @@
 
 - Expect the user to provide an Unsplash cover image URL in the prompt.
 - Use remote Unsplash images by default.
-- Do not download the asset locally unless the user explicitly asks for a local fallback.
+- Do not download or commit the asset locally unless the user explicitly asks for a local fallback.
+- Treat Unsplash media as third-party remote assets the repo does not own.
 
 ## Required Metadata
 

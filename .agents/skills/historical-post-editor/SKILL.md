@@ -28,5 +28,7 @@ Use this skill when editing an existing tracked post without changing its histor
 
 - Protect the post title, description, publish date, filename date, and prose body by default.
 - Use inline `figure.post-figure` and `figcaption` for editorial media.
+- Keep editorial images aligned with the blog's shared fixed-height, flexible-width, cropped
+  presentation without stretching.
 - Keep captions smaller, italic, and visually subordinate to body text.
 - Do not promote inline images into hero overlays unless the user explicitly asks for that change.
