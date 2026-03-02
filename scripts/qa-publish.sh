@@ -14,6 +14,7 @@ fi
 "$repo_root/scripts/validate-draft.sh" "$draft_path"
 
 ruby - "$draft_path" <<'RUBY'
+require "date"
 require "yaml"
 
 path = ARGV.fetch(0)
@@ -21,7 +22,7 @@ content = File.read(path)
 match = content.match(/\A---\s*\n(.*?)\n---\s*\n/m)
 abort("error: missing YAML front matter in #{path}") unless match
 
-data = YAML.safe_load(match[1], permitted_classes: [Time], aliases: true) || {}
+data = YAML.safe_load(match[1], permitted_classes: [Time, Date], aliases: true) || {}
 body = content.sub(match[0], "")
 allowed_categories = %w[blog ios swift react-native ai architecture testing debugging leadership developer-tools]
 
