@@ -16,7 +16,11 @@ tags:
   - system-design
   - debugging-strategy
   - mobile-crash-analysis
-last_modified_at: 2025-04-29 15:31:09 +0000
+last_modified_at: 2026-03-02 15:00:00 +0000
+image: /assets/images/posts/invisible-bug-systems-loop.svg
+image_alt: Systems-thinking diagram showing a safe debugging loop from isolating conditions to adding guardrails across a mobile integration boundary
+image_source: local
+fact_check_status: not-needed
 ---
 
 Imagine this: In a parallel universe, you are a mobile engineer working at SuperNova Corp, an intergalactic social media app. We’ve conquered space and made intergalactic connections, but AI still hasn’t taken over our jobs. It’s just as useful as it is in our universe in 2025.
@@ -321,6 +325,8 @@ graph LR
 classDef default fill:#2D323E,stroke:#666,stroke-width:2px,color:#fff,rx:5px,ry:5px;
 linkStyle default stroke:#666,stroke-width:2px;
 </div>
+
+<img class="post-inline-image" src="/assets/images/posts/invisible-bug-systems-loop.svg" alt="Systems-thinking diagram showing a safe debugging loop from isolating conditions to adding guardrails across a mobile integration boundary">
 
 <p class="text-center" style="color: #666; margin-top: -20px;">
 <small>Apply this framework to any integration boundary.</small>

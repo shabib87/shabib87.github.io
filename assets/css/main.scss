@@ -72,3 +72,28 @@ blockquote {
 .post-figure figcaption a {
   color: inherit;
 }
+
+p > .post-inline-image {
+  display: block;
+  width: 100%;
+  height: clamp(240px, 34vw, 420px);
+  margin: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+p:has(> .post-inline-image) {
+  margin: 0 0 0.65rem;
+}
+
+p:has(> .post-inline-image) + p.text-center {
+  margin-top: 0;
+}
+
+p:has(> .post-inline-image) + p.text-center small {
+  display: block;
+  font-size: 0.85em;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(245, 245, 245, 0.78);
+}
