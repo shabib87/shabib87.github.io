@@ -2,3 +2,6 @@ interface:
   display_name: "Jekyll Post Publisher"
   short_description: "Manage Jekyll post metadata and publish workflow"
   default_prompt: "Use $jekyll-post-publisher to package, validate, or publish a blog post for this repository."
+
+policy:
+  allow_implicit_invocation: false

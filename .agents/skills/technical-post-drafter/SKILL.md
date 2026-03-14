@@ -1,11 +1,19 @@
 ---
 name: technical-post-drafter
-description: Draft and reshape technical blog posts for this site. Use when turning a topic, outline, source notes, or rough draft into a structured article with a strong hook, clear section flow, concrete examples, and intact author voice before fact checking and publish QA.
+description: "Use this skill when the user needs to write or substantially reshape the body of a technical post for this site from a topic, outline, notes, transcript, or rough draft. Apply it to net-new drafting and major restructures before fact checking and publish QA, not ideation, pure voice polish, source verification, or metadata packaging."
 ---
 
 # Technical Post Drafter
 
 Use this skill when the article body needs to be written or substantially reworked.
+
+## Routing Boundaries
+
+- Use it when the body is missing, thin, out of order, or structurally weak.
+- Do not use it for choosing topics or backlog direction. Route that to `content-brainstormer`.
+- Do not use it for pure voice polish on otherwise solid prose. Route that to `sh-humanizer`.
+- Do not use it when the main job is verifying claims or citing sources. Route that to `fact-checker`.
+- Do not use it for metadata, validation, or publish workflow. Route that to `jekyll-post-publisher`.
 
 ## When To Use
 
@@ -25,12 +33,13 @@ Use this skill when the article body needs to be written or substantially rework
 
 ## Workflow
 
-1. Read `references/article-structure.md` for section sequencing and pacing.
-2. Read `references/drafting-rules.md` for voice, example, and claim-marking rules.
-3. If the input is only an idea or hook, hand off to `content-brainstormer` first.
-4. Draft or restructure the article body before metadata polishing.
-5. Send technical claims to `fact-checker` before calling the draft publish-ready.
-6. Hand the checked draft to `jekyll-post-publisher` for front matter, validation, and publication.
+1. Read `../../../.codex/docs/editorial-voice-profile.md`.
+2. Read `references/article-structure.md` for section sequencing and pacing.
+3. Read `references/drafting-rules.md` for voice, example, and claim-marking rules.
+4. If the input is only an idea or hook, hand off to `content-brainstormer` first.
+5. Draft or restructure the article body before metadata polishing.
+6. Send technical claims to `fact-checker` before calling the draft publish-ready.
+7. Hand the checked draft to `jekyll-post-publisher` for front matter, validation, and publication.
 
 ## Output Expectations
 
@@ -49,6 +58,7 @@ Use this skill when the article body needs to be written or substantially rework
 ## Rules
 
 - Preserve the author's judgment and voice; do not flatten it into generic tutorial prose.
+- Default to `problem -> mechanism -> consequence` before drifting into advice or process.
 - Prefer concrete systems examples over abstract claims.
 - Mark uncertain or source-dependent claims so `fact-checker` can verify them.
 - Avoid publish metadata work unless the user asks for file creation or packaging.
