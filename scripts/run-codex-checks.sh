@@ -109,8 +109,13 @@ if File.file?(codex_usage_path) && File.file?(docs_readme_path)
   codex_usage = File.read(codex_usage_path)
   docs_readme = File.read(docs_readme_path)
 
+  use_orchestrator_starters =
+    phase_num >= 4 ||
+      (codex_usage.include?("@.codex/prompts/orchestrator-site-workflow.md") &&
+       docs_readme.include?("@.codex/prompts/orchestrator-site-workflow.md"))
+
   starter_needles =
-    if phase_num >= 3 || File.file?(File.join(repo_root, ".codex", "prompts", "orchestrator-site-workflow.md"))
+    if use_orchestrator_starters
       [
         "@.codex/prompts/orchestrator-site-workflow.md",
         "@.codex/prompts/orchestrator-editorial-workflow.md",

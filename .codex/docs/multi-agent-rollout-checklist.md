@@ -6,7 +6,7 @@ Use this checklist to track the rollout across incremental PRs.
 
 - [x] Phase 1: QA Foundation + Tracker
 - [x] Phase 2: Control Plane + Ownership Lock
-- [ ] Phase 3: Prompt Migration (Non-Medium)
+- [x] Phase 3: Prompt Migration (Non-Medium)
 - [ ] Phase 4: Docs + Policy Alignment
 - [ ] Phase 5: Dedicated Medium Decommission
 - [ ] Phase 6: Canary + Stabilization
