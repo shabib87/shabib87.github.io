@@ -23,7 +23,6 @@ Use this skill for repo-specific blog work.
 - promoting a draft into `_posts/`
 - updating front matter
 - validating categories, tags, permalink, and cover image metadata
-- preparing a Medium port for publication on this site
 - packaging a fact-checked draft into the repo's publish workflow
 
 ## Required Inputs
@@ -40,17 +39,15 @@ Use this skill for repo-specific blog work.
 1. Read `references/frontmatter.md` for the required metadata.
 2. Read `references/content-checklist.md` for the publish bar.
 3. If the post includes an Unsplash image, read `references/cover-images.md`.
-4. If the post is a Medium migration, read `references/medium-migration.md`.
-5. Determine the content mode:
+4. Determine the content mode:
    - `net-new`
-   - `faithful-migration`
    - `historical-preservation-edit`
-6. If the content is still outline-only or the body needs major rewriting, hand it to
+5. If the content is still outline-only or the body needs major rewriting, hand it to
    `technical-post-drafter` before publish QA.
-7. If technical claims still need verification, run `fact-checker` before calling a draft
+6. If technical claims still need verification, run `fact-checker` before calling a draft
    publish-ready.
-8. Use `scripts/validate-post.sh <path>` before calling a post ready.
-9. Use `make validate-draft`, `make qa-publish`, and `make publish-draft` as the repo-level
+7. Use `scripts/validate-post.sh <path>` before calling a post ready.
+8. Use `make validate-draft`, `make qa-publish`, and `make publish-draft` as the repo-level
    workflow for drafts.
 
 ## Available Scripts
@@ -80,8 +77,6 @@ Use this skill for repo-specific blog work.
 - Require `fact_check_status` before publish.
 - Prefer the controlled taxonomy in `references/taxonomy.md`.
 - Keep the author's voice intact; improve clarity and structure without flattening it.
-- In `faithful-migration` mode, preserve source date, title, description, prose, and media order
-  unless the user explicitly asks otherwise.
 - In `historical-preservation-edit` mode, do not rewrite title, description, publish date, or
   prose body without explicit approval.
 - Visible media rendering and OG/Twitter/JSON-LD image behavior must both be checked when remote

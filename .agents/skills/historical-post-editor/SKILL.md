@@ -1,6 +1,6 @@
 ---
 name: historical-post-editor
-description: "Use this skill when the user wants preservation-safe improvements to a tracked published post's styling, media, or SEO while keeping its historical text and dates intact by default. Apply it to existing repo posts that need maintenance or presentation fixes, not Medium migration, net-new drafting, or broad rewrites."
+description: "Use this skill when the user wants preservation-safe improvements to a tracked published post's styling, media, or SEO while keeping its historical text and dates intact by default. Apply it to existing repo posts that need maintenance or presentation fixes, not net-new drafting or broad rewrites."
 ---
 
 # Historical Post Editor
@@ -10,7 +10,6 @@ Use this skill when editing an existing tracked post without changing its histor
 ## Routing Boundaries
 
 - Use it for tracked published posts that need safe presentation, metadata, or rendering fixes.
-- Do not use it for Medium-origin imports or conversions. Route those to `medium-porter`.
 - Do not use it for writing new article bodies or broad rewrites. Route those to `technical-post-drafter`.
 - Do not use it for general voice polish of existing prose. Route that to `sh-humanizer`.
 - Do not use it for ordinary draft creation or publish packaging. Route that to `jekyll-post-publisher`.
