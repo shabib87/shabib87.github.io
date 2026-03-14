@@ -81,7 +81,8 @@
   - `fact_check_status`
   - final publish QA
 - Cover images are usually remote Unsplash URLs supplied in the prompt. Local image assets are the exception.
-- Topic development should bias toward authority-building topics in mobile architecture, debugging, systems thinking, AI engineering, and principal mobile engineering leadership.
+- Topic development should bias toward insight-led topics in mobile architecture, debugging,
+  systems thinking, AI engineering, and mobile engineering leadership.
 
 ## Solo Integration Policy
 
@@ -100,7 +101,7 @@
 ## Repo-Local Skills
 
 - `jekyll-post-publisher`: Create private drafts, validate them, run publish QA, and promote them into tracked posts.
-- `content-brainstormer`: Generate authority-first topic ideas, hooks, outlines, and backlog candidates.
+- `content-brainstormer`: Generate experience-driven topic ideas, hooks, outlines, and backlog candidates.
 - `technical-post-drafter`: Turn outlines, notes, and rough drafts into strong technical article bodies before fact checking and publish QA.
 - `fact-checker`: Verify technical and time-sensitive claims with primary sources and official documentation.
 - `medium-porter`: Convert and polish Medium posts into site-native Jekyll content.
