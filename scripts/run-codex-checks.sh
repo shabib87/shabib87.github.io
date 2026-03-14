@@ -162,7 +162,7 @@ end
 end
 
 governance_change = changed.any? do |path|
-  path.match?(%r{\Ascripts/(validate-rollout-governance\.rb|validate-phase-scope\.sh|create-pr\.sh|finalize-merge\.sh|start-phase\.sh|rollout-audit\.sh|run-codex-checks\.sh)\z}) ||
+  path.match?(%r{\Ascripts/(validate-rollout-governance\.rb|create-pr\.sh|finalize-merge\.sh|start-phase\.sh|rollout-audit\.sh|run-codex-checks\.sh)\z}) ||
     path == ".github/workflows/rollout-governance.yml"
 end
 
