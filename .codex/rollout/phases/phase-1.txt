@@ -1,9 +1,0 @@
-# Phase 1: QA Foundation + Tracker
-scripts/run-codex-checks.sh
-scripts/validate-multi-agent-contracts.rb
-scripts/validate-phase-scope.sh
-.codex/docs/tooling.md
-.codex/docs/README.md
-.codex/docs/multi-agent-rollout-checklist.md
-.codex/docs/multi-agent-red-team.md
-.codex/rollout/phases/*

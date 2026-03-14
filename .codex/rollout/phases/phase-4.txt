@@ -1,7 +1,0 @@
-# Phase 4: Docs + Policy Alignment
-.codex/docs/codex-usage.md
-.codex/docs/ai-workflow.md
-.codex/docs/workflows.md
-.codex/docs/README.md
-AGENTS.md
-scripts/run-codex-checks.sh

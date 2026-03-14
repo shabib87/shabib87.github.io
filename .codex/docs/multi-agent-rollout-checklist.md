@@ -1,59 +1,42 @@
-# Multi-Agent Rollout Checklist
+# Rollout Governance Checklist
 
-Use this checklist to track the rollout across incremental PRs.
+Use this checklist for any rollout plan driven by
+`.codex/rollout/active-plan.yaml`.
 
-## Phase Status
+## Plan Contract
 
-- [x] Phase 1: QA Foundation + Tracker
-- [x] Phase 2: Control Plane + Ownership Lock
-- [x] Phase 3: Prompt Migration (Non-Medium)
-- [x] Phase 4: Docs + Policy Alignment
-- [x] Phase 5: Dedicated Medium Decommission
-- [x] Phase 6: Canary + Stabilization
+- [ ] `active-plan.yaml` exists and is valid (`version: 1`, `plan_id`, `mode: sequential`).
+- [ ] `branch_pattern` is phase-based (`^codex/phase-(\d+)-...`).
+- [ ] `required_checks` includes `build`, `semgrep`, `rollout-governance`.
+- [ ] size caps are non-content only:
+  - `limits.max_changed_files_non_content`
+  - `limits.max_changed_lines_non_content`
+  - `limits.ignore_paths_for_size_caps` includes `_posts/**`, `_pages/**`, `_drafts/**`.
 
-## Current Evidence Snapshot
+## Dynamic Phase Tracker
 
-- `make codex-check`: pass
-- `make qa-local`: pass
-- canary date: 2026-03-14
+Phases are dynamic (`1..N`) and discovered from:
+`.codex/rollout/plans/<plan-id>/phase-<n>.txt`.
 
-## Per-Phase Acceptance Template
-
-- PR link:
-- Scope stayed phase-only:
-- `make codex-check`:
-- `make qa-local`:
-- Socratic notes recorded:
-- Red-team findings addressed:
-
-## Ownership Lock Evidence
-
-- [x] `team-lead` instructions explicitly forbid default prose drafting/editing.
-- [x] `publisher-release` instructions explicitly forbid article body drafting.
-- [x] `writer` instructions explicitly own drafting/restructuring.
-- [x] `editor` instructions explicitly own editorial refinement and voice polish.
-
-## Medium Decommission Evidence
-
-Required grep command:
-
-```bash
-rg --hidden -n "medium-porter|medium-to-blog|@.codex/prompts/medium-to-blog.md|\\$medium-porter" . \
-  -g '!.codex/docs/multi-agent-rollout-checklist.md' \
-  -g '!scripts/run-codex-checks.sh' \
-  -g '!.codex/rollout/phases/*'
-```
-
-- [x] command returns zero active references
-- [x] deleted files are absent from the tree
-- [x] docs and prompts no longer route to retired import workflows
-
-## Canary Evidence
-
-| Canary | Objective | Result | Notes |
+| Phase | PR | Status | Evidence |
 | --- | --- | --- | --- |
-| Site workflow | Orchestrator delegates audit -> implementation -> QA | pass | `make site-audit AUDIT=seo TARGET=site` and `make site-audit AUDIT=quality TARGET=site` reported zero findings; full `make qa-local` passed |
-| Editorial workflow | Writer + editor ownership lock holds end-to-end | pass | `./scripts/validate-multi-agent-contracts.rb` passed; ownership strings verified in role and orchestrator editorial files |
+| 1 | | | `.codex/rollout/evidence/<plan-id>/phase-1.md` |
+| 2 | | | `.codex/rollout/evidence/<plan-id>/phase-2.md` |
+| n | | | `.codex/rollout/evidence/<plan-id>/phase-<n>.md` |
+
+## Per-Phase Acceptance
+
+- [ ] scope stayed phase-only (`phase-<n>.txt`).
+- [ ] `make codex-check` passed.
+- [ ] `make qa-local` passed.
+- [ ] phase evidence file contains both `RED` and `GREEN`.
+- [ ] PR base is `main` and lower phases are already merged.
+
+## Long-Post Safe Rules
+
+- `_posts/**`, `_pages/**`, `_drafts/**` are excluded from size caps only.
+- Those paths are still enforced by phase scope manifests.
+- Broad content wildcards in manifests are blocked (for example `_posts/*`).
 
 ## Socratic Review (Required Each PR)
 

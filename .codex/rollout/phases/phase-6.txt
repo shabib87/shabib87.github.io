@@ -1,5 +1,0 @@
-# Phase 6: Canary + Stabilization
-.codex/agents/*
-.codex/docs/multi-agent-rollout-checklist.md
-.codex/docs/multi-agent-red-team.md
-scripts/run-codex-checks.sh

@@ -1,0 +1,9 @@
+# Phase 2: Governance v3 stale-surface cleanup + docs alignment
+.codex/rollout/plans/governance-v3/phase-*.txt
+.codex/rollout/evidence/governance-v3/phase-2.md
+.codex/rollout/phases/*
+scripts/validate-phase-scope.sh
+scripts/run-codex-checks.sh
+.codex/docs/multi-agent-rollout-checklist.md
+.codex/docs/multi-agent-red-team.md
+.codex/docs/workflows.md

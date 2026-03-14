@@ -1,9 +1,0 @@
-# Phase 3: Prompt Migration (Non-Medium)
-.codex/prompts/orchestrator-site-workflow.md
-.codex/prompts/orchestrator-editorial-workflow.md
-.codex/prompts/orchestrator-preserve-existing-post.md
-.codex/prompts/site-workflow.md
-.codex/prompts/editorial-workflow.md
-.codex/prompts/preserve-existing-post.md
-.codex/docs/prompt-recipes.md
-scripts/run-codex-checks.sh

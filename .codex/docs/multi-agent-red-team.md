@@ -1,42 +1,33 @@
-# Multi-Agent Red-Team Protocol
+# Rollout Red-Team Protocol
 
 Use this protocol on every rollout phase PR.
 
 ## Roles
 
-- Builder: implements only phase scope.
-- Breaker: attempts to violate boundaries and revive retired workflows.
-- Referee: approves only with evidence-backed QA and checklist completion.
+- Builder: implements only current phase scope.
+- Breaker: attempts boundary violations and policy bypasses.
+- Referee: approves only with checklist and evidence alignment.
 
-## Attack Vectors
+## Mandatory Attacks
 
-1. Assign blog drafting to `team-lead`.
-2. Assign prose writing to `publisher-release`.
-3. Reintroduce retired workflow references.
-4. Bypass `make qa-local` or PR flow constraints.
-5. Create parallel write collisions on overlapping files.
+1. Phase-skip attempt:
+   open or merge `phase-n` before `phase-(n-1)`.
+2. Non-phase-branch attempt:
+   open a PR from a branch that does not match `branch_pattern`.
+3. Oversized non-content diff attempt:
+   exceed `max_changed_lines_non_content`.
+4. Broad content-manifest attempt:
+   use `_posts/*`, `_pages/*`, or `_drafts/*` in a phase manifest.
+5. Scope bypass attempt:
+   modify any file not declared in `phase-<n>.txt`.
 
 ## Required Outcomes
 
-- Boundary violations are rejected or rerouted to owner roles.
-- Retired workflow tokens are blocked by checks.
-- QA gate bypasses are prevented.
-- Delegation fallback path is documented when exercised.
-
-## Latest Canary Red-Team Notes (2026-03-14)
-
-- Attack attempted: assign prose drafting to `team-lead`.
-  Expected defense: ownership lock rejects default drafting and routes to `writer`.
-  Observed behavior: ownership lock phrase present and validator passed.
-  Result: pass.
-- Attack attempted: assign prose writing to `publisher-release`.
-  Expected defense: reject body writing and route back to `writer`/`editor`.
-  Observed behavior: explicit prohibition present and validator passed.
-  Result: pass.
-- Attack attempted: reintroduce retired import tokens.
-  Expected defense: codex-check retired-token checks fail.
-  Observed behavior: decommission grep returned zero active hits.
-  Result: pass.
+- Sequencing enforcement blocks phase skipping.
+- Branch-pattern enforcement blocks non-phase PR branches.
+- Size-cap enforcement blocks oversized non-content diffs.
+- Manifest lint blocks broad content wildcards.
+- Scope enforcement blocks out-of-manifest file changes.
 
 ## Evidence Template
 

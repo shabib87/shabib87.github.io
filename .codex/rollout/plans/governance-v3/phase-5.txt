@@ -1,0 +1,2 @@
+# Phase 5 placeholder (expand scope in phase-5 PR)
+.codex/rollout/plans/governance-v3/phase-5.txt
