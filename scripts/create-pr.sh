@@ -26,6 +26,87 @@ fi
 
 "$repo_root/scripts/run-local-qa.sh"
 
+plan_info="$(
+  ruby - "$repo_root" "$branch" <<'RUBY'
+require "date"
+require "yaml"
+
+repo_root = ARGV.fetch(0)
+branch = ARGV.fetch(1)
+active_plan = File.join(repo_root, ".codex", "rollout", "active-plan.yaml")
+unless File.file?(active_plan)
+  warn "error: missing active rollout plan at .codex/rollout/active-plan.yaml"
+  exit 1
+end
+
+data = YAML.safe_load(File.read(active_plan), permitted_classes: [Date, Time], aliases: false) || {}
+plan_id = data["plan_id"].to_s.strip
+base_branch = data["base_branch"].to_s.strip
+branch_pattern = data["branch_pattern"].to_s.strip
+required_checks = data["required_checks"].is_a?(Array) ? data["required_checks"] : []
+
+if plan_id.empty? || base_branch.empty? || branch_pattern.empty?
+  warn "error: active rollout plan is missing plan_id/base_branch/branch_pattern"
+  exit 1
+end
+
+match = Regexp.new(branch_pattern).match(branch)
+if match.nil?
+  warn "error: branch #{branch.inspect} does not match active branch_pattern #{branch_pattern.inspect}"
+  exit 1
+end
+
+phase = match[1].to_i
+if phase <= 0
+  warn "error: extracted phase must be >= 1 for branch #{branch.inspect}"
+  exit 1
+end
+
+puts "#{plan_id}\t#{base_branch}\t#{phase}\t#{branch_pattern}\t#{required_checks.join(',')}"
+RUBY
+)"
+
+plan_id="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $1}')"
+base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
+phase="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $3}')"
+branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
+required_checks="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $5}')"
+
+if [[ "$phase" -gt 1 ]]; then
+  pr_index="$(gh pr list --state all --base "$base_branch" --limit 200 --json number,state,mergedAt,headRefName)"
+
+  ruby - "$pr_index" "$branch_pattern" "$phase" <<'RUBY'
+require "json"
+
+prs = JSON.parse(ARGV.fetch(0))
+branch_pattern = Regexp.new(ARGV.fetch(1))
+phase = ARGV.fetch(2).to_i
+
+by_phase = Hash.new { |hash, key| hash[key] = [] }
+prs.each do |pr|
+  match = branch_pattern.match(pr["headRefName"].to_s)
+  next if match.nil?
+
+  phase_number = match[1].to_i
+  by_phase[phase_number] << pr
+end
+
+errors = []
+(1...phase).each do |required_phase|
+  entries = by_phase[required_phase]
+  merged = entries.any? { |pr| pr["state"] == "MERGED" || !pr["mergedAt"].nil? }
+  open = entries.any? { |pr| pr["state"] == "OPEN" }
+  errors << "phase #{required_phase} is not merged yet" unless merged
+  errors << "phase #{required_phase} still has an open PR" if open
+end
+
+if errors.any?
+  errors.each { |error| warn "error: #{error}" }
+  exit 1
+end
+RUBY
+fi
+
 remote_name="origin"
 if upstream_ref="$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
   remote_name="${upstream_ref%%/*}"
@@ -39,7 +120,7 @@ fi
 title_line="$("$repo_root/.agents/skills/repo-flow/scripts/infer-pr-metadata.sh" "$type")"
 title="${title_line#TITLE=}"
 
-affected_files="$(git diff --name-only main...HEAD | awk 'NF' || true)"
+affected_files="$(git diff --name-only "$base_branch"...HEAD | awk 'NF' || true)"
 if [[ -z "$affected_files" ]]; then
   affected_files="(none identified)"
 fi
@@ -75,6 +156,12 @@ cat > "$body_file" <<EOF
 
 - Standardize the change behind the repo's branch and PR workflow.
 
+## Rollout Metadata
+
+- plan_id: \`$plan_id\`
+- phase: \`$phase\`
+- required_checks: \`$required_checks\`
+
 ## Validation
 
 - \`make qa-local\`
@@ -99,7 +186,7 @@ $affected_urls
 EOF
 
 gh pr create \
-  --base main \
+  --base "$base_branch" \
   --head "$branch" \
   --title "$title" \
   --body-file "$body_file"

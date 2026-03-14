@@ -1,0 +1,7 @@
+# Phase 2: Control Plane + Ownership Lock
+.codex/config.toml
+.codex/agents/*
+.codex/docs/multi-agent-orchestration.md
+.codex/docs/multi-agent-rollout-checklist.md
+scripts/validate-multi-agent-contracts.rb
+scripts/run-codex-checks.sh

@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help setup hooks-install lint security codex-check site-audit qa-local validate-draft qa-publish publish-draft start-work check create-pr finalize-merge skill-audit skill-vendor
+.PHONY: help setup hooks-install lint security codex-check site-audit qa-local validate-draft qa-publish publish-draft start-work start-phase check create-pr finalize-merge rollout-audit rollout-tests skill-audit skill-vendor
 
 ifneq (,$(filter skill-audit skill-vendor,$(firstword $(MAKECMDGOALS))))
 SKILL_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -26,13 +26,16 @@ help:
 	@echo "  make lint"
 	@echo "  make security"
 	@echo "  make codex-check"
+	@echo "  make rollout-tests"
 	@echo "  make check"
 	@echo "  make qa-local"
 	@echo ""
 	@echo "Repo Flow:"
 	@echo "  make start-work TOPIC=\"...\" TYPE=chore"
+	@echo "  make start-phase PLAN=... PHASE=1 TOPIC=\"...\" TYPE=feat"
 	@echo "  make create-pr TYPE=feat"
 	@echo "  make finalize-merge PR=123"
+	@echo "  make rollout-audit"
 	@echo ""
 	@echo "Skill Governance:"
 	@echo "  make skill-audit NAME=example SOURCE=https://github.com/org/repo/tree/main/path"
@@ -73,6 +76,9 @@ publish-draft:
 start-work:
 	@./scripts/start-work.sh
 
+start-phase:
+	@./scripts/start-phase.sh
+
 check:
 	@./scripts/run-checks.sh
 
@@ -81,6 +87,12 @@ create-pr:
 
 finalize-merge:
 	@./scripts/finalize-merge.sh
+
+rollout-audit:
+	@./scripts/rollout-audit.sh
+
+rollout-tests:
+	@./scripts/run-rollout-governance-tests.sh
 
 skill-audit:
 	@./scripts/audit-skill.sh $(SKILL_ARGS)
