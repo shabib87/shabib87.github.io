@@ -124,10 +124,13 @@ errors << "active-plan.yaml limits.max_changed_files_non_content must be a posit
 errors << "active-plan.yaml limits.max_changed_lines_non_content must be a positive integer" unless max_changed_lines_non_content.is_a?(Integer) && max_changed_lines_non_content.positive?
 errors << "active-plan.yaml limits.ignore_paths_for_size_caps must be a non-empty list" if ignore_paths_for_size_caps.empty?
 
-branch = options[:branch] || ENV["ROLLOUT_BRANCH"] || ENV["GITHUB_HEAD_REF"]
+branch = options[:branch] || ENV["ROLLOUT_BRANCH"]
 if branch.to_s.strip.empty?
   ok, branch_output = command_output(repo_root, "branch --show-current")
   branch = ok ? branch_output.strip : ""
+end
+if branch.to_s.strip.empty?
+  branch = ENV["GITHUB_HEAD_REF"] || ENV["GITHUB_REF_NAME"] || ""
 end
 
 phase = nil
