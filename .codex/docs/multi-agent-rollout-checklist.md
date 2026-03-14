@@ -9,12 +9,13 @@ Use this checklist to track the rollout across incremental PRs.
 - [x] Phase 3: Prompt Migration (Non-Medium)
 - [x] Phase 4: Docs + Policy Alignment
 - [x] Phase 5: Dedicated Medium Decommission
-- [ ] Phase 6: Canary + Stabilization
+- [x] Phase 6: Canary + Stabilization
 
 ## Current Evidence Snapshot
 
 - `make codex-check`: pass
 - `make qa-local`: pass
+- canary date: 2026-03-14
 
 ## Per-Phase Acceptance Template
 
@@ -51,8 +52,8 @@ rg --hidden -n "medium-porter|medium-to-blog|@.codex/prompts/medium-to-blog.md|\
 
 | Canary | Objective | Result | Notes |
 | --- | --- | --- | --- |
-| Site workflow | Orchestrator delegates audit -> implementation -> QA | pending | requires execution in real task thread |
-| Editorial workflow | Writer + editor ownership lock holds end-to-end | pending | requires execution in real task thread |
+| Site workflow | Orchestrator delegates audit -> implementation -> QA | pass | `make site-audit AUDIT=seo TARGET=site` and `make site-audit AUDIT=quality TARGET=site` reported zero findings; full `make qa-local` passed |
+| Editorial workflow | Writer + editor ownership lock holds end-to-end | pass | `./scripts/validate-multi-agent-contracts.rb` passed; ownership strings verified in role and orchestrator editorial files |
 
 ## Socratic Review (Required Each PR)
 

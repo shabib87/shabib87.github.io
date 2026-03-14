@@ -12,7 +12,7 @@ Use this protocol on every rollout phase PR.
 
 1. Assign blog drafting to `team-lead`.
 2. Assign prose writing to `publisher-release`.
-3. Reintroduce Medium workflow references.
+3. Reintroduce retired workflow references.
 4. Bypass `make qa-local` or PR flow constraints.
 5. Create parallel write collisions on overlapping files.
 
@@ -22,6 +22,21 @@ Use this protocol on every rollout phase PR.
 - Retired workflow tokens are blocked by checks.
 - QA gate bypasses are prevented.
 - Delegation fallback path is documented when exercised.
+
+## Latest Canary Red-Team Notes (2026-03-14)
+
+- Attack attempted: assign prose drafting to `team-lead`.
+  Expected defense: ownership lock rejects default drafting and routes to `writer`.
+  Observed behavior: ownership lock phrase present and validator passed.
+  Result: pass.
+- Attack attempted: assign prose writing to `publisher-release`.
+  Expected defense: reject body writing and route back to `writer`/`editor`.
+  Observed behavior: explicit prohibition present and validator passed.
+  Result: pass.
+- Attack attempted: reintroduce retired import tokens.
+  Expected defense: codex-check retired-token checks fail.
+  Observed behavior: decommission grep returned zero active hits.
+  Result: pass.
 
 ## Evidence Template
 
