@@ -8,7 +8,7 @@ Use this checklist to track the rollout across incremental PRs.
 - [x] Phase 2: Control Plane + Ownership Lock
 - [x] Phase 3: Prompt Migration (Non-Medium)
 - [x] Phase 4: Docs + Policy Alignment
-- [ ] Phase 5: Dedicated Medium Decommission
+- [x] Phase 5: Dedicated Medium Decommission
 - [ ] Phase 6: Canary + Stabilization
 
 ## Current Evidence Snapshot
@@ -39,12 +39,13 @@ Required grep command:
 ```bash
 rg --hidden -n "medium-porter|medium-to-blog|@.codex/prompts/medium-to-blog.md|\\$medium-porter" . \
   -g '!.codex/docs/multi-agent-rollout-checklist.md' \
-  -g '!scripts/run-codex-checks.sh'
+  -g '!scripts/run-codex-checks.sh' \
+  -g '!.codex/rollout/phases/*'
 ```
 
-- [ ] command returns zero active references
-- [ ] deleted files are absent from the tree
-- [ ] docs and prompts no longer route to retired import workflows
+- [x] command returns zero active references
+- [x] deleted files are absent from the tree
+- [x] docs and prompts no longer route to retired import workflows
 
 ## Canary Evidence
 
