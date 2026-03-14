@@ -1,0 +1,43 @@
+[features]
+multi_agent = true
+
+[agents]
+max_threads = 6
+max_depth = 1
+job_max_runtime_seconds = 1800
+
+[agents.team-lead]
+description = "Primary orchestrator for this repository. Delegates aggressively, protects context quality, and communicates decisions to the user."
+config_file = "agents/team-lead.toml"
+
+[agents.researcher]
+description = "Read-only researcher for repo truth, official docs, and source validation before implementation decisions."
+config_file = "agents/researcher.toml"
+
+[agents.developer]
+description = "Implementation owner for Jekyll site, repo scripts, and workflow mechanics."
+config_file = "agents/developer.toml"
+
+[agents.seo-expert]
+description = "Read-only SEO and site-quality auditor focused on metadata, discoverability, and maintainability findings."
+config_file = "agents/seo-expert.toml"
+
+[agents.writer]
+description = "Drafting specialist for new or reshaped technical post bodies."
+config_file = "agents/writer.toml"
+
+[agents.editor]
+description = "Editorial specialist for structure, clarity, and voice polish."
+config_file = "agents/editor.toml"
+
+[agents.fact-checker]
+description = "Read-only specialist that verifies technical and time-sensitive claims against primary sources."
+config_file = "agents/fact-checker.toml"
+
+[agents.publisher-release]
+description = "Publication and release owner for metadata quality, publish QA, and PR packaging."
+config_file = "agents/publisher-release.toml"
+
+[agents.historical-post-editor]
+description = "Preservation-safe implementer for existing tracked posts with protected historical text and dates."
+config_file = "agents/historical-post-editor.toml"
