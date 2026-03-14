@@ -1,2 +1,4 @@
-# Phase 3 placeholder (expand scope in phase-3 PR)
+# Phase 3: Expand rollout-governance test matrix (dynamic N extremes)
 .codex/rollout/plans/governance-v3/phase-3.txt
+.codex/rollout/evidence/governance-v3/phase-3.md
+scripts/tests/rollout_governance_test.rb

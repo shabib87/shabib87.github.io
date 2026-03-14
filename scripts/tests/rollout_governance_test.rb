@@ -49,6 +49,9 @@ class RolloutGovernanceTest < Minitest::Test
     body = lines.join("\n")
     File.write(path, "#{body}\n")
   end
+  def write_contiguous_phases(max, lines = CORE_PLAN_PATTERNS + ["README.md"])
+    (1..max).each { |n| write_phase(n, lines) }
+  end
   def write_evidence(phase = 1)
     path = ".codex/rollout/evidence/governance-v3/phase-#{phase}.md"
     FileUtils.mkdir_p(File.dirname(path))
@@ -67,12 +70,29 @@ class RolloutGovernanceTest < Minitest::Test
   def test_dynamic_phase_count_accepts_contiguous_manifests
     with_repo(branch: "codex/phase-7-large-plan") do
       write_active_plan
-      (1..7).each do |n|
-        write_phase(n, CORE_PLAN_PATTERNS + ["README.md"])
-      end
+      write_contiguous_phases(7)
       write_phase(7, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-7.md"])
       write_evidence(7)
       stdout, stderr, status = run_validator(env: { "GITHUB_HEAD_REF" => "codex/phase-1-unrelated" })
+      assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
+    end
+  end
+  def test_dynamic_phase_count_accepts_single_phase_plan
+    with_repo(branch: "codex/phase-1-single-phase") do
+      write_active_plan
+      write_phase(1, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-1.md"])
+      write_evidence(1)
+      stdout, stderr, status = run_validator
+      assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
+    end
+  end
+  def test_dynamic_phase_count_accepts_large_contiguous_manifests
+    with_repo(branch: "codex/phase-50-large-plan") do
+      write_active_plan("limits" => { "max_changed_files_non_content" => 100, "max_changed_lines_non_content" => 10_000 })
+      write_contiguous_phases(50)
+      write_phase(50, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-50.md"])
+      write_evidence(50)
+      stdout, stderr, status = run_validator
       assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
     end
   end
