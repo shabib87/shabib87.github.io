@@ -4,4 +4,4 @@ interface:
   default_prompt: "Use $technical-post-drafter to turn this outline, notes, or rough draft into a strong technical article body."
 
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

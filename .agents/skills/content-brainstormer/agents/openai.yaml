@@ -1,4 +1,7 @@
 interface:
   display_name: "Content Brainstormer"
-  short_description: "Develop authority-first post ideas and hooks"
+  short_description: "Develop insight-led post ideas and hooks"
   default_prompt: "Use $content-brainstormer to generate or sharpen blog topics for this site."
+
+policy:
+  allow_implicit_invocation: true

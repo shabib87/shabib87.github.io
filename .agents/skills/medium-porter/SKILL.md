@@ -1,11 +1,19 @@
 ---
 name: medium-porter
-description: Migrate Medium posts into this Jekyll site with polish. Use when porting legacy articles, normalizing metadata, improving structure, or converting a Medium-style post into a site-native article while preserving voice.
+description: "Use this skill when the user is bringing Medium-origin content into this Jekyll site and needs migration, normalization, or a controlled site-native adaptation. Apply it to imported Medium drafts or posts, not tracked-post maintenance, net-new article drafting, or ordinary publish packaging."
 ---
 
 # Medium Porter
 
 Use this skill when importing or cleaning up Medium-origin content.
+
+## Routing Boundaries
+
+- Use it for Medium-source migration, cleanup, metadata normalization, and controlled adaptation into the site.
+- Do not use it for editing an already tracked historical post. Route that to `historical-post-editor`.
+- Do not use it for net-new article drafting from notes or outlines. Route that to `technical-post-drafter`.
+- Do not use it for pure voice polish on prose that is already site-native. Route that to `sh-humanizer`.
+- Do not use it for ordinary draft packaging or publication once the migration body is ready. Route that to `jekyll-post-publisher`.
 
 ## Workflow
 

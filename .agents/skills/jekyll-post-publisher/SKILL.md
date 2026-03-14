@@ -1,11 +1,19 @@
 ---
 name: jekyll-post-publisher
-description: Create draft files, normalize front matter, validate, and publish posts for this Jekyll blog. Use when opening a private local draft file, editing metadata, adding prompt-supplied Unsplash cover images, running publish QA, or promoting content from _drafts to _posts.
+description: "Use this skill when the user needs repo-specific post packaging: front matter, draft creation, validation, publish QA, or promotion from _drafts to _posts. Apply it to metadata normalization and publication workflow after the body largely exists, not to ideation, full article drafting, source verification, or voice rewrites."
 ---
 
 # Jekyll Post Publisher
 
 Use this skill for repo-specific blog work.
+
+## Routing Boundaries
+
+- Use it for file creation, front matter normalization, validation, publish QA, and promotion into tracked posts.
+- Do not use it for topic ideation or editorial backlog work. Route that to `content-brainstormer`.
+- Do not use it for writing or restructuring the main article body. Route that to `technical-post-drafter`.
+- Do not use it for claim verification or documentation lookup. Route that to `fact-checker`.
+- Do not use it for voice rewrites of otherwise solid prose. Route that to `sh-humanizer`.
 
 ## When To Use
 
@@ -44,6 +52,12 @@ Use this skill for repo-specific blog work.
 8. Use `scripts/validate-post.sh <path>` before calling a post ready.
 9. Use `make validate-draft`, `make qa-publish`, and `make publish-draft` as the repo-level
    workflow for drafts.
+
+## Available Scripts
+
+- `scripts/validate-post.sh --help` shows supported flags and examples.
+- `scripts/validate-post.sh <path>` validates a draft or tracked post in text mode.
+- `scripts/validate-post.sh --format jsonl <path>` emits one structured result per validated file.
 
 ## Output Expectations
 

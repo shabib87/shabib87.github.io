@@ -1,11 +1,19 @@
 ---
 name: fact-checker
-description: Verify technical and time-sensitive claims for blog content. Use when a post contains library, framework, API, tool, or product claims that should be checked against primary sources or official documentation before publication.
+description: "Use this skill when the user has a substantive draft or claim list and needs technical or time-sensitive assertions verified against primary sources before publication. Apply it to library, framework, API, tool, product, and version-sensitive claims, not ideation, net-new drafting, voice rewrites, or metadata packaging."
 ---
 
 # Fact Checker
 
 Use this skill when content accuracy matters.
+
+## Routing Boundaries
+
+- Use it after the substance exists and the question is whether specific claims are true, current, or supportable.
+- Do not use it for choosing topics or angles. Route that to `content-brainstormer`.
+- Do not use it for writing the main body from scratch or restructuring a weak draft. Route that to `technical-post-drafter`.
+- Do not use it for stylistic rewrites or voice polish. Route that to `sh-humanizer`.
+- Do not use it for front matter, publish QA, or promotion into `_posts/`. Route that to `jekyll-post-publisher`.
 
 ## Workflow
 
