@@ -1,0 +1,33 @@
+{
+  "skill_name": "historical-post-editor",
+  "evals": [
+    {
+      "id": "preservation-safe-figure-and-seo-fix",
+      "prompt": "Update the published post in evals/files/2024-08-15-metrics-hide-failure.md so the media uses the site's figure markup and the post gets safe SEO maintenance. Preserve the title, description, date, filename date, and prose body text.",
+      "files": [
+        "evals/files/2024-08-15-metrics-hide-failure.md"
+      ],
+      "expected_output": "A preservation-safe update that limits changes to allowed maintenance areas and validates the protected fields before completion.",
+      "assertions": [
+        "Preserves title, description, front matter date, and filename date",
+        "Preserves prose body text",
+        "Converts article media to the figure.post-figure and figcaption pattern or an equivalent repo-standard form",
+        "Uses scripts/assert-protected-post-fields.sh before calling the work done"
+      ]
+    },
+    {
+      "id": "tracked-post-rendering-maintenance",
+      "prompt": "Make rendering-safe media and metadata fixes to evals/files/2024-08-15-metrics-hide-failure.md without broad rewrites. Treat prose edits as out of scope unless they are explicitly approved.",
+      "files": [
+        "evals/files/2024-08-15-metrics-hide-failure.md"
+      ],
+      "expected_output": "A maintenance-focused result that keeps the historical text intact and limits the work to presentation, media, or metadata fixes.",
+      "assertions": [
+        "Keeps the work scoped to maintenance-safe changes",
+        "Avoids large rewrites or migration behavior",
+        "Calls out preservation boundaries explicitly",
+        "Leaves the result ready for rendering review"
+      ]
+    }
+  ]
+}

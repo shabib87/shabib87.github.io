@@ -1,0 +1,27 @@
+{
+  "skill_name": "fact-checker",
+  "evals": [
+    {
+      "id": "verify-version-sensitive-claims",
+      "prompt": "Check these claims before publish: Swift Testing can replace XCTest in every production suite right now; Context7 always contains the newest official docs; Jekyll remote Unsplash images automatically work for all OG and Twitter cards without extra checks.",
+      "expected_output": "A claim-by-claim review that separates verified, unsupported, and stale statements, names primary sources, and recommends wording changes where needed.",
+      "assertions": [
+        "Evaluates each claim individually",
+        "Names primary or official sources",
+        "Separates verified conclusions from unsupported claims",
+        "Suggests qualification or wording changes where needed"
+      ]
+    },
+    {
+      "id": "preservation-first-advisory-check",
+      "prompt": "This historical post includes old tool references. Check whether the claims are still accurate, but treat any proposed text changes as advisory because the source prose is protected.",
+      "expected_output": "An accuracy review that surfaces stale or ambiguous claims, cites sources, and keeps rewrite suggestions explicitly advisory because the text is preservation-first.",
+      "assertions": [
+        "Keeps the result advisory for preservation-first content",
+        "Flags stale or ambiguous claims clearly",
+        "Uses source-backed reasoning instead of memory",
+        "Does not drift into broad prose rewriting"
+      ]
+    }
+  ]
+}

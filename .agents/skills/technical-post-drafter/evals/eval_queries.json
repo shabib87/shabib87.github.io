@@ -1,0 +1,31 @@
+{
+  "skill_name": "technical-post-drafter",
+  "train": {
+    "should_trigger": [
+      "Turn this outline into a full technical article body with stronger section flow.",
+      "Expand these notes into a blog post draft about mobile debugging and system boundaries.",
+      "This rough draft is thin and repetitive. Rewrite the body so the argument actually lands.",
+      "Draft an article from these notes about platform leverage being treated like implementation detail."
+    ],
+    "should_not_trigger": [
+      "Give me five experience-driven blog ideas about mobile incidents.",
+      "Verify whether these library and API claims are still accurate before publish.",
+      "Rewrite this finished section so it sounds more like me and less like AI.",
+      "Add front matter, validate this draft, and publish it into _posts_."
+    ]
+  },
+  "validation": {
+    "should_trigger": [
+      "Restructure this article body so each section has a clearer job and payoff.",
+      "Take this outline and write the actual post, including a stronger hook and ending.",
+      "I have a transcript and rough notes. Turn them into a cohesive article body.",
+      "Sharpen the explanations and examples in this draft without turning it into a tutorial."
+    ],
+    "should_not_trigger": [
+      "I copied this Medium article into the repo. Convert it into site-native Jekyll content.",
+      "I have an outline and three sources. Help me research gaps before I keep writing.",
+      "Safely update this published post's media markup without changing the prose.",
+      "What should I write next if I want to sharpen my point of view in mobile architecture?"
+    ]
+  }
+}

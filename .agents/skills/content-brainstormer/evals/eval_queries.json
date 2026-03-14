@@ -1,0 +1,31 @@
+{
+  "skill_name": "content-brainstormer",
+  "train": {
+    "should_trigger": [
+      "Give me five experience-driven post ideas about mobile debugging and recommend one.",
+      "I want to build a backlog around platform power and mobile team boundaries. Suggest angles and hooks.",
+      "What should I write next if I want stronger positioning around AI engineering and systems thinking?",
+      "Cluster these rough themes into a six-week editorial backlog: debugging, architecture tradeoffs, platform leverage."
+    ],
+    "should_not_trigger": [
+      "Turn this outline into a full article body with H2s and transitions.",
+      "Verify whether these Swift Testing claims are still accurate before I publish.",
+      "Rewrite this section so it sounds more like me and less generic.",
+      "Add front matter and publish this draft into _posts_."
+    ]
+  },
+  "validation": {
+    "should_trigger": [
+      "Give me three post hooks about iOS build failures that expose a mistaken assumption and pick the strongest one.",
+      "I have notes on frontend framing hurting mobile teams. Help me choose the angle and outline direction.",
+      "Suggest insight-led article ideas from recurring failure modes in mobile release engineering.",
+      "Help me choose between these topics and turn the winner into a publishable outline direction."
+    ],
+    "should_not_trigger": [
+      "Improve section flow in this rough draft about mobile incidents.",
+      "Convert this Medium article into site-native Jekyll content.",
+      "Research gaps in this outline and add citation-ready notes.",
+      "Update this published post's figure markup without changing the prose."
+    ]
+  }
+}

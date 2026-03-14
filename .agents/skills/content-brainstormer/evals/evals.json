@@ -1,0 +1,28 @@
+{
+  "skill_name": "content-brainstormer",
+  "evals": [
+    {
+      "id": "insight-led-mobile-debugging",
+      "prompt": "I want five experience-driven post ideas about mobile debugging for my engineering blog. Pick one angle and give me a hook and outline direction.",
+      "expected_output": "A shortlist of at least five topic ideas grounded in real failure modes or mistaken assumptions, one recommended angle, at least one hook, and an outline direction that surfaces mechanism and consequence.",
+      "assertions": [
+        "Returns at least five distinct topic ideas",
+        "Names one recommended angle",
+        "Provides at least one hook anchored in tension, failure, or a mistaken assumption",
+        "Provides an outline direction that includes mechanism and consequence instead of a full article draft"
+      ]
+    },
+    {
+      "id": "backlog-cluster-from-recurring-failures",
+      "prompt": "I keep seeing the same failure modes around release engineering, platform boundaries, and debugging. Turn that into a backlog of post directions with one flagship recommendation.",
+      "expected_output": "A backlog-oriented set of post directions anchored in recurring engineering failure modes, with one flagship recommendation and a mechanism-driven rationale for why it matters.",
+      "assertions": [
+        "Grounds ideas in recurring engineering failures or tradeoffs",
+        "Includes at least one mechanism-driven reason the flagship recommendation matters",
+        "Includes backlog or sequencing guidance",
+        "Recommends one flagship direction",
+        "Avoids drifting into claim verification, full drafting, or publication packaging"
+      ]
+    }
+  ]
+}

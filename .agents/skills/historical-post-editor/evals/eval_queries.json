@@ -1,0 +1,31 @@
+{
+  "skill_name": "historical-post-editor",
+  "train": {
+    "should_trigger": [
+      "Safely update this published post's figure markup and SEO without changing the prose or date.",
+      "This tracked post needs media and metadata cleanup, but the historical text must stay intact.",
+      "Fix the rendering and social metadata on this published article without rewriting the body.",
+      "Make preservation-safe presentation edits to this existing repo post."
+    ],
+    "should_not_trigger": [
+      "I copied this Medium article into the repo. Convert it into site-native Jekyll content.",
+      "Turn this outline into a full technical article body.",
+      "Rewrite this section so it sounds more like me and less like AI.",
+      "Add front matter, validate this draft, and publish it into _posts_."
+    ]
+  },
+  "validation": {
+    "should_trigger": [
+      "Refresh the figure markup in this tracked post but keep the title, description, dates, and prose body unchanged.",
+      "Apply safe SEO maintenance to this published article without historical drift.",
+      "This existing post has broken media presentation. Fix it without touching the prose.",
+      "Do a preservation-first cleanup on this published post's rendering and metadata."
+    ],
+    "should_not_trigger": [
+      "Port this Medium draft into the blog repository.",
+      "Research the unsupported claims in this article before publish.",
+      "Give me five blog ideas about platform contracts and debugging.",
+      "I have an outline and notes. Draft the article body."
+    ]
+  }
+}
