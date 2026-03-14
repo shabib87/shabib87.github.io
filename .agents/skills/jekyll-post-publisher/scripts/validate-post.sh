@@ -2,17 +2,77 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
+format="text"
+strict_metadata="${STRICT_POST_METADATA:-0}"
 
-if [[ $# -lt 1 ]]; then
-  echo "usage: $0 <post-or-draft-path> [more-paths...]" >&2
+usage() {
+  cat <<'EOF'
+Usage: validate-post.sh [--help] [--format text|jsonl] [--strict] <post-or-draft-path> [more-paths...]
+
+Validate repo-specific front matter and path conventions for tracked posts or private drafts.
+
+Options:
+  --help                Show this help and exit.
+  --format FORMAT       Output format: text (default) or jsonl.
+  --strict              Require image and fact-check metadata even for drafts.
+
+Examples:
+  scripts/validate-post.sh _drafts/my-post.md
+  scripts/validate-post.sh --strict _posts/2026-03-14-my-post.md
+  scripts/validate-post.sh --format jsonl _drafts/my-post.md
+EOF
+}
+
+paths=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --help)
+      usage
+      exit 0
+      ;;
+    --format)
+      shift
+      if [[ $# -eq 0 ]]; then
+        echo "error: --format requires a value" >&2
+        exit 1
+      fi
+      format="$1"
+      case "$format" in
+        text|jsonl) ;;
+        *)
+          echo "error: --format must be 'text' or 'jsonl'" >&2
+          exit 1
+          ;;
+      esac
+      ;;
+    --strict)
+      strict_metadata="1"
+      ;;
+    --*)
+      echo "error: unknown option: $1" >&2
+      usage >&2
+      exit 1
+      ;;
+    *)
+      paths+=("$1")
+      ;;
+  esac
+  shift
+done
+
+if [[ ${#paths[@]} -lt 1 ]]; then
+  usage >&2
   exit 1
 fi
 
-ruby - "$repo_root" "$@" <<'RUBY'
+ruby - "$repo_root" "$format" "$strict_metadata" "${paths[@]}" <<'RUBY'
 require "date"
+require "json"
 require "yaml"
 
 repo_root = ARGV.shift
+format = ARGV.shift
+strict_metadata = ARGV.shift == "1"
 
 ARGV.each do |path|
   abort("error: file not found: #{path}") unless File.file?(path)
@@ -24,7 +84,7 @@ ARGV.each do |path|
   data = YAML.safe_load(match[1], permitted_classes: [Time, Date], aliases: true) || {}
   required = %w[title description permalink categories tags last_modified_at]
   strict_required = %w[image image_alt image_source fact_check_status]
-  required.concat(strict_required) if ENV.fetch("STRICT_POST_METADATA", "0") == "1"
+  required.concat(strict_required) if strict_metadata
   missing = required.reject do |key|
     value = data[key]
     !(value.nil? || (value.respond_to?(:empty?) && value.empty?))
@@ -79,6 +139,10 @@ ARGV.each do |path|
     abort("error: published posts must include date in #{path}") if data["date"].nil?
   end
 
-  puts "validated: #{path}"
+  if format == "jsonl"
+    puts JSON.generate({ path: path, status: "validated" })
+  else
+    puts "validated: #{path}"
+  end
 end
 RUBY

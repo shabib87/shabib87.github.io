@@ -22,3 +22,5 @@ _drafts/
 # Local tooling caches
 .pre-commit-cache/
 .venv-tools/
+.glassbox/latest-review.md
+.glassbox/review-mmpulsetc8qlyfby.md

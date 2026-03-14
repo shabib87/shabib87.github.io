@@ -180,7 +180,7 @@ def fit_assessment(skill)
   end
 
   if normalized_text(skill).match?(/voice|hook|outline|example|thesis/)
-    notes << "supports the site's authority-first technical writing style"
+    notes << "supports the site's insight-led engineering writing style"
   end
 
   [level, notes.uniq]
