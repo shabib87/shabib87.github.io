@@ -1,0 +1,17 @@
+version: 1
+plan_id: governance-v3
+apply_to_all_prs: true
+mode: sequential
+base_branch: main
+branch_pattern: '^codex/phase-(\d+)-[a-z0-9-]+$'
+limits:
+  max_changed_files_non_content: 25
+  max_changed_lines_non_content: 1200
+  ignore_paths_for_size_caps:
+    - _posts/**
+    - _pages/**
+    - _drafts/**
+required_checks:
+  - build
+  - semgrep
+  - rollout-governance

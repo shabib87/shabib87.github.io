@@ -14,13 +14,12 @@ fi
 
 export PHASE="$phase"
 
-ruby - "$repo_root" "$phase" <<'RUBY'
+ruby - "$repo_root" <<'RUBY'
 require "date"
+require "set"
 require "yaml"
 
 repo_root = ARGV.fetch(0)
-phase = ARGV.fetch(1).to_s
-phase_num = phase.to_i
 errors = []
 
 skill_paths = Dir[File.join(repo_root, ".agents", "skills", "*")].select { |path| File.directory?(path) }.sort
@@ -66,7 +65,7 @@ skill_paths.each do |skill_path|
 end
 
 makefile = File.read(File.join(repo_root, "Makefile"))
-%w[site-audit codex-check qa-local].each do |target|
+%w[site-audit codex-check qa-local start-phase rollout-audit].each do |target|
   errors << "missing #{target} target in Makefile" unless makefile.match?(/^#{Regexp.escape(target)}:/)
 end
 
@@ -88,15 +87,10 @@ required_prompts = %w[
   official-docs.md
   site-workflow.md
   preserve-existing-post.md
+  orchestrator-site-workflow.md
+  orchestrator-editorial-workflow.md
+  orchestrator-preserve-existing-post.md
 ]
-
-if phase_num >= 3 || File.file?(File.join(repo_root, ".codex", "prompts", "orchestrator-site-workflow.md"))
-  required_prompts += %w[
-    orchestrator-site-workflow.md
-    orchestrator-editorial-workflow.md
-    orchestrator-preserve-existing-post.md
-  ]
-end
 
 required_prompts.each do |prompt|
   prompt_path = File.join(prompt_dir, prompt)
@@ -109,24 +103,11 @@ if File.file?(codex_usage_path) && File.file?(docs_readme_path)
   codex_usage = File.read(codex_usage_path)
   docs_readme = File.read(docs_readme_path)
 
-  use_orchestrator_starters =
-    phase_num >= 4 ||
-      (codex_usage.include?("@.codex/prompts/orchestrator-site-workflow.md") &&
-       docs_readme.include?("@.codex/prompts/orchestrator-site-workflow.md"))
-
-  starter_needles =
-    if use_orchestrator_starters
-      [
-        "@.codex/prompts/orchestrator-site-workflow.md",
-        "@.codex/prompts/orchestrator-editorial-workflow.md",
-        "@.codex/prompts/orchestrator-preserve-existing-post.md"
-      ]
-    else
-      [
-        "@.codex/prompts/site-workflow.md",
-        "@.codex/prompts/editorial-workflow.md"
-      ]
-    end
+  starter_needles = [
+    "@.codex/prompts/orchestrator-site-workflow.md",
+    "@.codex/prompts/orchestrator-editorial-workflow.md",
+    "@.codex/prompts/orchestrator-preserve-existing-post.md"
+  ]
 
   starter_needles.each do |needle|
     errors << "missing #{needle} in .codex/docs/codex-usage.md" unless codex_usage.include?(needle)
@@ -135,7 +116,7 @@ if File.file?(codex_usage_path) && File.file?(docs_readme_path)
 end
 
 medium_skill_exists = Dir.exist?(File.join(repo_root, ".agents", "skills", "medium-porter"))
-if phase_num >= 5 || !medium_skill_exists
+if !medium_skill_exists
   retired_tokens = [
     /medium-porter/i,
     /medium-to-blog/i,
@@ -159,6 +140,42 @@ if phase_num >= 5 || !medium_skill_exists
   end
 end
 
+common_ancestor = `git -C "#{repo_root}" merge-base main HEAD 2>/dev/null`.strip
+changed = Set.new
+if !common_ancestor.empty?
+  `git -C "#{repo_root}" diff --name-only --diff-filter=ACMRD #{common_ancestor}...HEAD`.each_line do |line|
+    value = line.strip
+    changed << value unless value.empty?
+  end
+end
+`git -C "#{repo_root}" diff --name-only --diff-filter=ACMRD`.each_line do |line|
+  value = line.strip
+  changed << value unless value.empty?
+end
+`git -C "#{repo_root}" diff --name-only --cached --diff-filter=ACMRD`.each_line do |line|
+  value = line.strip
+  changed << value unless value.empty?
+end
+`git -C "#{repo_root}" ls-files --others --exclude-standard`.each_line do |line|
+  value = line.strip
+  changed << value unless value.empty?
+end
+
+governance_change = changed.any? do |path|
+  path.match?(%r{\Ascripts/(validate-rollout-governance\.rb|validate-phase-scope\.sh|create-pr\.sh|finalize-merge\.sh|start-phase\.sh|rollout-audit\.sh|run-codex-checks\.sh)\z}) ||
+    path == ".github/workflows/rollout-governance.yml"
+end
+
+test_or_evidence_change = changed.any? do |path|
+  path.start_with?("scripts/tests/") ||
+    path == "scripts/run-rollout-governance-tests.sh" ||
+    path.start_with?(".codex/rollout/evidence/")
+end
+
+if governance_change && !test_or_evidence_change
+  errors << "governance script changes require matching test/evidence updates (scripts/tests/* and .codex/rollout/evidence/*)"
+end
+
 if errors.empty?
   puts "codex workflow checks passed"
   puts "validated skills: #{skill_paths.length}"
@@ -169,4 +186,5 @@ end
 RUBY
 
 "$repo_root/scripts/validate-multi-agent-contracts.rb"
-"$repo_root/scripts/validate-phase-scope.sh"
+"$repo_root/scripts/run-rollout-governance-tests.sh"
+ruby "$repo_root/scripts/validate-rollout-governance.rb"

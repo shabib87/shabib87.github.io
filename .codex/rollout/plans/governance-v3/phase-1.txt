@@ -1,0 +1,15 @@
+# Phase 1: Governance v3 foundation
+.codex/rollout/active-plan.yaml
+.codex/rollout/plans/governance-v3/phase-1.txt
+.codex/rollout/evidence/governance-v3/phase-1.md
+.codex/rollout/plans/multi-agent-v1/*
+scripts/validate-rollout-governance.rb
+scripts/run-rollout-governance-tests.sh
+scripts/run-codex-checks.sh
+scripts/create-pr.sh
+scripts/finalize-merge.sh
+scripts/start-phase.sh
+scripts/rollout-audit.sh
+scripts/tests/*
+.github/workflows/rollout-governance.yml
+Makefile
