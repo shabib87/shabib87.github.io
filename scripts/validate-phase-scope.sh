@@ -17,21 +17,28 @@ if [[ -z "$phase" ]]; then
   exit 0
 fi
 
-manifest=".codex/rollout/phases/phase-${phase}.txt"
-if [[ ! -f "$manifest" ]]; then
-  echo "error: missing phase manifest $manifest" >&2
+if ! [[ "$phase" =~ ^[0-9]+$ ]]; then
+  echo "error: invalid phase value '$phase'" >&2
   exit 1
 fi
 
 patterns=()
-while IFS= read -r line; do
-  [[ -n "$line" ]] || continue
-  [[ "$line" =~ ^# ]] && continue
-  patterns+=("$line")
-done < "$manifest"
+for i in $(seq 1 "$phase"); do
+  manifest=".codex/rollout/phases/phase-${i}.txt"
+  if [[ ! -f "$manifest" ]]; then
+    echo "error: missing phase manifest $manifest" >&2
+    exit 1
+  fi
+
+  while IFS= read -r line; do
+    [[ -n "$line" ]] || continue
+    [[ "$line" =~ ^# ]] && continue
+    patterns+=("$line")
+  done < "$manifest"
+done
 
 if [[ "${#patterns[@]}" -eq 0 ]]; then
-  echo "error: phase manifest has no patterns: $manifest" >&2
+  echo "error: no phase patterns loaded for phases 1..$phase" >&2
   exit 1
 fi
 
@@ -73,12 +80,11 @@ for file in "${changed_files[@]}"; do
 done
 
 if [[ "${#errors[@]}" -gt 0 ]]; then
-  echo "error: files outside phase-${phase} manifest scope:" >&2
+  echo "error: files outside cumulative phase-1..phase-${phase} scope:" >&2
   for file in "${errors[@]}"; do
     echo "  - $file" >&2
   done
-  echo "manifest: $manifest" >&2
   exit 1
 fi
 
-echo "phase scope check passed for phase-${phase}"
+echo "phase scope check passed for cumulative phase-1..phase-${phase}"

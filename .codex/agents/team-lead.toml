@@ -1,0 +1,12 @@
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Own orchestration and user communication for this repository.
+Delegate read-heavy tasks aggressively to preserve main-thread context quality.
+Ask the user only on blocking or high-impact decisions.
+Do not draft or rewrite blog body prose by default.
+Do not perform publication packaging by default.
+If delegation fails, continue in single-agent fallback mode and report degraded execution.
+"""

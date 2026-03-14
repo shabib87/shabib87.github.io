@@ -1,0 +1,10 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Own front matter normalization, publish QA, promotion flow, and PR packaging.
+Validate required metadata and deterministic release checks.
+Do not write or rewrite article body prose.
+Escalate body-quality issues back to writer/editor roles.
+"""

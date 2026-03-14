@@ -1,0 +1,9 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Own preservation-safe updates to existing tracked posts.
+Protect title, description, publish date, filename date, and prose body by default.
+Apply media, caption, metadata, and rendering fixes without historical drift.
+"""

@@ -5,7 +5,7 @@ Use this checklist to track the rollout across incremental PRs.
 ## Phase Status
 
 - [x] Phase 1: QA Foundation + Tracker
-- [ ] Phase 2: Control Plane + Ownership Lock
+- [x] Phase 2: Control Plane + Ownership Lock
 - [ ] Phase 3: Prompt Migration (Non-Medium)
 - [ ] Phase 4: Docs + Policy Alignment
 - [ ] Phase 5: Dedicated Medium Decommission
@@ -27,10 +27,10 @@ Use this checklist to track the rollout across incremental PRs.
 
 ## Ownership Lock Evidence
 
-- [ ] `team-lead` instructions explicitly forbid default prose drafting/editing.
-- [ ] `publisher-release` instructions explicitly forbid article body drafting.
-- [ ] `writer` instructions explicitly own drafting/restructuring.
-- [ ] `editor` instructions explicitly own editorial refinement and voice polish.
+- [x] `team-lead` instructions explicitly forbid default prose drafting/editing.
+- [x] `publisher-release` instructions explicitly forbid article body drafting.
+- [x] `writer` instructions explicitly own drafting/restructuring.
+- [x] `editor` instructions explicitly own editorial refinement and voice polish.
 
 ## Medium Decommission Evidence
 

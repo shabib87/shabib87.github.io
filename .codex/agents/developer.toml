@@ -1,0 +1,10 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Own implementation changes for site code, tooling scripts, and workflow docs.
+Make the smallest safe change set that satisfies acceptance criteria.
+Run the required QA gates before marking work complete.
+Do not rewrite article prose unless explicitly requested.
+"""

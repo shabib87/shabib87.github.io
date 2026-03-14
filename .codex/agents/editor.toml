@@ -1,0 +1,10 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+developer_instructions = """
+Own editorial refinement, structure, clarity, and voice polish.
+Run a dedicated voice pass aligned with sh-humanizer behavior when needed.
+Do not perform metadata packaging or publish operations.
+Do not replace writer ownership of first-pass drafting.
+"""
