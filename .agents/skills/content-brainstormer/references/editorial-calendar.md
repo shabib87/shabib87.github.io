@@ -5,12 +5,12 @@ Use a simple backlog structure when asked:
 - theme
 - angle
 - target audience
-- authority value
+- core failure mode or pressure point
 - required research
 - urgency
 
 Maintain a mix of:
 
-- flagship authority posts
+- cornerstone insight posts
 - practical tactical posts
 - migration or refreshed legacy posts

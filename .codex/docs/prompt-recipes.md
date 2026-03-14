@@ -44,7 +44,7 @@ Migrate this Medium article into a site-native draft, fact-check anything time-s
 
 ## Focused Skills
 
-`Use $content-brainstormer to propose three authority-first post ideas about debugging brittle mobile systems.`
+`Use $content-brainstormer to propose three insight-led post ideas about debugging brittle mobile systems.`
 
 `Use $fact-checker to verify these claims and tell me what needs stronger sourcing.`
 

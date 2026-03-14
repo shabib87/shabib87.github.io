@@ -20,5 +20,8 @@ Allowed changes:
 
 Before finishing:
 
-- compare the before and after versions with `scripts/assert-protected-post-fields.sh`
+- compare the before and after versions with
+  `scripts/assert-protected-post-fields.sh <before-path> <after-path>`
+- use `scripts/assert-protected-post-fields.sh --format jsonl <before-path> <after-path>` when you
+  need structured check output
 - preview the affected post if rendering changed

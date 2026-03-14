@@ -1,16 +1,17 @@
 # Editorial Policy
 
-## Positioning
+## Editorial Focus
 
-This site is an authority-building publication for:
+This site is an experience-driven engineering publication focused on:
 
 - mobile architecture
 - debugging and failure analysis
 - systems thinking
 - AI engineering
-- principal mobile engineering leadership
+- mobile engineering leadership
 
-The writing should strengthen that positioning rather than chase generic traffic.
+The writing should strengthen that focus through insight, judgment, and consequence rather than
+chase generic traffic.
 
 ## Drafting Model
 
@@ -52,15 +53,16 @@ Every publish-ready post needs:
 - Use Context7 when the official docs are available there and the precise behavior matters.
 - Rewrite or remove claims that cannot be supported cleanly.
 
-## Authority-First Topic Selection
+## Insight-Led Topic Selection
 
 Prioritize ideas that:
 
-- demonstrate original experience
+- demonstrate repeated field experience
 - reveal systems thinking
-- show principal judgment in architecture, platform strategy, or cross-team technical direction
-- connect real engineering tradeoffs to practical lessons
-- compound reputation in the site's core domains
+- show strong engineering judgment in architecture, platform strategy, or cross-team technical
+  direction
+- connect real engineering tradeoffs to practical consequence
+- deepen the site's point of view in the core domains
 
 ## Publish QA
 
