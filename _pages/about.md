@@ -1,6 +1,6 @@
 ---
 title: "Hi, I'm Shabib"
-description: "Engineering blog on principal mobile architecture, debugging philosophy, and cross-platform strategy. Written by a principal mobile engineer."
+description: "Engineering blog on mobile architecture, debugging, and cross-platform strategy. Experience-driven writing about systems, tradeoffs, and engineering consequences."
 permalink: /
 layout: single
 author_profile: true
