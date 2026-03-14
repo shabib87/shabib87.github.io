@@ -1,0 +1,32 @@
+{
+  "skill_name": "technical-post-drafter",
+  "evals": [
+    {
+      "id": "outline-to-full-article-body",
+      "prompt": "Turn this outline into a full article body for experienced mobile engineers: Hook about teams blaming tooling instead of contracts; H2 on the mistaken assumption; H2 on the mechanism inside the system boundary; H2 on the organizational consequence; close with a blunt takeaway. Include concrete examples and mark source-dependent claims.",
+      "expected_output": "A full article body with an opening observation or tension, explicit mechanism and consequence, concrete examples, marked source-dependent claims, and a blunt takeaway or explicit next step.",
+      "assertions": [
+        "Includes a clear opening observation or tension",
+        "Uses section headings or an equivalent section structure",
+        "Includes an explanation of mechanism",
+        "Includes a technical, organizational, or strategic consequence",
+        "Adds concrete systems examples or failure modes",
+        "Marks source-dependent or uncertain claims",
+        "Avoids role-title self-reference as a source of authority"
+      ]
+    },
+    {
+      "id": "restructure-thin-rough-draft",
+      "prompt": "This rough draft has the right idea but the sections are repetitive and out of order. Restructure it into a stronger article body about why platform leverage gets treated like implementation detail on mobile teams. Keep the voice judgment-forward, not tutorial-like.",
+      "expected_output": "A materially stronger article body that clarifies the throughline, sharpens section order, makes mechanism and consequence visible, and preserves a judgment-forward voice without drifting into metadata or packaging work.",
+      "assertions": [
+        "Improves section order or flow",
+        "Makes mechanism or causal logic clearer",
+        "Makes consequence or implication clearer",
+        "Keeps the response focused on body drafting rather than publication workflow",
+        "Includes at least one concrete tradeoff, failure mode, or system consequence",
+        "Avoids role-title self-reference as a source of authority"
+      ]
+    }
+  ]
+}

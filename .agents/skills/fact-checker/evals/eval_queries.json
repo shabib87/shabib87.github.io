@@ -1,0 +1,31 @@
+{
+  "skill_name": "fact-checker",
+  "train": {
+    "should_trigger": [
+      "Verify whether these Swift Testing and Context7 claims are still accurate before publish.",
+      "Check the version-sensitive claims in this draft against official docs.",
+      "I have a list of API and tool assertions. Tell me which ones are supported by primary sources.",
+      "Fact-check these library and product claims without rewriting the whole article."
+    ],
+    "should_not_trigger": [
+      "Turn this outline into a full technical article body.",
+      "Give me five experience-driven topic ideas about mobile debugging.",
+      "Rewrite this section so it sounds more like me and less like AI.",
+      "Add front matter and publish this draft into _posts_."
+    ]
+  },
+  "validation": {
+    "should_trigger": [
+      "Before I publish, verify whether these Jekyll, GitHub Actions, and OpenAI workflow claims are still current.",
+      "Check this draft for unsupported technical claims and tell me what needs citation or qualification.",
+      "Use primary sources to verify these framework and API statements.",
+      "Audit the technical claims in this article for freshness and source support."
+    ],
+    "should_not_trigger": [
+      "I copied this Medium article into the repo. Convert it into site-native content.",
+      "I need help choosing the best angle for a post about debugging culture.",
+      "This published post needs figure markup and SEO fixes, but the prose must stay unchanged.",
+      "I have an outline and sources. Help me improve the structure before I continue writing."
+    ]
+  }
+}

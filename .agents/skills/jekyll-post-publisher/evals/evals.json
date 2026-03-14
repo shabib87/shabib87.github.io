@@ -1,0 +1,34 @@
+{
+  "skill_name": "jekyll-post-publisher",
+  "evals": [
+    {
+      "id": "package-body-only-draft",
+      "prompt": "Turn evals/files/draft-body-only.md into a private draft with site-ready front matter, explicit validation status, and the right next publication step. Keep the work focused on packaging, not body rewriting.",
+      "files": [
+        "evals/files/draft-body-only.md"
+      ],
+      "expected_output": "A repo-ready private draft with complete front matter, a validation step, and a clear next command or workflow handoff.",
+      "assertions": [
+        "Adds YAML front matter or an equivalent metadata block",
+        "Includes title, description, permalink, categories, tags, and last_modified_at",
+        "Includes image metadata and fact_check_status when packaging for publish readiness",
+        "References validation or publish workflow steps such as scripts/validate-post.sh or make validate-draft",
+        "Avoids large article-body rewrites"
+      ]
+    },
+    {
+      "id": "finish-metadata-for-publish-ready-draft",
+      "prompt": "Complete the packaging work for evals/files/draft-metadata-incomplete.md so it is ready for publish QA. Normalize the front matter, validate it, and state the next repo workflow step.",
+      "files": [
+        "evals/files/draft-metadata-incomplete.md"
+      ],
+      "expected_output": "A publish-ready packaging result that normalizes metadata, validates the draft, and clearly states the next repo-local workflow step.",
+      "assertions": [
+        "Normalizes front matter fields required by this repo",
+        "Preserves the focus on metadata, validation, and publication workflow",
+        "States validation status explicitly",
+        "Names the next repo-local command or workflow step"
+      ]
+    }
+  ]
+}
