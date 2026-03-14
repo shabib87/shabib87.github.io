@@ -4,6 +4,10 @@ ruby "3.4.4"
 
 gem "github-pages", group: :jekyll_plugins
 
+# Explicitly include runtime deps now split or no longer default in newer runtimes.
+gem "faraday-retry"
+gem "ostruct"
+
 gem "tzinfo-data"
 gem "wdm", "~> 0.1.0" if Gem.win_platform?
 
