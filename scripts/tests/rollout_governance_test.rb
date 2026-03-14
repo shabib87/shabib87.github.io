@@ -70,10 +70,10 @@ class RolloutGovernanceTest < Minitest::Test
     MD
   end
 
-  def run_validator(branch: nil)
+  def run_validator(branch: nil, env: {})
     cmd = ["ruby", VALIDATOR, "--repo-root", Dir.pwd]
     cmd += ["--branch", branch] if branch
-    Open3.capture3(*cmd)
+    Open3.capture3(env, *cmd)
   end
 
   def test_dynamic_phase_count_accepts_contiguous_manifests
@@ -190,6 +190,20 @@ class RolloutGovernanceTest < Minitest::Test
       _stdout, stderr, status = run_validator
       refute status.success?
       assert_match(/broad content wildcard/i, stderr)
+    end
+  end
+
+  def test_repo_branch_has_priority_over_github_head_ref
+    with_repo(branch: "codex/phase-7-large-plan") do
+      write_active_plan
+      (1..7).each do |n|
+        write_phase(n, CORE_PLAN_PATTERNS + ["README.md"])
+      end
+      write_phase(7, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-7.md"])
+      write_evidence(7)
+
+      stdout, stderr, status = run_validator(env: { "GITHUB_HEAD_REF" => "codex/phase-1-unrelated" })
+      assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
     end
   end
 
