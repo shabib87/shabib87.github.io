@@ -7,3 +7,4 @@ scripts/run-codex-checks.sh
 .codex/docs/multi-agent-rollout-checklist.md
 .codex/docs/multi-agent-red-team.md
 .codex/docs/workflows.md
+AGENTS.md
