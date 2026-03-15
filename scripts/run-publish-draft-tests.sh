@@ -3,4 +3,5 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
-exec ruby "$repo_root/scripts/lib/publish_draft.rb" "${1:-}" "${2:-}" "${3:-}"
+
+ruby "$repo_root/scripts/tests/publish_draft_test.rb"
