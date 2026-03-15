@@ -54,6 +54,15 @@
 - Ensure local checks pass before opening a PR. CI is backup only, not the primary development loop.
 - Branching model is trunk-based development: create short-lived branches off `main`, rebase if they drift, and integrate back with rebase only.
 
+## Review Guidelines
+
+- For Codex GitHub reviews, prioritize high-impact findings first: regressions, correctness bugs, security risks, and workflow breakage.
+- Review only the pull request diff and avoid unrelated repository commentary.
+- Include concrete file references and the smallest actionable fix direction.
+- Do not report style or preference nits unless they clearly reduce risk.
+- Call out missing tests only when the change introduces meaningful behavioral risk.
+- If no significant issues are found, explicitly state: `No high-impact findings.`
+
 ## Repo-Local Skills Policy
 
 - Repo-local skills live in `.agents/skills/` and take precedence over user-global skills when both apply.
