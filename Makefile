@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help setup hooks-install lint security codex-check site-audit qa-local validate-draft qa-publish publish-draft start-work start-phase check create-pr finalize-merge rollout-audit rollout-tests skill-audit skill-vendor
+.PHONY: help setup hooks-install lint security codex-check site-audit qa-local validate-draft qa-publish publish-draft publish-draft-tests start-work start-phase check create-pr finalize-merge rollout-audit rollout-tests skill-audit skill-vendor
 
 ifneq (,$(filter skill-audit skill-vendor,$(firstword $(MAKECMDGOALS))))
 SKILL_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -17,7 +17,8 @@ help:
 	@echo "Editorial:"
 	@echo "  make validate-draft PATH=_drafts/post.md"
 	@echo "  make qa-publish PATH=_drafts/post.md"
-	@echo "  make publish-draft PATH=_drafts/post.md DATE=YYYY-MM-DD"
+	@echo "  make publish-draft PATH=_drafts/post.md DATE=YYYY-MM-DD [KEEP_DRAFT=1]"
+	@echo "  make publish-draft-tests"
 	@echo ""
 	@echo "Site Quality:"
 	@echo "  make site-audit AUDIT=seo TARGET=site"
@@ -71,7 +72,10 @@ qa-publish:
 	@/usr/bin/env DRAFT_PATH='$(PATH)' /bin/bash -lc './scripts/qa-publish.sh "$$DRAFT_PATH"'
 
 publish-draft:
-	@/usr/bin/env DRAFT_PATH='$(PATH)' DATE='$(DATE)' SLUG='$(SLUG)' /bin/bash -lc './scripts/publish-draft.sh'
+	@/usr/bin/env DRAFT_PATH='$(PATH)' DATE='$(DATE)' SLUG='$(SLUG)' KEEP_DRAFT='$(KEEP_DRAFT)' /bin/bash -lc './scripts/publish-draft.sh'
+
+publish-draft-tests:
+	@./scripts/run-publish-draft-tests.sh
 
 start-work:
 	@./scripts/start-work.sh

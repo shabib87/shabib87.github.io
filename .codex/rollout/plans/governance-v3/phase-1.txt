@@ -10,6 +10,11 @@ scripts/create-pr.sh
 scripts/finalize-merge.sh
 scripts/start-phase.sh
 scripts/rollout-audit.sh
+scripts/publish-draft.sh
+scripts/run-publish-draft-tests.sh
 scripts/tests/*
+scripts/lib/publish_draft.rb
+scripts/lib/publish_draft_core.rb
 .github/workflows/rollout-governance.yml
 Makefile
+README.md

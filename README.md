@@ -46,6 +46,21 @@ make check
 ./.venv-tools/bin/pre-commit run --hook-stage pre-push --all-files
 ```
 
+## Editorial Commands
+
+```bash
+make validate-draft PATH=_drafts/post.md
+make qa-publish PATH=_drafts/post.md
+make publish-draft PATH=_drafts/post.md DATE=YYYY-MM-DD
+```
+
+`make publish-draft` now removes the source file from `_drafts/` after a successful publish.
+Use `KEEP_DRAFT=1` to opt out for one run:
+
+```bash
+make publish-draft PATH=_drafts/post.md DATE=YYYY-MM-DD KEEP_DRAFT=1
+```
+
 ## Acknowledgments
 
 This site is powered by [Jekyll](https://jekyllrb.com/) and the
