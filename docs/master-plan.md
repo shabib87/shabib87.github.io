@@ -1750,6 +1750,9 @@ This plan is complete when all of the following are true:
 - `_drafts/` is tracked by git and agents can create/edit drafts in branches.
 - Every meaningful change starts as a Linear issue.
 - Every issue clearly indicates executor and bottleneck state.
+- Every issue declares exactly one completion gate type: `PR_REQUIRED` or `EVIDENCE_REQUIRED`.
+- `PR_REQUIRED` issues cannot move to `Done` until the linked PR is merged to `main`.
+- `EVIDENCE_REQUIRED` issues cannot move to `Done` without explicit evidence artifacts and human sign-off.
 - Branches use `CWS-*` identifiers.
 - Per-task files exist at `docs/tasks/CWS-NNN.md` and persist after merge.
 - Hooks catch most failures before push.
