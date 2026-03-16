@@ -54,6 +54,13 @@
 - Ensure local checks pass before opening a PR. CI is backup only, not the primary development loop.
 - Branching model is trunk-based development: create short-lived branches off `main`, rebase if they drift, and integrate back with rebase only.
 
+### Graphite And GitHub CLI Policy
+
+- Use Graphite CLI (`gt`) for stack lifecycle operations: `gt create`, `gt modify`, `gt restack`, `gt sync`, and `gt submit --no-interactive`.
+- Use GitHub CLI (`gh`) for GitHub object operations after submission: inspecting checks, viewing diffs, reading review state, commenting, and labeling.
+- Keep branch/stack state authoritative in `gt`; use `gh` as the GitHub surface inspection and operations layer.
+- For stacked PR work, avoid mixing direct `git push`/`git commit` with Graphite stack steps unless explicitly required for recovery.
+
 ## Review Guidelines
 
 - For Codex GitHub reviews, prioritize high-impact findings first: regressions, correctness bugs, security risks, and workflow breakage.
