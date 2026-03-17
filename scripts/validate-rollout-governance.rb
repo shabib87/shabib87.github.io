@@ -109,7 +109,8 @@ plan_id = plan["plan_id"].to_s.strip
 apply_to_all_prs = plan["apply_to_all_prs"] == true
 mode = plan["mode"].to_s.strip
 base_branch = plan["base_branch"].to_s.strip
-branch_pattern = plan["branch_pattern"].to_s.strip
+task_branch_pattern = plan["task_branch_pattern"].to_s.strip
+phase_branch_pattern = plan["phase_branch_pattern"].to_s.strip
 limits = plan["limits"].is_a?(Hash) ? plan["limits"] : {}
 max_changed_files_non_content = limits["max_changed_files_non_content"]
 max_changed_lines_non_content = limits["max_changed_lines_non_content"]
@@ -119,7 +120,8 @@ errors << "active-plan.yaml missing plan_id" if plan_id.empty?
 errors << "active-plan.yaml must set apply_to_all_prs=true" unless apply_to_all_prs
 errors << "active-plan.yaml mode must be sequential" unless mode == "sequential"
 errors << "active-plan.yaml missing base_branch" if base_branch.empty?
-errors << "active-plan.yaml missing branch_pattern" if branch_pattern.empty?
+errors << "active-plan.yaml missing task_branch_pattern" if task_branch_pattern.empty?
+errors << "active-plan.yaml missing phase_branch_pattern" if phase_branch_pattern.empty?
 errors << "active-plan.yaml limits.max_changed_files_non_content must be a positive integer" unless max_changed_files_non_content.is_a?(Integer) && max_changed_files_non_content.positive?
 errors << "active-plan.yaml limits.max_changed_lines_non_content must be a positive integer" unless max_changed_lines_non_content.is_a?(Integer) && max_changed_lines_non_content.positive?
 errors << "active-plan.yaml limits.ignore_paths_for_size_caps must be a non-empty list" if ignore_paths_for_size_caps.empty?
@@ -134,18 +136,25 @@ if branch.to_s.strip.empty?
 end
 
 phase = nil
+branch_mode = nil
 if branch == base_branch
   puts "rollout governance check skipped for base branch #{base_branch}"
   exit 0 if errors.empty?
 elsif branch.empty?
   errors << "unable to detect current branch"
 else
-  match = Regexp.new(branch_pattern).match(branch) rescue nil
-  if match.nil?
-    errors << "branch #{branch.inspect} does not match required phase pattern #{branch_pattern.inspect}" if apply_to_all_prs
-  else
-    phase = match[1].to_i
+  phase_match = Regexp.new(phase_branch_pattern).match(branch) rescue nil
+  task_match = Regexp.new(task_branch_pattern).match(branch) rescue nil
+  if !phase_match.nil?
+    branch_mode = "phase"
+    phase = phase_match[1].to_i
     errors << "phase extracted from branch must be >= 1" if phase <= 0
+  elsif !task_match.nil?
+    branch_mode = "task"
+  else
+    if apply_to_all_prs
+      errors << "branch #{branch.inspect} does not match task pattern #{task_branch_pattern.inspect} or phase pattern #{phase_branch_pattern.inspect}"
+    end
   end
 end
 
@@ -176,6 +185,11 @@ end
 if errors.any?
   errors.each { |error| warn "error: #{error}" }
   exit 1
+end
+
+if branch_mode == "task"
+  puts "rollout governance check passed for plan=#{plan_id} branch_mode=task"
+  exit 0
 end
 
 manifest_path = File.join(plan_dir, "phase-#{phase}.txt")
