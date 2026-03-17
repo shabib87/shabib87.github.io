@@ -19,11 +19,6 @@ if ! gh auth status >/dev/null 2>&1; then
   exit 1
 fi
 
-if gh pr view "$branch" >/dev/null 2>&1; then
-  echo "error: a PR already exists for branch $branch" >&2
-  exit 1
-fi
-
 "$repo_root/scripts/run-local-qa.sh"
 
 plan_info="$(
@@ -116,16 +111,6 @@ end
 RUBY
 fi
 
-remote_name="origin"
-if upstream_ref="$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
-  remote_name="${upstream_ref%%/*}"
-fi
-
-if ! git ls-remote --exit-code --heads "$remote_name" "$branch" >/dev/null 2>&1; then
-  echo "pushing branch $branch to $remote_name"
-  git push -u "$remote_name" "$branch"
-fi
-
 title_line="$("$repo_root/.agents/skills/repo-flow/scripts/infer-pr-metadata.sh" "$type")"
 title="${title_line#TITLE=}"
 
@@ -156,6 +141,12 @@ if [[ -z "$affected_urls" ]]; then
 fi
 
 body_file="$(mktemp)"
+gt_log_file="$(mktemp)"
+cleanup() {
+  rm -f "$body_file" "$gt_log_file"
+}
+trap cleanup EXIT
+
 cat > "$body_file" <<EOF
 ## Summary
 
@@ -195,10 +186,42 @@ $affected_urls
 - No private drafts or secrets included
 EOF
 
-gh pr create \
-  --base "$base_branch" \
-  --head "$branch" \
-  --title "$title" \
-  --body-file "$body_file"
+# Prefer Graphite for stack submission, then normalize metadata with gh.
+if command -v gt >/dev/null 2>&1; then
+  gt track --parent "$base_branch" >/dev/null 2>&1 || true
+  if ! gt submit --stack --no-interactive >"$gt_log_file" 2>&1; then
+    if grep -q "must restack before submitting this stack" "$gt_log_file"; then
+      gt restack
+      if ! gt submit --stack --no-interactive; then
+        echo "warning: gt submit failed after restack; falling back to gh PR flow" >&2
+      fi
+    else
+      echo "warning: gt submit failed; falling back to gh PR flow" >&2
+      cat "$gt_log_file" >&2
+    fi
+  fi
+fi
 
-rm -f "$body_file"
+remote_name="origin"
+if upstream_ref="$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
+  remote_name="${upstream_ref%%/*}"
+fi
+
+if ! git ls-remote --exit-code --heads "$remote_name" "$branch" >/dev/null 2>&1; then
+  echo "pushing branch $branch to $remote_name"
+  git push -u "$remote_name" "$branch"
+fi
+
+if ! gh pr view "$branch" >/dev/null 2>&1; then
+  gh pr create \
+    --base "$base_branch" \
+    --head "$branch" \
+    --title "$title" \
+    --body-file "$body_file"
+fi
+
+gh pr edit "$branch" --title "$title" --body-file "$body_file"
+
+if [[ "$(gh pr view "$branch" --json isDraft --jq '.isDraft')" == "true" ]]; then
+  gh pr ready "$branch"
+fi
