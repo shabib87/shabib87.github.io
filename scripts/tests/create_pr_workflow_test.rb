@@ -34,4 +34,14 @@ class CreatePrWorkflowTest < Minitest::Test
     assert_match(/warning: gt submit failed; falling back to gh PR flow/, script_body)
     refute_match(/error: gt submit failed/, script_body)
   end
+
+  def test_graphite_restack_failure_falls_back_to_gh_flow
+    assert_match(/if ! gt restack >>"\$gt_log_file" 2>&1; then/, script_body)
+    assert_match(/warning: gt restack failed; falling back to gh PR flow/, script_body)
+  end
+
+  def test_graphite_restack_failure_logs_context
+    assert_match(/if ! gt restack >>"\$gt_log_file" 2>&1; then/, script_body)
+    assert_match(/cat "\$gt_log_file" >&2/, script_body)
+  end
 end
