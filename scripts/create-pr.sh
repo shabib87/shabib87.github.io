@@ -191,9 +191,12 @@ if command -v gt >/dev/null 2>&1; then
   gt track --parent "$base_branch" >/dev/null 2>&1 || true
   if ! gt submit --stack --no-interactive >"$gt_log_file" 2>&1; then
     if grep -q "must restack before submitting this stack" "$gt_log_file"; then
-      gt restack
-      if ! gt submit --stack --no-interactive; then
+      if ! gt restack >>"$gt_log_file" 2>&1; then
+        echo "warning: gt restack failed; falling back to gh PR flow" >&2
+        cat "$gt_log_file" >&2
+      elif ! gt submit --stack --no-interactive >>"$gt_log_file" 2>&1; then
         echo "warning: gt submit failed after restack; falling back to gh PR flow" >&2
+        cat "$gt_log_file" >&2
       fi
     else
       echo "warning: gt submit failed; falling back to gh PR flow" >&2
