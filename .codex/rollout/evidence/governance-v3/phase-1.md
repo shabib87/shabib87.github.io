@@ -19,3 +19,10 @@ GREEN (publish workflow expansion)
 - result: passed after phase-1 manifest scope was updated for publish workflow paths
 - representative output:
   - `codex workflow checks passed`
+
+GREEN (PR workflow normalization)
+
+- command: `bash scripts/run-rollout-governance-tests.sh`
+- result: passed after adding `scripts/tests/create_pr_workflow_test.rb` and wiring it into the governance test runner
+- representative output:
+  - `4 runs, ... assertions, 0 failures, 0 errors, 0 skips`
