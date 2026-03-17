@@ -60,6 +60,15 @@
 - Use GitHub CLI (`gh`) for GitHub object operations after submission: inspecting checks, viewing diffs, reading review state, commenting, and labeling.
 - Keep branch/stack state authoritative in `gt`; use `gh` as the GitHub surface inspection and operations layer.
 - For stacked PR work, avoid mixing direct `git push`/`git commit` with Graphite stack steps unless explicitly required for recovery.
+- Preflight branch naming before PR creation/submission. Accepted rollout patterns are `^codex/cws-\d+-[a-z0-9-]+$` and `^codex/phase-(\d+)-[a-z0-9-]+$`.
+- For PR metadata updates, do not pass multiline markdown directly in shell flags. Use `gh pr create/edit --body-file <path>` to avoid shell substitution and corrupted PR bodies.
+- If a PR head branch violates rollout naming policy, create a compliant replacement branch/PR and close the superseded PR with a replacement note.
+- If `gh` is authenticated but SSH push fails (`Permission denied (publickey)`), recovery can use `gh api repos/<owner>/<repo>/git/refs` to create the remote branch ref to the intended commit.
+
+### Codex Instruction Hygiene
+
+- `AGENTS.md` remains the execution policy for this repository. If any other document conflicts with `AGENTS.md`, follow `AGENTS.md` for execution and open a follow-up issue to reconcile docs.
+- Keep `AGENTS.md` concise and stable. Put reusable task workflows in repo-local skills under `.agents/skills/` so guidance stays modular and loaded on demand.
 
 ## Review Guidelines
 
