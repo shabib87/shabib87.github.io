@@ -46,6 +46,7 @@ $historical-post-editor $site-quality-auditor $repo-flow
 
 - Legacy non-orchestrator prompts remain temporarily for compatibility.
 - Legacy import workflow is retired in this repository.
-- Rollout governance is phase-based and sequential (`codex/phase-<n>-...`).
+- Normal task branches use Linear-first naming (`codex/cws-<id>-...`).
+- Rollout governance remains phase-based and sequential for rollout branches (`codex/phase-<n>-...`).
 - Use `make start-phase PLAN=<plan-id> PHASE=<n> TOPIC="..." TYPE=...` for governed work.
 - Validate ruleset/check alignment with `make rollout-audit`.

@@ -38,20 +38,20 @@ path = ARGV.fetch(0)
 data = YAML.safe_load(File.read(path), permitted_classes: [Date, Time], aliases: false) || {}
 plan_id = data["plan_id"].to_s.strip
 base_branch = data["base_branch"].to_s.strip
-branch_pattern = data["branch_pattern"].to_s.strip
+phase_branch_pattern = data["phase_branch_pattern"].to_s.strip
 
-if plan_id.empty? || base_branch.empty? || branch_pattern.empty?
-  warn "error: active rollout plan missing required keys (plan_id/base_branch/branch_pattern)"
+if plan_id.empty? || base_branch.empty? || phase_branch_pattern.empty?
+  warn "error: active rollout plan missing required keys (plan_id/base_branch/phase_branch_pattern)"
   exit 1
 end
 
-puts "#{plan_id}\t#{base_branch}\t#{branch_pattern}"
+puts "#{plan_id}\t#{base_branch}\t#{phase_branch_pattern}"
 RUBY
 )"
 
 active_plan_id="$(printf '%s' "$active_info" | awk -F '\t' 'NR==1 {print $1}')"
 base_branch="$(printf '%s' "$active_info" | awk -F '\t' 'NR==1 {print $2}')"
-branch_pattern="$(printf '%s' "$active_info" | awk -F '\t' 'NR==1 {print $3}')"
+phase_branch_pattern="$(printf '%s' "$active_info" | awk -F '\t' 'NR==1 {print $3}')"
 
 if [[ -z "$plan" ]]; then
   plan="$active_plan_id"
@@ -97,13 +97,13 @@ inferred="$("$repo_root/.agents/skills/repo-flow/scripts/infer-branch-name.sh" "
 suffix="${inferred#codex/"${type}"-}"
 branch_name="codex/phase-${phase}-${suffix}"
 
-ruby - "$branch_name" "$branch_pattern" <<'RUBY'
+ruby - "$branch_name" "$phase_branch_pattern" <<'RUBY'
 branch_name = ARGV.fetch(0)
-branch_pattern = ARGV.fetch(1)
+phase_branch_pattern = ARGV.fetch(1)
 
-match = Regexp.new(branch_pattern).match(branch_name)
+match = Regexp.new(phase_branch_pattern).match(branch_name)
 if match.nil?
-  warn "error: generated branch #{branch_name.inspect} does not match branch_pattern #{branch_pattern.inspect}"
+  warn "error: generated branch #{branch_name.inspect} does not match phase_branch_pattern #{phase_branch_pattern.inspect}"
   exit 1
 end
 RUBY

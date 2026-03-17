@@ -12,8 +12,9 @@ Use this protocol on every rollout phase PR.
 
 1. Phase-skip attempt:
    open or merge `phase-n` before `phase-(n-1)`.
-2. Non-phase-branch attempt:
-   open a PR from a branch that does not match `branch_pattern`.
+2. Invalid-branch attempt:
+   open a PR from a branch that matches neither `task_branch_pattern` nor
+   `phase_branch_pattern`.
 3. Oversized non-content diff attempt:
    exceed `max_changed_lines_non_content`.
 4. Broad content-manifest attempt:
@@ -24,7 +25,8 @@ Use this protocol on every rollout phase PR.
 ## Required Outcomes
 
 - Sequencing enforcement blocks phase skipping.
-- Branch-pattern enforcement blocks non-phase PR branches.
+- Branch-pattern enforcement blocks invalid PR branches outside task and phase
+  patterns.
 - Size-cap enforcement blocks oversized non-content diffs.
 - Manifest lint blocks broad content wildcards.
 - Scope enforcement blocks out-of-manifest file changes.

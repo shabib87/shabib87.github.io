@@ -6,7 +6,8 @@ Use this checklist for any rollout plan driven by
 ## Plan Contract
 
 - [ ] `active-plan.yaml` exists and is valid (`version: 1`, `plan_id`, `mode: sequential`).
-- [ ] `branch_pattern` is phase-based (`^codex/phase-(\d+)-...`).
+- [ ] `task_branch_pattern` allows task branches (`^codex/cws-\d+-...`).
+- [ ] `phase_branch_pattern` remains phase-based (`^codex/phase-(\d+)-...`).
 - [ ] `required_checks` includes `build`, `semgrep`, `rollout-governance`.
 - [ ] size caps are non-content only:
   - `limits.max_changed_files_non_content`

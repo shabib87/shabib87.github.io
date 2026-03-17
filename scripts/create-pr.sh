@@ -42,40 +42,49 @@ end
 data = YAML.safe_load(File.read(active_plan), permitted_classes: [Date, Time], aliases: false) || {}
 plan_id = data["plan_id"].to_s.strip
 base_branch = data["base_branch"].to_s.strip
-branch_pattern = data["branch_pattern"].to_s.strip
+task_branch_pattern = data["task_branch_pattern"].to_s.strip
+phase_branch_pattern = data["phase_branch_pattern"].to_s.strip
 required_checks = data["required_checks"].is_a?(Array) ? data["required_checks"] : []
 
-if plan_id.empty? || base_branch.empty? || branch_pattern.empty?
-  warn "error: active rollout plan is missing plan_id/base_branch/branch_pattern"
+if plan_id.empty? || base_branch.empty? || task_branch_pattern.empty? || phase_branch_pattern.empty?
+  warn "error: active rollout plan is missing plan_id/base_branch/task_branch_pattern/phase_branch_pattern"
   exit 1
 end
 
-match = Regexp.new(branch_pattern).match(branch)
-if match.nil?
-  warn "error: branch #{branch.inspect} does not match active branch_pattern #{branch_pattern.inspect}"
+branch_mode = nil
+phase = nil
+
+phase_match = Regexp.new(phase_branch_pattern).match(branch)
+task_match = Regexp.new(task_branch_pattern).match(branch)
+if !phase_match.nil?
+  branch_mode = "phase"
+  phase = phase_match[1].to_i
+  if phase <= 0
+    warn "error: extracted phase must be >= 1 for branch #{branch.inspect}"
+    exit 1
+  end
+elsif !task_match.nil?
+  branch_mode = "task"
+else
+  warn "error: branch #{branch.inspect} does not match task pattern #{task_branch_pattern.inspect} or phase pattern #{phase_branch_pattern.inspect}"
   exit 1
 end
 
-phase = match[1].to_i
-if phase <= 0
-  warn "error: extracted phase must be >= 1 for branch #{branch.inspect}"
-  exit 1
-end
-
-puts "#{plan_id}\t#{base_branch}\t#{phase}\t#{branch_pattern}\t#{required_checks.join(',')}"
+puts "#{plan_id}\t#{base_branch}\t#{branch_mode}\t#{phase}\t#{phase_branch_pattern}\t#{required_checks.join(',')}"
 RUBY
 )"
 
 plan_id="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $1}')"
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
-phase="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $3}')"
-branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
-required_checks="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $5}')"
+branch_mode="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $3}')"
+phase="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
+phase_branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $5}')"
+required_checks="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $6}')"
 
-if [[ "$phase" -gt 1 ]]; then
+if [[ "$branch_mode" == "phase" && "$phase" -gt 1 ]]; then
   pr_index="$(gh pr list --state all --base "$base_branch" --limit 200 --json number,state,mergedAt,headRefName)"
 
-  ruby - "$pr_index" "$branch_pattern" "$phase" <<'RUBY'
+  ruby - "$pr_index" "$phase_branch_pattern" "$phase" <<'RUBY'
 require "json"
 
 prs = JSON.parse(ARGV.fetch(0))
@@ -159,7 +168,8 @@ cat > "$body_file" <<EOF
 ## Rollout Metadata
 
 - plan_id: \`$plan_id\`
-- phase: \`$phase\`
+- branch_mode: \`$branch_mode\`
+- phase: \`${phase:-n/a}\`
 - required_checks: \`$required_checks\`
 
 ## Validation
