@@ -42,3 +42,6 @@ config_file = "agents/publisher-release.toml"
 [agents.historical-post-editor]
 description = "Preservation-safe implementer for existing tracked posts with protected historical text and dates."
 config_file = "agents/historical-post-editor.toml"
+
+[sandbox_workspace_write]
+network_access = true
