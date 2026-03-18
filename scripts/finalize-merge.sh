@@ -73,7 +73,12 @@ required_checks = ARGV.fetch(4).split(",").map(&:strip).reject(&:empty?)
 
 errors = []
 errors << "PR is still a draft" if pr["isDraft"] == true
-errors << "PR base #{pr["baseRefName"].inspect} must be #{base_branch.inspect}" if pr["baseRefName"] != base_branch
+base_ref = pr["baseRefName"].to_s
+base_is_trunk = base_ref == base_branch
+base_is_stack_branch = task_branch_pattern.match?(base_ref) || phase_branch_pattern.match?(base_ref)
+unless base_is_trunk || base_is_stack_branch
+  errors << "PR base #{base_ref.inspect} must be #{base_branch.inspect} or a rollout stack branch"
+end
 
 head = pr["headRefName"].to_s
 branch_mode = nil
@@ -117,7 +122,7 @@ if errors.any?
   exit 1
 end
 
-puts [pr["url"], branch_mode, phase, head].join("\t")
+puts [pr["url"], branch_mode, phase, head, base_ref].join("\t")
 RUBY
 )"
 
@@ -125,6 +130,7 @@ pr_url="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $1}')"
 branch_mode="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $2}')"
 phase="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $3}')"
 head_branch="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $4}')"
+base_ref_name="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $5}')"
 
 if [[ "$branch_mode" == "phase" && "$phase" -gt 1 ]]; then
   pr_index="$(gh pr list --state all --base "$base_branch" --limit 200 --json number,state,mergedAt,headRefName)"
@@ -192,6 +198,7 @@ Self-review checklist for $pr_url
 - branch mode: $branch_mode
 - phase: ${phase:-n/a}
 - head branch: $head_branch
+- base branch: $base_ref_name
 - full local QA gate passed (\`make qa-local\`)
 - diff reviewed
 - no private drafts or secrets included
