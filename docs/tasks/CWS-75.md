@@ -5,7 +5,7 @@
 - Linear issue: `CWS-75`
 - Linear URL: <https://linear.app/codewithshabib/issue/CWS-75/dev-align-agents-and-pr-template-with-branch-and-cws-title>
 - Generated: `2026-03-18`
-- Status: `In Review`
+- Status: `Done`
 
 ## Objective
 
@@ -28,6 +28,7 @@ Align `AGENTS.md` and PR template policy with create-pr traceability enforcement
 
 ## Completion Evidence
 
-- Open PR: <https://github.com/shabib87/shabib87.github.io/pull/38>
+- Completed at: `2026-03-18T18:18:26.625Z`
+- Merged PR: <https://github.com/shabib87/shabib87.github.io/pull/38>
 - Cycle: `7ef11bc3-f086-40a6-afd9-256b27df384d`
 - Project: `[INFRA] Repo Process & Tooling`
