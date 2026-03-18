@@ -30,4 +30,9 @@ class FinalizeMergeWorkflowTest < Minitest::Test
   def test_stack_note_points_to_graphite_stack_merge
     assert_includes(script_body, "to merge the full stack, use Graphite web \"Merge stack\" or run: gt merge")
   end
+
+  def test_does_not_gate_on_task_file_status_text
+    refute_match(/task file status/i, script_body)
+    refute_match(/Completion Evidence/, script_body)
+  end
 end

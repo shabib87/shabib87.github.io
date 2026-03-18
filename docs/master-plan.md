@@ -387,6 +387,12 @@ Where `NNN` is the Linear issue number (e.g., `docs/tasks/CWS-42.md`).
 | Codex picks up task      | Agent reads from `docs/tasks/CWS-NNN.md`                          |
 | Task complete, PR merged | File persists as historical record                                |
 
+### Single-Writer Status Model
+
+- Linear is the mutable execution-status source of truth (`Backlog`/`Todo`/`In Progress`/`In Review`/`Done`).
+- `docs/tasks/CWS-NNN.md` is a local execution-context snapshot and evidence pointer.
+- If a task file includes a `Status` field, treat it as informational only. Do not use it as a merge gate.
+
 ### File structure
 
 ```markdown
@@ -408,6 +414,19 @@ Where `NNN` is the Linear issue number (e.g., `docs/tasks/CWS-42.md`).
 
 [Extracted from issue body]
 
+## Validation Commands
+
+[Deterministic validation command list]
+
+## Captured From Linear
+
+- Timestamp: YYYY-MM-DD HH:MM:SS TZ
+
+## Evidence (Optional)
+
+- PR: https://github.com/<owner>/<repo>/pull/<id>
+- Completed at: YYYY-MM-DDTHH:MM:SSZ
+
 ## Labels
 
 [Labels from Linear]
@@ -416,6 +435,8 @@ Where `NNN` is the Linear issue number (e.g., `docs/tasks/CWS-42.md`).
 
 [Sub-issues if any, with their CWS IDs]
 ```
+
+Canonical template: `docs/tasks/TEMPLATE.md`.
 
 ### Git tracking
 
@@ -1225,6 +1246,7 @@ _Last updated: YYYY-MM-DD by [agent-name] during CWS-NNN_
 - Updates are committed as part of the task branch — reviewed in the PR like any other change.
 - Shabib reviews the context file periodically and corrects any drift.
 - Add to `AGENTS.md`:
+
   ```text
   Before starting any task, read docs/agent-context.md for project context.
   After completing a task, update the relevant section if anything changed.
