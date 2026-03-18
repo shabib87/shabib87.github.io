@@ -8,9 +8,9 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-17 03:01:10 EDT`
+- Synced at: `2026-03-18 12:46:15 EDT`
 - Synced by: `Codex`
-- Scope: `CWS-64 merge + CWS-65 PR recovery (malformed branch superseded by compliant replacement PR)`
+- Scope: `Post-CWS-45/CWS-65 completion sync + NEXT queue refresh + new INFRA intake (CWS-66/CWS-69)`
 - Linear anchors:
   - `Program Index — Backlog Governance`
   - `Backlog Remediation Matrix — Master v2`
@@ -20,25 +20,26 @@ This file is a bounded cache for agent continuity.
 
 ## Stale After
 
-- `2026-03-18 03:01:10 EDT`
+- `2026-03-19 12:46:15 EDT`
 - Rule: if current time is later than this timestamp, run a full Linear re-sync before execution.
 
 ## Active Phase
 
-- `Implementation kickoff active — NEXT-5 queue sequenced and cycle-linked`
+- `Implementation kickoff active — NEXT queue sequenced, with new INFRA hardening intake pending placement`
 
 ## Top Priorities (max 5)
 
 1. Execute NEXT-10 sequence in dependency order:
-   `CWS-45 -> CWS-10 -> CWS-20 -> CWS-22 -> CWS-34 -> CWS-53 -> CWS-17 -> CWS-15 -> CWS-11 -> CWS-54`.
+   `CWS-10 -> CWS-20 -> CWS-22 -> CWS-34 -> CWS-53 -> CWS-17 -> CWS-15 -> CWS-11 -> CWS-54`.
 2. Keep all active execution issues linked to cycle `7ef11bc3-f086-40a6-afd9-256b27df384d`.
 3. Enforce cycle-first intake: any issue pulled from Linear for execution must be cycle-linked before queueing.
-4. Normalize PR flow: Graphite handles stack submit, `gh` enforces final PR title/body and draft readiness state.
-5. Complete `CWS-65` via compliant replacement PR (`#36`), then update Linear issue state and PR linkage.
+4. Place new INFRA hardening intake (`CWS-66` parent, `CWS-69` child) into the active dependency queue before execution.
+5. Normalize PR flow: Graphite handles stack submit, `gh` enforces final PR title/body and draft readiness state.
 
 ## Open Decisions
 
 - [ ] Confirm explicit owner go-ahead before moving from governance to implementation.
+- [ ] Decide whether `CWS-66`/`CWS-69` preempt any remaining NEXT-10 order.
 - [ ] Decide whether to enforce dependency linting via scripted audit in CI.
 - [ ] Decide when to split canonical mirror docs into section documents (if maintainability degrades).
 
@@ -53,21 +54,22 @@ This file is a bounded cache for agent continuity.
 
 ## Next 10 Actions
 
-- [ ] Start `CWS-45` (NEXT-10 #1) and move to `In Progress` at pickup.
-- [ ] After `CWS-45` merge, start `CWS-10` (NEXT-10 #2).
+- [ ] Start `CWS-10` (NEXT-10 #2) and move to `In Progress` at pickup.
 - [ ] After `CWS-10` merge, start `CWS-20` (NEXT-10 #3).
 - [ ] After `CWS-20` merge, start `CWS-22` (NEXT-10 #4).
 - [ ] After `CWS-22` merge, start `CWS-34` (NEXT-10 #5).
 - [ ] After `CWS-10` merge, schedule `CWS-53` (NEXT-10 #6).
 - [ ] Start dispatch chain: `CWS-17` (NEXT-10 #7) -> `CWS-15` (NEXT-10 #8) -> `CWS-11` (NEXT-10 #9).
 - [ ] After `CWS-34` merge, start `CWS-54` (NEXT-10 #10).
+- [ ] Add `CWS-66` and `CWS-69` to cycle `7ef11bc3-f086-40a6-afd9-256b27df384d` before they enter active execution.
+- [ ] Resolve queue placement for `CWS-66`/`CWS-69` against remaining NEXT-10 dependencies.
 - [ ] Keep cycle linkage intact and PR links attached before marking each issue `Done`.
-- [ ] Merge PR `#36` (`fix(cws-65): continue create-pr flow when gt restack fails`) after required checks are green.
-- [ ] Move `CWS-65` to `Done` and attach replacement PR link; ensure superseded PR `#35` remains closed with rationale.
 - [ ] Re-sync this ledger after each NEXT-10 completion and every follow-up remediation ticket.
 
 ## Recent Completions
 
+- [x] `CWS-65` is `Done` in Linear with merged replacement PR `#36` and superseded PR `#35` closed.
+- [x] `CWS-45` is `Done` in Linear after merge of PR `#32`.
 - [x] `CWS-64` executed in dedicated PR `#34` with normalized title/body; branch updated to latest `main`, checks passed, and PR merged.
 - [x] Malformed-branch draft PR `#35` superseded: replacement compliant branch `codex/cws-65-create-pr-gt-restack-fallback` created and published as PR `#36`.
 - [x] Superseded PR `#35` closed with replacement note to preserve auditability and unblock rollout-governance gate compliance.

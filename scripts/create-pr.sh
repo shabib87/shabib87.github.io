@@ -76,6 +76,63 @@ phase="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
 phase_branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $5}')"
 required_checks="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $6}')"
 
+if ! ruby - "$repo_root/docs/agent-context.md" <<'RUBY'
+require "time"
+
+path = ARGV.fetch(0)
+unless File.file?(path)
+  warn "error: missing docs/agent-context.md"
+  exit 1
+end
+
+content = File.read(path)
+stale_section = content.match(/^## Stale After\s*$\n+((?:- .*\n)+)/m)
+if stale_section.nil?
+  warn "error: docs/agent-context.md is missing a parseable 'Stale After' section"
+  exit 1
+end
+
+ts_line = stale_section[1].lines.find { |line| line.match?(/^\s*-\s*`[^`]+`\s*$/) }
+if ts_line.nil?
+  warn "error: docs/agent-context.md is missing stale timestamp in 'Stale After' section"
+  exit 1
+end
+
+ts = ts_line[/`([^`]+)`/, 1]
+begin
+  stale_at = Time.parse(ts)
+rescue ArgumentError
+  warn "error: could not parse stale timestamp #{ts.inspect} in docs/agent-context.md"
+  exit 1
+end
+
+if Time.now > stale_at
+  warn "error: docs/agent-context.md is stale (stale_after=#{stale_at.strftime("%Y-%m-%d %H:%M:%S %Z")})"
+  exit 1
+end
+RUBY
+then
+  exit 1
+fi
+
+issue_id=""
+linear_issue_link=""
+if [[ "$branch_mode" == "task" ]]; then
+  if [[ "$branch" =~ ^codex/cws-([0-9]+)-[a-z0-9-]+$ ]]; then
+    issue_id="CWS-${BASH_REMATCH[1]}"
+    linear_issue_link="https://linear.app/codewithshabib/issue/${issue_id}"
+  else
+    echo "error: unable to derive issue id from task branch: $branch" >&2
+    exit 1
+  fi
+
+  task_file="$repo_root/docs/tasks/${issue_id}.md"
+  if [[ ! -f "$task_file" ]]; then
+    echo "error: missing required task file: docs/tasks/${issue_id}.md" >&2
+    exit 1
+  fi
+fi
+
 if [[ "$branch_mode" == "phase" && "$phase" -gt 1 ]]; then
   pr_index="$(gh pr list --state all --base "$base_branch" --limit 200 --json number,state,mergedAt,headRefName)"
 
@@ -113,6 +170,13 @@ fi
 
 title_line="$("$repo_root/.agents/skills/repo-flow/scripts/infer-pr-metadata.sh" "$type")"
 title="${title_line#TITLE=}"
+if [[ -n "$issue_id" ]]; then
+  if [[ "$title" != *"${issue_id}"* && "$title" != *"${issue_id,,}"* ]]; then
+    echo "error: inferred PR title must include ${issue_id} for traceability" >&2
+    echo "error: current inferred title: $title" >&2
+    exit 1
+  fi
+fi
 
 affected_files="$(git diff --name-only "$base_branch"...HEAD | awk 'NF' || true)"
 if [[ -z "$affected_files" ]]; then
@@ -155,6 +219,10 @@ cat > "$body_file" <<EOF
 ## Why
 
 - Standardize the change behind the repo's branch and PR workflow.
+
+## Linear Traceability
+
+- Issue: ${linear_issue_link:-"(phase branch / no direct CWS issue id)"}
 
 ## Rollout Metadata
 
