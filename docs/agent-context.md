@@ -8,9 +8,9 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-18 13:59:31 EDT`
+- Synced at: `2026-03-18 14:43:46 EDT`
 - Synced by: `Codex`
-- Scope: `Repo-local drift-remediation closeout hardening (no new Linear pull): stack-friendly finalize-merge behavior plus start/closeout lifecycle policy`
+- Scope: `Post-merge cleanup and CWS-78 kickoff: clarify Graphite stack merge versus gh single-PR finalize flow`
 - Linear anchors:
   - `Program Index — Backlog Governance`
   - `Backlog Remediation Matrix — Master v2`
@@ -20,7 +20,7 @@ This file is a bounded cache for agent continuity.
 
 ## Stale After
 
-- `2026-03-19 13:59:31 EDT`
+- `2026-03-19 14:43:46 EDT`
 - Rule: if current time is later than this timestamp, run a full Linear re-sync before execution.
 
 ## Active Phase
@@ -29,8 +29,8 @@ This file is a bounded cache for agent continuity.
 
 ## Top Priorities (max 5)
 
-1. Complete stack closeout hardening task `CWS-77` on top of remediation stack:
-   finalize-merge stack base handling + lifecycle policy codification.
+1. Complete merge-flow clarity task `CWS-78`:
+   explicit stack-vs-single merge guidance in finalize workflow, tests, and prompts.
 2. Execute NEXT-10 sequence in dependency order:
    `CWS-10 -> CWS-20 -> CWS-22 -> CWS-34 -> CWS-53 -> CWS-17 -> CWS-15 -> CWS-11 -> CWS-54`.
 3. Keep all active execution issues linked to cycle `7ef11bc3-f086-40a6-afd9-256b27df384d`.
@@ -56,8 +56,8 @@ This file is a bounded cache for agent continuity.
 
 ## Next 10 Actions
 
-- [ ] Merge closeout hardening PR for `CWS-77` after review, then move `CWS-77` to `Done`.
-- [ ] Merge remediation stack PRs `#37` -> `#38` -> `#39`, then move `CWS-74`, `CWS-75`, `CWS-76`, and parent `CWS-73` to `Done`.
+- [ ] Ship `CWS-78` PR: finalize-merge prompt clarity, stacked-merge guardrail note, and tests.
+- [ ] After `CWS-78` merge, move `CWS-78` to `Done` with PR linkage.
 - [ ] Start `CWS-10` (NEXT-10 #2) and move to `In Progress` at pickup.
 - [ ] After `CWS-10` merge, start `CWS-20` (NEXT-10 #3).
 - [ ] After `CWS-20` merge, start `CWS-22` (NEXT-10 #4).
@@ -72,6 +72,10 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Remediation stack merged end-to-end: `#37`, `#38`, `#39`, and `#40` landed on `main`.
+- [x] Stack merge observation confirmed: Graphite merge flow can appear delayed while rebases/checks execute; final merge completed without manual conflict intervention.
+- [x] Local Graphite/git cleanup completed post-merge (`gt sync --no-interactive --force`), merged branches pruned, local `main` fast-forwarded.
+- [x] Created new execution issue `CWS-78` (`In Progress`) and task file `docs/tasks/CWS-78.md` for merge-flow clarity hardening.
 - [x] Created parent remediation issue `CWS-73` and cycle-linked sub-issues `CWS-74`, `CWS-75`, and `CWS-76`.
 - [x] Backfilled missing task snapshots: `docs/tasks/CWS-16.md`, `docs/tasks/CWS-45.md`, `docs/tasks/CWS-50.md`, `docs/tasks/CWS-64.md`, and `docs/tasks/CWS-65.md`.
 - [x] `CWS-65` is `Done` in Linear with merged replacement PR `#36` and superseded PR `#35` closed.

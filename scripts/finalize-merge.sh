@@ -131,6 +131,10 @@ branch_mode="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $2}')"
 phase="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $3}')"
 head_branch="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $4}')"
 base_ref_name="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $5}')"
+is_stack_base="false"
+if [[ "$base_ref_name" != "$base_branch" ]]; then
+  is_stack_base="true"
+fi
 
 if [[ "$branch_mode" == "phase" && "$phase" -gt 1 ]]; then
   pr_index="$(gh pr list --state all --base "$base_branch" --limit 200 --json number,state,mergedAt,headRefName)"
@@ -199,13 +203,21 @@ Self-review checklist for $pr_url
 - phase: ${phase:-n/a}
 - head branch: $head_branch
 - base branch: $base_ref_name
+- merge engine: gh (single PR rebase merge)
 - full local QA gate passed (\`make qa-local\`)
 - diff reviewed
 - no private drafts or secrets included
 - PR title/body look correct
 - changed files and URLs are expected
 EOF
-printf 'Integrate this PR to %s with rebase? [y/N] ' "$base_branch"
+if [[ "$is_stack_base" == "true" ]]; then
+  cat <<EOF
+stacked PR note:
+- this script merges only the current PR into its base branch ($base_ref_name).
+- to merge the full stack, use Graphite web "Merge stack" or run: gt merge
+EOF
+fi
+printf 'Integrate this PR into %s via GitHub rebase merge (single PR only)? [y/N] ' "$base_ref_name"
 read -r confirm
 if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
   echo "integration cancelled"

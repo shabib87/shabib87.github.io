@@ -22,4 +22,12 @@ class FinalizeMergeWorkflowTest < Minitest::Test
   def test_self_review_checklist_prints_pr_base_branch
     assert_match(/- base branch: \$base_ref_name/, script_body)
   end
+
+  def test_prompt_targets_pr_base_for_single_pr_merge
+    assert_match(/Integrate this PR into %s via GitHub rebase merge \(single PR only\)\? \[y\/N\]/, script_body)
+  end
+
+  def test_stack_note_points_to_graphite_stack_merge
+    assert_includes(script_body, "to merge the full stack, use Graphite web \"Merge stack\" or run: gt merge")
+  end
 end
