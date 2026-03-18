@@ -5,7 +5,6 @@
 - Linear issue: `CWS-XXX`
 - Linear URL: <https://linear.app/codewithshabib/issue/CWS-XXX>
 - Captured from Linear at: `YYYY-MM-DD HH:MM:SS TZ`
-- Status (Informational): `Backlog | Todo | In Progress | In Review | Done`
 
 ## Objective
 
@@ -36,4 +35,4 @@ Describe the intended outcome.
 ## Single-Writer Rule
 
 - Linear is the mutable execution-status source of truth.
-- Local task-file `Status` is informational only and is not merge-gating.
+- Do not maintain mutable status in task files; keep status changes in Linear only.

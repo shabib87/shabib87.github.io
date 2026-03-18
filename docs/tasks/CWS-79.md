@@ -5,7 +5,6 @@
 - Linear issue: `CWS-79`
 - Linear URL: <https://linear.app/codewithshabib/issue/CWS-79/dev-harden-docstasks-as-immutable-context-snapshots-and-remove-status>
 - Captured from Linear at: `2026-03-18 19:10:08 EDT`
-- Status (Informational): `In Progress`
 
 ## Objective
 
@@ -38,4 +37,4 @@ Harden `docs/tasks` usage as immutable context snapshots and remove dual-status 
 ## Single-Writer Rule
 
 - Linear is the mutable execution-status source of truth.
-- Local task-file `Status` is informational only and is not merge-gating.
+- Do not maintain mutable status in task files; keep status changes in Linear only.

@@ -14,7 +14,7 @@
 - keep the working tree clean before PR creation
 - use Conventional Commit style for the PR title
 - include summary, why, validation, affected files, affected URLs, and self-review notes
-- for task branches, require `docs/tasks/CWS-<id>.md` as local execution context; do not gate on local task-file status text
+- for task branches, require `docs/tasks/CWS-<id>.md` as local execution context; do not maintain mutable status text in the task file
 
 ## Integration
 
@@ -22,4 +22,4 @@
 - if CI has reported, require it to be green
 - integrate with rebase only for a linear history
 - delete the branch after integration
-- keep Linear issue and PR traceability links current; treat local task-file status as informational only
+- keep Linear issue and PR traceability links current; keep mutable status transitions in Linear only
