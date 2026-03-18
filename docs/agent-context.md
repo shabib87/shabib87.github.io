@@ -8,9 +8,9 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-18 12:46:15 EDT`
+- Synced at: `2026-03-18 13:11:51 EDT`
 - Synced by: `Codex`
-- Scope: `Post-CWS-45/CWS-65 completion sync + NEXT queue refresh + new INFRA intake (CWS-66/CWS-69)`
+- Scope: `Drift remediation kickoff (CWS-73 parent + CWS-74/75/76 sub-issues), task-file backfill, and create-pr enforcement rollout`
 - Linear anchors:
   - `Program Index — Backlog Governance`
   - `Backlog Remediation Matrix — Master v2`
@@ -20,7 +20,7 @@ This file is a bounded cache for agent continuity.
 
 ## Stale After
 
-- `2026-03-19 12:46:15 EDT`
+- `2026-03-19 13:11:51 EDT`
 - Rule: if current time is later than this timestamp, run a full Linear re-sync before execution.
 
 ## Active Phase
@@ -29,16 +29,18 @@ This file is a bounded cache for agent continuity.
 
 ## Top Priorities (max 5)
 
-1. Execute NEXT-10 sequence in dependency order:
+1. Execute drift remediation stack in dependency order:
+   `CWS-74 -> CWS-75 -> CWS-76` under parent `CWS-73`.
+2. Execute NEXT-10 sequence in dependency order:
    `CWS-10 -> CWS-20 -> CWS-22 -> CWS-34 -> CWS-53 -> CWS-17 -> CWS-15 -> CWS-11 -> CWS-54`.
-2. Keep all active execution issues linked to cycle `7ef11bc3-f086-40a6-afd9-256b27df384d`.
-3. Enforce cycle-first intake: any issue pulled from Linear for execution must be cycle-linked before queueing.
-4. Place new INFRA hardening intake (`CWS-66` parent, `CWS-69` child) into the active dependency queue before execution.
+3. Keep all active execution issues linked to cycle `7ef11bc3-f086-40a6-afd9-256b27df384d`.
+4. Enforce cycle-first intake: any issue pulled from Linear for execution must be cycle-linked before queueing.
 5. Normalize PR flow: Graphite handles stack submit, `gh` enforces final PR title/body and draft readiness state.
 
 ## Open Decisions
 
 - [ ] Confirm explicit owner go-ahead before moving from governance to implementation.
+- [ ] Decide when to migrate away from `codex/phase-*` branch mode in a separate dedicated task.
 - [ ] Decide whether `CWS-66`/`CWS-69` preempt any remaining NEXT-10 order.
 - [ ] Decide whether to enforce dependency linting via scripted audit in CI.
 - [ ] Decide when to split canonical mirror docs into section documents (if maintainability degrades).
@@ -54,6 +56,7 @@ This file is a bounded cache for agent continuity.
 
 ## Next 10 Actions
 
+- [ ] Merge remediation stack PRs `#37` -> `#38` -> `#39`, then move `CWS-74`, `CWS-75`, `CWS-76`, and parent `CWS-73` to `Done`.
 - [ ] Start `CWS-10` (NEXT-10 #2) and move to `In Progress` at pickup.
 - [ ] After `CWS-10` merge, start `CWS-20` (NEXT-10 #3).
 - [ ] After `CWS-20` merge, start `CWS-22` (NEXT-10 #4).
@@ -68,6 +71,8 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Created parent remediation issue `CWS-73` and cycle-linked sub-issues `CWS-74`, `CWS-75`, and `CWS-76`.
+- [x] Backfilled missing task snapshots: `docs/tasks/CWS-16.md`, `docs/tasks/CWS-45.md`, `docs/tasks/CWS-50.md`, `docs/tasks/CWS-64.md`, and `docs/tasks/CWS-65.md`.
 - [x] `CWS-65` is `Done` in Linear with merged replacement PR `#36` and superseded PR `#35` closed.
 - [x] `CWS-45` is `Done` in Linear after merge of PR `#32`.
 - [x] `CWS-64` executed in dedicated PR `#34` with normalized title/body; branch updated to latest `main`, checks passed, and PR merged.
