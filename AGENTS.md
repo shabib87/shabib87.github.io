@@ -69,6 +69,18 @@
 - If a PR head branch violates rollout naming policy, create a compliant replacement branch/PR and close the superseded PR with a replacement note.
 - If `gh` is authenticated but SSH push fails (`Permission denied (publickey)`), recovery can use `gh api repos/<owner>/<repo>/git/refs` to create the remote branch ref to the intended commit.
 
+### Execution Lifecycle Policy
+
+- Start-of-work gate:
+  - create or confirm the target Linear issue before implementation begins
+  - for task branches (`codex/cws-<id>-...`), create `docs/tasks/CWS-<id>.md` before `make create-pr`
+  - refresh `docs/agent-context.md` before PR submission when stale
+- Review-closeout gate:
+  - reply to every open PR review thread with explicit disposition and rationale (`accepted`, `partial`, or `declined`)
+  - run `make qa-local` on the final reviewed branch tip before merge
+  - update the task file status/evidence and refresh `docs/agent-context.md` before final integration
+  - for stacks, finalize in downstack order; stack membership may target `main` or another rollout branch
+
 ### Codex Instruction Hygiene
 
 - `AGENTS.md` remains the execution policy for this repository. If any other document conflicts with `AGENTS.md`, follow `AGENTS.md` for execution and open a follow-up issue to reconcile docs.

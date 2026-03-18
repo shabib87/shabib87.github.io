@@ -8,9 +8,9 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-18 13:11:51 EDT`
+- Synced at: `2026-03-18 13:59:31 EDT`
 - Synced by: `Codex`
-- Scope: `Drift remediation kickoff (CWS-73 parent + CWS-74/75/76 sub-issues), task-file backfill, and create-pr enforcement rollout`
+- Scope: `Repo-local drift-remediation closeout hardening (no new Linear pull): stack-friendly finalize-merge behavior plus start/closeout lifecycle policy`
 - Linear anchors:
   - `Program Index — Backlog Governance`
   - `Backlog Remediation Matrix — Master v2`
@@ -20,7 +20,7 @@ This file is a bounded cache for agent continuity.
 
 ## Stale After
 
-- `2026-03-19 13:11:51 EDT`
+- `2026-03-19 13:59:31 EDT`
 - Rule: if current time is later than this timestamp, run a full Linear re-sync before execution.
 
 ## Active Phase
@@ -29,8 +29,8 @@ This file is a bounded cache for agent continuity.
 
 ## Top Priorities (max 5)
 
-1. Execute drift remediation stack in dependency order:
-   `CWS-74 -> CWS-75 -> CWS-76` under parent `CWS-73`.
+1. Complete stack closeout hardening task `CWS-77` on top of remediation stack:
+   finalize-merge stack base handling + lifecycle policy codification.
 2. Execute NEXT-10 sequence in dependency order:
    `CWS-10 -> CWS-20 -> CWS-22 -> CWS-34 -> CWS-53 -> CWS-17 -> CWS-15 -> CWS-11 -> CWS-54`.
 3. Keep all active execution issues linked to cycle `7ef11bc3-f086-40a6-afd9-256b27df384d`.
@@ -56,6 +56,7 @@ This file is a bounded cache for agent continuity.
 
 ## Next 10 Actions
 
+- [ ] Merge closeout hardening PR for `CWS-77` after review, then move `CWS-77` to `Done`.
 - [ ] Merge remediation stack PRs `#37` -> `#38` -> `#39`, then move `CWS-74`, `CWS-75`, `CWS-76`, and parent `CWS-73` to `Done`.
 - [ ] Start `CWS-10` (NEXT-10 #2) and move to `In Progress` at pickup.
 - [ ] After `CWS-10` merge, start `CWS-20` (NEXT-10 #3).
@@ -103,8 +104,8 @@ This file is a bounded cache for agent continuity.
 
 ## Workflow Learnings (Last 5 Sessions)
 
+- [x] Stack merge finalization must accept rollout stack bases, not only `main`, to avoid blocking valid upstack PR integration.
 - [x] Fallback coverage across `gt submit` and `gt restack` materially reduced PR-creation failure impact.
 - [x] Rollout branch naming validation is a hard merge gate. Enforce regex preflight before PR creation/submission.
 - [x] `gh` PR body updates should always use `--body-file` to avoid shell backtick substitution in multiline markdown.
 - [x] Recovery playbook is validated: when a malformed branch blocks CI, create a compliant replacement PR and close the superseded PR with rationale.
-- [x] Recovery path is validated for auth mismatches: if `gh` API works but SSH push fails, create remote refs with `gh api` as a scoped fallback.
