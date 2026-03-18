@@ -44,4 +44,22 @@ class CreatePrWorkflowTest < Minitest::Test
     assert_match(/if ! gt restack >>"\$gt_log_file" 2>&1; then/, script_body)
     assert_match(/cat "\$gt_log_file" >&2/, script_body)
   end
+
+  def test_hard_fails_when_agent_context_is_missing_or_stale
+    assert_match(/missing docs\/agent-context\.md/, script_body)
+    assert_match(/docs\/agent-context\.md is stale/, script_body)
+  end
+
+  def test_hard_fails_when_task_file_missing_for_task_branch
+    assert_match(/missing required task file: docs\/tasks\/\$\{issue_id\}\.md/, script_body)
+  end
+
+  def test_hard_fails_when_inferred_title_missing_issue_id
+    assert_match(/inferred PR title must include \$\{issue_id\} for traceability/, script_body)
+  end
+
+  def test_pr_body_includes_linear_traceability_link
+    assert_match(/## Linear Traceability/, script_body)
+    assert_match(/linear_issue_link/, script_body)
+  end
 end
