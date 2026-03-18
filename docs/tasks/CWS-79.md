@@ -18,7 +18,7 @@ Harden `docs/tasks` usage as immutable context snapshots and remove dual-status 
 ## Deterministic Acceptance Criteria
 
 1. `AGENTS.md` no longer treats local task-file status updates as a merge gate.
-2. A canonical `docs/tasks` template exists and codifies status as informational.
+2. A canonical `docs/tasks` template exists and forbids mutable local status fields.
 3. Repo-flow guidance and master-plan wording align to single-writer status ownership.
 4. Workflow tests pass and confirm no task-status merge gate behavior.
 
