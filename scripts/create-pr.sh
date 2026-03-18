@@ -126,6 +126,7 @@ if [[ "$branch_mode" == "task" ]]; then
     exit 1
   fi
 
+  # Task files are local context snapshots. Gate only on existence; mutable status stays in Linear.
   task_file="$repo_root/docs/tasks/${issue_id}.md"
   if [[ ! -f "$task_file" ]]; then
     echo "error: missing required task file: docs/tasks/${issue_id}.md" >&2

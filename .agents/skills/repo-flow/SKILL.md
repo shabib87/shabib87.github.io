@@ -18,6 +18,7 @@ Use this skill for repo mechanics.
 
 - clean branch creation
 - consistent PR title/body
+- deterministic task-context bootstrap from `docs/tasks/CWS-<id>.md`
 - local-first validation before PR
 - solo self-review rebase integration flow
 
@@ -36,3 +37,5 @@ Use this skill for repo mechanics.
 - Require valid `gh` authentication for PR and rebase integration commands.
 - Keep history linear and prefer rebase-only integration behavior.
 - Do not require external reviewer approval for this repo; require explicit self-review instead.
+- For task branches, require `docs/tasks/CWS-<id>.md` to exist, but do not treat local task-file `Status` text as merge-gating state.
+- Use Linear as the mutable execution-status source of truth; keep task files focused on execution brief and evidence pointers.

@@ -54,6 +54,11 @@ class CreatePrWorkflowTest < Minitest::Test
     assert_match(/missing required task file: docs\/tasks\/\$\{issue_id\}\.md/, script_body)
   end
 
+  def test_task_file_status_text_is_not_a_gate
+    refute_match(/task file status/i, script_body)
+    refute_match(/Completion Evidence/, script_body)
+  end
+
   def test_hard_fails_when_inferred_title_missing_issue_id
     assert_match(/inferred PR title must include \$\{issue_id\} for traceability/, script_body)
   end
