@@ -171,7 +171,8 @@ fi
 title_line="$("$repo_root/.agents/skills/repo-flow/scripts/infer-pr-metadata.sh" "$type")"
 title="${title_line#TITLE=}"
 if [[ -n "$issue_id" ]]; then
-  if [[ "$title" != *"${issue_id}"* && "$title" != *"${issue_id,,}"* ]]; then
+  issue_id_lower="$(printf '%s' "$issue_id" | tr '[:upper:]' '[:lower:]')"
+  if [[ "$title" != *"${issue_id}"* && "$title" != *"${issue_id_lower}"* ]]; then
     echo "error: inferred PR title must include ${issue_id} for traceability" >&2
     echo "error: current inferred title: $title" >&2
     exit 1
