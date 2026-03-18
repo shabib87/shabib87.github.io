@@ -5,7 +5,7 @@
 - Linear issue: `CWS-78`
 - Linear URL: <https://linear.app/codewithshabib/issue/CWS-78/dev-clarify-graphite-vs-github-merge-paths-in-finalize-flow-and-harden>
 - Generated: `2026-03-18`
-- Status: `In Progress`
+- Status: `Done`
 
 ## Objective
 
@@ -29,5 +29,8 @@ Clarify stacked versus single-PR merge behavior so `scripts/finalize-merge.sh` i
 
 ## Completion Evidence
 
+- Completed at: `2026-03-18T18:51:45.020Z`
+- Merged PR: <https://github.com/shabib87/shabib87.github.io/pull/41>
 - Branch: `codex/cws-78-graphite-merge-flow-clarity`
+- Cycle: `7ef11bc3-f086-40a6-afd9-256b27df384d`
 - Project: `[INFRA] Repo Process & Tooling`
