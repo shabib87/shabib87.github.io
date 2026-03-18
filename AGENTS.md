@@ -59,8 +59,12 @@
 - Use Graphite CLI (`gt`) for stack lifecycle operations: `gt create`, `gt modify`, `gt restack`, `gt sync`, and `gt submit --no-interactive`.
 - Use GitHub CLI (`gh`) for GitHub object operations after submission: inspecting checks, viewing diffs, reading review state, commenting, and labeling.
 - Keep branch/stack state authoritative in `gt`; use `gh` as the GitHub surface inspection and operations layer.
+- If using `gt submit --no-interactive` for a stack, normalize each stack PR body with `gh pr edit --body-file <path>` before marking that PR ready.
 - For stacked PR work, avoid mixing direct `git push`/`git commit` with Graphite stack steps unless explicitly required for recovery.
 - Preflight branch naming before PR creation/submission. Accepted rollout patterns are `^codex/cws-\d+-[a-z0-9-]+$` and `^codex/phase-(\d+)-[a-z0-9-]+$`.
+- For task branches (`codex/cws-<id>-...`), `docs/tasks/CWS-<id>.md` must exist before PR creation.
+- `docs/agent-context.md` must be fresh (not past `Stale After`) before PR creation.
+- For task branches, PR titles must include the matching issue token for traceability (`CWS-<id>` or `cws-<id>`).
 - For PR metadata updates, do not pass multiline markdown directly in shell flags. Use `gh pr create/edit --body-file <path>` to avoid shell substitution and corrupted PR bodies.
 - If a PR head branch violates rollout naming policy, create a compliant replacement branch/PR and close the superseded PR with a replacement note.
 - If `gh` is authenticated but SSH push fails (`Permission denied (publickey)`), recovery can use `gh api repos/<owner>/<repo>/git/refs` to create the remote branch ref to the intended commit.
