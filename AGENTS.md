@@ -63,7 +63,7 @@
 - For stacked PR work, avoid mixing direct `git push`/`git commit` with Graphite stack steps unless explicitly required for recovery.
 - Preflight branch naming before PR creation/submission. Accepted rollout patterns are `^codex/cws-\d+-[a-z0-9-]+$` and `^codex/phase-(\d+)-[a-z0-9-]+$`.
 - For task branches (`codex/cws-<id>-...`), `docs/tasks/CWS-<id>.md` must exist before PR creation.
-- Treat `docs/tasks/CWS-<id>.md` as a context snapshot. Any local `Status` field is informational only; Linear is the mutable execution-status source of truth.
+- Treat `docs/tasks/CWS-<id>.md` as a context snapshot and avoid mutable status fields in the file. Linear is the mutable execution-status source of truth.
 - `docs/agent-context.md` must be fresh (not past `Stale After`) before PR creation.
 - For task branches, PR titles must include the matching issue token for traceability (`CWS-<id>` or `cws-<id>`).
 - For PR metadata updates, do not pass multiline markdown directly in shell flags. Use `gh pr create/edit --body-file <path>` to avoid shell substitution and corrupted PR bodies.

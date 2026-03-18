@@ -391,7 +391,7 @@ Where `NNN` is the Linear issue number (e.g., `docs/tasks/CWS-42.md`).
 
 - Linear is the mutable execution-status source of truth (`Backlog`/`Todo`/`In Progress`/`In Review`/`Done`).
 - `docs/tasks/CWS-NNN.md` is a local execution-context snapshot and evidence pointer.
-- If a task file includes a `Status` field, treat it as informational only. Do not use it as a merge gate.
+- Do not maintain mutable status fields in task files. Keep status transitions in Linear only.
 
 ### File structure
 

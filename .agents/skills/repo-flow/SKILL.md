@@ -36,7 +36,7 @@ Use this skill for repository workflow mechanics only.
 2. Read `references/context7-verification.md` only when command behavior depends on official docs.
 3. Use repository scripts and `make` targets instead of ad hoc git/gh sequences.
 4. Run `make qa-local` before commit, before PR creation, and again on the committed tree before push or rebase integration.
-5. For task branches, require `docs/tasks/CWS-<id>.md` to exist; treat local task-file status as informational only.
+5. For task branches, require `docs/tasks/CWS-<id>.md` to exist; do not maintain mutable status text in the task file.
 6. Keep Linear as mutable execution-status source of truth and keep PR traceability links current.
 
 ## Outputs
@@ -61,7 +61,7 @@ Use this skill for repository workflow mechanics only.
 - Require valid `gh` authentication for PR and rebase integration commands.
 - Keep history linear and prefer rebase-only integration behavior.
 - Do not require external reviewer approval for this repo; require explicit self-review instead.
-- For task branches, require `docs/tasks/CWS-<id>.md` to exist; do not treat local task-file `Status` text as merge-gating state.
+- For task branches, require `docs/tasks/CWS-<id>.md` to exist; do not maintain mutable status text in the task file.
 - Use Linear as the mutable execution-status source of truth; keep task files focused on execution brief and evidence pointers.
 
 ## Trigger Quality Check
