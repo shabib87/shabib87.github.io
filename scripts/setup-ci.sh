@@ -36,7 +36,9 @@ ensure_ruby_bundle() {
   activate_repo_ruby
   export BUNDLE_PATH="$repo_root/vendor/bundle"
   export BUNDLE_FROZEN="true"
-  bundle install --jobs 4 --retry 3
+  if ! bundle check >/dev/null 2>&1; then
+    bundle install --jobs 4 --retry 3
+  fi
 }
 
 ensure_semgrep() {
