@@ -72,6 +72,14 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Hardened Graphite branch flow to prevent untracked-branch failures in normal repo workflow:
+  `scripts/start-work.sh` and `scripts/start-phase.sh` now auto-run `gt track --parent ...` after
+  git-created branch bootstrap, with hard failure if tracking fails.
+- [x] Updated PR packaging fallback: `scripts/create-pr.sh` now detects `gt submit` "untracked
+  branch" errors, runs `gt track --parent "$base_branch"`, and retries `gt submit` before falling
+  back to `gh` flow.
+- [x] Added governance tests for branch-tracking behavior (`scripts/tests/start_branch_tracking_test.rb`)
+  and updated `create_pr_workflow_test.rb` for untracked-branch recovery path.
 - [x] Added explicit AGENTS test-first contract to reduce downstream churn with `CWS-53`: no implementation before failing test for testable tasks, plus rationale requirement when changes are not meaningfully testable.
 - [x] `CWS-10` moved to `In Progress`; drift documented that dependencies `CWS-41` and `CWS-45` were already complete (`2026-03-17` UTC timestamps recorded in issue comments/body).
 - [x] Created `docs/tasks/CWS-10.md` as immutable task snapshot and rewrote `AGENTS.md` to contract-first model (linear-first queue policy, MUST NOT boundaries, DoR/DoD references, two-phase/clarification/loop guardrails, boundary caveat).
@@ -112,6 +120,10 @@ This file is a bounded cache for agent continuity.
 
 ## Workflow Learnings (Last 5 Sessions)
 
+- [x] Graphite does not automatically track parent metadata for branches created with
+  `git checkout -b`; tracking must be explicit before first `gt create`/`gt submit`.
+- [x] The durable fix is to auto-track at branch-bootstrap time and keep create-pr recovery for
+  any legacy/untracked branch path.
 - [x] Stack merge finalization must accept rollout stack bases, not only `main`, to avoid blocking valid upstack PR integration.
 - [x] Fallback coverage across `gt submit` and `gt restack` materially reduced PR-creation failure impact.
 - [x] Rollout branch naming validation is a hard merge gate. Enforce regex preflight before PR creation/submission.
