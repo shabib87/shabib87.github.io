@@ -72,6 +72,9 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] `CWS-22` execution packaged to PR `#45` (`codex/cws-22-ci-setup-runner-bootstrap`) with
+  local QA passing; review feedback on bundler cache was addressed in follow-up commit
+  `06d182d`, response posted on-thread, and review thread resolved (`2026-03-18 EDT`).
 - [x] Started `CWS-22` pickup on `2026-03-18 EDT`: dependency drift documented in Linear
   (`CWS-22` still listed `CWS-20` as missing while `CWS-20` was already `Done` at
   `2026-03-19T02:59:02Z`), execution decision recorded, and immutable task snapshot created at
