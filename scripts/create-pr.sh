@@ -258,9 +258,16 @@ EOF
 
 # Prefer Graphite for stack submission, then normalize metadata with gh.
 if command -v gt >/dev/null 2>&1; then
-  gt track --parent "$base_branch" >/dev/null 2>&1 || true
   if ! gt submit --stack --no-interactive >"$gt_log_file" 2>&1; then
-    if grep -q "must restack before submitting this stack" "$gt_log_file"; then
+    if grep -q "untracked branch" "$gt_log_file"; then
+      if ! gt track --parent "$base_branch" >>"$gt_log_file" 2>&1; then
+        echo "warning: gt branch tracking failed; falling back to gh PR flow" >&2
+        cat "$gt_log_file" >&2
+      elif ! gt submit --stack --no-interactive >>"$gt_log_file" 2>&1; then
+        echo "warning: gt submit failed after tracking branch; falling back to gh PR flow" >&2
+        cat "$gt_log_file" >&2
+      fi
+    elif grep -q "must restack before submitting this stack" "$gt_log_file"; then
       if ! gt restack >>"$gt_log_file" 2>&1; then
         echo "warning: gt restack failed; falling back to gh PR flow" >&2
         cat "$gt_log_file" >&2
