@@ -18,6 +18,11 @@ class ExecutionReliabilityRulesTest < Minitest::Test
 
   def test_rules_file_exists_with_git_and_gt_write_command_prefix_rules
     assert(File.file?(RULES_PATH), "expected rules file at #{RULES_PATH}")
+    assert_match(/prefix_rule\(\s*pattern=\["git", "status"\],\s*decision="allow"/, rules_body)
+    assert_match(/prefix_rule\(\s*pattern=\["git", "diff"\],\s*decision="allow"/, rules_body)
+    assert_match(/prefix_rule\(\s*pattern=\["git", "log"\],\s*decision="allow"/, rules_body)
+    assert_match(/prefix_rule\(\s*pattern=\["rg"\],\s*decision="allow"/, rules_body)
+    assert_match(/prefix_rule\(\s*pattern=\["gh", "pr", "view"\],\s*decision="allow"/, rules_body)
     assert_match(/prefix_rule\(\s*pattern=\["git", "checkout"\],\s*decision="prompt"/, rules_body)
     assert_match(/prefix_rule\(\s*pattern=\["git", "rebase"\],\s*decision="prompt"/, rules_body)
     assert_match(/prefix_rule\(\s*pattern=\["git", "commit"\],\s*decision="prompt"/, rules_body)
