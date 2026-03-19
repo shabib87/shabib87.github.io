@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help setup hooks-install lint security codex-check site-audit qa-local validate-draft qa-publish publish-draft publish-draft-tests start-work start-phase check create-pr finalize-merge rollout-audit rollout-tests skill-audit skill-vendor
+.PHONY: help setup ci-setup hooks-install lint security codex-check site-audit qa-local validate-draft qa-publish publish-draft publish-draft-tests start-work start-phase check create-pr finalize-merge rollout-audit rollout-tests skill-audit skill-vendor
 
 ifneq (,$(filter skill-audit skill-vendor,$(firstword $(MAKECMDGOALS))))
 SKILL_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -12,6 +12,7 @@ help:
 	@echo ""
 	@echo "Setup:"
 	@echo "  make setup"
+	@echo "  make ci-setup"
 	@echo "  make hooks-install"
 	@echo ""
 	@echo "Editorial:"
@@ -46,6 +47,9 @@ help:
 
 setup:
 	@./scripts/setup-dev.sh
+
+ci-setup:
+	@./scripts/setup-ci.sh
 
 hooks-install:
 	@./scripts/setup-hooks.sh

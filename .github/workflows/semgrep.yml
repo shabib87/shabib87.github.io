@@ -19,10 +19,8 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Install repo-managed pre-commit
-        run: |
-          python -m venv .venv-tools
-          ./.venv-tools/bin/pip install --requirement requirements-dev.txt
+      - name: Bootstrap CI dependencies
+        run: CI_SETUP_PROFILE=base,semgrep make ci-setup
 
       - name: Run targeted Semgrep checks
         run: ./scripts/run-security-checks.sh

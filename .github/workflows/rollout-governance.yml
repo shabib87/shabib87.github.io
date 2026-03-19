@@ -22,5 +22,8 @@ jobs:
         with:
           ruby-version: .ruby-version
 
+      - name: Bootstrap CI dependencies
+        run: CI_SETUP_PROFILE=base make ci-setup
+
       - name: Run rollout governance checks
         run: ./scripts/run-codex-checks.sh

@@ -23,7 +23,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: true
+          bundler-cache: false
+
+      - name: Bootstrap CI dependencies
+        run: CI_SETUP_PROFILE=base,ruby make ci-setup
 
       - name: Run repo checks
         run: ./scripts/run-checks.sh
