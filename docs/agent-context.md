@@ -8,9 +8,9 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-18 14:43:46 EDT`
+- Synced at: `2026-03-18 20:48:00 EDT`
 - Synced by: `Codex`
-- Scope: `Post-merge cleanup and CWS-78 kickoff: clarify Graphite stack merge versus gh single-PR finalize flow`
+- Scope: `CWS-10 execution kickoff: AGENTS contract rewrite, dependency drift correction, and task-file evidence bootstrap`
 - Linear anchors:
   - `Program Index — Backlog Governance`
   - `Backlog Remediation Matrix — Master v2`
@@ -20,12 +20,12 @@ This file is a bounded cache for agent continuity.
 
 ## Stale After
 
-- `2026-03-19 14:43:46 EDT`
+- `2026-03-19 20:48:00 EDT`
 - Rule: if current time is later than this timestamp, run a full Linear re-sync before execution.
 
 ## Active Phase
 
-- `Implementation kickoff active — NEXT queue sequenced, with new INFRA hardening intake pending placement`
+- `Execution active — CWS-10 in progress on contract rewrite branch; NEXT chain remains CWS-20 then CWS-22 then CWS-34`
 
 ## Top Priorities (max 5)
 
@@ -58,7 +58,7 @@ This file is a bounded cache for agent continuity.
 
 - [ ] Ship `CWS-78` PR: finalize-merge prompt clarity, stacked-merge guardrail note, and tests.
 - [ ] After `CWS-78` merge, move `CWS-78` to `Done` with PR linkage.
-- [ ] Start `CWS-10` (NEXT-10 #2) and move to `In Progress` at pickup.
+- [ ] Complete `CWS-10` PR packaging and merge (`AGENTS.md` contract rewrite + `docs/tasks/CWS-10.md`).
 - [ ] After `CWS-10` merge, start `CWS-20` (NEXT-10 #3).
 - [ ] After `CWS-20` merge, start `CWS-22` (NEXT-10 #4).
 - [ ] After `CWS-22` merge, start `CWS-34` (NEXT-10 #5).
@@ -72,6 +72,10 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Added explicit AGENTS test-first contract to reduce downstream churn with `CWS-53`: no implementation before failing test for testable tasks, plus rationale requirement when changes are not meaningfully testable.
+- [x] `CWS-10` moved to `In Progress`; drift documented that dependencies `CWS-41` and `CWS-45` were already complete (`2026-03-17` UTC timestamps recorded in issue comments/body).
+- [x] Created `docs/tasks/CWS-10.md` as immutable task snapshot and rewrote `AGENTS.md` to contract-first model (linear-first queue policy, MUST NOT boundaries, DoR/DoD references, two-phase/clarification/loop guardrails, boundary caveat).
+- [x] Local validation passed for CWS-10 working tree (`rg` acceptance gate and `make qa-local`).
 - [x] Remediation stack merged end-to-end: `#37`, `#38`, `#39`, and `#40` landed on `main`.
 - [x] Stack merge observation confirmed: Graphite merge flow can appear delayed while rebases/checks execute; final merge completed without manual conflict intervention.
 - [x] Local Graphite/git cleanup completed post-merge (`gt sync --no-interactive --force`), merged branches pruned, local `main` fast-forwarded.
