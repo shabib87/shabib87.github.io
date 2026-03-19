@@ -72,6 +72,9 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Converted `.codex/rules/execution-reliability.rules` to valid Codex Starlark
+  `prefix_rule(...)` syntax and added `.codex/requirements.toml` with restrictive prefix rules
+  plus MCP allowlist entries for `context7`, `linear`, and `graphite`.
 - [x] Captured `CWS-20` additive execution-reliability policy: added
   `.codex/rules/execution-reliability.rules` command-prefix prompts for git/Graphite write lanes,
   and documented `.git/index.lock` escalation fallback in

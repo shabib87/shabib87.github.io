@@ -1,27 +1,27 @@
 # CWS-20 execution reliability command policy.
 # Reference: https://developers.openai.com/codex/rules
-# These entries are command-governance hints only. Sandbox permissions still apply.
+# Keep this file in prefix_rule(...) form (Starlark), not TOML.
 
-[[command_rules]]
-pattern = ["git", "checkout"]
-decision = "prompt"
+# Prompt on state-mutating git lanes.
+prefix_rule(pattern=["git", "checkout"], decision="prompt")
+prefix_rule(pattern=["git", "rebase"], decision="prompt")
+prefix_rule(pattern=["git", "commit"], decision="prompt")
+prefix_rule(pattern=["git", "cherry-pick"], decision="prompt")
 
-[[command_rules]]
-pattern = ["git", "rebase"]
-decision = "prompt"
+# Prompt on Graphite mutating lanes.
+prefix_rule(pattern=["gt", "create"], decision="prompt")
+prefix_rule(pattern=["gt", "modify"], decision="prompt")
+prefix_rule(pattern=["gt", "submit"], decision="prompt")
+prefix_rule(pattern=["gt", "restack"], decision="prompt")
 
-[[command_rules]]
-pattern = ["git", "commit"]
-decision = "prompt"
-
-[[command_rules]]
-pattern = ["gt", "create"]
-decision = "prompt"
-
-[[command_rules]]
-pattern = ["gt", "modify"]
-decision = "prompt"
-
-[[command_rules]]
-pattern = ["gt", "submit"]
-decision = "prompt"
+# Hard-block destructive git shortcuts.
+prefix_rule(
+    pattern=["git", "reset", "--hard"],
+    decision="forbidden",
+    justification="Blocked to avoid irreversible history/worktree loss."
+)
+prefix_rule(
+    pattern=["git", "clean", "-fdx"],
+    decision="forbidden",
+    justification="Blocked to avoid deleting untracked files/directories."
+)
