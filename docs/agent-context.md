@@ -72,6 +72,20 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Captured `CWS-20` additive execution-reliability policy: added
+  `.codex/rules/execution-reliability.rules` command-prefix prompts for git/Graphite write lanes,
+  and documented `.git/index.lock` escalation fallback in
+  `.agents/skills/repo-flow/references/branch-pr-merge.md`.
+- [x] Removed post-setup shell fragility for repo Ruby usage: added shared
+  `activate_repo_ruby` helper in `scripts/lib/tooling.sh` and wired
+  `scripts/run-codex-checks.sh` + `scripts/run-checks.sh` to require the repo Ruby version
+  automatically; added coverage in `scripts/tests/repo_ruby_activation_test.rb`.
+- [x] `CWS-20` setup bootstrap hardened: `Brewfile` now includes `rbenv`, `ruby-build`,
+  `semgrep`, `vale`, and `cspell`; `scripts/setup-dev.sh` now provisions required repo Ruby
+  through `rbenv` without `eval`; and `scripts/tests/setup_dev_bootstrap_test.rb` added to pin
+  the setup contract.
+- [x] Started `CWS-20` pickup: created immutable task snapshot `docs/tasks/CWS-20.md`
+  from current Linear issue context (`2026-03-18 EDT`) to clear missing local task-file evidence.
 - [x] Aligned PR submit flow to Graphite docs for non-interactive usage by adding `--publish` to
   `gt submit --stack --no-interactive` paths in `scripts/create-pr.sh` (initial submit + retry
   paths), with test coverage updates in `scripts/tests/create_pr_workflow_test.rb`.

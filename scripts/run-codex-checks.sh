@@ -4,6 +4,11 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# shellcheck disable=SC1091
+. "$repo_root/scripts/lib/tooling.sh"
+activate_repo_ruby
+require_repo_ruby || exit 1
+
 phase="${PHASE:-}"
 if [[ -z "$phase" ]]; then
   branch="$(git branch --show-current 2>/dev/null || true)"

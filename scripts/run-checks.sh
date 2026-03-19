@@ -6,6 +6,8 @@ cd "$repo_root"
 
 # shellcheck disable=SC1091
 . "$repo_root/scripts/lib/tooling.sh"
+activate_repo_ruby
+require_repo_ruby || exit 1
 
 export BUNDLE_PATH="$repo_root/vendor/bundle"
 export BUNDLE_FROZEN="true"

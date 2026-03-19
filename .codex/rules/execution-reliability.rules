@@ -1,0 +1,27 @@
+# CWS-20 execution reliability command policy.
+# Reference: https://developers.openai.com/codex/rules
+# These entries are command-governance hints only. Sandbox permissions still apply.
+
+[[command_rules]]
+pattern = ["git", "checkout"]
+decision = "prompt"
+
+[[command_rules]]
+pattern = ["git", "rebase"]
+decision = "prompt"
+
+[[command_rules]]
+pattern = ["git", "commit"]
+decision = "prompt"
+
+[[command_rules]]
+pattern = ["gt", "create"]
+decision = "prompt"
+
+[[command_rules]]
+pattern = ["gt", "modify"]
+decision = "prompt"
+
+[[command_rules]]
+pattern = ["gt", "submit"]
+decision = "prompt"

@@ -26,3 +26,6 @@
 - integrate with rebase only for a linear history
 - delete the branch after integration
 - keep Linear issue and PR traceability links current; keep mutable status transitions in Linear only
+- if git/Graphite operations fail with `.git/index.lock` or sandbox write denial, escalate command
+  approval explicitly and retry; command prefix rules improve consistency but do not replace
+  filesystem permissions.

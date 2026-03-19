@@ -1,2 +1,7 @@
 brew "gh"
 brew "python"
+brew "rbenv"
+brew "ruby-build"
+brew "semgrep"
+brew "vale"
+brew "cspell"

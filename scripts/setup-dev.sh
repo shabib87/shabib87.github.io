@@ -36,6 +36,52 @@ ensure_brew_package() {
   brew install "$formula"
 }
 
+ensure_repo_ruby_with_rbenv() {
+  local required actual rbenv_bin
+  required="$(repo_ruby_version)"
+
+  if command -v ruby >/dev/null 2>&1; then
+    actual="$(ruby -e 'print RUBY_VERSION')"
+    if [[ "$actual" == "$required" ]]; then
+      return 0
+    fi
+    echo "info: ruby $required required, found $actual"
+  else
+    echo "info: ruby $required required and not found on PATH"
+  fi
+
+  if ! command -v rbenv >/dev/null 2>&1; then
+    return 1
+  fi
+
+  if ! command -v ruby-build >/dev/null 2>&1; then
+    return 1
+  fi
+
+  export RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+  rbenv_bin="$(command -v rbenv)"
+  export PATH="$RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH"
+
+  if ! "$rbenv_bin" versions --bare | grep -Fxq "$required"; then
+    echo "info: installing ruby $required via rbenv"
+    "$rbenv_bin" install -s "$required"
+  fi
+
+  "$rbenv_bin" local "$required"
+  "$rbenv_bin" rehash
+
+  if ! actual="$(RBENV_VERSION="$required" "$rbenv_bin" exec ruby -e 'print RUBY_VERSION' 2>/dev/null)"; then
+    return 1
+  fi
+
+  if [[ "$actual" != "$required" ]]; then
+    return 1
+  fi
+
+  export RBENV_VERSION="$required"
+  return 0
+}
+
 install_repo_pre_commit() {
   local pre_commit_bin
   pre_commit_bin="$(repo_pre_commit_bin)"
@@ -62,11 +108,20 @@ require_cmd() {
   fi
 }
 
-require_cmd ruby "Install Ruby via your preferred package manager."
 require_cmd git "Install Git from https://git-scm.com/downloads"
 
-if [[ "$missing" -eq 0 ]]; then
-  require_repo_ruby || exit 1
+if ! ensure_brew_package rbenv rbenv; then
+  require_cmd rbenv "Install rbenv, e.g. brew install rbenv"
+fi
+
+if ! ensure_brew_package ruby-build ruby-build; then
+  require_cmd ruby-build "Install ruby-build, e.g. brew install ruby-build"
+fi
+
+if ! ensure_repo_ruby_with_rbenv; then
+  echo "error: unable to provision required ruby $(repo_ruby_version)" >&2
+  echo "hint: install rbenv + ruby-build, then rerun make setup" >&2
+  missing=1
 fi
 
 if ! ensure_bundler; then
@@ -82,6 +137,18 @@ fi
 
 if ! ensure_brew_package python3 python; then
   require_cmd python3 "Install Python 3, e.g. brew install python"
+fi
+
+if ! ensure_brew_package semgrep semgrep; then
+  require_cmd semgrep "Install Semgrep, e.g. brew install semgrep"
+fi
+
+if ! ensure_brew_package vale vale; then
+  require_cmd vale "Install Vale, e.g. brew install vale"
+fi
+
+if ! ensure_brew_package cspell cspell; then
+  require_cmd cspell "Install cspell, e.g. brew install cspell"
 fi
 
 if ! install_repo_pre_commit; then
