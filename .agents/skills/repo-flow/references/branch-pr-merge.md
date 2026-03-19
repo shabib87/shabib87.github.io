@@ -4,6 +4,8 @@
 
 - start from `main`
 - create a `codex/<type>-<slug>` branch
+- if the branch is created via `git checkout -b` (not `gt create`), run `gt track --parent main`
+  before any `gt create`/`gt submit` command
 - keep work isolated to that branch
 - do not commit until `make qa-local` passes
 - if site-facing files changed, preview with `bundle exec jekyll serve` before commit

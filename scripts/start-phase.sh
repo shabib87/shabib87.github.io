@@ -110,6 +110,15 @@ RUBY
 
 git checkout -b "$branch_name"
 
+if command -v gt >/dev/null 2>&1; then
+  # Phase branches are created via git, so register Graphite parent metadata immediately.
+  if ! gt track --parent "$base_branch" >/dev/null 2>&1; then
+    echo "error: failed to track phase branch in Graphite with parent=$base_branch" >&2
+    echo "error: run 'gt track --parent $base_branch' and retry" >&2
+    exit 1
+  fi
+fi
+
 echo "created phase branch: $branch_name"
 echo "plan: $plan"
 echo "phase: $phase"

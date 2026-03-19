@@ -41,5 +41,15 @@ fi
 git rebase "$main_remote/$main_remote_branch" >/dev/null
 git checkout -b "$branch_name"
 
+if command -v gt >/dev/null 2>&1; then
+  # Ensure Graphite metadata is present so later gt create/modify/submit never fails on
+  # "untracked branch" after this script bootstraps a branch via git.
+  if ! gt track --parent "main" >/dev/null 2>&1; then
+    echo "error: failed to track branch in Graphite with parent=main" >&2
+    echo "error: run 'gt track --parent main' and retry" >&2
+    exit 1
+  fi
+fi
+
 echo "created branch: $branch_name"
 echo "next: implement the change, then run make qa-local"
