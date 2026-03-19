@@ -6,6 +6,8 @@
 - create a `codex/<type>-<slug>` branch
 - if the branch is created via `git checkout -b` (not `gt create`), run `gt track --parent main`
   before any `gt create`/`gt submit` command
+- on a pre-created task branch, use `gt modify --commit` to create commits; do not run `gt create`
+  from that branch because it creates a new branch and can violate branch-pattern gates.
 - keep work isolated to that branch
 - do not commit until `make qa-local` passes
 - if site-facing files changed, preview with `bundle exec jekyll serve` before commit

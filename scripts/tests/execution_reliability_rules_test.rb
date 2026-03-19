@@ -29,5 +29,7 @@ class ExecutionReliabilityRulesTest < Minitest::Test
   def test_repo_flow_reference_documents_index_lock_escalation_fallback
     assert_match(/\.git\/index\.lock/, repo_flow_ref_body)
     assert_match(/escalat/i, repo_flow_ref_body)
+    assert_match(/use `gt modify --commit`/, repo_flow_ref_body)
+    assert_match(/do not run `gt create`/, repo_flow_ref_body)
   end
 end
