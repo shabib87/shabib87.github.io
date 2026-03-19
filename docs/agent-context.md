@@ -72,6 +72,10 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Started `CWS-22` pickup on `2026-03-18 EDT`: dependency drift documented in Linear
+  (`CWS-22` still listed `CWS-20` as missing while `CWS-20` was already `Done` at
+  `2026-03-19T02:59:02Z`), execution decision recorded, and immutable task snapshot created at
+  `docs/tasks/CWS-22.md`.
 - [x] Converted `.codex/rules/execution-reliability.rules` to valid Codex Starlark
   `prefix_rule(...)` syntax and added `.codex/requirements.toml` with restrictive prefix rules
   plus MCP allowlist entries for `context7`, `linear`, and `graphite`.
