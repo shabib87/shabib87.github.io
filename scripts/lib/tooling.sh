@@ -18,6 +18,17 @@ repo_ruby_version() {
   tr -d '[:space:]' < "$repo_root/.ruby-version"
 }
 
+activate_repo_ruby() {
+  local required
+  required="$(repo_ruby_version)"
+
+  if command -v rbenv >/dev/null 2>&1 || [[ -x "${HOME}/.rbenv/bin/rbenv" ]]; then
+    export RBENV_ROOT="${RBENV_ROOT:-$HOME/.rbenv}"
+    export PATH="$RBENV_ROOT/shims:$RBENV_ROOT/bin:$PATH"
+    export RBENV_VERSION="$required"
+  fi
+}
+
 require_repo_ruby() {
   local expected actual
   expected="$(repo_ruby_version)"
