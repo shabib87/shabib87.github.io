@@ -72,6 +72,9 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- [x] Aligned PR submit flow to Graphite docs for non-interactive usage by adding `--publish` to
+  `gt submit --stack --no-interactive` paths in `scripts/create-pr.sh` (initial submit + retry
+  paths), with test coverage updates in `scripts/tests/create_pr_workflow_test.rb`.
 - [x] Hardened Graphite branch flow to prevent untracked-branch failures in normal repo workflow:
   `scripts/start-work.sh` and `scripts/start-phase.sh` now auto-run `gt track --parent ...` after
   git-created branch bootstrap, with hard failure if tracking fails.

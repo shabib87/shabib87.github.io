@@ -12,13 +12,17 @@ class CreatePrWorkflowTest < Minitest::Test
 
   def test_prefers_graphite_submit_when_available
     assert_match(/if command -v gt >/i, script_body)
-    assert_match(/gt submit --stack --no-interactive/, script_body)
+    assert_match(/gt submit --stack --no-interactive --publish/, script_body)
   end
 
   def test_recovers_when_gt_submit_reports_untracked_branch
     assert_match(/if grep -q "untracked branch" "\$gt_log_file"; then/, script_body)
     assert_match(/gt track --parent "\$base_branch" >>"\$gt_log_file" 2>&1/, script_body)
-    assert_match(/gt submit --stack --no-interactive >>"\$gt_log_file" 2>&1/, script_body)
+    assert_match(/gt submit --stack --no-interactive --publish >>"\$gt_log_file" 2>&1/, script_body)
+  end
+
+  def test_uses_graphite_publish_mode_for_non_interactive_submit
+    assert_match(/gt submit --stack --no-interactive --publish/, script_body)
   end
 
   def test_normalizes_pr_metadata_with_gh_after_submit
