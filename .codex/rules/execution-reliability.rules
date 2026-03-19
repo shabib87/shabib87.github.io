@@ -2,6 +2,13 @@
 # Reference: https://developers.openai.com/codex/rules
 # Keep this file in prefix_rule(...) form (Starlark), not TOML.
 
+# Fast safe lanes for read-only/local inspection commands.
+prefix_rule(pattern=["git", "status"], decision="allow")
+prefix_rule(pattern=["git", "diff"], decision="allow")
+prefix_rule(pattern=["git", "log"], decision="allow")
+prefix_rule(pattern=["rg"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "view"], decision="allow")
+
 # Prompt on state-mutating git lanes.
 prefix_rule(pattern=["git", "checkout"], decision="prompt")
 prefix_rule(pattern=["git", "rebase"], decision="prompt")
