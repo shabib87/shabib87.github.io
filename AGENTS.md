@@ -12,6 +12,9 @@ This file is the execution contract for this repository.
 Before starting implementation, resolve task pickup in this order:
 
 1. Linear first: confirm issue state, dependencies, acceptance criteria, and gate type.
+   - Before any repo edits, set the Linear issue state to `In Progress`.
+   - Before any repo edits, ensure the issue is linked to the active execution cycle.
+   - If either action fails, stop execution and report the blocker.
 2. Local second: corroborate with `docs/tasks/CWS-<id>.md` and `docs/agent-context.md`.
 3. If Linear and local context diverge, report drift in the Linear issue before execution.
 
