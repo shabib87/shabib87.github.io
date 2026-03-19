@@ -1,0 +1,25 @@
+# CWS-20 admin-style requirements baseline for safer/easier agentic flow.
+# Reference: https://developers.openai.com/codex/config-reference
+
+# Restrictive approval/sandbox constraints.
+allowed_approval_policies = ["on-request", "granular"]
+allowed_sandbox_modes = ["workspace-write", "read-only"]
+allowed_web_search_modes = ["cached", "live"]
+
+[mcp_servers.context7.identity]
+command = "npx"
+
+[mcp_servers.linear.identity]
+url = "https://mcp.linear.app/mcp"
+
+[mcp_servers.graphite.identity]
+command = "/opt/homebrew/bin/gt"
+
+[rules]
+prefix_rules = [
+  # Require prompt for outbound-changing git actions.
+  { pattern = [{ token = "git" }, { any_of = ["push", "fetch", "pull"] }], decision = "prompt", justification = "Network or remote-state git operations must be explicitly approved." },
+  # Forbid high-risk destructive shortcuts.
+  { pattern = [{ token = "git" }, { token = "reset" }, { token = "--hard" }], decision = "forbidden", justification = "Prevent destructive history/worktree reset." },
+  { pattern = [{ token = "git" }, { token = "clean" }, { token = "-fdx" }], decision = "forbidden", justification = "Prevent destructive untracked-file deletion." }
+]
