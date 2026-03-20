@@ -10,27 +10,28 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-19 16:52:09 EDT`
+- Synced at: `2026-03-20 21:00:00 EDT`
 - Synced by: `Claude Code`
-- Scope: `CWS-80/CWS-81 March 2026 workspace rebaseline and Linear reorganization`
+- Scope: `CWS-80/CWS-81/CWS-82 March 2026 workspace rebaseline and dual-platform pivot`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
   - `Blog Content Pipeline`
-  - `CWS-80`
+  - `CWS-80` (Done)
   - `CWS-81`
+  - `CWS-82` (Done)
 
 ## Stale After
 
-- `2026-03-20 16:52:09 EDT`
+- `2026-03-21 21:00:00 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
 
-- Planning rebaseline is active.
+- `CWS-80` (workspace rebaseline) and `CWS-82` (dual-platform pivot) are Done and merged.
 - Do not use the old NEXT-10 execution queue as the current planning source.
-- Resume normal feature pickup only after `CWS-80` evidence is complete and `CWS-81` decisions are
-  fully documented.
+- Next: complete the CWS-80 blocker-first audit of downstream issues, then move `CWS-81` into
+  active execution.
 
 ## Confirmed Baseline
 
@@ -40,8 +41,8 @@ This file is a bounded cache for agent continuity.
   `[ORCHESTRATION] Agentic Workflow Design`.
 - `Blog Content Pipeline` is the single ongoing blog execution project.
 - Notion is the upstream note and research inbox. Linear is the execution source of truth.
-- Meta work exists for workspace drift audit and reorganization normalization in `CWS-80` and
-  `CWS-81`.
+- Meta work existed for workspace drift audit (`CWS-80`, Done) and reorganization normalization
+  (`CWS-81`, pending). Dual-platform pivot (`CWS-82`, Done) added Claude Code as peer platform.
 - `CWS-17` is closed after audit confirmed its substantive objective was already satisfied.
 - `CWS-14` and `CWS-48` remain open but were repurposed to complete and normalize existing
   canonical editorial artifacts rather than create them from scratch.
