@@ -117,6 +117,17 @@ Graphite and GitHub CLI policy:
 
 - Use `gt` for stack lifecycle (`create`, `modify`, `restack`, `sync`, `submit`).
 - Use `gh` for GitHub object operations (checks, labels, comments, PR metadata updates).
+- `make finalize-merge PR=...` merges a single PR via `gh pr merge --rebase --delete-branch`. It
+  validates rollout plan gates, CI checks, and self-review. For PRs stacked on non-trunk bases, it
+  warns that only the current PR is merged and directs to `gt merge` or Graphite web for full-stack
+  merges. It does not manage Graphite metadata or retarget child PRs.
+- For Graphite stacks, prefer `gt merge` or Graphite web "Merge stack" to merge the full stack in
+  one operation. This keeps Graphite metadata consistent and retargets children correctly.
+- If you use `make finalize-merge` on one PR in a stack, do NOT run `gt sync --force` to reconcile
+  the remaining children. `gt sync --force` deletes branches it considers stale and closes their
+  PRs. Instead, manually rebase child branches onto the new main or retarget their PRs via `gh`.
+- Agents MUST NOT use ad hoc `gh pr merge` outside `make finalize-merge`. The script provides
+  validation gates that raw `gh` bypasses.
 
 Test-first policy:
 

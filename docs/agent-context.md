@@ -62,6 +62,18 @@ This file is a bounded cache for agent continuity.
 - Any agent resuming from this file must read `docs/planning/linear-reorg-2026-03.md` before
   continuing backlog normalization.
 
+## Lessons Learned
+
+- CWS-82 stack merge (2026-03-20): merging stacked PRs with ad hoc `gh pr merge` then
+  `gt sync --force` deleted child branches and closed their PRs, losing unmerged changes.
+  Two failures: (1) used raw `gh pr merge` instead of `make finalize-merge`, bypassing rollout
+  plan validation gates; (2) ran `gt sync --force` to reconcile the stack, which treats orphaned
+  branches as stale and deletes them. `make finalize-merge` warns about stacks and directs to
+  `gt merge`, but it merges one PR at a time and does not manage Graphite metadata or retarget
+  children. For Graphite stacks, use `gt merge` or Graphite web for full-stack merges. If a
+  stack is already partially merged outside Graphite, retarget children manually
+  (`gh pr edit --base main`) — never `gt sync --force`.
+
 ## Next Local Actions
 
 - Finish `CWS-80` blocker-first in this order:
