@@ -5,12 +5,13 @@ This file is a bounded cache for agent continuity.
 - Source of truth: Linear issues, projects, initiatives, and documents.
 - Freshness SLA: 24 hours.
 - Planning memory file: `docs/planning/linear-reorg-2026-03.md`
+- Either platform (Codex or Claude Code) can update this ledger.
 - If stale, do not trust this file until a new Linear sync pass is completed.
 
 ## Last Synced From Linear
 
 - Synced at: `2026-03-19 16:52:09 EDT`
-- Synced by: `Codex`
+- Synced by: `Claude Code`
 - Scope: `CWS-80/CWS-81 March 2026 workspace rebaseline and Linear reorganization`
 - Linear anchors:
   - `Content & Thought Leadership`
