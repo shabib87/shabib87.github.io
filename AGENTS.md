@@ -99,7 +99,8 @@ Reference canonical definitions in `docs/master-plan.md` and `docs/sop.md`.
 
 ## Task-File Convention
 
-- Task branches use `codex/cws-<id>-<slug>`.
+- Task branches use `codex/cws-<id>-<slug>`. (The `codex/` prefix is a repo convention, not a
+  platform restriction.)
 - `docs/tasks/CWS-<id>.md` is required before PR creation.
 - Task files are immutable context snapshots.
 - Do not store mutable status fields in task files; Linear is the single mutable status owner.
@@ -124,7 +125,7 @@ Test-first policy:
 
 ## Instruction-Based Boundary Caveat
 
-Codex boundary control is instruction-based, not hard sandbox partitioning per role.
+Agent boundary control is instruction-based, not hard sandbox partitioning per role.
 
 - `MUST NOT` boundaries reduce risk but are not a platform-enforced ACL.
 - Mitigate with scoped tasks, validation gates, self-audit, and PR review discipline.
@@ -145,6 +146,16 @@ If there are no significant issues, state: `No high-impact findings.`
 - Use Context7 or first-party docs for version-sensitive behavior.
 - Use repo-local skills first when task shape matches a skill.
 - Keep `AGENTS.md` small; place repeatable procedures in skills and references.
+
+## Platform Applicability
+
+This contract applies to all agent execution platforms used with this repository, including
+OpenAI Codex and Anthropic Claude Code. Platform-specific mechanics are documented in:
+
+- Codex: `.codex/` directory, `docs/sop.md`
+- Claude Code: `CLAUDE.md`
+
+The rules in this file override any platform-specific defaults.
 
 ## Bash Security Baseline
 
