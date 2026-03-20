@@ -1,8 +1,8 @@
 # CodeWithShabib Agentic Workflow Master Plan
 
-_Last updated: 2026-03-15_
+_Last updated: 2026-03-20_
 _Document type: Unified Master Plan (PRD + TRD)_
-_Version: 3.3 — validated against March 2026 official documentation_
+_Version: 3.4 — dual-platform pivot (Codex + Claude Code)_
 
 ---
 
@@ -28,7 +28,7 @@ This document is the single source of truth for the agentic operating model for 
 The goal is to run this repository like a small specialist team:
 
 - **Shabib** is the human principal, reviewer, editor-in-chief, and final approver.
-- **Codex agents** are specialist contributors that execute scoped work.
+- **Agent platforms** (Codex, Claude Code) provide specialist contributors that execute scoped work.
 - **Linear** is the source of truth for planning, status, ownership, and bottlenecks.
 - **GitHub** is the implementation and review surface.
 - **Graphite** is used only for free stacked PR workflow management (Hobby tier).
@@ -49,7 +49,7 @@ A new idea should flow like this:
 4. If needed, the parent issue is decomposed into smaller sub-issues.
 5. A GitHub `workflow_dispatch` is triggered (from ChatGPT web/Mac via Codex sidebar, Perplexity via GitHub connector, or `gh` CLI). The dispatch workflow prepares a branch, fetches the Linear brief, and writes `docs/tasks/CWS-NNN.md`.
 6. Shabib starts **Codex** (CLI, Mac app, IDE extension, or Codex Cloud via ChatGPT web/iOS sidebar) with the correct orchestrator prompt.
-7. Codex agents perform the scoped work and open a draft PR.
+7. Agents perform the scoped work and open a draft PR.
 8. Local hooks catch most failures before push.
 9. CI validates the PR with the correct pipeline.
 10. Graphite manages stacks when work is split across multiple PRs.
@@ -88,16 +88,16 @@ Definition of Ready for agent-pickable tickets:
 2. **Title follows convention:** `[DEV]`, `[EDITORIAL-NEW]`, or `[EDITORIAL-UPDATE]` prefix
 3. **Description is complete:** Contains the structured execution brief (goal, acceptance criteria, scope boundaries, files expected to change)
 4. **Acceptance criteria are testable:** Each criterion maps to a deterministic check (test passes, lint passes, build succeeds) or an explicit human judgment check (marked as `[HUMAN-REVIEW]`)
-5. **Scope is bounded:** Single concern, estimated ≤ 1 Codex session. If larger, decompose into sub-issues first.
+5. **Scope is bounded:** Single concern, estimated ≤ 1 agent session. If larger, decompose into sub-issues first.
 6. **Branch is prepared:** `docs/tasks/CWS-NNN.md` exists on a prepared branch (created by dispatch workflow)
 7. **Dependencies are resolved:** No blockers from other issues. If the issue depends on another, that issue must be `Done`.
-8. **Required skills exist:** If the task needs a specific Codex skill, that skill must already be committed to the repo.
+8. **Required skills exist:** If the task needs a specific agent skill, that skill must already be committed to the repo.
 
 Who enforces DoR:
 
 - The dispatch workflow enforces items 1-3 and 6 (automated).
 - Shabib enforces items 4-5, 7-8 (human judgment at issue creation time).
-- Codex agents should CHECK DoR at the start of every task and refuse to proceed if any item fails, posting a comment on the Linear issue explaining what's missing.
+- Agents should CHECK DoR at the start of every task and refuse to proceed if any item fails, posting a comment on the Linear issue explaining what's missing.
 
 ---
 
@@ -297,6 +297,8 @@ Use for:
 
 ### Codex (CLI, Mac App, IDE Extension, Cloud)
 
+> **Note:** For Claude Code capabilities, see `CLAUDE.md` and `docs/sop.md` Section 1.8.
+
 Available surfaces as of March 2026:
 
 | Surface             | Platform                                             | Status                          |
@@ -321,6 +323,32 @@ Key capabilities:
 **Use only after** the issue exists and the branch has been prepared with `docs/tasks/CWS-NNN.md`.
 
 Codex is not the planner of record. Linear is.
+
+### Claude Code (CLI, IDE Extension)
+
+Available surfaces as of March 2026:
+
+| Surface                   | Platform                              | Status         |
+| ------------------------- | ------------------------------------- | -------------- |
+| Claude Code CLI           | macOS, Linux                          | Stable         |
+| Claude Code IDE Extension | VS Code                               | Stable         |
+
+Key capabilities:
+
+- Dynamic subagent dispatch via `Agent` tool (prompt-based, no config files)
+- `CLAUDE.md` as session-start instruction surface
+- Persistent file-based memory system (`~/.claude/`)
+- Git worktree isolation for subagents
+- MCP support (Linear, Context7)
+- Skills system (reads `.agents/skills/` SKILL.md files; agentskills.io compatible)
+- Hooks system for automated behaviors
+
+**Trigger model:** Manual. Same as Codex — Shabib starts Claude Code with the task after the
+branch and task file are prepared.
+
+**Use only after** the issue exists and the branch has been prepared with `docs/tasks/CWS-NNN.md`.
+
+Claude Code is not the planner of record. Linear is.
 
 ---
 
@@ -545,7 +573,7 @@ A task requires Shabib to:
 
 #### Agent means
 
-A task is safe for Codex to execute with the right prompt and constraints.
+A task is safe for an agent to execute with the right prompt and constraints.
 
 #### Hybrid means
 
@@ -656,7 +684,8 @@ Stack merge on free tier uses standard GitHub merge — Graphite CLI handles reb
 #### Keep
 
 - `.codex/` as the Codex control plane
-- `.agents/skills/` as the repo-local skills directory for current compatibility
+- `.agents/skills/` as the repo-local skills directory (shared across platforms)
+- `.agents/roles/` as the shared agent role definitions directory (created by CWS-23)
 
 #### Add / improve
 
@@ -943,7 +972,7 @@ Rules to include:
 
 ---
 
-## Codex Multi-Agent Design
+## Multi-Agent Design
 
 ### Roles already present in the repo
 
@@ -961,7 +990,7 @@ The repo already has agent definitions for:
 
 ### Agent Identity System
 
-Each agent has a One Piece character identity that maps to their role. These identities are used in Codex `config.toml` agent definitions, skill descriptions, prompt headers, and Slack notifications for personality and quick identification.
+Each agent has a One Piece character identity that maps to their role. These identities are used in agent definitions (Codex `config.toml`, Claude Code dispatch prompts), skill descriptions, prompt headers, and Slack notifications for personality and quick identification.
 
 | Agent Name            | One Piece Character | Role                     | Rationale                                                                    |
 | --------------------- | ------------------- | ------------------------ | ---------------------------------------------------------------------------- |
@@ -975,7 +1004,7 @@ Each agent has a One Piece character identity that maps to their role. These ide
 | Brook the Musician    | Brook               | seo-expert               | Brings life and rhythm to content — SEO, discoverability, audience reach     |
 | Jinbe the Helmsman    | Jinbe               | historical-post-editor   | Steady hand that steers legacy content through safe waters without capsizing |
 
-Agent names follow the format `<Name> the <Role>`. These names are used in Codex `config.toml` agent definitions, skill descriptions, prompt headers, and Slack notifications for personality and quick identification.
+Agent names follow the format `<Name> the <Role>`. These names are used in agent definitions (Codex `config.toml`, Claude Code dispatch prompts), skill descriptions, prompt headers, and Slack notifications for personality and quick identification.
 
 The naming convention is extensible. New agents (including reasoning agents) follow the same pattern using One Piece characters whose traits match the role.
 
@@ -1003,13 +1032,17 @@ If an agent cannot make progress for any reason (missing file, permission error,
 
 #### Concurrency limits
 
-Set explicit limits in `config.toml`:
+**Codex:** Set explicit limits in `config.toml`:
 
 ```toml
 [agents]
 max_threads = 3
 max_depth = 1
 ```
+
+**Claude Code:** No native concurrency config. The orchestrator enforces the same limits through
+prompt discipline — batch `Agent` tool calls to 3 or fewer per message, and agents do not spawn
+sub-agents.
 
 - **max_threads = 3**: Never more than 3 parallel agents. If a task needs more lanes, batch them across turns.
 - **max_depth = 1**: Sub-agents MUST NOT spawn their own sub-agents. Only the orchestrator (Luffy) delegates.
@@ -1026,14 +1059,21 @@ If the plan has more than 3 parallel lanes, batch them:
 
 ### Agent Configuration Structure
 
-Each agent is defined by three layers, separating identity, behavior, and function:
+Each agent is defined by three layers, separating identity, behavior, and function. Role files
+are shared across platforms; platform-specific config stays in the platform directory:
 
 ```text
-.codex/agents/<agent-name>/
-├── config.toml          # Functional: tools, permissions, model assignment
-├── soul.md              # Behavioral: identity, values, guardrails, personality
-└── instructions.md      # Operational: what to do, how to do it, boundaries
+.agents/roles/<agent-name>/       # Shared across platforms (created by CWS-23)
+├── soul.md                       # Behavioral: identity, values, guardrails, personality
+└── instructions.md               # Operational: what to do, how to do it, boundaries
+
+.codex/agents/<agent-name>/       # Codex-specific
+└── config.toml                   # Functional: tools, permissions, model assignment
 ```
+
+**Claude Code dispatch:** Claude Code reads `soul.md` and `instructions.md` from
+`.agents/roles/<name>/` and incorporates them into the `Agent` tool prompt at dispatch time.
+No TOML config is needed — Claude Code's agent dispatch is prompt-based.
 
 **`soul.md`** defines who the agent IS — personality, values, and behavioral guardrails. Inspired by DeerFlow's SOUL.md pattern. This is separate from functional instructions.
 
@@ -1132,7 +1172,7 @@ This is the **Option C plan review gate**: Linear is the record, Slack is the no
 
 #### Phase 2: Execute
 
-Once the plan is approved (Shabib re-invokes Codex with "Plan approved, proceed" or provides edits):
+Once the plan is approved (Shabib re-invokes the agent with "Plan approved, proceed" or provides edits). In Claude Code, the same session can continue directly; in Codex, Shabib re-invokes with the approval:
 
 1. Execute each step by delegating to the appropriate agent.
 2. Track progress against the numbered plan.
@@ -1198,13 +1238,13 @@ Before creating the PR, the orchestrator MUST verify all of the following. If an
 
 ### Agent context purpose
 
-Codex agents have no cross-session memory. Each task starts from scratch. To provide project continuity, agents read and update a persistent context file.
+Agent platforms have limited or no built-in cross-session memory (Codex has none; Claude Code has a file-based memory system). To provide project continuity, agents read and update a persistent context file.
 
 ### File: `docs/agent-context.md`
 
 Format: **Markdown** (not JSON/JSONL). Rationale:
 
-- Codex agents read markdown natively — consistent with AGENTS.md, SKILL.md, and task files.
+- Both Codex and Claude Code read markdown natively — consistent with AGENTS.md, SKILL.md, and task files.
 - Human-readable and human-editable for periodic review.
 - Clean git diffs for PR review.
 - No parsing overhead — agents read it directly.
@@ -1429,6 +1469,18 @@ Run at the start of a Codex session to verify the agent has what it needs:
 - Verify `docs/tasks/CWS-NNN.md` exists for the current branch (if on a task branch)
 - Print a one-line status: "Ready for task CWS-42: [title]" or list what's missing
 
+### `make claude-setup` — Claude Code environment verification
+
+Run at the start of a Claude Code session to verify the agent has what it needs:
+
+- Verify `CLAUDE.md` exists at repo root
+- Verify `AGENTS.md` exists and is under 32 KiB
+- Verify required skills are present in `.agents/skills/`
+- Verify Makefile targets are accessible
+- Verify branch is clean or correctly prepared
+- Verify `docs/tasks/CWS-NNN.md` exists for the current branch (if on a task branch)
+- Print a one-line status: "Ready for task CWS-42: [title]" or list what's missing
+
 ---
 
 ## Slack Strategy
@@ -1602,7 +1654,7 @@ Project: [INFRA] Repo Process & Tooling
 
 Project: [ORCHESTRATION] Agentic Workflow Design
 
-- Epic: AGENTS.md & Codex Config
+- Epic: AGENTS.md & Agent Platform Config
 - Epic: Skill Authoring (agentskills.io compliant)
 - Epic: Reasoning Agent Skills (mental models)
 - Epic: Dispatch Workflow
@@ -1871,8 +1923,8 @@ This plan is complete when all of the following are true:
 - Editorial posts are validated by automated checks and manual judgment checks.
 - Slack provides visibility without paid upgrades (within 10-integration limit).
 - ADRs document architectural changes.
-- Shabib can start from **any surface** (Perplexity iOS/Android/Mac/web, ChatGPT iOS/Android/Mac/web, CLI) and reliably reach a prepared branch with `docs/tasks/CWS-NNN.md` ready for Codex pickup.
-- Shabib can use **any Codex surface** (CLI, Mac app, IDE extension, Cloud) to execute the task.
+- Shabib can start from **any surface** (Perplexity iOS/Android/Mac/web, ChatGPT iOS/Android/Mac/web, CLI) and reliably reach a prepared branch with `docs/tasks/CWS-NNN.md` ready for agent pickup.
+- Shabib can use **any agent surface** (Codex CLI/App/IDE/Cloud, Claude Code CLI/IDE) to execute the task.
 - Reasoning skills are implemented and invocable via `$skill-name`.
 - Portable reasoning prompts exist for Perplexity/ChatGPT use.
 - All agents have One Piece identities in `config.toml`.
@@ -1898,6 +1950,8 @@ This plan is complete when all of the following are true:
 | **Codex IDE Extension** | VS Code, Cursor, Windsurf, JetBrains         | In-IDE agent, Cloud delegation                                            | Included with ChatGPT subscription                    |
 | **Codex Cloud**         | Web (chatgpt.com/codex), ChatGPT iOS/Android | Remote sandboxed execution, PR creation                                   | Included with ChatGPT subscription                    |
 | **Codex GitHub Action** | CI                                           | `openai/codex-action@v1`, PR review, patch application                    | Requires API key                                      |
+| **Claude Code CLI**     | macOS, Linux                                 | Local agent, dynamic subagent dispatch, persistent memory, MCP, hooks     | Included with Anthropic subscription                  |
+| **Claude Code IDE**     | VS Code                                      | In-IDE agent, same capabilities as CLI                                    | Included with Anthropic subscription                  |
 | **Linear**              | Web, iOS, Android, Mac                       | GraphQL API, GitHub integration (free), Slack integration (free)          | Free plan: unlimited issues                           |
 | **Graphite**            | CLI, VS Code, Web                            | Stacked PRs, PR inbox, limited AI reviews                                 | Hobby: personal repos, CLI, no Slack, no merge queue  |
 | **GitHub Actions**      | CI                                           | `workflow_dispatch` (API returns `run_id` since Feb 2026), path filtering | Free for public repos; 2000 min/month private         |
@@ -1953,6 +2007,7 @@ This plan is complete when all of the following are true:
 | 41  | Self-audit checklist before PR creation                                  | 10-point verification before any PR is opened                              |
 | 42  | Concurrency limits set (max_threads=3, max_depth=1)                      | Prevents coordination chaos in multi-agent execution                       |
 | 43  | Agent context system added to backlog                                    | New epic under INFRA and ORCHESTRATION                                     |
+| 44  | Dual-platform pivot (Codex + Claude Code)                                | Claude Code added as peer platform; shared roles, CLAUDE.md                |
 
 ---
 
@@ -1978,7 +2033,9 @@ Blind spots identified:
 
 9. **No emergency bypass.** If CI or hooks break, there's no documented way to force-push an urgent fix. Add: emergency bypass procedure (admin merge with `[EMERGENCY]` label, post-incident ADR required).
 
-10. **Agent boundary enforcement is instruction-based only.** Codex has no programmatic way to restrict file access or command execution per agent. The MUST NOT rules in `instructions.md` rely on the LLM following instructions. A misbehaving agent could still modify restricted files. Mitigation: the self-audit checklist catches scope violations before PR creation, and PR review is mandatory. Consider adding a CI check that validates diff scope against the agent role specified in the task file.
+10. **Dual-platform drift.** With both Codex and Claude Code as execution platforms, instructions and capabilities could diverge. Mitigation: single `AGENTS.md` as the authoritative contract, shared role location (`.agents/roles/`), platform-specific config clearly separated (`CLAUDE.md` vs `.codex/`), and periodic audit that both platforms produce equivalent results for the same task.
+
+11. **Agent boundary enforcement is instruction-based only.** Codex has no programmatic way to restrict file access or command execution per agent. The MUST NOT rules in `instructions.md` rely on the LLM following instructions. A misbehaving agent could still modify restricted files. Mitigation: the self-audit checklist catches scope violations before PR creation, and PR review is mandatory. Consider adding a CI check that validates diff scope against the agent role specified in the task file.
 
 ---
 
@@ -1995,4 +2052,4 @@ Shabib is not trying to automate away judgment. He is trying to automate away re
 
 That is the correct role split.
 
-The two human touchpoints — idea creation and final review — are non-negotiable. Everything between them should require zero manual intervention except the current limitation of manually starting Codex (which may be resolved when OpenAI ships a programmatic trigger API).
+The two human touchpoints — idea creation and final review — are non-negotiable. Everything between them should require zero manual intervention except the current limitation of manually starting the agent platform (Codex or Claude Code). Either platform can handle any task — the choice is operational preference.
