@@ -31,3 +31,21 @@
 - if git/Graphite operations fail with `.git/index.lock` or sandbox write denial, escalate command
   approval explicitly and retry; command prefix rules improve consistency but do not replace
   filesystem permissions.
+
+## Stack Merge Policy
+
+- `make finalize-merge PR=...` merges a single PR via `gh pr merge --rebase --delete-branch`. It
+  validates against the active rollout plan (`active-plan.yaml`): branch pattern matching, required
+  CI checks, phase ordering (for phase branches only), and rebase-merge availability. For PRs whose
+  base is a non-trunk stack branch, it warns that only the current PR is merged and directs to
+  `gt merge` or Graphite web for full-stack merges. It does not call any Graphite commands, manage
+  Graphite metadata, or retarget child PRs after deleting the merged branch.
+- for Graphite stacks, prefer `gt merge` or Graphite web "Merge stack" to merge the full stack in
+  one operation — this keeps Graphite metadata consistent and retargets children correctly
+- if using `make finalize-merge` on individual PRs in a stack, do NOT run `gt sync --force` to
+  reconcile the remaining children — `gt sync --force` deletes branches it considers stale and
+  closes their PRs
+- if a base PR was already merged and its branch deleted, manually rebase or retarget child PRs
+  via `gh pr edit --base main`; do not rely on `gt sync` to recover
+- if a stack is broken beyond recovery, abandon it: cherry-pick surviving commits onto a fresh
+  branch from main and submit one clean PR
