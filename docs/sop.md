@@ -1,8 +1,8 @@
-# Codex Agent Orchestration SOP
+# Agent Orchestration SOP
 
-**Scope:** Personal operator playbook for using Codex to run reusable, bounded, multi-role workflows safely and consistently.
+**Scope:** Personal operator playbook for using Codex and Claude Code to run reusable, bounded, multi-role workflows safely and consistently.
 
-**Evidence standard:** This SOP is based on March 2026 official Codex documentation and guidance. Where a capability is documented only in the changelog or marked experimental, that status is called out explicitly.
+**Evidence standard:** This SOP is based on March 2026 official documentation for both Codex and Claude Code. Where a capability is documented only in the changelog or marked experimental, that status is called out explicitly.
 
 ---
 
@@ -118,6 +118,75 @@ Codex's official top-level docs for app orchestration center on scheduled automa
 - Treat hooks as emerging and experimental in Codex as of March 2026.
 - Do not build core production workflow assumptions on undocumented hook behavior.
 - For deterministic downstream actions, prefer explicit outer orchestration such as repo scripts or CI.
+
+### 1.8 Claude Code capabilities
+
+Claude Code is an Anthropic CLI agent that runs locally (macOS, Linux) and in IDE extensions
+(VS Code). It reads `CLAUDE.md` at session start for project-specific instructions and follows
+`AGENTS.md` as the authoritative execution contract.
+
+**Agent dispatch model:** Claude Code uses a dynamic, prompt-based `Agent` tool for subagent
+dispatch — no persistent TOML config files. Role definitions are read from `.agents/roles/<name>/`
+at dispatch time and incorporated into the agent prompt.
+
+**Key capabilities (March 2026):**
+
+- Subagent dispatch via `Agent` tool (dynamic prompt-based, not config-file-based)
+- `CLAUDE.md` as session-start instruction surface (analogous to `AGENTS.md` for Codex)
+- Persistent file-based memory system (`~/.claude/`) for cross-session continuity
+- Hooks system (`SessionStart`, tool-use hooks) for automated behaviors
+- Git worktree isolation for subagents (`isolation: "worktree"`)
+- MCP support (same servers: Linear, Context7)
+- Skills support (reads `.agents/skills/` SKILL.md files directly; agentskills.io compatible)
+
+**What Claude Code does not have:**
+
+- No persistent agent config files (roles are prompt-injected at dispatch)
+- No built-in automation scheduler (use external orchestration or cron)
+- No native concurrency limits config — manage via orchestrator discipline
+- No app-level UI for multi-agent management (CLI and IDE only)
+
+**Operational meaning:**
+
+- Use Claude Code when the task benefits from dynamic subagent dispatch, persistent memory,
+  or when Codex is unavailable.
+- Follow the same `AGENTS.md` contract regardless of platform.
+- Store Claude Code-specific instructions in `CLAUDE.md`, not in `AGENTS.md`.
+
+### 1.9 Platform capability comparison
+
+| Capability | Codex | Claude Code |
+| --- | --- | --- |
+| Instruction surface | `AGENTS.md` | `CLAUDE.md` + `AGENTS.md` |
+| Agent config | `.codex/agents/*.toml` (static) | `Agent` tool (dynamic prompt) |
+| Role definitions | `.codex/agents/<name>/` | `.agents/roles/<name>/` (shared) |
+| Skills | `.agents/skills/` + `agents/openai.yaml` | `.agents/skills/` (ignores openai.yaml) |
+| Subagent dispatch | Config-based, app-managed | Prompt-based, `Agent` tool |
+| Concurrency limits | `config.toml` (`max_threads`, `max_depth`) | Orchestrator discipline |
+| Cross-session memory | None (reads `docs/agent-context.md`) | File-based (`~/.claude/`) + `docs/agent-context.md` |
+| Worktree isolation | App-native | `isolation: "worktree"` parameter |
+| Automations | Built-in scheduler | External (cron, CI, scripts) |
+| Hooks | Experimental (CLI 0.114.0) | Supported (`SessionStart`, tool-use) |
+| MCP | Supported | Supported |
+| Surfaces | CLI, Mac App, IDE, Cloud | CLI, IDE (VS Code) |
+
+### 1.10 When to use which platform
+
+Use **Codex** when:
+
+- The task benefits from the app's multi-agent management UI
+- You want scheduled automations with inbox triage
+- You need Cloud execution from mobile (iOS/Android sidebar)
+- The work is already configured with `.codex/agents/` TOML files
+
+Use **Claude Code** when:
+
+- The task benefits from dynamic subagent dispatch with custom prompts
+- You want persistent cross-session memory for continuity
+- You need worktree isolation for parallel subagent work
+- You're working in VS Code and want integrated agent assistance
+
+Either platform can handle any task. The choice is operational preference, not capability gating.
 
 ---
 
@@ -489,3 +558,4 @@ For publish, PR, notify, or chain-next-step behavior:
 | 1.0 | 2026-03-15 | Initial SOP |
 | 2.0 | 2026-03-15 | Added Agent Skills open standard (agentskills.io) as dual-compliance requirement. Added Section 2 (Skill authoring standard) with portable structure, frontmatter spec, Codex extension, progressive disclosure budget, and portability rules. Added slash command reference list. Added deeplinks. Added AGENTS.md discovery model and size limit. Added multi-agent platform support status (CLI-only). Added concurrency limits. Added automation sandbox modes. Updated capability table with stable/experimental status clarification. Added portability anti-pattern to Section 7. |
 | 2.1 | 2026-03-17 | Updated subagent/platform guidance: CLI and Codex App visibility, IDE extension visibility pending, custom-agent TOML location under `.codex/agents/*.toml`, explicit-operator delegation rule, and source link moved from multi-agent to subagents docs. |
+| 3.0 | 2026-03-20 | Dual-platform pivot: renamed to Agent Orchestration SOP, added Claude Code capabilities (Section 1.8), platform capability comparison table (Section 1.9), platform selection guidance (Section 1.10). Scope broadened from Codex-only to Codex + Claude Code. |
