@@ -19,6 +19,9 @@ vendor/bundle/
 # Private local drafts
 _drafts/
 
+# Claude Code local config
+.claude/settings.local.json
+
 # Local tooling caches
 .pre-commit-cache/
 .venv-tools/
