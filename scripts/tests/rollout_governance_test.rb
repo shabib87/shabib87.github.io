@@ -11,7 +11,7 @@ class RolloutGovernanceTest < Minitest::Test
     ".codex/rollout/active-plan.yaml",
     ".codex/rollout/plans/governance-v3/phase-*.txt"
   ].freeze
-  def with_repo(branch: "codex/phase-1-test")
+  def with_repo(branch: "cws/phase-1-test")
     Dir.mktmpdir("rollout-governance-test") do |dir|
       Dir.chdir(dir) do
         system!("git", "init")
@@ -33,8 +33,8 @@ class RolloutGovernanceTest < Minitest::Test
       "apply_to_all_prs" => true,
       "mode" => "sequential",
       "base_branch" => "main",
-      "task_branch_pattern" => "^codex/cws-\\d+-[a-z0-9-]+$",
-      "phase_branch_pattern" => "^codex/phase-(\\d+)-[a-z0-9-]+$",
+      "task_branch_pattern" => "^cws/\\d+-[a-z0-9-]+$",
+      "phase_branch_pattern" => "^cws/phase-(\\d+)-[a-z0-9-]+$",
       "limits" => {
         "max_changed_files_non_content" => 25,
         "max_changed_lines_non_content" => 1200,
@@ -69,17 +69,17 @@ class RolloutGovernanceTest < Minitest::Test
     Open3.capture3(env, *cmd)
   end
   def test_dynamic_phase_count_accepts_contiguous_manifests
-    with_repo(branch: "codex/phase-7-large-plan") do
+    with_repo(branch: "cws/phase-7-large-plan") do
       write_active_plan
       write_contiguous_phases(7)
       write_phase(7, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-7.md"])
       write_evidence(7)
-      stdout, stderr, status = run_validator(env: { "GITHUB_HEAD_REF" => "codex/phase-1-unrelated" })
+      stdout, stderr, status = run_validator(env: { "GITHUB_HEAD_REF" => "cws/phase-1-unrelated" })
       assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
     end
   end
   def test_accepts_valid_cws_branch_without_phase_enforcement
-    with_repo(branch: "codex/cws-16-branch-policy") do
+    with_repo(branch: "cws/16-branch-policy") do
       write_active_plan
       write_contiguous_phases(1)
       write_evidence(1)
@@ -99,7 +99,7 @@ class RolloutGovernanceTest < Minitest::Test
     end
   end
   def test_dynamic_phase_count_accepts_single_phase_plan
-    with_repo(branch: "codex/phase-1-single-phase") do
+    with_repo(branch: "cws/phase-1-single-phase") do
       write_active_plan
       write_phase(1, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-1.md"])
       write_evidence(1)
@@ -108,7 +108,7 @@ class RolloutGovernanceTest < Minitest::Test
     end
   end
   def test_dynamic_phase_count_accepts_large_contiguous_manifests
-    with_repo(branch: "codex/phase-50-large-plan") do
+    with_repo(branch: "cws/phase-50-large-plan") do
       write_active_plan("limits" => { "max_changed_files_non_content" => 100, "max_changed_lines_non_content" => 10_000 })
       write_contiguous_phases(50)
       write_phase(50, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-50.md"])
@@ -118,7 +118,7 @@ class RolloutGovernanceTest < Minitest::Test
     end
   end
   def test_missing_intermediate_phase_manifest_fails
-    with_repo(branch: "codex/phase-4-gap-case") do
+    with_repo(branch: "cws/phase-4-gap-case") do
       write_active_plan
       write_phase(1, ["README.md"])
       write_phase(2, ["README.md"])

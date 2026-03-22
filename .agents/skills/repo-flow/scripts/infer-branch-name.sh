@@ -16,4 +16,4 @@ if [[ -z "$slug" ]]; then
   exit 1
 fi
 
-printf 'codex/%s-%s\n' "$type" "$slug"
+printf 'cws/%s-%s\n' "$type" "$slug"
