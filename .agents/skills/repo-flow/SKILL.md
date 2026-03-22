@@ -55,6 +55,15 @@ Use this skill for repository workflow mechanics only.
 - Required local checks have passed.
 - Integration path is explicit, rebase-only, and policy-compliant.
 
+## Gotchas
+
+- `gt sync --force` after partial stack merges deletes branches and closes PRs. Never use it to
+  reconcile a partially merged stack.
+- `gh pr merge` directly bypasses validation gates in `make finalize-merge`. Always use
+  `make finalize-merge PR=...` for single-PR merges.
+- For Graphite stacks, `make finalize-merge` only merges one PR and does not manage Graphite
+  metadata or retarget children. Use `gt merge` or Graphite web for full-stack merges.
+
 ## Rules
 
 - Start repo-changing work from `main` on a fresh `cws/*` branch.
@@ -68,6 +77,25 @@ Use this skill for repository workflow mechanics only.
 - Use Linear as the mutable execution-status source of truth; keep task files focused on execution brief and evidence pointers.
 - Before repo edits on a task issue, Linear state MUST be `In Progress` and cycle linkage MUST be present.
 - If setting `In Progress` or cycle linkage fails, stop execution and report the blocker.
+- MUST NOT use `gh pr merge` directly — use `make finalize-merge PR=...`.
+- MUST NOT use `gt sync --force` to reconcile after partial stack merges.
+- For stacks, MUST use `gt merge` or Graphite web, not individual PR merges.
+- MUST NOT create bulk commits — use atomic commits (one logical change per commit).
+
+## Validation Loop
+
+1. Run `make qa-local`. If it fails, fix issues and re-run.
+2. Do not commit until `make qa-local` passes.
+3. If `make qa-local` fails twice consecutively, stop and report (per AGENTS.md loop safety).
+4. If `make qa-local` fails, invoke `superpowers:systematic-debugging` to diagnose.
+
+## Cross-Skill References
+
+These are Claude Code plugin skills — MUST be invoked during repo-flow execution:
+
+- `superpowers:verification-before-completion` — invoke before claiming work is done.
+- `superpowers:systematic-debugging` — invoke if `make qa-local` fails.
+- `commit-commands:commit` — invoke for commit creation conventions.
 
 ## Trigger Quality Check
 
