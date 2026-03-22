@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-22
 **Linear issue:** Sub-issue of CWS-81
-**Status:** Design approved, pending implementation
+**Status:** Implemented
 
 ## Objective
 
