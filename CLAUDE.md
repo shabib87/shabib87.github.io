@@ -57,8 +57,7 @@ When spawning a subagent via the `Agent` tool:
 ## Task Pickup
 
 - Same queue resolution as `AGENTS.md`: Linear first, local second.
-- Same branch convention: `codex/cws-<id>-<slug>` (the `codex/` prefix is a repo convention,
-  not a platform restriction).
+- Same branch convention: `cws/<id>-<slug>`.
 - Same task file requirement: `docs/tasks/CWS-<id>.md` before PR creation.
 
 ## Graphite

@@ -3,7 +3,7 @@
 ## Branches
 
 - start from `main`
-- create a `codex/<type>-<slug>` branch
+- create a `cws/<type>-<slug>` branch
 - if the branch is created via `git checkout -b` (not `gt create`), run `gt track --parent main`
   before any `gt create`/`gt submit` command
 - on a pre-created task branch, use `gt modify --commit` to create commits; do not run `gt create`

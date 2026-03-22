@@ -99,8 +99,7 @@ Reference canonical definitions in `docs/master-plan.md` and `docs/sop.md`.
 
 ## Task-File Convention
 
-- Task branches use `codex/cws-<id>-<slug>`. (The `codex/` prefix is a repo convention, not a
-  platform restriction.)
+- Task branches use `cws/<id>-<slug>`.
 - `docs/tasks/CWS-<id>.md` is required before PR creation.
 - Task files are immutable context snapshots.
 - Do not store mutable status fields in task files; Linear is the single mutable status owner.

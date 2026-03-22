@@ -118,7 +118,7 @@ fi
 issue_id=""
 linear_issue_link=""
 if [[ "$branch_mode" == "task" ]]; then
-  if [[ "$branch" =~ ^codex/cws-([0-9]+)-[a-z0-9-]+$ ]]; then
+  if [[ "$branch" =~ ^cws/([0-9]+)-[a-z0-9-]+$ ]]; then
     issue_id="CWS-${BASH_REMATCH[1]}"
     linear_issue_link="https://linear.app/codewithshabib/issue/${issue_id}"
   else
