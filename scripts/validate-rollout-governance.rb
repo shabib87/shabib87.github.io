@@ -35,6 +35,7 @@ apply_to_all_prs = plan["apply_to_all_prs"] == true
 mode = plan["mode"].to_s.strip
 base_branch = plan["base_branch"].to_s.strip
 task_branch_pattern = plan["task_branch_pattern"].to_s.strip
+exempt_branch_patterns = plan["exempt_branch_patterns"].is_a?(Array) ? plan["exempt_branch_patterns"] : []
 limits = plan["limits"].is_a?(Hash) ? plan["limits"] : {}
 max_changed_files_non_content = limits["max_changed_files_non_content"]
 max_changed_lines_non_content = limits["max_changed_lines_non_content"]
@@ -64,9 +65,15 @@ if branch == base_branch
 elsif branch.empty?
   errors << "unable to detect current branch"
 else
-  task_match = Regexp.new(task_branch_pattern).match(branch) rescue nil
-  if task_match.nil? && apply_to_all_prs
-    errors << "branch #{branch.inspect} does not match task pattern #{task_branch_pattern.inspect}"
+  exempt = exempt_branch_patterns.any? { |pattern| Regexp.new(pattern).match?(branch) rescue false }
+  if exempt
+    puts "rollout governance check passed for plan=#{plan_id} branch=#{branch} (exempt)"
+    exit 0 if errors.empty?
+  else
+    task_match = Regexp.new(task_branch_pattern).match(branch) rescue nil
+    if task_match.nil? && apply_to_all_prs
+      errors << "branch #{branch.inspect} does not match task pattern #{task_branch_pattern.inspect}"
+    end
   end
 end
 
