@@ -159,7 +159,6 @@ fi
 commit_summary="$(git log --oneline "$base_branch"...HEAD 2>/dev/null || git log --oneline -10)"
 
 # Auto-detect traceability checklist items
-branch_ok="x"
 if [[ "$branch" =~ ^cws/[0-9]+-[a-z0-9-]+$ ]]; then branch_ok="x"; else branch_ok=" "; fi
 
 title_has_id=" "

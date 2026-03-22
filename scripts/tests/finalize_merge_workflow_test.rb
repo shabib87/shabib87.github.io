@@ -16,7 +16,7 @@ class FinalizeMergeWorkflowTest < Minitest::Test
   end
 
   def test_still_merges_with_rebase_and_deletes_branch
-    assert_match(/gh pr merge "\$pr" --rebase --delete-branch/, script_body)
+    assert_match(/gh_or_curl_pr_merge "\$pr" rebase/, script_body)
   end
 
   def test_self_review_checklist_prints_pr_base_branch
