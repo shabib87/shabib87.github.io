@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help setup ci-setup hooks-install lint security codex-check site-audit qa-local validate-draft qa-publish publish-draft publish-draft-tests start-work start-phase check create-pr finalize-merge rollout-audit rollout-tests skill-audit skill-vendor
+.PHONY: help setup ci-setup hooks-install lint security workflow-check site-audit qa-local validate-draft qa-publish publish-draft publish-draft-tests start-work start-phase check create-pr finalize-merge rollout-audit rollout-tests skill-audit skill-vendor
 
 ifneq (,$(filter skill-audit skill-vendor,$(firstword $(MAKECMDGOALS))))
 SKILL_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -27,7 +27,7 @@ help:
 	@echo "QA:"
 	@echo "  make lint"
 	@echo "  make security"
-	@echo "  make codex-check"
+	@echo "  make workflow-check"
 	@echo "  make rollout-tests"
 	@echo "  make check"
 	@echo "  make qa-local"
@@ -60,8 +60,8 @@ lint:
 security:
 	@./scripts/run-security-checks.sh
 
-codex-check:
-	@./scripts/run-codex-checks.sh
+workflow-check:
+	@./scripts/run-workflow-checks.sh
 
 site-audit:
 	@/usr/bin/env AUDIT='$(AUDIT)' TARGET='$(TARGET)' /bin/bash -lc './scripts/site-audit.sh'

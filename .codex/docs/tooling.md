@@ -17,7 +17,7 @@ make setup
 
 - `make lint`
 - `make security`
-- `make codex-check`
+- `make workflow-check`
 - `make site-audit AUDIT=seo TARGET=site`
 - `make qa-local`
 - `make check`
@@ -27,7 +27,7 @@ make setup
 Run:
 
 ```bash
-make codex-check
+make workflow-check
 ```
 
 This validates:

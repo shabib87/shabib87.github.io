@@ -28,7 +28,7 @@ Phases are dynamic (`1..N`) and discovered from:
 ## Per-Phase Acceptance
 
 - [ ] scope stayed phase-only (`phase-<n>.txt`).
-- [ ] `make codex-check` passed.
+- [ ] `make workflow-check` passed.
 - [ ] `make qa-local` passed.
 - [ ] phase evidence file contains both `RED` and `GREEN`.
 - [ ] PR base is `main` and lower phases are already merged.
