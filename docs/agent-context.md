@@ -10,81 +10,59 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-20 21:00:00 EDT`
+- Synced at: `2026-03-22 12:00:00 EDT`
 - Synced by: `Claude Code`
-- Scope: `CWS-80/CWS-81/CWS-82 March 2026 workspace rebaseline and dual-platform pivot`
+- Scope: `CWS-93 backlog hygiene, label cleanup, and cycle rebaseline`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
   - `Blog Content Pipeline`
-  - `CWS-80` (Done)
-  - `CWS-81`
-  - `CWS-82` (Done)
+  - `CWS-93` (In Progress)
 
 ## Stale After
 
-- `2026-03-21 21:00:00 EDT`
+- `2026-03-23 12:00:00 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
 
-- `CWS-80` (workspace rebaseline) and `CWS-82` (dual-platform pivot) are Done and merged.
-- Do not use the old NEXT-10 execution queue as the current planning source.
-- Next: complete the CWS-80 blocker-first audit of downstream issues, then move `CWS-81` into
-  active execution.
+- CWS-93 (backlog hygiene) is in progress.
+- Phase 1 (Linear mutations) complete. Phase 2 (repo changes) in Graphite stack.
+- CWS-80 (Done), CWS-82 (Done).
 
-## Confirmed Baseline
+## Top Priorities
 
-- `Content & Thought Leadership` owns `[EDITORIAL] Content Quality System` and
-  `Blog Content Pipeline`.
-- `Agentic Delivery Platform` owns `[INFRA] Repo Process & Tooling` and
-  `[ORCHESTRATION] Agentic Workflow Design`.
-- `Blog Content Pipeline` is the single ongoing blog execution project.
-- Notion is the upstream note and research inbox. Linear is the execution source of truth.
-- Meta work existed for workspace drift audit (`CWS-80`, Done) and reorganization normalization
-  (`CWS-81`, pending). Dual-platform pivot (`CWS-82`, Done) added Claude Code as peer platform.
-- `CWS-17` is closed after audit confirmed its substantive objective was already satisfied.
-- `CWS-14` and `CWS-48` remain open but were repurposed to complete and normalize existing
-  canonical editorial artifacts rather than create them from scratch.
-- Task-file semantics were clarified: local `docs/tasks/CWS-<id>.md` files should exist at
-  pickup or start-of-work, not for untouched backlog audit only.
-- Cycle-linked backlog items may therefore intentionally lack local task snapshots until they are
-  actually started.
-- The current Linear cycle objects do not match the intended Monday-start cadence.
-- Treat `March 16-22, 2026` as the transition week in planning memory until cycle settings are
-  corrected through supported tooling.
+1. Complete CWS-93 backlog hygiene (this task)
+2. CWS-81 normalization (parent)
+3. Infrastructure chain: CWS-18 → CWS-5 → CWS-12
+
+## Open Decisions
+
+- CWS-14/48 voice profile interview: scheduling TBD
+- CWS-83 repo split: deferred post-April 19, requires git history rewrite
+- Cycle date correction: not available through current Linear MCP toolset
 
 ## Active Risks
 
-- Repo and Linear still diverge on some planning evidence and editorial policy details,
-  especially `_drafts/` tracking policy.
-- Future weekly allocations are approved as a working plan but not yet date-true Linear cycle
-  truth.
-- Any agent resuming from this file must read `docs/planning/linear-reorg-2026-03.md` before
-  continuing backlog normalization.
+- Editorial chain blocked until voice profile interview (CWS-14/48)
+- Semgrep post-tool hook erroring (no SEMGREP_APP_TOKEN) — non-blocking but noisy
 
-## Lessons Learned
+## Next 10 Actions
 
-- CWS-82 stack merge (2026-03-20): merging stacked PRs with ad hoc `gh pr merge` then
-  `gt sync --force` deleted child branches and closed their PRs, losing unmerged changes.
-  Two failures: (1) used raw `gh pr merge` instead of `make finalize-merge`, bypassing rollout
-  plan validation gates; (2) ran `gt sync --force` to reconcile the stack, which treats orphaned
-  branches as stale and deletes them. `make finalize-merge` warns about stacks and directs to
-  `gt merge`, but it merges one PR at a time and does not manage Graphite metadata or retarget
-  children. For Graphite stacks, use `gt merge` or Graphite web for full-stack merges. If a
-  stack is already partially merged outside Graphite, retarget children manually
-  (`gh pr edit --base main`) — never `gt sync --force`.
+1. Merge CWS-93 Graphite stack
+2. Close CWS-44 after agent-context.md rewrite merges
+3. Update CWS-81 remaining scope
+4. Pick up CWS-18 (next infrastructure task)
+5. Pick up CWS-5 (blocked by CWS-18)
+6. Schedule CWS-14 voice profile interview session
+7. Pick up CWS-13 (Vale config — unblocks CWS-25, CWS-32)
+8. Pick up CWS-23 (unblocks CWS-36, CWS-31, CWS-38)
+9. Correct Linear cycle dates through supported tooling
+10. Pick up CWS-92 Docker sandbox setup
 
-## Next Local Actions
+## Recent Completions
 
-- Finish `CWS-80` blocker-first in this order:
-  `CWS-18`, `CWS-15`, `CWS-34`, `CWS-23`, then the dependent or supporting issues
-  `CWS-5`, `CWS-12`, `CWS-27`, `CWS-54`, `CWS-6`, `CWS-13`, `CWS-26`, `CWS-53` as needed.
-- During that audit, only record dependency drift, stale wording, repo-versus-Linear mismatch,
-  and rescope notes. Do not create untouched task files.
-- After `CWS-80` evidence is complete, move `CWS-81` into active execution and use it to
-  normalize the current transition-cycle scope and document future weeks as the working cadence
-  until Linear cycle settings are corrected.
-- After `CWS-81` normalization is stable, start weekly initiative or project update hygiene with
-  health status for the new planning structure.
-- Keep the planning memory file current as the long-running local record.
+- CWS-80: Workspace rebaseline and drift audit (Done, merged)
+- CWS-82: Dual-platform pivot — Claude Code as peer platform (Done, merged)
+- CWS-7: Label taxonomy audit (Done, closed — cleanup executed in CWS-93)
+- CWS-1, 2, 3, 4: Cancelled (Linear onboarding noise)
