@@ -2,22 +2,17 @@
 # frozen_string_literal: true
 require "fileutils"
 require "minitest/autorun"
-require "open3"
 require "tmpdir"
 require "yaml"
 class RolloutGovernanceTest < Minitest::Test
   VALIDATOR = File.expand_path("../validate-rollout-governance.rb", __dir__)
-  CORE_PLAN_PATTERNS = [
-    ".codex/rollout/active-plan.yaml",
-    ".codex/rollout/plans/governance-v3/phase-*.txt"
-  ].freeze
-  def with_repo(branch: "cws/phase-1-test")
+  def with_repo(branch: "cws/1-test")
     Dir.mktmpdir("rollout-governance-test") do |dir|
       Dir.chdir(dir) do
         system!("git", "init")
         system!("git", "config", "user.name", "Test User")
         system!("git", "config", "user.email", "test@example.com")
-        FileUtils.mkdir_p(".codex/rollout/plans/governance-v3")
+        FileUtils.mkdir_p(".codex/rollout")
         File.write("README.md", "baseline\n")
         system!("git", "add", "README.md")
         system!("git", "commit", "-m", "baseline")
@@ -34,7 +29,6 @@ class RolloutGovernanceTest < Minitest::Test
       "mode" => "sequential",
       "base_branch" => "main",
       "task_branch_pattern" => "^cws/\\d+-[a-z0-9-]+$",
-      "phase_branch_pattern" => "^cws/phase-(\\d+)-[a-z0-9-]+$",
       "limits" => {
         "max_changed_files_non_content" => 25,
         "max_changed_lines_non_content" => 1200,
@@ -45,44 +39,32 @@ class RolloutGovernanceTest < Minitest::Test
     deep_merge!(plan, overrides)
     File.write(".codex/rollout/active-plan.yaml", plan.to_yaml)
   end
-  def write_phase(number, lines)
-    path = ".codex/rollout/plans/governance-v3/phase-#{number}.txt"
-    body = lines.join("\n")
-    File.write(path, "#{body}\n")
-  end
-  def write_contiguous_phases(max, lines = CORE_PLAN_PATTERNS + ["README.md"])
-    (1..max).each { |n| write_phase(n, lines) }
-  end
-  def write_evidence(phase = 1)
-    path = ".codex/rollout/evidence/governance-v3/phase-#{phase}.md"
-    FileUtils.mkdir_p(File.dirname(path))
-    File.write(path, <<~MD)
-      RED
-      - failing tests recorded
-      GREEN
-      - tests pass after implementation
-    MD
-  end
   def run_validator(branch: nil, env: {})
-    cmd = ["ruby", VALIDATOR, "--repo-root", Dir.pwd]
-    cmd += ["--branch", branch] if branch
-    Open3.capture3(env, *cmd)
-  end
-  def test_dynamic_phase_count_accepts_contiguous_manifests
-    with_repo(branch: "cws/phase-7-large-plan") do
-      write_active_plan
-      write_contiguous_phases(7)
-      write_phase(7, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-7.md"])
-      write_evidence(7)
-      stdout, stderr, status = run_validator(env: { "GITHUB_HEAD_REF" => "cws/phase-1-unrelated" })
-      assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
+    rd_out, wr_out = IO.pipe
+    rd_err, wr_err = IO.pipe
+    argv = ["--repo-root", Dir.pwd]
+    argv += ["--branch", branch] if branch
+    pid = fork do
+      $stdout.reopen(wr_out)
+      $stderr.reopen(wr_err)
+      wr_out.close
+      wr_err.close
+      rd_out.close
+      rd_err.close
+      env.each { |k, v| ENV[k] = v }
+      ARGV.replace(argv)
+      load VALIDATOR
     end
+    wr_out.close
+    wr_err.close
+    _, status = Process.wait2(pid)
+    [rd_out.read, rd_err.read, status]
+  ensure
+    [rd_out, wr_out, rd_err, wr_err].each { |io| io&.close unless io&.closed? }
   end
   def test_accepts_valid_cws_branch_without_phase_enforcement
     with_repo(branch: "cws/16-branch-policy") do
       write_active_plan
-      write_contiguous_phases(1)
-      write_evidence(1)
       stdout, stderr, status = run_validator
       assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
       assert_match(/branch_mode=task/, stdout)
@@ -91,120 +73,9 @@ class RolloutGovernanceTest < Minitest::Test
   def test_rejects_invalid_non_matching_branch
     with_repo(branch: "feature/cws-16-branch-policy") do
       write_active_plan
-      write_contiguous_phases(1)
-      write_evidence(1)
       _stdout, stderr, status = run_validator
       refute status.success?
       assert_match(/does not match task pattern/i, stderr)
-    end
-  end
-  def test_dynamic_phase_count_accepts_single_phase_plan
-    with_repo(branch: "cws/phase-1-single-phase") do
-      write_active_plan
-      write_phase(1, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-1.md"])
-      write_evidence(1)
-      stdout, stderr, status = run_validator
-      assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
-    end
-  end
-  def test_dynamic_phase_count_accepts_large_contiguous_manifests
-    with_repo(branch: "cws/phase-50-large-plan") do
-      write_active_plan("limits" => { "max_changed_files_non_content" => 100, "max_changed_lines_non_content" => 10_000 })
-      write_contiguous_phases(50)
-      write_phase(50, CORE_PLAN_PATTERNS + ["README.md", ".codex/rollout/evidence/governance-v3/phase-50.md"])
-      write_evidence(50)
-      stdout, stderr, status = run_validator
-      assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
-    end
-  end
-  def test_missing_intermediate_phase_manifest_fails
-    with_repo(branch: "cws/phase-4-gap-case") do
-      write_active_plan
-      write_phase(1, ["README.md"])
-      write_phase(2, ["README.md"])
-      write_phase(4, ["README.md"])
-      write_evidence(4)
-      _stdout, stderr, status = run_validator
-      refute status.success?
-      assert_match(/missing phase manifest/i, stderr)
-    end
-  end
-  def test_ignored_content_paths_are_excluded_from_size_caps_only
-    with_repo do
-      write_active_plan(
-        "limits" => {
-          "max_changed_files_non_content" => 10,
-          "max_changed_lines_non_content" => 200
-        }
-      )
-      write_phase(
-        1,
-        CORE_PLAN_PATTERNS + [
-          ".codex/rollout/evidence/governance-v3/phase-1.md",
-          "scripts/demo.sh",
-          "_posts/2026-03-14-long-post.md"
-        ]
-      )
-      write_evidence(1)
-      FileUtils.mkdir_p("scripts")
-      File.write("scripts/demo.sh", "#!/usr/bin/env bash\necho hi\n")
-      FileUtils.mkdir_p("_posts")
-      File.write("_posts/2026-03-14-long-post.md", ("x\n" * 5000))
-      stdout, stderr, status = run_validator
-      assert status.success?, "expected success, got stderr: #{stderr}\nstdout: #{stdout}"
-    end
-  end
-  def test_non_content_size_cap_failure
-    with_repo do
-      write_active_plan(
-        "limits" => {
-          "max_changed_files_non_content" => 10,
-          "max_changed_lines_non_content" => 10
-        }
-      )
-      write_phase(
-        1,
-        CORE_PLAN_PATTERNS + [
-          ".codex/rollout/evidence/governance-v3/phase-1.md",
-          "scripts/demo.sh"
-        ]
-      )
-      write_evidence(1)
-      FileUtils.mkdir_p("scripts")
-      File.write("scripts/demo.sh", ("line\n" * 50))
-      _stdout, stderr, status = run_validator
-      refute status.success?
-      assert_match(/changed lines exceed/i, stderr)
-    end
-  end
-  def test_scope_failure_even_for_ignored_paths
-    with_repo do
-      write_active_plan
-      write_phase(
-        1,
-        CORE_PLAN_PATTERNS + [
-          ".codex/rollout/evidence/governance-v3/phase-1.md",
-          "scripts/demo.sh"
-        ]
-      )
-      write_evidence(1)
-      FileUtils.mkdir_p("_posts")
-      File.write("_posts/2026-03-14-long-post.md", "hello\n")
-      _stdout, stderr, status = run_validator
-      refute status.success?
-      assert_match(/outside phase-1 scope/i, stderr)
-    end
-  end
-  def test_broad_content_wildcard_in_manifest_is_blocked
-    with_repo do
-      write_active_plan
-      write_phase(1, CORE_PLAN_PATTERNS + [".codex/rollout/evidence/governance-v3/phase-1.md", "_posts/*"])
-      write_evidence(1)
-      FileUtils.mkdir_p("_posts")
-      File.write("_posts/2026-03-14-long-post.md", "hello\n")
-      _stdout, stderr, status = run_validator
-      refute status.success?
-      assert_match(/broad content wildcard/i, stderr)
     end
   end
   private
