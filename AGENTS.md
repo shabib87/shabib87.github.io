@@ -167,6 +167,28 @@ OpenAI Codex and Anthropic Claude Code. Platform-specific mechanics are document
 
 The rules in this file override any platform-specific defaults.
 
+## Label Taxonomy
+
+Approved labels (15). Do not create new labels without human approval.
+
+| Label | Purpose |
+| ----- | ------- |
+| `Spec` | Has written specification |
+| `Ready` | Pickup-ready, no blockers |
+| `agent-task` | Work to be executed by an AI agent |
+| `human-task` | Human executes |
+| `Infra` | Infrastructure/tooling domain |
+| `Workflow` | Process/workflow domain |
+| `epic:dx-setup` | DX setup epic |
+| `epic:editorial-qa` | Editorial quality epic |
+| `epic:ci-pipeline` | CI pipeline epic |
+| `epic:safety` | Safety and security epic |
+| `epic:skills` | Skill authoring epic |
+| `epic:reasoning` | Reasoning skills epic |
+| `epic:slack` | Slack integration epic |
+| `epic:dispatch` | Dispatch workflow epic |
+| `epic:agents-config` | Agent config epic |
+
 ## Bash Security Baseline
 
 Shell scripts must:
