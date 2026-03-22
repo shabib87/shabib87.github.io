@@ -57,7 +57,7 @@ Use this skill for repository workflow mechanics only.
 
 ## Rules
 
-- Start repo-changing work from `main` on a fresh `codex/*` branch.
+- Start repo-changing work from `main` on a fresh `cws/*` branch.
 - Do not commit until the full local QA gate passes.
 - Re-run the same local QA gate on the committed tree before push or rebase integration.
 - Run local checks before opening a PR.

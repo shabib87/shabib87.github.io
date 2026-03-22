@@ -94,8 +94,8 @@ fi
 git rebase "$main_remote/$main_remote_branch" >/dev/null
 
 inferred="$("$repo_root/.agents/skills/repo-flow/scripts/infer-branch-name.sh" "$type" "$topic")"
-suffix="${inferred#codex/"${type}"-}"
-branch_name="codex/phase-${phase}-${suffix}"
+suffix="${inferred#cws/"${type}"-}"
+branch_name="cws/phase-${phase}-${suffix}"
 
 ruby - "$branch_name" "$phase_branch_pattern" <<'RUBY'
 branch_name = ARGV.fetch(0)

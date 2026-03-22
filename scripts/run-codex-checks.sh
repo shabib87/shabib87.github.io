@@ -12,7 +12,7 @@ require_repo_ruby || exit 1
 phase="${PHASE:-}"
 if [[ -z "$phase" ]]; then
   branch="$(git branch --show-current 2>/dev/null || true)"
-  if [[ "$branch" =~ ^codex/phase-([0-9]+)(-|$) ]]; then
+  if [[ "$branch" =~ ^cws/phase-([0-9]+)(-|$) ]]; then
     phase="${BASH_REMATCH[1]}"
   fi
 fi

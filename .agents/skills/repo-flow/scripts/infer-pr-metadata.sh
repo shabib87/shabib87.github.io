@@ -3,7 +3,7 @@ set -euo pipefail
 
 type="${1:-chore}"
 branch="$(git branch --show-current)"
-subject="${branch#codex/}"
+subject="${branch#cws/}"
 if [[ "$subject" =~ ^cws-([0-9]+)-(.*)$ ]]; then
   issue_id="${BASH_REMATCH[1]}"
   tail_subject="${BASH_REMATCH[2]}"
