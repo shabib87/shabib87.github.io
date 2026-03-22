@@ -4,7 +4,6 @@ apply_to_all_prs: true
 mode: sequential
 base_branch: main
 task_branch_pattern: '^cws/\d+-[a-z0-9-]+$'
-phase_branch_pattern: '^cws/phase-(\d+)-[a-z0-9-]+$'
 limits:
   max_changed_files_non_content: 25
   max_changed_lines_non_content: 1200
