@@ -1,6 +1,12 @@
 ---
 name: repo-flow
-description: Use this skill when the user asks to start, validate, package, or integrate repository changes in this repo using its scripted workflow (`make qa-local`, `make create-pr`, `make finalize-merge`) and policy gates (branch naming, task file presence, Linear traceability, rebase-only integration). Use it even when requested indirectly ("open a PR", "finish merge", "prep branch"). Do not use for editorial drafting or content-only edits that do not involve repo workflow mechanics, and do not use for generic git advice outside this repository.
+description: >-
+  Use this skill when the user asks to start, validate, package, or integrate repository changes
+  in this repo using its scripted workflow (make qa-local, make create-pr, make finalize-merge)
+  and policy gates (branch naming, task file presence, Linear traceability, rebase-only
+  integration). Use it even when requested indirectly ("open a PR", "finish merge", "prep
+  branch"). Do not use for editorial drafting or content-only edits that do not involve repo
+  workflow mechanics, and do not use for generic git advice outside this repository.
 ---
 
 # Repo Flow
@@ -56,6 +62,9 @@ Use this skill for repository workflow mechanics only.
 - Integration path is explicit, rebase-only, and policy-compliant.
 
 ## Gotchas
+
+Known failure modes specific to this workflow. Other skills should adopt a similar section when
+non-obvious failure modes accumulate from real incidents.
 
 - `gt sync --force` after partial stack merges deletes branches and closes PRs. Never use it to
   reconcile a partially merged stack.
