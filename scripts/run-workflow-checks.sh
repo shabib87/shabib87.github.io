@@ -70,7 +70,7 @@ skill_paths.each do |skill_path|
 end
 
 makefile = File.read(File.join(repo_root, "Makefile"))
-%w[site-audit codex-check qa-local start-phase rollout-audit].each do |target|
+%w[site-audit workflow-check qa-local start-phase rollout-audit].each do |target|
   errors << "missing #{target} target in Makefile" unless makefile.match?(/^#{Regexp.escape(target)}:/)
 end
 
@@ -145,29 +145,29 @@ if !medium_skill_exists
   end
 end
 
-common_ancestor = `git -C "#{repo_root}" merge-base main HEAD 2>/dev/null`.strip
+common_ancestor = IO.popen(["git", "-C", repo_root, "merge-base", "main", "HEAD"], err: File::NULL, &:read).to_s.strip
 changed = Set.new
 if !common_ancestor.empty?
-  `git -C "#{repo_root}" diff --name-only --diff-filter=ACMRD #{common_ancestor}...HEAD`.each_line do |line|
+  IO.popen(["git", "-C", repo_root, "diff", "--name-only", "--diff-filter=ACMRD", "#{common_ancestor}...HEAD"], &:read).to_s.each_line do |line|
     value = line.strip
     changed << value unless value.empty?
   end
 end
-`git -C "#{repo_root}" diff --name-only --diff-filter=ACMRD`.each_line do |line|
+IO.popen(["git", "-C", repo_root, "diff", "--name-only", "--diff-filter=ACMRD"], &:read).to_s.each_line do |line|
   value = line.strip
   changed << value unless value.empty?
 end
-`git -C "#{repo_root}" diff --name-only --cached --diff-filter=ACMRD`.each_line do |line|
+IO.popen(["git", "-C", repo_root, "diff", "--name-only", "--cached", "--diff-filter=ACMRD"], &:read).to_s.each_line do |line|
   value = line.strip
   changed << value unless value.empty?
 end
-`git -C "#{repo_root}" ls-files --others --exclude-standard`.each_line do |line|
+IO.popen(["git", "-C", repo_root, "ls-files", "--others", "--exclude-standard"], &:read).to_s.each_line do |line|
   value = line.strip
   changed << value unless value.empty?
 end
 
 governance_change = changed.any? do |path|
-  path.match?(%r{\Ascripts/(validate-rollout-governance\.rb|create-pr\.sh|finalize-merge\.sh|start-phase\.sh|rollout-audit\.sh|run-codex-checks\.sh)\z}) ||
+  path.match?(%r{\Ascripts/(validate-rollout-governance\.rb|create-pr\.sh|finalize-merge\.sh|start-phase\.sh|rollout-audit\.sh|run-workflow-checks\.sh)\z}) ||
     path == ".github/workflows/rollout-governance.yml"
 end
 
@@ -182,7 +182,7 @@ if governance_change && !test_or_evidence_change
 end
 
 if errors.empty?
-  puts "codex workflow checks passed"
+  puts "workflow checks passed"
   puts "validated skills: #{skill_paths.length}"
 else
   errors.each { |error| warn "error: #{error}" }
