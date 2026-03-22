@@ -90,7 +90,7 @@ CWS-1, 2, 3, 4 were already cancelled in a prior session (Linear onboarding nois
 
 Use `mcp__claude_ai_Linear__save_issue` to:
 - Set state to `Done`
-- Add comment: "Closing: label taxonomy exists (37 labels). Cleanup to 15 labels is being executed as part of CWS-<id> (backlog hygiene)."
+- Add comment: "Closing: label taxonomy exists (39 labels). Cleanup to 15 labels is being executed as part of CWS-<id> (backlog hygiene)."
 
 - [ ] **Step 2: Fix agent-context.md format (prep for CWS-44 close)**
 
@@ -184,7 +184,7 @@ Use `mcp__claude_ai_Linear__list_issue_labels` to get the full list with IDs.
 
 - [ ] **Step 3: Identify issues on labels being deleted**
 
-For each of the 22 labels to delete, check which issues use them. Plan relabeling:
+For each of the 24 labels to delete, check which issues use them. Plan relabeling:
 - `epic:dor-dod` → `epic:dx-setup`
 - `epic:adr` → `epic:dx-setup`
 - `epic:publish-draft` → `epic:editorial-qa`

@@ -17,7 +17,7 @@ The backlog has accumulated several categories of drift:
 
 - Stale metadata: project target dates past due, issues missing milestones, Codex-specific titles
   after dual-platform pivot.
-- Label bloat: 37 labels with 10 unused and significant redundancy.
+- Label bloat: 39 labels with significant redundancy.
 - Structural gaps: CWS-44 (agent-context.md) not closed despite file existing, CWS-82 Graphite
   lessons not encoded in repo-flow skill, branch prefix still `codex/` instead of
   platform-agnostic.
@@ -47,7 +47,7 @@ boundaries. The WIP cap (5 active, 3 agent-executable) provides flow discipline.
 | Issue | Action | Rationale |
 |-------|--------|-----------|
 | CWS-1, 2, 3, 4 | Cancel | Linear onboarding noise |
-| CWS-7 | Audit-close | Label taxonomy exists (37 labels), cleanup is happening now |
+| CWS-7 | Audit-close | Label taxonomy exists (39 labels), cleanup is happening now |
 | CWS-44 | Close after agent-context.md fix | File exists and is maintained, schema just needs alignment |
 
 ### Issues to Update
@@ -73,7 +73,7 @@ Remove target dates from all 4 projects:
 - [EDITORIAL] Content Quality System (was March 21)
 - Blog Content Pipeline (none — no change needed)
 
-### Label Cleanup (37 → 15)
+### Label Cleanup (39 → 15)
 
 **Keep (15):**
 
@@ -95,7 +95,7 @@ Remove target dates from all 4 projects:
 | `epic:dispatch` | Dispatch workflow epic |
 | `epic:agents-config` | Agent config epic |
 
-**Delete (22):**
+**Delete (24):**
 `Dev`, `Refinement-Needed`, `Merge-Ready`, `Review`, `Implementation`, `Editorial-Update`,
 `Editorial-New`, `Hybrid`, `Improvement`, `Feature`, `Bug`, `Agent`, `Human`, `Waiting-Agent`,
 `Waiting-Human`, `Linear`, `Codex`, `epic:dor-dod`, `epic:adr`, `epic:publish-draft`,
