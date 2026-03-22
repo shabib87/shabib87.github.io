@@ -228,3 +228,30 @@ fi
 
 git checkout "$base_branch"
 git pull --ff-only "$main_remote" "$main_remote_branch"
+
+# Update agent-context.md staleness timestamp (D7)
+agent_context="$repo_root/docs/agent-context.md"
+if [[ -f "$agent_context" ]]; then
+  # shellcheck disable=SC2016
+  new_stale_ts="$(ruby -e '
+    require "time"
+    puts (Time.now + 86400).strftime("%Y-%m-%d %H:%M:%S %Z")
+  ')"
+  # shellcheck disable=SC2016
+  ruby -e '
+    path = ARGV[0]
+    new_ts = ARGV[1]
+    content = File.read(path)
+    updated = content.sub(/^(## Stale After\s*\n+- )`[^`]+`/, "\\1`#{new_ts}`")
+    if updated == content
+      warn "warning: could not update stale timestamp in agent-context.md"
+    else
+      File.write(path, updated)
+    end
+  ' "$agent_context" "$new_stale_ts"
+
+  if ! git diff --quiet "$agent_context" 2>/dev/null; then
+    git add "$agent_context"
+    git commit -m "chore: bump agent-context staleness timestamp to $new_stale_ts"
+  fi
+fi
