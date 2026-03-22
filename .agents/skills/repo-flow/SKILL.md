@@ -52,7 +52,7 @@ Use this skill for repository workflow mechanics only.
 ## Done Criteria
 
 - Work is packaged in a PR with clean commits.
-- Required local checks have passed.
+- Required local checks have passed (see Validation Loop for execution protocol).
 - Integration path is explicit, rebase-only, and policy-compliant.
 
 ## Gotchas
@@ -79,19 +79,20 @@ Use this skill for repository workflow mechanics only.
 - If setting `In Progress` or cycle linkage fails, stop execution and report the blocker.
 - MUST NOT use `gh pr merge` directly — use `make finalize-merge PR=...`.
 - MUST NOT use `gt sync --force` to reconcile after partial stack merges.
-- For stacks, MUST use `gt merge` or Graphite web, not individual PR merges.
+- For full-stack merges, use `gt merge` or Graphite web. Single-PR merges from a stack via `make finalize-merge PR=...` are allowed but only merge that PR — retarget children manually if needed.
 - MUST NOT create bulk commits — use atomic commits (one logical change per commit).
 
 ## Validation Loop
 
-1. Run `make qa-local`. If it fails, fix issues and re-run.
-2. Do not commit until `make qa-local` passes.
+1. Run `make qa-local`. If it passes, proceed to commit.
+2. If it fails, diagnose the issue (invoke `superpowers:systematic-debugging` if available), fix, and re-run.
 3. If `make qa-local` fails twice consecutively, stop and report (per AGENTS.md loop safety).
-4. If `make qa-local` fails, invoke `superpowers:systematic-debugging` to diagnose.
+4. Do not commit until `make qa-local` passes.
 
 ## Cross-Skill References
 
-These are Claude Code plugin skills — MUST be invoked during repo-flow execution:
+These are Claude Code plugin skills — SHOULD be invoked if available during repo-flow execution.
+They are platform-provided (not repo-local), so agents on other platforms may skip them.
 
 - `superpowers:verification-before-completion` — invoke before claiming work is done.
 - `superpowers:systematic-debugging` — invoke if `make qa-local` fails.
