@@ -4,7 +4,8 @@ This file is a bounded cache for agent continuity.
 
 - Source of truth: Linear issues, projects, initiatives, and documents.
 - Freshness SLA: 24 hours.
-- Planning memory file: `docs/planning/linear-reorg-2026-03.md`
+- Planning memory file: `docs/planning/linear-reorg-2026-03.md` (March 2026 rebaseline; may be
+  superseded by a newer planning doc after the reorg is complete)
 - Either platform (Codex or Claude Code) can update this ledger.
 - If stale, do not trust this file until a new Linear sync pass is completed.
 

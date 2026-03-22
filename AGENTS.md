@@ -189,6 +189,10 @@ Approved labels (15). Do not create new labels without human approval.
 | `epic:dispatch` | Dispatch workflow epic |
 | `epic:agents-config` | Agent config epic |
 
+Label consolidation reference (CWS-93): `epic:security` was absorbed into `epic:safety`.
+`Status:*` labels, duplicate `Bug`/`Feature` labels, and Codex-specific labels were removed.
+If old label names appear in Linear history, map them to the closest approved label above.
+
 ## Bash Security Baseline
 
 Shell scripts must:
