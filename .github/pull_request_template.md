@@ -1,6 +1,6 @@
 ## Branch And Title Convention
 
-- Branch: `cws/<id>-<slug>` (task) or `cws/phase-<n>-<slug>` (rollout)
+- Branch: `cws/<id>-<slug>`
 - Task-branch PR title must include matching issue token (`CWS-<id>` or `cws-<id>`)
 - Include a direct Linear issue link in the PR body
 - For non-interactive stack submit (`gt submit --no-interactive`), replace this template body with a concrete summary before PR ready.
