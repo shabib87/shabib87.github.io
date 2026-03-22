@@ -38,43 +38,24 @@ data = YAML.safe_load(File.read(active_plan), permitted_classes: [Date, Time], a
 plan_id = data["plan_id"].to_s.strip
 base_branch = data["base_branch"].to_s.strip
 task_branch_pattern = data["task_branch_pattern"].to_s.strip
-phase_branch_pattern = data["phase_branch_pattern"].to_s.strip
 required_checks = data["required_checks"].is_a?(Array) ? data["required_checks"] : []
 
-if plan_id.empty? || base_branch.empty? || task_branch_pattern.empty? || phase_branch_pattern.empty?
-  warn "error: active rollout plan is missing plan_id/base_branch/task_branch_pattern/phase_branch_pattern"
+if plan_id.empty? || base_branch.empty? || task_branch_pattern.empty?
+  warn "error: active rollout plan is missing plan_id/base_branch/task_branch_pattern"
   exit 1
 end
 
-branch_mode = nil
-phase = nil
-
-phase_match = Regexp.new(phase_branch_pattern).match(branch)
 task_match = Regexp.new(task_branch_pattern).match(branch)
-if !phase_match.nil?
-  branch_mode = "phase"
-  phase = phase_match[1].to_i
-  if phase <= 0
-    warn "error: extracted phase must be >= 1 for branch #{branch.inspect}"
-    exit 1
-  end
-elsif !task_match.nil?
-  branch_mode = "task"
-else
-  warn "error: branch #{branch.inspect} does not match task pattern #{task_branch_pattern.inspect} or phase pattern #{phase_branch_pattern.inspect}"
+if task_match.nil?
+  warn "error: branch #{branch.inspect} does not match task pattern #{task_branch_pattern.inspect}"
   exit 1
 end
 
-puts "#{plan_id}\t#{base_branch}\t#{branch_mode}\t#{phase}\t#{phase_branch_pattern}\t#{required_checks.join(',')}"
+puts "#{plan_id}\t#{base_branch}\t#{required_checks.join(',')}"
 RUBY
 )"
 
-plan_id="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $1}')"
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
-branch_mode="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $3}')"
-phase="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
-phase_branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $5}')"
-required_checks="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $6}')"
 
 if ! ruby - "$repo_root/docs/agent-context.md" <<'RUBY'
 require "time"
@@ -117,57 +98,21 @@ fi
 
 issue_id=""
 linear_issue_link=""
-if [[ "$branch_mode" == "task" ]]; then
-  if [[ "$branch" =~ ^cws/([0-9]+)-[a-z0-9-]+$ ]]; then
-    issue_id="CWS-${BASH_REMATCH[1]}"
-    linear_issue_link="https://linear.app/codewithshabib/issue/${issue_id}"
-  else
-    echo "error: unable to derive issue id from task branch: $branch" >&2
-    exit 1
-  fi
-
-  # Task files are local context snapshots. Gate only on existence; mutable status stays in Linear.
-  task_file="$repo_root/docs/tasks/${issue_id}.md"
-  if [[ ! -f "$task_file" ]]; then
-    echo "error: missing required task file: docs/tasks/${issue_id}.md" >&2
-    exit 1
-  fi
-fi
-
-if [[ "$branch_mode" == "phase" && "$phase" -gt 1 ]]; then
-  pr_index="$(gh pr list --state all --base "$base_branch" --limit 200 --json number,state,mergedAt,headRefName)"
-
-  ruby - "$pr_index" "$phase_branch_pattern" "$phase" <<'RUBY'
-require "json"
-
-prs = JSON.parse(ARGV.fetch(0))
-branch_pattern = Regexp.new(ARGV.fetch(1))
-phase = ARGV.fetch(2).to_i
-
-by_phase = Hash.new { |hash, key| hash[key] = [] }
-prs.each do |pr|
-  match = branch_pattern.match(pr["headRefName"].to_s)
-  next if match.nil?
-
-  phase_number = match[1].to_i
-  by_phase[phase_number] << pr
-end
-
-errors = []
-(1...phase).each do |required_phase|
-  entries = by_phase[required_phase]
-  merged = entries.any? { |pr| pr["state"] == "MERGED" || !pr["mergedAt"].nil? }
-  open = entries.any? { |pr| pr["state"] == "OPEN" }
-  errors << "phase #{required_phase} is not merged yet" unless merged
-  errors << "phase #{required_phase} still has an open PR" if open
-end
-
-if errors.any?
-  errors.each { |error| warn "error: #{error}" }
+if [[ "$branch" =~ ^cws/([0-9]+)-[a-z0-9-]+$ ]]; then
+  issue_id="CWS-${BASH_REMATCH[1]}"
+  linear_issue_link="https://linear.app/codewithshabib/issue/${issue_id}"
+else
+  echo "error: unable to derive issue id from task branch: $branch" >&2
   exit 1
-end
-RUBY
 fi
+
+# Task files are local context snapshots. Gate only on existence; mutable status stays in Linear.
+task_file="$repo_root/docs/tasks/${issue_id}.md"
+if [[ ! -f "$task_file" ]]; then
+  echo "error: missing required task file: docs/tasks/${issue_id}.md" >&2
+  exit 1
+fi
+
 
 title_line="$("$repo_root/.agents/skills/repo-flow/scripts/infer-pr-metadata.sh" "$type")"
 title="${title_line#TITLE=}"
@@ -224,14 +169,7 @@ cat > "$body_file" <<EOF
 
 ## Linear Traceability
 
-- Issue: ${linear_issue_link:-"(phase branch / no direct CWS issue id)"}
-
-## Rollout Metadata
-
-- plan_id: \`$plan_id\`
-- branch_mode: \`$branch_mode\`
-- phase: \`${phase:-n/a}\`
-- required_checks: \`$required_checks\`
+- Issue: ${linear_issue_link}
 
 ## Validation
 
