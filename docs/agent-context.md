@@ -47,10 +47,10 @@ This file is a bounded cache for agent continuity.
 - Editorial chain blocked until voice profile interview (CWS-14/48)
 - Semgrep post-tool hook erroring (no SEMGREP_APP_TOKEN) — non-blocking but noisy
 
-## Next 10 Actions
+## Next Actions (snapshot — verify against Linear before executing)
 
 1. Merge CWS-93 Graphite stack
-2. Close CWS-44 after agent-context.md rewrite merges
+2. Close CWS-44 (agent-context schema) after agent-context.md rewrite merges
 3. Update CWS-81 remaining scope
 4. Pick up CWS-18 (next infrastructure task)
 5. Pick up CWS-5 (blocked by CWS-18)
