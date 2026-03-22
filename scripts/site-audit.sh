@@ -218,7 +218,7 @@ when "maintenance"
     add_finding(findings, "note", "maintenance", "make check requires a successful Jekyll build and may need network access for the remote theme", "scripts/run-checks.sh")
   end
 
-  %w[site-audit codex-check qa-local].each do |target_name|
+  %w[site-audit workflow-check qa-local].each do |target_name|
     add_finding(findings, "error", "maintenance", "missing #{target_name} Make target", "Makefile") unless makefile.match?(/^#{Regexp.escape(target_name)}:/)
   end
 end

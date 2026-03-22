@@ -16,7 +16,7 @@ run_step() {
 
 run_step "Linting repo automation and docs" make lint
 run_step "Running security checks" make security
-run_step "Validating Codex skills, prompts, and docs" make codex-check
+run_step "Validating workflow skills, prompts, and docs" make workflow-check
 run_step "Running site SEO audit" make site-audit AUDIT=seo TARGET=site
 run_step "Running site quality audit" make site-audit AUDIT=quality TARGET=site
 run_step "Running site maintenance audit" make site-audit AUDIT=maintenance TARGET=site

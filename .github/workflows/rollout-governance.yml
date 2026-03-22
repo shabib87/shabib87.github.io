@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -26,4 +26,4 @@ jobs:
         run: CI_SETUP_PROFILE=base make ci-setup
 
       - name: Run rollout governance checks
-        run: ./scripts/run-codex-checks.sh
+        run: ./scripts/run-workflow-checks.sh
