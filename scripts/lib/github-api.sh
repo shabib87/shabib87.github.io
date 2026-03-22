@@ -45,6 +45,10 @@ _github_resolve_repo() {
   if [[ "$remote_url" =~ ^git@[^:]+:(.+/[^/]+)(\.git)?$ ]]; then
     slug="${BASH_REMATCH[1]}"
     slug="${slug%.git}"
+  # SSH protocol: ssh://git@github.com/owner/repo.git or ssh://git@github.com:22/owner/repo.git
+  elif [[ "$remote_url" =~ ^ssh://git@[^/]+(:[0-9]+)?/(.+/[^/]+)(\.git)?$ ]]; then
+    slug="${BASH_REMATCH[2]}"
+    slug="${slug%.git}"
   # HTTPS: https://github.com/owner/repo.git
   elif [[ "$remote_url" =~ ^https?://[^/]+/(.+/[^/]+)(\.git)?$ ]]; then
     slug="${BASH_REMATCH[1]}"
@@ -72,8 +76,7 @@ github_api_get() {
   local endpoint="$1"
 
   if _gh_available; then
-    gh api "$endpoint"
-    return
+    gh api "$endpoint" 2>/dev/null && return 0
   fi
 
   local token
@@ -92,8 +95,7 @@ github_api_post() {
   local json_body="$3"
 
   if _gh_available; then
-    gh api --method "$method" "$endpoint" --input - <<<"$json_body"
-    return
+    gh api --method "$method" "$endpoint" --input - <<<"$json_body" 2>/dev/null && return 0
   fi
 
   local token
@@ -113,12 +115,13 @@ github_api_post() {
 
 # gh_or_curl_pr_view <ref>
 # ref: branch name or PR number
+# Returns JSON with fields: number, state, url, headRefName, baseRefName,
+# isDraft, statusCheckRollup, mergedAt (normalized from REST API if using curl)
 gh_or_curl_pr_view() {
   local ref="$1"
 
   if _gh_available; then
-    gh pr view "$ref"
-    return
+    gh pr view "$ref" --json number,state,url,headRefName,baseRefName,isDraft,statusCheckRollup,mergedAt 2>/dev/null && return 0
   fi
 
   local token repo_slug pr_number
@@ -136,10 +139,25 @@ gh_or_curl_pr_view() {
       ruby -rjson -e 'data=JSON.parse(STDIN.read); puts data.first["number"] rescue exit(1)')"
   fi
 
+  # Normalize REST API response to match gh --json field names
   curl -fsSL \
     -H "Authorization: token ${token}" \
     -H "Accept: application/vnd.github+json" \
-    "https://api.github.com/repos/${repo_slug}/pulls/${pr_number}"
+    "https://api.github.com/repos/${repo_slug}/pulls/${pr_number}" |
+    ruby -rjson -e '
+      pr = JSON.parse(STDIN.read)
+      normalized = {
+        "number"            => pr["number"],
+        "state"             => pr["state"],
+        "url"               => pr["html_url"],
+        "headRefName"       => pr.dig("head", "ref"),
+        "baseRefName"       => pr.dig("base", "ref"),
+        "isDraft"           => pr["draft"],
+        "statusCheckRollup" => [],
+        "mergedAt"          => pr["merged_at"]
+      }
+      puts JSON.generate(normalized)
+    '
 }
 
 # gh_or_curl_pr_create <base> <head> <title> <body_file>
@@ -154,8 +172,7 @@ gh_or_curl_pr_create() {
       --base "$base" \
       --head "$head" \
       --title "$title" \
-      --body-file "$body_file"
-    return
+      --body-file "$body_file" 2>/dev/null && return 0
   fi
 
   local token repo_slug body_content json_payload
@@ -190,8 +207,7 @@ gh_or_curl_pr_edit() {
   local body_file="$3"
 
   if _gh_available; then
-    gh pr edit "$pr" --title "$title" --body-file "$body_file"
-    return
+    gh pr edit "$pr" --title "$title" --body-file "$body_file" 2>/dev/null && return 0
   fi
 
   local token repo_slug body_content json_payload
@@ -230,8 +246,7 @@ gh_or_curl_pr_merge() {
       merge)  flag="--merge"  ;;
       *)      flag="--rebase" ;;
     esac
-    gh pr merge "$pr" $flag --delete-branch
-    return
+    gh pr merge "$pr" $flag --delete-branch 2>/dev/null && return 0
   fi
 
   local token repo_slug merge_method json_payload
