@@ -78,6 +78,7 @@ class RolloutGovernanceTest < Minitest::Test
       assert_match(/does not match task pattern/i, stderr)
     end
   end
+
   def test_accepts_exempt_dependabot_branch
     with_repo(branch: "dependabot/npm_and_yarn/lodash-4.17.21") do
       write_active_plan("exempt_branch_patterns" => ["^dependabot/", "^renovate/", "^gh-pages$"])
@@ -86,6 +87,7 @@ class RolloutGovernanceTest < Minitest::Test
       assert_match(/exempt/, stdout)
     end
   end
+
   def test_accepts_exempt_gh_pages_branch
     with_repo(branch: "gh-pages") do
       write_active_plan("exempt_branch_patterns" => ["^dependabot/", "^renovate/", "^gh-pages$"])
@@ -94,6 +96,7 @@ class RolloutGovernanceTest < Minitest::Test
       assert_match(/exempt/, stdout)
     end
   end
+
   def test_rejects_non_exempt_non_matching_branch
     with_repo(branch: "feature/random") do
       write_active_plan("exempt_branch_patterns" => ["^dependabot/", "^renovate/", "^gh-pages$"])
@@ -102,6 +105,7 @@ class RolloutGovernanceTest < Minitest::Test
       assert_match(/does not match task pattern/i, stderr)
     end
   end
+
   private
   def deep_merge!(target, updates)
     updates.each_pair do |key, value|
