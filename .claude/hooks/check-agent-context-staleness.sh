@@ -16,7 +16,7 @@ fi
 # shellcheck disable=SC2016
 stale_ts="$(ruby -e '
   content = File.read(ARGV[0])
-  section = content.match(/^## Stale After\s*$\n+((?:- .*\n)+)/m)
+  section = content.match(/^## Stale After\s*\n\n((?:- .*\n)+)/)
   if section.nil?
     warn "error: cannot find Stale After section in agent-context.md"
     exit 2
@@ -27,7 +27,7 @@ stale_ts="$(ruby -e '
     exit 2
   end
   puts ts_line[/`([^`]+)`/, 1]
-' "$agent_context" 2>&1)" || exit 2
+' "$agent_context")" || exit 2
 
 if [[ -z "$stale_ts" ]]; then
   echo "error: empty stale timestamp in agent-context.md" >&2
@@ -44,7 +44,7 @@ is_stale="$(ruby -e '
     exit 2
   end
   puts Time.now > ts ? "stale" : "fresh"
-' "$stale_ts" 2>&1)" || exit 2
+' "$stale_ts")" || exit 2
 
 if [[ "$is_stale" == "stale" ]]; then
   cat <<EOF
