@@ -113,7 +113,6 @@ if [[ ! -f "$task_file" ]]; then
   exit 1
 fi
 
-
 title_line="$("$repo_root/.agents/skills/repo-flow/scripts/infer-pr-metadata.sh" "$type")"
 title="${title_line#TITLE=}"
 if [[ -n "$issue_id" ]]; then
