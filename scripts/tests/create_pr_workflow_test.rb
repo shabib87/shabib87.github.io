@@ -25,14 +25,14 @@ class CreatePrWorkflowTest < Minitest::Test
     assert_match(/gt submit --stack --no-interactive --publish/, script_body)
   end
 
-  def test_normalizes_pr_metadata_with_gh_after_submit
-    assert_match(/gh pr edit "\$branch" --title "\$title" --body-file "\$body_file"/, script_body)
+  def test_normalizes_pr_metadata_after_submit
+    assert_match(/gh_or_curl_pr_edit "\$branch" "\$title" "\$body_file"/, script_body)
     assert_match(/gh pr ready "\$branch"/, script_body)
   end
 
-  def test_falls_back_to_gh_pr_create_when_branch_has_no_pr
-    assert_match(/if ! gh pr view "\$branch" >/i, script_body)
-    assert_match(/gh pr create \\/, script_body)
+  def test_falls_back_to_pr_create_when_branch_has_no_pr
+    assert_match(/if ! gh_or_curl_pr_view "\$branch" >/i, script_body)
+    assert_match(/gh_or_curl_pr_create "\$base_branch" "\$branch" "\$title" "\$body_file"/, script_body)
   end
 
   def test_no_hard_failure_when_pr_already_exists
