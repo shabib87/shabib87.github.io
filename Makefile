@@ -36,7 +36,7 @@ help:
 	@echo "  make start-work TOPIC=\"...\" TYPE=chore"
 	@echo "  make start-phase PLAN=... PHASE=1 TOPIC=\"...\" TYPE=feat"
 	@echo "  make create-pr TYPE=feat"
-	@echo "  make finalize-merge PR=123"
+	@echo "  make finalize-merge PR=123 [YES=1] [STACK=1]"
 	@echo "  make rollout-audit"
 	@echo ""
 	@echo "Skill Governance:"
@@ -94,7 +94,7 @@ create-pr:
 	@./scripts/create-pr.sh
 
 finalize-merge:
-	@./scripts/finalize-merge.sh
+	@YES='$(YES)' STACK='$(STACK)' ./scripts/finalize-merge.sh
 
 rollout-audit:
 	@./scripts/rollout-audit.sh
