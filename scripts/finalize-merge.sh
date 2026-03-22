@@ -4,13 +4,29 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# shellcheck disable=SC1091
+. "$repo_root/scripts/lib/github-api.sh"
+
+non_interactive="${YES:-}"
+stack_mode="${STACK:-}"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --yes|--no-interactive) non_interactive=1; shift ;;
+    --stack) stack_mode=1; shift ;;
+    *) break ;;
+  esac
+done
+
 pr="${PR:-${1:-}}"
 
 "$repo_root/.agents/skills/repo-flow/scripts/ensure-clean-tree.sh"
 
-if ! gh auth status >/dev/null 2>&1; then
-  echo "error: GitHub CLI authentication is invalid. Run: gh auth login -h github.com" >&2
-  exit 1
+if ! _gh_available; then
+  if ! _github_resolve_token >/dev/null 2>&1; then
+    echo "error: no GitHub authentication. Run: gh auth login, or set GITHUB_TOKEN" >&2
+    exit 1
+  fi
 fi
 
 if [[ -z "$pr" ]]; then
@@ -57,7 +73,7 @@ base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
 task_branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $3}')"
 required_checks_csv="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
 
-pr_state="$(gh pr view "$pr" --json number,statusCheckRollup,isDraft,url,baseRefName,headRefName,state)"
+pr_state="$(gh_or_curl_pr_view "$pr")"
 
 validation="$(
   ruby - "$pr_state" "$base_branch" "$task_branch_pattern" "$required_checks_csv" <<'RUBY'
@@ -122,8 +138,8 @@ if [[ "$base_ref_name" != "$base_branch" ]]; then
   is_stack_base="true"
 fi
 
-
-rebase_allowed="$(gh repo view --json rebaseMergeAllowed --jq '.rebaseMergeAllowed')"
+repo_slug="$(_github_resolve_repo)"
+rebase_allowed="$(github_api_get "/repos/${repo_slug}" | ruby -rjson -e 'puts JSON.parse(STDIN.read)["allow_rebase_merge"]' 2>/dev/null || echo "true")"
 if [[ "$rebase_allowed" != "true" ]]; then
   echo "error: repository is not configured for rebase merges; refusing to pick a different strategy silently" >&2
   exit 1
@@ -169,14 +185,34 @@ stacked PR note:
 - to merge the full stack, use Graphite web "Merge stack" or run: gt merge
 EOF
 fi
-printf 'Integrate this PR into %s via GitHub rebase merge (single PR only)? [y/N] ' "$base_ref_name"
-read -r confirm
-if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
-  echo "integration cancelled"
-  exit 1
+
+if [[ -n "$non_interactive" ]]; then
+  echo "non-interactive mode: proceeding with merge"
+else
+  printf 'Integrate this PR into %s via GitHub rebase merge (single PR only)? [y/N] ' "$base_ref_name"
+  read -r confirm
+  if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+    echo "integration cancelled"
+    exit 1
+  fi
 fi
 
-gh pr merge "$pr" --rebase --delete-branch
+if [[ -n "$stack_mode" ]]; then
+  echo "stack merge mode"
+  if command -v gt >/dev/null 2>&1; then
+    if gt merge 2>/dev/null; then
+      echo "stack merged via gt merge"
+    else
+      echo "warning: gt merge failed; falling back to single PR merge" >&2
+      gh_or_curl_pr_merge "$pr" rebase
+    fi
+  else
+    echo "warning: gt not available; falling back to single PR merge" >&2
+    gh_or_curl_pr_merge "$pr" rebase
+  fi
+else
+  gh_or_curl_pr_merge "$pr" rebase
+fi
 
 main_remote="origin"
 main_remote_branch="$base_branch"
