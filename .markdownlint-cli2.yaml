@@ -7,4 +7,5 @@ ignores:
   - "_site/**"
   - "vendor/**"
   - ".bundle/**"
-  - "docs/superpowers/**"
+  - "docs/superpowers/specs/**"
+  - "docs/superpowers/plans/**"
