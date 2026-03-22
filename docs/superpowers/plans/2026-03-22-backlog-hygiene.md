@@ -47,7 +47,7 @@ All mutations happen through Linear MCP tools. No files created or modified.
 
 **PR 4 — Planning doc rewrite + task file:**
 - Rewrite: `docs/planning/linear-reorg-2026-03.md`
-- Create: `docs/tasks/CWS-<id>.md` (task file for this cleanup issue)
+- Create: `docs/tasks/CWS-93.md` (task file for this cleanup issue)
 
 ---
 
@@ -90,7 +90,7 @@ CWS-1, 2, 3, 4 were already cancelled in a prior session (Linear onboarding nois
 
 Use `mcp__claude_ai_Linear__save_issue` to:
 - Set state to `Done`
-- Add comment: "Closing: label taxonomy exists (39 labels). Cleanup to 15 labels is being executed as part of CWS-<id> (backlog hygiene)."
+- Add comment: "Closing: label taxonomy exists (39 labels). Cleanup to 15 labels is being executed as part of CWS-93 (backlog hygiene)."
 
 - [ ] **Step 2: Fix agent-context.md format (prep for CWS-44 close)**
 
@@ -98,7 +98,7 @@ This is done in Task 5 (PR 2). CWS-44 will be closed after agent-context.md is r
 
 Use `mcp__claude_ai_Linear__save_comment`:
 - Issue: CWS-44
-- Comment: "agent-context.md rewrite in progress as part of CWS-<id>. Will match the 8-section schema from AC. Closing after PR merges."
+- Comment: "agent-context.md rewrite in progress as part of CWS-93. Will match the 8-section schema from AC. Closing after PR merges."
 
 ---
 
@@ -505,12 +505,12 @@ This file is a bounded cache for agent continuity.
 
 - Synced at: `<current timestamp>`
 - Synced by: `Claude Code`
-- Scope: `CWS-<id> backlog hygiene, label cleanup, and cycle rebaseline`
+- Scope: `CWS-93 backlog hygiene, label cleanup, and cycle rebaseline`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
   - `Blog Content Pipeline`
-  - `CWS-<id>` (In Progress)
+  - `CWS-93` (In Progress)
 
 ## Stale After
 
@@ -519,13 +519,13 @@ This file is a bounded cache for agent continuity.
 
 ## Active Phase
 
-- CWS-<id> (backlog hygiene) is in progress.
+- CWS-93 (backlog hygiene) is in progress.
 - Phase 1 (Linear mutations) complete. Phase 2 (repo changes) in Graphite stack.
 - CWS-80 (Done), CWS-82 (Done).
 
 ## Top Priorities
 
-1. Complete CWS-<id> backlog hygiene (this task)
+1. Complete CWS-93 backlog hygiene (this task)
 2. CWS-81 normalization (parent)
 3. Infrastructure chain: CWS-18 → CWS-5 → CWS-12
 
@@ -542,7 +542,7 @@ This file is a bounded cache for agent continuity.
 
 ## Next 10 Actions
 
-1. Merge CWS-<id> Graphite stack
+1. Merge CWS-93 Graphite stack
 2. Close CWS-44 after agent-context.md rewrite merges
 3. Close CWS-7 after label cleanup merges
 4. Update CWS-81 remaining scope
@@ -683,16 +683,16 @@ gt create --all -m "chore: harden repo-flow skill per CWS-82 lessons and agentsk
 
 **Files:**
 - Rewrite: `docs/planning/linear-reorg-2026-03.md`
-- Create: `docs/tasks/CWS-<id>.md`
+- Create: `docs/tasks/CWS-93.md`
 
 - [ ] **Step 1: Create task file**
 
-Create `docs/tasks/CWS-<id>.md`:
+Create `docs/tasks/CWS-93.md`:
 
 ```markdown
-# CWS-<id>: Backlog Hygiene, Label Cleanup, and Cycle Rebaseline
+# CWS-93: Backlog Hygiene, Label Cleanup, and Cycle Rebaseline
 
-- Linear: https://linear.app/codewithshabib/issue/CWS-<id>
+- Linear: https://linear.app/codewithshabib/issue/CWS-93
 - Parent: CWS-81
 - Branch: `cws/<id>-backlog-hygiene`
 - Spec: `docs/superpowers/specs/2026-03-22-backlog-hygiene-design.md`
@@ -801,7 +801,7 @@ After the stack is merged (via `gt merge` or Graphite web):
 
 Use `mcp__claude_ai_Linear__save_issue`:
 - State: Done
-- Comment: "agent-context.md rewritten to CWS-44 8-section schema. Merged in CWS-<id> stack."
+- Comment: "agent-context.md rewritten to CWS-44 8-section schema. Merged in CWS-93 stack."
 
 - [ ] **Step 2: Close CWS-7**
 
