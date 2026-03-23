@@ -94,7 +94,7 @@ create-pr:
 	@TYPE='$(TYPE)' ./scripts/create-pr.sh
 
 finalize-merge:
-	@YES='$(YES)' STACK='$(STACK)' ./scripts/finalize-merge.sh
+	@PR='$(PR)' YES='$(YES)' STACK='$(STACK)' ./scripts/finalize-merge.sh
 
 rollout-audit:
 	@./scripts/rollout-audit.sh

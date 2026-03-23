@@ -63,6 +63,11 @@ class CreatePrWorkflowTest < Minitest::Test
     refute_match(/exit 1.*# stale/i, script_body)
   end
 
+  def test_staleness_checkbox_reflects_actual_state
+    assert_match(/agent_context_fresh/, script_body)
+    assert_match(/\$\{agent_context_fresh\}.*agent-context\.md.*fresh/, script_body)
+  end
+
   def test_hard_fails_when_task_file_missing_for_task_branch
     assert_match(/missing required task file: docs\/tasks\/\$\{issue_id\}\.md/, script_body)
   end
