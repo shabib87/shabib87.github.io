@@ -54,9 +54,13 @@ class CreatePrWorkflowTest < Minitest::Test
     assert_match(/cat "\$gt_log_file" >&2/, script_body)
   end
 
-  def test_hard_fails_when_agent_context_is_missing_or_stale
+  def test_hard_fails_when_agent_context_is_missing
     assert_match(/missing docs\/agent-context\.md/, script_body)
-    assert_match(/docs\/agent-context\.md is stale/, script_body)
+  end
+
+  def test_warns_but_does_not_block_when_agent_context_is_stale
+    assert_match(/WARNING:.*docs\/agent-context\.md is stale/, script_body)
+    refute_match(/exit 1.*# stale/i, script_body)
   end
 
   def test_hard_fails_when_task_file_missing_for_task_branch
@@ -75,5 +79,14 @@ class CreatePrWorkflowTest < Minitest::Test
   def test_pr_body_includes_linear_traceability_link
     assert_match(/## Linear Traceability/, script_body)
     assert_match(/linear_issue_link/, script_body)
+  end
+
+  def test_sources_github_api_library
+    assert_match(%r{scripts/lib/github-api\.sh}, script_body)
+  end
+
+  def test_uses_fallback_auth_check
+    assert_match(/_gh_available/, script_body)
+    assert_match(/_github_resolve_token/, script_body)
   end
 end
