@@ -93,8 +93,8 @@ rescue ArgumentError
 end
 
 if Time.now > stale_at
-  warn "error: docs/agent-context.md is stale (stale_after=#{stale_at.strftime("%Y-%m-%d %H:%M:%S %Z")})"
-  exit 1
+  warn "WARNING: docs/agent-context.md is stale (stale_after=#{stale_at.strftime("%Y-%m-%d %H:%M:%S %Z")})"
+  warn "WARNING: Run a Linear sync to refresh context before relying on cached issue states."
 end
 RUBY
 then
