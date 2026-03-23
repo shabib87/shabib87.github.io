@@ -2,7 +2,6 @@
 id: CWS-94
 title: "Harden PR Scripts for Stack, Sandbox, and Agent Workflows"
 parent: CWS-81
-status: In Progress
 linear: https://linear.app/codewithshabib/issue/CWS-94
 ---
 
