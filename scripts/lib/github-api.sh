@@ -61,9 +61,19 @@ _github_resolve_repo() {
   printf '%s\n' "$slug"
 }
 
-# _gh_available — returns 0 if gh CLI is installed AND authenticated
+# _gh_available — returns 0 if gh CLI is installed AND authenticated.
+# Result is cached for the lifetime of the sourcing shell to avoid
+# repeated network calls to gh auth status.
+_GH_AVAILABLE=""
 _gh_available() {
-  command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1
+  if [[ -z "$_GH_AVAILABLE" ]]; then
+    if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
+      _GH_AVAILABLE="yes"
+    else
+      _GH_AVAILABLE="no"
+    fi
+  fi
+  [[ "$_GH_AVAILABLE" == "yes" ]]
 }
 
 # ---------------------------------------------------------------------------
@@ -88,7 +98,7 @@ github_api_get() {
 }
 
 # github_api_post <method> <endpoint> <json_body>
-# method: POST, PATCH, PUT
+# method: POST, PATCH, PUT, DELETE
 github_api_post() {
   local method="$1"
   local endpoint="$2"
@@ -110,6 +120,25 @@ github_api_post() {
 }
 
 # ---------------------------------------------------------------------------
+# Internal helpers
+# ---------------------------------------------------------------------------
+
+# _resolve_pr_number <ref> <token> <repo_slug>
+# If ref is numeric, pass through. Otherwise, resolve branch name to PR number.
+_resolve_pr_number() {
+  local ref="$1" token="$2" repo_slug="$3"
+  if [[ "$ref" =~ ^[0-9]+$ ]]; then
+    printf '%s' "$ref"
+    return 0
+  fi
+  curl -fsSL \
+    -H "Authorization: token ${token}" \
+    -H "Accept: application/vnd.github+json" \
+    "https://api.github.com/repos/${repo_slug}/pulls?head=${repo_slug%%/*}:${ref}&state=all" |
+    ruby -rjson -e 'data=JSON.parse(STDIN.read); puts data.first["number"] rescue exit(1)'
+}
+
+# ---------------------------------------------------------------------------
 # PR-specific helpers
 # ---------------------------------------------------------------------------
 
@@ -127,25 +156,32 @@ gh_or_curl_pr_view() {
   local token repo_slug pr_number
   token="$(_github_resolve_token)"
   repo_slug="$(_github_resolve_repo)"
+  pr_number="$(_resolve_pr_number "$ref" "$token" "$repo_slug")"
 
-  # If ref looks like a number, use it directly; otherwise search by head branch
-  if [[ "$ref" =~ ^[0-9]+$ ]]; then
-    pr_number="$ref"
-  else
-    pr_number="$(curl -fsSL \
-      -H "Authorization: token ${token}" \
-      -H "Accept: application/vnd.github+json" \
-      "https://api.github.com/repos/${repo_slug}/pulls?head=${repo_slug%%/*}:${ref}&state=open" |
-      ruby -rjson -e 'data=JSON.parse(STDIN.read); puts data.first["number"] rescue exit(1)')"
-  fi
-
-  # Normalize REST API response to match gh --json field names
-  curl -fsSL \
+  # Fetch PR data
+  local pr_json head_sha checks_json
+  pr_json="$(curl -fsSL \
     -H "Authorization: token ${token}" \
     -H "Accept: application/vnd.github+json" \
-    "https://api.github.com/repos/${repo_slug}/pulls/${pr_number}" |
+    "https://api.github.com/repos/${repo_slug}/pulls/${pr_number}")"
+
+  # Fetch check runs for the head commit to populate statusCheckRollup
+  head_sha="$(printf '%s' "$pr_json" | ruby -rjson -e 'puts JSON.parse(STDIN.read).dig("head","sha")')"
+  checks_json="$(curl -fsSL \
+    -H "Authorization: token ${token}" \
+    -H "Accept: application/vnd.github+json" \
+    "https://api.github.com/repos/${repo_slug}/commits/${head_sha}/check-runs" 2>/dev/null || echo '{"check_runs":[]}')"
+
+  # Normalize REST API response to match gh --json field names
+  # shellcheck disable=SC2016
+  printf '%s\0%s' "$pr_json" "$checks_json" |
     ruby -rjson -e '
-      pr = JSON.parse(STDIN.read)
+      parts = STDIN.read.split("\0", 2)
+      pr = JSON.parse(parts[0])
+      checks_data = JSON.parse(parts[1]) rescue {"check_runs" => []}
+      check_runs = (checks_data["check_runs"] || []).map do |cr|
+        {"name" => cr["name"], "conclusion" => (cr["conclusion"] || "").upcase}
+      end
       normalized = {
         "number"            => pr["number"],
         "state"             => pr["state"],
@@ -153,7 +189,7 @@ gh_or_curl_pr_view() {
         "headRefName"       => pr.dig("head", "ref"),
         "baseRefName"       => pr.dig("base", "ref"),
         "isDraft"           => pr["draft"],
-        "statusCheckRollup" => [],
+        "statusCheckRollup" => check_runs,
         "mergedAt"          => pr["merged_at"]
       }
       puts JSON.generate(normalized)
@@ -199,20 +235,21 @@ gh_or_curl_pr_create() {
     "https://api.github.com/repos/${repo_slug}/pulls"
 }
 
-# gh_or_curl_pr_edit <pr> <title> <body_file>
-# pr: PR number
+# gh_or_curl_pr_edit <ref> <title> <body_file>
+# ref: branch name or PR number
 gh_or_curl_pr_edit() {
-  local pr="$1"
+  local ref="$1"
   local title="$2"
   local body_file="$3"
 
   if _gh_available; then
-    gh pr edit "$pr" --title "$title" --body-file "$body_file" 2>/dev/null && return 0
+    gh pr edit "$ref" --title "$title" --body-file "$body_file" 2>/dev/null && return 0
   fi
 
-  local token repo_slug body_content json_payload
+  local token repo_slug pr_number body_content json_payload
   token="$(_github_resolve_token)"
   repo_slug="$(_github_resolve_repo)"
+  pr_number="$(_resolve_pr_number "$ref" "$token" "$repo_slug")"
   body_content="$(cat "$body_file")"
 
   json_payload="$(ruby -rjson -e '
@@ -229,13 +266,13 @@ gh_or_curl_pr_edit() {
     -H "Accept: application/vnd.github+json" \
     -H "Content-Type: application/json" \
     -d "$json_payload" \
-    "https://api.github.com/repos/${repo_slug}/pulls/${pr}"
+    "https://api.github.com/repos/${repo_slug}/pulls/${pr_number}"
 }
 
-# gh_or_curl_pr_merge <pr> <method>
-# pr: PR number; method: rebase, squash, merge
+# gh_or_curl_pr_merge <ref> <method>
+# ref: branch name or PR number; method: rebase, squash, merge
 gh_or_curl_pr_merge() {
-  local pr="$1"
+  local ref="$1"
   local method="$2"
 
   if _gh_available; then
@@ -246,12 +283,25 @@ gh_or_curl_pr_merge() {
       merge)  flag="--merge"  ;;
       *)      flag="--rebase" ;;
     esac
-    gh pr merge "$pr" $flag --delete-branch 2>/dev/null && return 0
+    gh pr merge "$ref" $flag --delete-branch 2>/dev/null && return 0
   fi
 
-  local token repo_slug merge_method json_payload
+  local token repo_slug pr_number head_ref merge_method json_payload
   token="$(_github_resolve_token)"
   repo_slug="$(_github_resolve_repo)"
+
+  # Resolve PR number and head ref for branch cleanup
+  if [[ "$ref" =~ ^[0-9]+$ ]]; then
+    pr_number="$ref"
+    head_ref="$(curl -fsSL \
+      -H "Authorization: token ${token}" \
+      -H "Accept: application/vnd.github+json" \
+      "https://api.github.com/repos/${repo_slug}/pulls/${pr_number}" |
+      ruby -rjson -e 'puts JSON.parse(STDIN.read).dig("head","ref")')"
+  else
+    head_ref="$ref"
+    pr_number="$(_resolve_pr_number "$ref" "$token" "$repo_slug")"
+  fi
 
   case "$method" in
     rebase) merge_method="rebase" ;;
@@ -270,5 +320,12 @@ gh_or_curl_pr_merge() {
     -H "Accept: application/vnd.github+json" \
     -H "Content-Type: application/json" \
     -d "$json_payload" \
-    "https://api.github.com/repos/${repo_slug}/pulls/${pr}/merge"
+    "https://api.github.com/repos/${repo_slug}/pulls/${pr_number}/merge"
+
+  # Delete remote branch (best-effort, matches --delete-branch in gh path)
+  curl -fsSL \
+    -X DELETE \
+    -H "Authorization: token ${token}" \
+    -H "Accept: application/vnd.github+json" \
+    "https://api.github.com/repos/${repo_slug}/git/refs/heads/${head_ref}" 2>/dev/null || true
 }

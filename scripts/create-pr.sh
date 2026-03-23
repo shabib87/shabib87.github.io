@@ -62,7 +62,8 @@ RUBY
 
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
 
-if ! ruby - "$repo_root/docs/agent-context.md" <<'RUBY'
+agent_context_fresh="x"
+if ! staleness_result="$(ruby - "$repo_root/docs/agent-context.md" <<'RUBY'
 require "time"
 
 path = ARGV.fetch(0)
@@ -95,10 +96,14 @@ end
 if Time.now > stale_at
   warn "WARNING: docs/agent-context.md is stale (stale_after=#{stale_at.strftime("%Y-%m-%d %H:%M:%S %Z")})"
   warn "WARNING: Run a Linear sync to refresh context before relying on cached issue states."
+  puts "stale"
 end
 RUBY
-then
+)"; then
   exit 1
+fi
+if [[ "$staleness_result" == "stale" ]]; then
+  agent_context_fresh=" "
 fi
 
 issue_id=""
@@ -187,7 +192,7 @@ cat > "$body_file" <<EOF
 - [${branch_ok}] Branch name matches approved pattern
 - [${title_has_id}] PR title contains matching issue token (\`${issue_id}\` or \`${issue_id_lower:-}\`) (task branches)
 - [${task_file_exists}] \`docs/tasks/${issue_id}.md\` exists and is committed (task branches)
-- [x] \`docs/agent-context.md\` is fresh (not stale)
+- [${agent_context_fresh}] \`docs/agent-context.md\` is fresh (not stale)
 - [${linear_link_ok}] Linear issue link is present in this PR
 
 ## Summary
