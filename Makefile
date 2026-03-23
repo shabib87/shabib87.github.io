@@ -91,7 +91,7 @@ check:
 	@./scripts/run-checks.sh
 
 create-pr:
-	@./scripts/create-pr.sh
+	@TYPE='$(TYPE)' ./scripts/create-pr.sh
 
 finalize-merge:
 	@YES='$(YES)' STACK='$(STACK)' ./scripts/finalize-merge.sh
