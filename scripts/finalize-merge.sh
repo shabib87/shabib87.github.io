@@ -253,11 +253,14 @@ if [[ -f "$agent_context" ]]; then
       fi
       git push "$push_remote" "$head_branch"
 
-      echo "waiting for CI checks after staleness bump..."
       if _gh_available; then
-        gh pr checks "$pr" --watch --fail-level error 2>/dev/null || true
+        echo "waiting for CI checks after staleness bump..."
+        if ! gh pr checks "$pr" --watch --fail-level error; then
+          echo "error: CI checks failed after staleness bump; aborting merge" >&2
+          exit 1
+        fi
       else
-        echo "note: gh CLI not available; verify checks manually before merge lands" >&2
+        echo "warning: gh CLI not available; cannot verify CI checks after staleness bump" >&2
       fi
     fi
   fi
