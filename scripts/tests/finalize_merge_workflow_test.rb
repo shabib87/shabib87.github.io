@@ -35,4 +35,31 @@ class FinalizeMergeWorkflowTest < Minitest::Test
     refute_match(/task file status/i, script_body)
     refute_match(/Completion Evidence/, script_body)
   end
+
+  def test_accepts_yes_flag_for_non_interactive_mode
+    assert_match(/--yes\|--no-interactive\) non_interactive=1/, script_body)
+    assert_match(/non_interactive="\$\{YES:-\}"/, script_body)
+  end
+
+  def test_accepts_stack_flag_for_stack_merge
+    assert_match(/--stack\) stack_mode=1/, script_body)
+    assert_match(/stack_mode="\$\{STACK:-\}"/, script_body)
+  end
+
+  def test_uses_fallback_library_for_pr_view
+    assert_match(/gh_or_curl_pr_view "\$pr"/, script_body)
+  end
+
+  def test_sources_github_api_library
+    assert_match(%r{scripts/lib/github-api\.sh}, script_body)
+  end
+
+  def test_uses_fallback_auth_check
+    assert_match(/_gh_available/, script_body)
+    assert_match(/_github_resolve_token/, script_body)
+  end
+
+  def test_stack_mode_uses_gt_merge
+    assert_match(/gt merge/, script_body)
+  end
 end
