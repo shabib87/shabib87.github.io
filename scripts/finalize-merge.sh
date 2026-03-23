@@ -197,6 +197,72 @@ else
   fi
 fi
 
+# If agent-context.md is stale, bump timestamp on the feature branch before
+# merging so the bump lands on the base branch through the normal PR flow.
+# This respects branch protection — no direct push to main.
+agent_context="$repo_root/docs/agent-context.md"
+if [[ -f "$agent_context" ]]; then
+  # shellcheck disable=SC2016
+  is_stale="$(ruby -e '
+    require "time"
+    path = ARGV.fetch(0)
+    content = File.read(path)
+    section = content.match(/^## Stale After\s*\n+((?:- .*\n)+)/)
+    exit 0 unless section
+    ts_line = section[1].lines.find { |l| l.match?(/^\s*-\s*`[^`]+`\s*$/) }
+    exit 0 unless ts_line
+    ts = ts_line[/`([^`]+)`/, 1]
+    stale_at = Time.parse(ts) rescue nil
+    exit 0 unless stale_at
+    puts "stale" if Time.now > stale_at
+  ' "$agent_context" 2>/dev/null || true)"
+
+  if [[ "$is_stale" == "stale" ]]; then
+    echo "agent-context.md is stale; bumping timestamp on $head_branch before merge"
+
+    current_branch="$(git branch --show-current)"
+    if [[ "$current_branch" != "$head_branch" ]]; then
+      git checkout "$head_branch"
+    fi
+
+    # shellcheck disable=SC2016
+    new_stale_ts="$(ruby -e '
+      require "time"
+      puts (Time.now + 86400).strftime("%Y-%m-%d %H:%M:%S %Z")
+    ')"
+    # shellcheck disable=SC2016
+    ruby -e '
+      path = ARGV[0]
+      new_ts = ARGV[1]
+      content = File.read(path)
+      updated = content.sub(/^(## Stale After\s*\n+- )`[^`]+`/, "\\1`#{new_ts}`")
+      if updated == content
+        warn "warning: could not update stale timestamp in agent-context.md"
+      else
+        File.write(path, updated)
+      end
+    ' "$agent_context" "$new_stale_ts"
+
+    if ! git diff --quiet "$agent_context" 2>/dev/null; then
+      git add "$agent_context"
+      git commit -m "chore: bump agent-context staleness timestamp to $new_stale_ts"
+
+      push_remote="origin"
+      if push_upstream="$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}' 2>/dev/null)"; then
+        push_remote="${push_upstream%%/*}"
+      fi
+      git push "$push_remote" "$head_branch"
+
+      echo "waiting for CI checks after staleness bump..."
+      if _gh_available; then
+        gh pr checks "$pr" --watch --fail-level error 2>/dev/null || true
+      else
+        echo "note: gh CLI not available; verify checks manually before merge lands" >&2
+      fi
+    fi
+  fi
+fi
+
 if [[ -n "$stack_mode" ]]; then
   echo "stack merge mode"
   if command -v gt >/dev/null 2>&1; then
@@ -228,32 +294,3 @@ fi
 
 git checkout "$base_branch"
 git pull --ff-only "$main_remote" "$main_remote_branch"
-
-# Update agent-context.md staleness timestamp (D7)
-# Push immediately so other sessions see the fresh timestamp.
-agent_context="$repo_root/docs/agent-context.md"
-if [[ -f "$agent_context" ]]; then
-  # shellcheck disable=SC2016
-  new_stale_ts="$(ruby -e '
-    require "time"
-    puts (Time.now + 86400).strftime("%Y-%m-%d %H:%M:%S %Z")
-  ')"
-  # shellcheck disable=SC2016
-  ruby -e '
-    path = ARGV[0]
-    new_ts = ARGV[1]
-    content = File.read(path)
-    updated = content.sub(/^(## Stale After\s*\n+- )`[^`]+`/, "\\1`#{new_ts}`")
-    if updated == content
-      warn "warning: could not update stale timestamp in agent-context.md"
-    else
-      File.write(path, updated)
-    end
-  ' "$agent_context" "$new_stale_ts"
-
-  if ! git diff --quiet "$agent_context" 2>/dev/null; then
-    git add "$agent_context"
-    git commit -m "chore: bump agent-context staleness timestamp to $new_stale_ts"
-    git push "$main_remote" "$base_branch"
-  fi
-fi
