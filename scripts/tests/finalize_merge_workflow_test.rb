@@ -62,4 +62,26 @@ class FinalizeMergeWorkflowTest < Minitest::Test
   def test_stack_mode_uses_gt_merge
     assert_match(/gt merge/, script_body)
   end
+
+  def test_bumps_staleness_on_feature_branch_before_merge
+    assert_match(/agent-context\.md is stale; bumping timestamp on \$head_branch before merge/, script_body)
+    assert_match(/git push "\$push_remote" "\$head_branch"/, script_body)
+  end
+
+  def test_waits_for_ci_after_staleness_bump
+    assert_match(/gh pr checks "\$pr" --watch --fail-level error/, script_body)
+  end
+
+  def test_ci_failure_after_staleness_bump_aborts_merge
+    assert_match(/CI checks failed after staleness bump; aborting merge/, script_body)
+    # Must NOT swallow CI failures with || true
+    staleness_section = script_body[/bumping timestamp.*?fi\n\s*fi\n\s*fi/m]
+    refute_nil staleness_section, "could not locate staleness bump section"
+    refute_match(/gh pr checks.*\|\| true/, staleness_section)
+  end
+
+  def test_does_not_commit_staleness_bump_to_main
+    # The bump must go through the feature branch PR, not directly to main
+    refute_match(/git push.*\$main_remote.*\$base_branch.*staleness/, script_body)
+  end
 end

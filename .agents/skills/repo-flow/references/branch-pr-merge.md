@@ -20,6 +20,7 @@
 - prefer `gt submit --stack --no-interactive --publish` for non-interactive Graphite submission
 - include summary, why, validation, affected files, affected URLs, and self-review notes
 - for task branches, require `docs/tasks/CWS-<id>.md` as local execution context; do not maintain mutable status text in the task file
+- PR body is auto-generated from `.github/pull_request_template.md` template — includes traceability checklist, commit summary, Linear links, and affected files.
 
 ## Integration
 
@@ -31,15 +32,20 @@
 - if git/Graphite operations fail with `.git/index.lock` or sandbox write denial, escalate command
   approval explicitly and retry; command prefix rules improve consistency but do not replace
   filesystem permissions.
+- For agent/CI contexts, use `make finalize-merge PR=... YES=1` to skip interactive confirmation.
+- For full-stack merges, use `make finalize-merge PR=... STACK=1 YES=1` or `gt merge`.
 
 ## Stack Merge Policy
 
-- `make finalize-merge PR=...` merges a single PR via `gh pr merge --rebase --delete-branch`. It
+- `make finalize-merge PR=...` merges a single PR via `gh pr merge --rebase --delete-branch` (or
+  the `gh_or_curl` fallback in `scripts/lib/github-api.sh` when `gh` CLI is unavailable). It
   validates against the active rollout plan (`active-plan.yaml`): branch pattern matching, required
-  CI checks, phase ordering (for phase branches only), and rebase-merge availability. For PRs whose
-  base is a non-trunk stack branch, it warns that only the current PR is merged and directs to
-  `gt merge` or Graphite web for full-stack merges. It does not call any Graphite commands, manage
-  Graphite metadata, or retarget child PRs after deleting the merged branch.
+  CI checks, and rebase-merge availability. For PRs whose base is a non-trunk stack branch, it
+  warns that only the current PR is merged and directs to `gt merge` or Graphite web for
+  full-stack merges. It does not call any Graphite commands, manage Graphite metadata, or retarget
+  child PRs after deleting the merged branch.
+  - `--yes` / `YES=1` — skip interactive confirmation (required in agent/CI contexts).
+  - `--stack` / `STACK=1` — trigger full-stack merge mode via `gt merge`.
 - for Graphite stacks, prefer `gt merge` or Graphite web "Merge stack" to merge the full stack in
   one operation — this keeps Graphite metadata consistent and retargets children correctly
 - if using `make finalize-merge` on individual PRs in a stack, do NOT run `gt sync --force` to

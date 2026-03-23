@@ -7,6 +7,23 @@ description: >-
   integration). Use it even when requested indirectly ("open a PR", "finish merge", "prep
   branch"). Do not use for editorial drafting or content-only edits that do not involve repo
   workflow mechanics, and do not use for generic git advice outside this repository.
+metadata:
+  filePattern:
+    - "scripts/create-pr.sh"
+    - "scripts/finalize-merge.sh"
+    - "scripts/run-workflow-checks.sh"
+    - "scripts/start-work.sh"
+    - "scripts/run-local-qa.sh"
+    - "scripts/lib/github-api.sh"
+    - ".codex/rollout/active-plan.yaml"
+    - "Makefile"
+    - ".github/workflows/rollout-governance.yml"
+    - ".github/pull_request_template.md"
+  bashPattern:
+    - "make (create-pr|finalize-merge|start-work|workflow-check|qa-local)"
+    - "gt (create|submit|merge|restack|track)"
+    - "gh pr (create|merge|view|edit|ready)"
+    - "git push"
 ---
 
 # Repo Flow
@@ -72,6 +89,8 @@ non-obvious failure modes accumulate from real incidents.
   `make finalize-merge PR=...` for single-PR merges.
 - For Graphite stacks, `make finalize-merge` only merges one PR and does not manage Graphite
   metadata or retarget children. Use `gt merge` or Graphite web for full-stack merges.
+- If `gh` CLI fails, scripts automatically fall back to `curl` + GitHub REST API. The fallback
+  requires `GITHUB_TOKEN` or `gh auth token` to be available.
 
 ## Rules
 
@@ -79,7 +98,7 @@ non-obvious failure modes accumulate from real incidents.
 - Do not commit until the full local QA gate passes.
 - Re-run the same local QA gate on the committed tree before push or rebase integration.
 - Run local checks before opening a PR.
-- Require valid `gh` authentication for PR and rebase integration commands.
+- Require valid GitHub authentication (`gh` CLI or `GITHUB_TOKEN` for curl fallback).
 - Keep history linear and prefer rebase-only integration behavior.
 - Do not require external reviewer approval for this repo; require explicit self-review instead.
 - For task branches, require `docs/tasks/CWS-<id>.md` to exist; do not maintain mutable status text in the task file.
@@ -90,6 +109,77 @@ non-obvious failure modes accumulate from real incidents.
 - MUST NOT use `gt sync --force` to reconcile after partial stack merges.
 - For full-stack merges, use `gt merge` or Graphite web. Single-PR merges from a stack via `make finalize-merge PR=...` are allowed but only merge that PR — retarget children manually if needed.
 - MUST NOT create bulk commits — use atomic commits (one logical change per commit).
+
+## Agent Non-Interactive Mode
+
+For agent and CI contexts where interactive prompts are not available:
+
+- `make finalize-merge PR=<number> YES=1` skips the interactive confirmation prompt. The
+  `--yes` flag passed directly to `finalize-merge.sh` has the same effect.
+- `make finalize-merge PR=<number> STACK=1 YES=1` triggers full-stack merge mode. The
+  `--stack` flag passed directly to `finalize-merge.sh` has the same effect.
+- Use `YES=1` whenever running in a non-TTY environment (CI, subagent, background task) to
+  prevent the script from hanging on confirmation input.
+- Use `STACK=1` only when all PRs in the stack are ready to merge together.
+
+## Stack Workflow
+
+For Graphite stacked PRs, the recommended flow is:
+
+1. `gt create` — create a new stack layer from the current branch.
+2. `gt submit --stack --no-interactive --publish` — push all stack layers and open/update PRs.
+   `create-pr.sh` attempts this command first; if it fails or `gt` is unavailable, it falls
+   back to the `gh pr create` flow.
+3. To merge a full stack: `make finalize-merge PR=<top-pr> STACK=1 YES=1` or use `gt merge`.
+4. To merge a single PR from a stack: `make finalize-merge PR=<number> YES=1` — merges only
+   that PR and warns that children must be retargeted manually.
+
+## Exempt Branch Patterns
+
+The following branch patterns bypass governance branch-naming validation. They are configured
+in `.codex/rollout/active-plan.yaml` under `exempt_branch_patterns`:
+
+- `^dependabot/` — Dependabot dependency update branches.
+- `^renovate/` — Renovate dependency update branches.
+- `^gh-pages$` — GitHub Pages deployment branch.
+
+Exempt branches skip the `cws/<type>-<slug>` naming requirement but still go through CI checks
+and rebase-merge policy.
+
+## Fallback Authentication
+
+Scripts support two GitHub authentication paths:
+
+1. `gh` CLI — used when available and authenticated.
+2. `curl` + GitHub REST API — automatic fallback when `gh` CLI is unavailable or auth fails.
+
+Token resolution order for the curl fallback:
+
+1. `GITHUB_TOKEN` environment variable.
+2. Output of `gh auth token`.
+3. Fail with an explicit error if neither is available.
+
+Shared helper functions for both paths live in `scripts/lib/github-api.sh`. Scripts call
+`gh_or_curl` wrappers rather than invoking `gh` or `curl` directly, so the fallback is
+transparent to callers.
+
+## PR Template Compliance
+
+`create-pr.sh` generates a PR body that matches ALL sections of
+`.github/pull_request_template.md`. The generated body includes:
+
+- Branch And Title Convention
+- Traceability Checklist
+- Summary
+- Why
+- Linear Traceability
+- Validation
+- Affected Files
+- Affected URLs
+- Self-review Notes
+
+PRs created outside `make create-pr` must manually include all sections to pass PR template
+compliance gates.
 
 ## Validation Loop
 
