@@ -230,7 +230,7 @@ git checkout "$base_branch"
 git pull --ff-only "$main_remote" "$main_remote_branch"
 
 # Update agent-context.md staleness timestamp (D7)
-# This commit stays local until the next branch submission pushes main.
+# Push immediately so other sessions see the fresh timestamp.
 agent_context="$repo_root/docs/agent-context.md"
 if [[ -f "$agent_context" ]]; then
   # shellcheck disable=SC2016
@@ -254,5 +254,6 @@ if [[ -f "$agent_context" ]]; then
   if ! git diff --quiet "$agent_context" 2>/dev/null; then
     git add "$agent_context"
     git commit -m "chore: bump agent-context staleness timestamp to $new_stale_ts"
+    git push "$main_remote" "$base_branch"
   fi
 fi

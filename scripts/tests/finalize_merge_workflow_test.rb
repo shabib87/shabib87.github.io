@@ -62,4 +62,9 @@ class FinalizeMergeWorkflowTest < Minitest::Test
   def test_stack_mode_uses_gt_merge
     assert_match(/gt merge/, script_body)
   end
+
+  def test_bumps_staleness_timestamp_and_pushes_after_merge
+    assert_match(/bump agent-context staleness timestamp/, script_body)
+    assert_match(/git push "\$main_remote" "\$base_branch"/, script_body)
+  end
 end
