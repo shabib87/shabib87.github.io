@@ -34,6 +34,6 @@ specialized roles execute bounded tasks.
 
 ## QA Contract
 
-- `make codex-check` validates skill metadata, prompt/doc integrity, and multi-agent contracts.
+- `make workflow-check` validates skill metadata, prompt/doc integrity, and multi-agent contracts.
 - `make qa-local` remains the release-grade gate before commit, push, PR, and integration.
-- For decommissioned workflow surfaces, keep explicit negative checks in codex-check.
+- For decommissioned workflow surfaces, keep explicit negative checks in workflow-check.

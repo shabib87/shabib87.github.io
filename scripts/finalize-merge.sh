@@ -36,11 +36,10 @@ data = YAML.safe_load(File.read(active_plan), permitted_classes: [Date, Time], a
 plan_id = data["plan_id"].to_s.strip
 base_branch = data["base_branch"].to_s.strip
 task_branch_pattern = data["task_branch_pattern"].to_s.strip
-phase_branch_pattern = data["phase_branch_pattern"].to_s.strip
 required_checks = data["required_checks"].is_a?(Array) ? data["required_checks"] : []
 
-if plan_id.empty? || base_branch.empty? || task_branch_pattern.empty? || phase_branch_pattern.empty?
-  warn "error: active rollout plan is missing plan_id/base_branch/task_branch_pattern/phase_branch_pattern"
+if plan_id.empty? || base_branch.empty? || task_branch_pattern.empty?
+  warn "error: active rollout plan is missing plan_id/base_branch/task_branch_pattern"
   exit 1
 end
 
@@ -49,49 +48,38 @@ if required_checks.empty?
   exit 1
 end
 
-puts "#{plan_id}\t#{base_branch}\t#{task_branch_pattern}\t#{phase_branch_pattern}\t#{required_checks.join(',')}"
+puts "#{plan_id}\t#{base_branch}\t#{task_branch_pattern}\t#{required_checks.join(',')}"
 RUBY
 )"
 
 plan_id="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $1}')"
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
 task_branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $3}')"
-phase_branch_pattern="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
-required_checks_csv="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $5}')"
+required_checks_csv="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}')"
 
 pr_state="$(gh pr view "$pr" --json number,statusCheckRollup,isDraft,url,baseRefName,headRefName,state)"
 
 validation="$(
-  ruby - "$pr_state" "$base_branch" "$task_branch_pattern" "$phase_branch_pattern" "$required_checks_csv" <<'RUBY'
+  ruby - "$pr_state" "$base_branch" "$task_branch_pattern" "$required_checks_csv" <<'RUBY'
 require "json"
 
 pr = JSON.parse(ARGV.fetch(0))
 base_branch = ARGV.fetch(1)
 task_branch_pattern = Regexp.new(ARGV.fetch(2))
-phase_branch_pattern = Regexp.new(ARGV.fetch(3))
-required_checks = ARGV.fetch(4).split(",").map(&:strip).reject(&:empty?)
+required_checks = ARGV.fetch(3).split(",").map(&:strip).reject(&:empty?)
 
 errors = []
 errors << "PR is still a draft" if pr["isDraft"] == true
 base_ref = pr["baseRefName"].to_s
 base_is_trunk = base_ref == base_branch
-base_is_stack_branch = task_branch_pattern.match?(base_ref) || phase_branch_pattern.match?(base_ref)
+base_is_stack_branch = task_branch_pattern.match?(base_ref)
 unless base_is_trunk || base_is_stack_branch
   errors << "PR base #{base_ref.inspect} must be #{base_branch.inspect} or a rollout stack branch"
 end
 
 head = pr["headRefName"].to_s
-branch_mode = nil
-phase = nil
-
-if (phase_match = phase_branch_pattern.match(head))
-  branch_mode = "phase"
-  phase = phase_match[1].to_i
-  errors << "phase extracted from branch must be >= 1" if phase <= 0
-elsif task_branch_pattern.match(head)
-  branch_mode = "task"
-else
-  errors << "PR head branch #{head.inspect} does not match task or phase branch patterns"
+unless task_branch_pattern.match(head)
+  errors << "PR head branch #{head.inspect} does not match task branch pattern"
 end
 
 checks = pr["statusCheckRollup"] || []
@@ -122,52 +110,18 @@ if errors.any?
   exit 1
 end
 
-puts [pr["url"], branch_mode, phase, head, base_ref].join("\t")
+puts [pr["url"], head, base_ref].join("\t")
 RUBY
 )"
 
 pr_url="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $1}')"
-branch_mode="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $2}')"
-phase="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $3}')"
-head_branch="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $4}')"
-base_ref_name="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $5}')"
+head_branch="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $2}')"
+base_ref_name="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $3}')"
 is_stack_base="false"
 if [[ "$base_ref_name" != "$base_branch" ]]; then
   is_stack_base="true"
 fi
 
-if [[ "$branch_mode" == "phase" && "$phase" -gt 1 ]]; then
-  pr_index="$(gh pr list --state all --base "$base_branch" --limit 200 --json number,state,mergedAt,headRefName)"
-  ruby - "$pr_index" "$phase_branch_pattern" "$phase" <<'RUBY'
-require "json"
-
-prs = JSON.parse(ARGV.fetch(0))
-branch_pattern = Regexp.new(ARGV.fetch(1))
-phase = ARGV.fetch(2).to_i
-
-by_phase = Hash.new { |hash, key| hash[key] = [] }
-prs.each do |pr|
-  match = branch_pattern.match(pr["headRefName"].to_s)
-  next if match.nil?
-
-  by_phase[match[1].to_i] << pr
-end
-
-errors = []
-(1...phase).each do |required_phase|
-  entries = by_phase[required_phase]
-  merged = entries.any? { |entry| entry["state"] == "MERGED" || !entry["mergedAt"].nil? }
-  open = entries.any? { |entry| entry["state"] == "OPEN" }
-  errors << "phase #{required_phase} is not merged yet" unless merged
-  errors << "phase #{required_phase} still has an open PR" if open
-end
-
-if errors.any?
-  errors.each { |error| warn "error: #{error}" }
-  exit 1
-end
-RUBY
-fi
 
 rebase_allowed="$(gh repo view --json rebaseMergeAllowed --jq '.rebaseMergeAllowed')"
 if [[ "$rebase_allowed" != "true" ]]; then
@@ -199,8 +153,6 @@ fi
 cat <<EOF
 Self-review checklist for $pr_url
 - plan: $plan_id
-- branch mode: $branch_mode
-- phase: ${phase:-n/a}
 - head branch: $head_branch
 - base branch: $base_ref_name
 - merge engine: gh (single PR rebase merge)

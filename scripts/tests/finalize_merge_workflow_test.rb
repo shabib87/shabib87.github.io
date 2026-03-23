@@ -11,7 +11,7 @@ class FinalizeMergeWorkflowTest < Minitest::Test
   end
 
   def test_allows_rollout_stack_base_branches
-    assert_match(/base_is_stack_branch = task_branch_pattern\.match\?\(base_ref\) \|\| phase_branch_pattern\.match\?\(base_ref\)/, script_body)
+    assert_match(/base_is_stack_branch = task_branch_pattern\.match\?\(base_ref\)/, script_body)
     assert_includes(script_body, "or a rollout stack branch")
   end
 
