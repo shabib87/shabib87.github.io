@@ -97,6 +97,15 @@ class RolloutGovernanceTest < Minitest::Test
     end
   end
 
+  def test_accepts_exempt_renovate_branch
+    with_repo(branch: "renovate/lodash-4.x") do
+      write_active_plan("exempt_branch_patterns" => ["^dependabot/", "^renovate/", "^gh-pages$"])
+      stdout, stderr, status = run_validator(branch: "renovate/lodash-4.x")
+      assert status.success?, "expected success for exempt branch, got stderr: #{stderr}"
+      assert_match(/exempt/, stdout)
+    end
+  end
+
   def test_rejects_non_exempt_non_matching_branch
     with_repo(branch: "feature/random") do
       write_active_plan("exempt_branch_patterns" => ["^dependabot/", "^renovate/", "^gh-pages$"])
