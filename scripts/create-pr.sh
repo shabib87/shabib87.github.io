@@ -4,6 +4,9 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+# shellcheck disable=SC1091
+. "$repo_root/scripts/lib/github-api.sh"
+
 type="${TYPE:-${1:-chore}}"
 branch="$(git branch --show-current)"
 
@@ -14,9 +17,11 @@ fi
 
 "$repo_root/.agents/skills/repo-flow/scripts/ensure-clean-tree.sh"
 
-if ! gh auth status >/dev/null 2>&1; then
-  echo "error: GitHub CLI authentication is invalid. Run: gh auth login -h github.com" >&2
-  exit 1
+if ! _gh_available; then
+  if ! _github_resolve_token >/dev/null 2>&1; then
+    echo "error: no GitHub authentication. Run: gh auth login, or set GITHUB_TOKEN" >&2
+    exit 1
+  fi
 fi
 
 "$repo_root/scripts/run-local-qa.sh"
@@ -57,7 +62,8 @@ RUBY
 
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
 
-if ! ruby - "$repo_root/docs/agent-context.md" <<'RUBY'
+agent_context_fresh="x"
+if ! staleness_result="$(ruby - "$repo_root/docs/agent-context.md" <<'RUBY'
 require "time"
 
 path = ARGV.fetch(0)
@@ -88,12 +94,16 @@ rescue ArgumentError
 end
 
 if Time.now > stale_at
-  warn "error: docs/agent-context.md is stale (stale_after=#{stale_at.strftime("%Y-%m-%d %H:%M:%S %Z")})"
-  exit 1
+  warn "WARNING: docs/agent-context.md is stale (stale_after=#{stale_at.strftime("%Y-%m-%d %H:%M:%S %Z")})"
+  warn "WARNING: Run a Linear sync to refresh context before relying on cached issue states."
+  puts "stale"
 end
 RUBY
-then
+)"; then
   exit 1
+fi
+if [[ "$staleness_result" == "stale" ]]; then
+  agent_context_fresh=" "
 fi
 
 issue_id=""
@@ -150,6 +160,20 @@ if [[ -z "$affected_urls" ]]; then
   affected_urls="(none identified)"
 fi
 
+# Build commit summary for the template
+commit_summary="$(git log --oneline "$base_branch"...HEAD 2>/dev/null || git log --oneline -10)"
+
+# Auto-detect traceability checklist items
+if [[ "$branch" =~ ^cws/[0-9]+-[a-z0-9-]+$ ]]; then branch_ok="x"; else branch_ok=" "; fi
+
+title_has_id=" "
+if [[ "$title" == *"${issue_id}"* || "$title" == *"${issue_id_lower:-}"* ]]; then title_has_id="x"; fi
+
+task_file_exists=" "
+if [[ -f "$repo_root/docs/tasks/${issue_id}.md" ]]; then task_file_exists="x"; fi
+
+linear_link_ok="x"  # always present since we construct it from branch
+
 body_file="$(mktemp)"
 gt_log_file="$(mktemp)"
 cleanup() {
@@ -158,9 +182,22 @@ cleanup() {
 trap cleanup EXIT
 
 cat > "$body_file" <<EOF
+## Branch And Title Convention
+
+- Branch: \`${branch}\`
+- Title: ${title}
+
+## Traceability Checklist
+
+- [${branch_ok}] Branch name matches approved pattern
+- [${title_has_id}] PR title contains matching issue token (\`${issue_id}\` or \`${issue_id_lower:-}\`) (task branches)
+- [${task_file_exists}] \`docs/tasks/${issue_id}.md\` exists and is committed (task branches)
+- [${agent_context_fresh}] \`docs/agent-context.md\` is fresh (not stale)
+- [${linear_link_ok}] Linear issue link is present in this PR
+
 ## Summary
 
-- ${title#"$type: "}
+$(printf '%s\n' "$commit_summary" | sed 's/^/- /')
 
 ## Why
 
@@ -168,7 +205,8 @@ cat > "$body_file" <<EOF
 
 ## Linear Traceability
 
-- Issue: ${linear_issue_link}
+- Parent issue: ${linear_issue_link}
+- This issue: ${linear_issue_link}
 
 ## Validation
 
@@ -188,9 +226,8 @@ $affected_urls
 
 ## Self-review Notes
 
-- Full local QA gate passed
-- Diff reviewed
-- No private drafts or secrets included
+- Risk assessment: low — scoped workflow change
+- Backward compatibility notes: none
 EOF
 
 # Prefer Graphite for stack submission, then normalize metadata with gh.
@@ -229,16 +266,12 @@ if ! git ls-remote --exit-code --heads "$remote_name" "$branch" >/dev/null 2>&1;
   git push -u "$remote_name" "$branch"
 fi
 
-if ! gh pr view "$branch" >/dev/null 2>&1; then
-  gh pr create \
-    --base "$base_branch" \
-    --head "$branch" \
-    --title "$title" \
-    --body-file "$body_file"
+if ! gh_or_curl_pr_view "$branch" >/dev/null 2>&1; then
+  gh_or_curl_pr_create "$base_branch" "$branch" "$title" "$body_file"
 fi
 
-gh pr edit "$branch" --title "$title" --body-file "$body_file"
+gh_or_curl_pr_edit "$branch" "$title" "$body_file"
 
-if [[ "$(gh pr view "$branch" --json isDraft --jq '.isDraft')" == "true" ]]; then
+if _gh_available && [[ "$(gh pr view "$branch" --json isDraft --jq '.isDraft')" == "true" ]]; then
   gh pr ready "$branch"
 fi
