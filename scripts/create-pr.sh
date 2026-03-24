@@ -4,9 +4,6 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
-# shellcheck disable=SC1091
-. "$repo_root/scripts/lib/github-api.sh"
-
 type="${TYPE:-${1:-chore}}"
 branch="$(git branch --show-current)"
 
@@ -17,11 +14,9 @@ fi
 
 "$repo_root/.agents/skills/repo-flow/scripts/ensure-clean-tree.sh"
 
-if ! _gh_available; then
-  if ! _github_resolve_token >/dev/null 2>&1; then
-    echo "error: no GitHub authentication. Run: gh auth login, or set GITHUB_TOKEN" >&2
-    exit 1
-  fi
+if ! gh auth status >/dev/null 2>&1; then
+  echo "error: no GitHub authentication. Run: gh auth login" >&2
+  exit 1
 fi
 
 "$repo_root/scripts/run-local-qa.sh"
@@ -266,12 +261,12 @@ if ! git ls-remote --exit-code --heads "$remote_name" "$branch" >/dev/null 2>&1;
   git push -u "$remote_name" "$branch"
 fi
 
-if ! gh_or_curl_pr_view "$branch" >/dev/null 2>&1; then
-  gh_or_curl_pr_create "$base_branch" "$branch" "$title" "$body_file"
+if ! gh pr view "$branch" >/dev/null 2>&1; then
+  gh pr create --base "$base_branch" --head "$branch" --title "$title" --body-file "$body_file"
 fi
 
-gh_or_curl_pr_edit "$branch" "$title" "$body_file"
+gh pr edit "$branch" --title "$title" --body-file "$body_file"
 
-if _gh_available && [[ "$(gh pr view "$branch" --json isDraft --jq '.isDraft')" == "true" ]]; then
+if [[ "$(gh pr view "$branch" --json isDraft --jq '.isDraft')" == "true" ]]; then
   gh pr ready "$branch"
 fi
