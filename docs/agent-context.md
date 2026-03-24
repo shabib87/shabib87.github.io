@@ -11,9 +11,9 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-23 23:10:00 EDT`
+- Synced at: `2026-03-24 14:30:00 EDT`
 - Synced by: `Claude Code`
-- Scope: `CWS-94 merge closeout and backlog prioritization`
+- Scope: `CWS-95 merge closeout`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
@@ -22,11 +22,12 @@ This file is a bounded cache for agent continuity.
 
 ## Stale After
 
-- `2026-03-24 23:10:00 EDT`
+- `2026-03-25 14:30:00 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
 
+- CWS-95 (remove remember plugin + curl fallback) merged — PR #63.
 - CWS-94 (script hardening) merged via `gt merge` — 3-PR Graphite stack.
 - CWS-93 (backlog hygiene) Done.
 - CWS-81 (Linear reorganization, parent) remains Todo — check remaining sub-task scope.
@@ -66,6 +67,7 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- CWS-95: Remove remember plugin + curl fallback library, codify quality principles (Done, merged — PR #63)
 - CWS-94: Harden PR scripts for stack, sandbox, and agent workflows (Done, merged — 3-PR stack)
 - CWS-93: Backlog hygiene, label cleanup, and cycle rebaseline (Done, merged)
 - CWS-80: Workspace rebaseline and drift audit (Done, merged)
