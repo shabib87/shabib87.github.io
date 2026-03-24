@@ -22,9 +22,6 @@ _drafts/
 # Claude Code local config
 .claude/settings.local.json
 
-# Remember plugin session data
-.remember/
-
 # Local tooling caches
 .pre-commit-cache/
 .venv-tools/
