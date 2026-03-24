@@ -9,6 +9,10 @@ phase="${PHASE:-${2:-}}"
 topic="${TOPIC:-${3:-}}"
 type="${TYPE:-${4:-chore}}"
 
+_active_ruby=""
+cleanup() { rm -f "$_active_ruby"; }
+trap cleanup EXIT
+
 if [[ -z "$phase" ]]; then
   echo "error: provide PHASE or pass it as the second argument" >&2
   exit 1

@@ -7,6 +7,10 @@ cd "$repo_root"
 non_interactive="${YES:-}"
 stack_mode="${STACK:-}"
 
+_plan_ruby="" _validate_ruby="" _checks_ruby=""
+cleanup() { rm -f "$_plan_ruby" "$_validate_ruby" "$_checks_ruby"; }
+trap cleanup EXIT
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --yes|--no-interactive) non_interactive=1; shift ;;
@@ -135,7 +139,11 @@ if [[ "$base_ref_name" != "$base_branch" ]]; then
   is_stack_base="true"
 fi
 
-rebase_allowed="$(gh api 'repos/{owner}/{repo}' --jq '.allow_rebase_merge' 2>/dev/null || echo "true")"
+rebase_allowed="$(gh api 'repos/{owner}/{repo}' --jq '.allow_rebase_merge' 2>/dev/null || true)"
+if [[ -z "$rebase_allowed" ]]; then
+  echo "error: could not determine rebase merge setting from GitHub API" >&2
+  exit 1
+fi
 if [[ "$rebase_allowed" != "true" ]]; then
   echo "error: repository is not configured for rebase merges; refusing to pick a different strategy silently" >&2
   exit 1
