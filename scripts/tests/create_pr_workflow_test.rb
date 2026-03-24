@@ -26,13 +26,13 @@ class CreatePrWorkflowTest < Minitest::Test
   end
 
   def test_normalizes_pr_metadata_after_submit
-    assert_match(/gh_or_curl_pr_edit "\$branch" "\$title" "\$body_file"/, script_body)
+    assert_match(/gh pr edit "\$branch" --title "\$title" --body-file "\$body_file"/, script_body)
     assert_match(/gh pr ready "\$branch"/, script_body)
   end
 
   def test_falls_back_to_pr_create_when_branch_has_no_pr
-    assert_match(/if ! gh_or_curl_pr_view "\$branch" >/i, script_body)
-    assert_match(/gh_or_curl_pr_create "\$base_branch" "\$branch" "\$title" "\$body_file"/, script_body)
+    assert_match(/if ! gh pr view "\$branch" >/i, script_body)
+    assert_match(/gh pr create --base "\$base_branch" --head "\$branch" --title "\$title" --body-file "\$body_file"/, script_body)
   end
 
   def test_no_hard_failure_when_pr_already_exists
@@ -86,12 +86,13 @@ class CreatePrWorkflowTest < Minitest::Test
     assert_match(/linear_issue_link/, script_body)
   end
 
-  def test_sources_github_api_library
-    assert_match(%r{scripts/lib/github-api\.sh}, script_body)
+  def test_requires_gh_auth
+    assert_match(/gh auth status/, script_body)
   end
 
-  def test_uses_fallback_auth_check
-    assert_match(/_gh_available/, script_body)
-    assert_match(/_github_resolve_token/, script_body)
+  def test_does_not_use_curl_fallback
+    refute_match(/gh_or_curl/, script_body)
+    refute_match(/_gh_available/, script_body)
+    refute_match(/github-api\.sh/, script_body)
   end
 end
