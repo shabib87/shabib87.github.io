@@ -27,6 +27,7 @@ This file is a bounded cache for agent continuity.
 
 ## Active Phase
 
+- CWS-89 (remove dead `.cursor/rules/` directory) merged — PR #64.
 - CWS-95 (remove remember plugin + curl fallback) merged — PR #63.
 - CWS-94 (script hardening) merged via `gt merge` — 3-PR Graphite stack.
 - CWS-93 (backlog hygiene) Done.
@@ -67,6 +68,7 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- CWS-89: Remove dead `.cursor/rules/` directory (Done, merged — PR #64)
 - CWS-95: Remove remember plugin + curl fallback library, codify quality principles (Done, merged — PR #63)
 - CWS-94: Harden PR scripts for stack, sandbox, and agent workflows (Done, merged — 3-PR stack)
 - CWS-93: Backlog hygiene, label cleanup, and cycle rebaseline (Done, merged)
