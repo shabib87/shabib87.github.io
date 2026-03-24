@@ -128,10 +128,19 @@ Graphite and GitHub CLI policy:
 - Agents MUST NOT use ad hoc `gh pr merge` outside `make finalize-merge`. The script provides
   validation gates that raw `gh` bypasses.
 
-Test-first policy:
+Code quality principles — these are hard requirements, not suggestions:
 
-- For testable changes, write or update a failing test first, then implement, then refactor.
-- If a change is not meaningfully testable, record a concise rationale in task evidence or PR notes.
+- **TDD**: For testable changes, write or update a failing test first, then implement, then
+  refactor (red-green-refactor). If a change is not meaningfully testable, record a concise
+  rationale in task evidence or PR notes.
+- **DRY**: Do not duplicate logic. Extract shared behavior only when there are 3+ consumers;
+  2 similar lines are cheaper than a premature abstraction.
+- **KISS**: Prefer the simplest solution that meets the requirement. Remove indirection that
+  does not earn its complexity. When deleting code makes things clearer, delete it.
+- **SOLID (SRP focus)**: Each file, function, and module should have one clear responsibility.
+  Split when a unit does two unrelated things; do not split just to hit a line-count target.
+- **YAGNI**: Do not build for hypothetical future requirements. No feature flags, config
+  options, or abstraction layers unless the current task demands them.
 
 ## Instruction-Based Boundary Caveat
 

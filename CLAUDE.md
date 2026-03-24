@@ -65,6 +65,18 @@ When spawning a subagent via the `Agent` tool:
 - Use `gt` CLI for stacked PR lifecycle (`create`, `modify`, `submit`, `stack`).
 - Use `gh` CLI for GitHub object operations (checks, labels, comments, PR metadata).
 
+## Code Quality Principles
+
+These are hard requirements inherited from `AGENTS.md`. Apply them to every code change:
+
+- **TDD**: Failing test first, implementation second, refactor third. No exceptions for testable
+  changes. If not testable, state why in the PR.
+- **DRY**: No duplicated logic. Extract only at 3+ consumers — two similar lines beat a premature
+  abstraction.
+- **KISS**: Simplest solution that works. If removing code makes things clearer, remove it.
+- **SOLID**: One responsibility per file/function/module. Split when doing two unrelated things.
+- **YAGNI**: Build only what the current task demands. No speculative abstractions.
+
 ## Bash Scripting
 
 - Do not place heredocs inside `$()` command substitutions — bash 3.2 (macOS default) cannot
