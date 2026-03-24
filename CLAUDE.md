@@ -65,6 +65,28 @@ When spawning a subagent via the `Agent` tool:
 - Use `gt` CLI for stacked PR lifecycle (`create`, `modify`, `submit`, `stack`).
 - Use `gh` CLI for GitHub object operations (checks, labels, comments, PR metadata).
 
+## Bash Scripting
+
+- Do not place heredocs inside `$()` command substitutions — bash 3.2 (macOS default) cannot
+  reliably parse them and may lose quote state for the rest of the file. Instead, write the
+  heredoc to a temp file and execute that:
+
+  ```bash
+  # WRONG — breaks bash 3.2:
+  result="$(ruby - "$arg" <<'RUBY'
+  ...
+  RUBY
+  )"
+
+  # RIGHT — bash 3.2 safe:
+  _tmp="$(mktemp)"
+  cat > "$_tmp" <<'RUBY'
+  ...
+  RUBY
+  result="$(ruby "$_tmp" "$arg")"
+  rm -f "$_tmp"
+  ```
+
 ## Validation
 
 - `make qa-local` is the required local release gate.

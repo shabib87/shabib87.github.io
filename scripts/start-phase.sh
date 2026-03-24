@@ -30,8 +30,8 @@ if [[ ! -f "$active_plan_path" ]]; then
   exit 1
 fi
 
-active_info="$(
-  ruby - "$active_plan_path" <<'RUBY'
+_active_ruby="$(mktemp)"
+cat > "$_active_ruby" <<'RUBY'
 require "yaml"
 
 path = ARGV.fetch(0)
@@ -47,7 +47,8 @@ end
 
 puts "#{plan_id}\t#{base_branch}\t#{phase_branch_pattern}"
 RUBY
-)"
+active_info="$(ruby "$_active_ruby" "$active_plan_path")"
+rm -f "$_active_ruby"
 
 active_plan_id="$(printf '%s' "$active_info" | awk -F '\t' 'NR==1 {print $1}')"
 base_branch="$(printf '%s' "$active_info" | awk -F '\t' 'NR==1 {print $2}')"

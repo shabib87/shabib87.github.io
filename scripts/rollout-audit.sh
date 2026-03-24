@@ -10,8 +10,8 @@ if [[ ! -f "$active_plan_path" ]]; then
   exit 1
 fi
 
-plan_info="$(
-  ruby - "$active_plan_path" <<'RUBY'
+_plan_ruby="$(mktemp)"
+cat > "$_plan_ruby" <<'RUBY'
 require "yaml"
 
 path = ARGV.fetch(0)
@@ -31,7 +31,8 @@ end
 
 puts "#{base_branch}\t#{required_checks.join(',')}"
 RUBY
-)"
+plan_info="$(ruby "$_plan_ruby" "$active_plan_path")"
+rm -f "$_plan_ruby"
 
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $1}')"
 required_checks_csv="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
@@ -52,8 +53,8 @@ rulesets_json="[]"
 while IFS= read -r ruleset_id; do
   [[ -n "$ruleset_id" ]] || continue
   ruleset_json="$(gh api "repos/$repo_slug/rulesets/$ruleset_id")"
-  rulesets_json="$(
-    ruby - "$rulesets_json" "$ruleset_json" <<'RUBY'
+  _append_ruby="$(mktemp)"
+  cat > "$_append_ruby" <<'RUBY'
 require "json"
 
 all = JSON.parse(ARGV.fetch(0))
@@ -61,7 +62,8 @@ entry = JSON.parse(ARGV.fetch(1))
 all << entry
 puts all.to_json
 RUBY
-  )"
+  rulesets_json="$(ruby "$_append_ruby" "$rulesets_json" "$ruleset_json")"
+  rm -f "$_append_ruby"
 done <<< "$ruleset_ids"
 
 ruby - "$rulesets_json" "$base_branch" "$required_checks_csv" <<'RUBY'

@@ -31,8 +31,8 @@ fi
 
 "$repo_root/scripts/run-local-qa.sh"
 
-plan_info="$(
-  ruby - "$repo_root" <<'RUBY'
+_plan_ruby="$(mktemp)"
+cat > "$_plan_ruby" <<'RUBY'
 require "date"
 require "yaml"
 
@@ -61,7 +61,8 @@ end
 
 puts "#{plan_id}\t#{base_branch}\t#{task_branch_pattern}\t#{required_checks.join(',')}"
 RUBY
-)"
+plan_info="$(ruby "$_plan_ruby" "$repo_root")"
+rm -f "$_plan_ruby"
 
 plan_id="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $1}')"
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
@@ -70,8 +71,8 @@ required_checks_csv="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $4}'
 
 pr_state="$(gh pr view "$pr" --json number,state,url,headRefName,baseRefName,isDraft,statusCheckRollup,mergedAt)"
 
-validation="$(
-  ruby - "$pr_state" "$base_branch" "$task_branch_pattern" "$required_checks_csv" <<'RUBY'
+_validate_ruby="$(mktemp)"
+cat > "$_validate_ruby" <<'RUBY'
 require "json"
 
 pr = JSON.parse(ARGV.fetch(0))
@@ -123,7 +124,8 @@ end
 
 puts [pr["url"], head, base_ref].join("\t")
 RUBY
-)"
+validation="$(ruby "$_validate_ruby" "$pr_state" "$base_branch" "$task_branch_pattern" "$required_checks_csv")"
+rm -f "$_validate_ruby"
 
 pr_url="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $1}')"
 head_branch="$(printf '%s' "$validation" | awk -F '\t' 'NR==1 {print $2}')"
@@ -139,8 +141,8 @@ if [[ "$rebase_allowed" != "true" ]]; then
   exit 1
 fi
 
-checks_lines="$(
-  ruby - "$pr_state" <<'RUBY'
+_checks_ruby="$(mktemp)"
+cat > "$_checks_ruby" <<'RUBY'
 require "json"
 
 state = JSON.parse(ARGV.fetch(0))
@@ -151,7 +153,8 @@ checks.each do |entry|
   puts "#{name}: #{conclusion}"
 end
 RUBY
-)"
+checks_lines="$(ruby "$_checks_ruby" "$pr_state")"
+rm -f "$_checks_ruby"
 
 if [[ -n "$checks_lines" ]]; then
   echo "reported CI checks:"
