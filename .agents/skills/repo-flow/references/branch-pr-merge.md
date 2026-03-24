@@ -37,8 +37,7 @@
 
 ## Stack Merge Policy
 
-- `make finalize-merge PR=...` merges a single PR via `gh pr merge --rebase --delete-branch` (or
-  the `gh_or_curl` fallback in `scripts/lib/github-api.sh` when `gh` CLI is unavailable). It
+- `make finalize-merge PR=...` merges a single PR via `gh pr merge --rebase --delete-branch`. It
   validates against the active rollout plan (`active-plan.yaml`): branch pattern matching, required
   CI checks, and rebase-merge availability. For PRs whose base is a non-trunk stack branch, it
   warns that only the current PR is merged and directs to `gt merge` or Graphite web for

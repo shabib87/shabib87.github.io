@@ -14,7 +14,6 @@ metadata:
     - "scripts/run-workflow-checks.sh"
     - "scripts/start-work.sh"
     - "scripts/run-local-qa.sh"
-    - "scripts/lib/github-api.sh"
     - ".codex/rollout/active-plan.yaml"
     - "Makefile"
     - ".github/workflows/rollout-governance.yml"
@@ -89,8 +88,6 @@ non-obvious failure modes accumulate from real incidents.
   `make finalize-merge PR=...` for single-PR merges.
 - For Graphite stacks, `make finalize-merge` only merges one PR and does not manage Graphite
   metadata or retarget children. Use `gt merge` or Graphite web for full-stack merges.
-- If `gh` CLI fails, scripts automatically fall back to `curl` + GitHub REST API. The fallback
-  requires `GITHUB_TOKEN` or `gh auth token` to be available.
 
 ## Rules
 
@@ -98,7 +95,7 @@ non-obvious failure modes accumulate from real incidents.
 - Do not commit until the full local QA gate passes.
 - Re-run the same local QA gate on the committed tree before push or rebase integration.
 - Run local checks before opening a PR.
-- Require valid GitHub authentication (`gh` CLI or `GITHUB_TOKEN` for curl fallback).
+- Require `gh` CLI authentication (`gh auth login`).
 - Keep history linear and prefer rebase-only integration behavior.
 - Do not require external reviewer approval for this repo; require explicit self-review instead.
 - For task branches, require `docs/tasks/CWS-<id>.md` to exist; do not maintain mutable status text in the task file.
@@ -145,23 +142,6 @@ in `.codex/rollout/active-plan.yaml` under `exempt_branch_patterns`:
 
 Exempt branches skip the `cws/<type>-<slug>` naming requirement but still go through CI checks
 and rebase-merge policy.
-
-## Fallback Authentication
-
-Scripts support two GitHub authentication paths:
-
-1. `gh` CLI — used when available and authenticated.
-2. `curl` + GitHub REST API — automatic fallback when `gh` CLI is unavailable or auth fails.
-
-Token resolution order for the curl fallback:
-
-1. `GITHUB_TOKEN` environment variable.
-2. Output of `gh auth token`.
-3. Fail with an explicit error if neither is available.
-
-Shared helper functions for both paths live in `scripts/lib/github-api.sh`. Scripts call
-`gh_or_curl` wrappers rather than invoking `gh` or `curl` directly, so the fallback is
-transparent to callers.
 
 ## PR Template Compliance
 
