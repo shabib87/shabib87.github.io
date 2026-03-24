@@ -21,8 +21,8 @@ fi
 
 "$repo_root/scripts/run-local-qa.sh"
 
-plan_info="$(
-  ruby - "$repo_root" "$branch" <<'RUBY'
+_plan_ruby="$(mktemp)"
+cat > "$_plan_ruby" <<'RUBY'
 require "date"
 require "yaml"
 
@@ -53,12 +53,14 @@ end
 
 puts "#{plan_id}\t#{base_branch}\t#{required_checks.join(',')}"
 RUBY
-)"
+plan_info="$(ruby "$_plan_ruby" "$repo_root" "$branch")"
+rm -f "$_plan_ruby"
 
 base_branch="$(printf '%s' "$plan_info" | awk -F '\t' 'NR==1 {print $2}')"
 
 agent_context_fresh="x"
-if ! staleness_result="$(ruby - "$repo_root/docs/agent-context.md" <<'RUBY'
+_stale_ruby="$(mktemp)"
+cat > "$_stale_ruby" <<'RUBY'
 require "time"
 
 path = ARGV.fetch(0)
@@ -94,9 +96,11 @@ if Time.now > stale_at
   puts "stale"
 end
 RUBY
-)"; then
+if ! staleness_result="$(ruby "$_stale_ruby" "$repo_root/docs/agent-context.md")"; then
+  rm -f "$_stale_ruby"
   exit 1
 fi
+rm -f "$_stale_ruby"
 if [[ "$staleness_result" == "stale" ]]; then
   agent_context_fresh=" "
 fi
@@ -267,6 +271,7 @@ fi
 
 gh pr edit "$branch" --title "$title" --body-file "$body_file"
 
-if [[ "$(gh pr view "$branch" --json isDraft --jq '.isDraft')" == "true" ]]; then
+draft_status="$(gh pr view "$branch" --json isDraft --jq '.isDraft')"
+if [[ "$draft_status" == "true" ]]; then
   gh pr ready "$branch"
 fi
