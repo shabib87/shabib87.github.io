@@ -46,15 +46,15 @@ Use this skill for repo-specific blog work.
    `technical-post-drafter` before publish QA.
 6. If technical claims still need verification, run `fact-checker` before calling a draft
    publish-ready.
-7. Use `scripts/validate-post.sh <path>` before calling a post ready.
+7. Use `.agents/skills/jekyll-post-publisher/scripts/validate-post.sh <path>` before calling a post ready.
 8. Use `make validate-draft`, `make qa-publish`, and `make publish-draft` as the repo-level
    workflow for drafts.
 
 ## Available Scripts
 
-- `scripts/validate-post.sh --help` shows supported flags and examples.
-- `scripts/validate-post.sh <path>` validates a draft or tracked post in text mode.
-- `scripts/validate-post.sh --format jsonl <path>` emits one structured result per validated file.
+- `.agents/skills/jekyll-post-publisher/scripts/validate-post.sh --help` shows supported flags and examples.
+- `.agents/skills/jekyll-post-publisher/scripts/validate-post.sh <path>` validates a draft or tracked post in text mode.
+- `.agents/skills/jekyll-post-publisher/scripts/validate-post.sh --format jsonl <path>` emits one structured result per validated file.
 
 ## Output Expectations
 
