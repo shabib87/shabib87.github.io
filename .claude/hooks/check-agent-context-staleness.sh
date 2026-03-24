@@ -16,7 +16,7 @@ fi
 # shellcheck disable=SC2016
 stale_ts="$(ruby -e '
   content = File.read(ARGV[0])
-  section = content.match(/^## Stale After\s*\n\n((?:- .*\n)+)/)
+  section = content.match(/^## Stale After\s*\n+((?:- .*\n)+)/)
   if section.nil?
     warn "error: cannot find Stale After section in agent-context.md"
     exit 2
