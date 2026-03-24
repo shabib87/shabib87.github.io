@@ -11,31 +11,34 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-22 12:00:00 EDT`
+- Synced at: `2026-03-23 23:10:00 EDT`
 - Synced by: `Claude Code`
-- Scope: `CWS-93 backlog hygiene, label cleanup, and cycle rebaseline`
+- Scope: `CWS-94 merge closeout and backlog prioritization`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
   - `Blog Content Pipeline`
-  - `CWS-93` (In Progress)
+  - `CWS-81` (Todo — parent of CWS-93, CWS-94)
 
 ## Stale After
 
-- `2026-03-23 12:00:00 EDT`
+- `2026-03-24 23:10:00 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
 
-- CWS-93 (backlog hygiene) is in progress.
-- Phase 1 (Linear mutations) complete. Phase 2 (repo changes) in Graphite stack.
+- CWS-94 (script hardening) merged via `gt merge` — 3-PR Graphite stack.
+- CWS-93 (backlog hygiene) Done.
+- CWS-81 (Linear reorganization, parent) remains Todo — check remaining sub-task scope.
 - CWS-80 (Done), CWS-82 (Done).
 
 ## Top Priorities
 
-1. Complete CWS-93 backlog hygiene (this task)
-2. CWS-81 normalization (parent)
-3. Infrastructure chain: CWS-18 → CWS-5 → CWS-12
+1. CWS-81: Linear reorganization and cycle normalization (High, Todo, M1 — parent task, check remaining scope)
+2. CWS-21: Define decomposition rules for single vs stacked PRs (High, Backlog, M1)
+3. CWS-70: Define PR packaging behavior for agent background tasks (High, Backlog, M2)
+4. CWS-72: Define auth/secret requirements for agent cloud tasks (High, Backlog, M2)
+5. CWS-54: Configure Semgrep CE for security scanning (High, Backlog, M3, in current cycle)
 
 ## Open Decisions
 
@@ -46,23 +49,25 @@ This file is a bounded cache for agent continuity.
 ## Active Risks
 
 - Editorial chain blocked until voice profile interview (CWS-14/48)
-- Semgrep post-tool hook erroring (no SEMGREP_APP_TOKEN) — non-blocking but noisy
+- `com.apple.provenance` extended attribute on `.claude/settings.json` blocks pre-push hooks — workaround: recreate file outside sandbox or strip xattr manually
 
 ## Next Actions (snapshot — verify against Linear before executing)
 
-1. Merge CWS-93 Graphite stack
-2. Close CWS-44 (agent-context schema) after agent-context.md rewrite merges
-3. Update CWS-81 remaining scope
-4. Pick up CWS-18 (next infrastructure task)
-5. Pick up CWS-5 (blocked by CWS-18)
-6. Schedule CWS-14 voice profile interview session
-7. Pick up CWS-13 (Vale config — unblocks CWS-25, CWS-32)
-8. Pick up CWS-23 (unblocks CWS-36, CWS-31, CWS-38)
-9. Correct Linear cycle dates through supported tooling
+1. Check CWS-81 remaining scope — both sub-tasks (CWS-93, CWS-94) are done; may be closeable
+2. Pick up CWS-21 (decomposition rules — M1, High, agent-task)
+3. Pick up CWS-70 (PR packaging for cloud tasks — M2, High)
+4. Pick up CWS-72 (auth/secret requirements — M2, High)
+5. Pick up CWS-54 (Semgrep CE — M3, High, in current cycle)
+6. Pick up CWS-19 (ADR infrastructure — M2, Medium, Ready)
+7. Pick up CWS-30 (pre-commit hook — M2, Medium)
+8. Pick up CWS-47 (drafts-to-posts publish workflow — M2, Medium)
+9. Schedule CWS-14 voice profile interview session
 10. Pick up CWS-92 Docker sandbox setup
 
 ## Recent Completions
 
+- CWS-94: Harden PR scripts for stack, sandbox, and agent workflows (Done, merged — 3-PR stack)
+- CWS-93: Backlog hygiene, label cleanup, and cycle rebaseline (Done, merged)
 - CWS-80: Workspace rebaseline and drift audit (Done, merged)
 - CWS-82: Dual-platform pivot — Claude Code as peer platform (Done, merged)
 - CWS-7: Label taxonomy audit (Done, closed — cleanup executed in CWS-93)
