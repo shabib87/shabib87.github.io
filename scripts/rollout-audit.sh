@@ -4,6 +4,10 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 
+_plan_ruby="" _append_ruby=""
+cleanup() { rm -f "$_plan_ruby" "$_append_ruby"; }
+trap cleanup EXIT
+
 active_plan_path="$repo_root/.codex/rollout/active-plan.yaml"
 if [[ ! -f "$active_plan_path" ]]; then
   echo "error: missing active rollout plan at .codex/rollout/active-plan.yaml" >&2

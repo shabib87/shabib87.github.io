@@ -21,6 +21,10 @@ fi
 
 "$repo_root/scripts/run-local-qa.sh"
 
+_plan_ruby="" _stale_ruby="" body_file="" gt_log_file=""
+cleanup() { rm -f "$_plan_ruby" "$_stale_ruby" "$body_file" "$gt_log_file"; }
+trap cleanup EXIT
+
 _plan_ruby="$(mktemp)"
 cat > "$_plan_ruby" <<'RUBY'
 require "date"
@@ -175,10 +179,6 @@ linear_link_ok="x"  # always present since we construct it from branch
 
 body_file="$(mktemp)"
 gt_log_file="$(mktemp)"
-cleanup() {
-  rm -f "$body_file" "$gt_log_file"
-}
-trap cleanup EXIT
 
 cat > "$body_file" <<EOF
 ## Branch And Title Convention

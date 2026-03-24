@@ -69,7 +69,8 @@ When spawning a subagent via the `Agent` tool:
 
 - Do not place heredocs inside `$()` command substitutions — bash 3.2 (macOS default) cannot
   reliably parse them and may lose quote state for the rest of the file. Instead, write the
-  heredoc to a temp file and execute that:
+  heredoc to a temp file and execute that. Bare heredocs (not inside `$()`) are safe and do not
+  need the temp-file pattern.
 
   ```bash
   # WRONG — breaks bash 3.2:
@@ -85,7 +86,15 @@ When spawning a subagent via the `Agent` tool:
   RUBY
   result="$(ruby "$_tmp" "$arg")"
   rm -f "$_tmp"
+
+  # ALSO FINE — bare heredoc, not inside $():
+  ruby - "$arg" <<'RUBY'
+  ...
+  RUBY
   ```
+
+- When using temp files for heredocs, register them with `trap cleanup EXIT` early in the script
+  so they are cleaned up on any exit path (including `set -e` failures).
 
 ## Validation
 
