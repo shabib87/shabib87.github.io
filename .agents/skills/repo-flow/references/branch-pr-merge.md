@@ -37,14 +37,15 @@
 
 ## Stack Merge Policy
 
-- `make finalize-merge PR=...` merges a single PR via `gh pr merge --rebase --delete-branch`. It
-  validates against the active rollout plan (`active-plan.yaml`): branch pattern matching, required
-  CI checks, and rebase-merge availability. For PRs whose base is a non-trunk stack branch, it
-  warns that only the current PR is merged and directs to `gt merge` or Graphite web for
-  full-stack merges. It does not call any Graphite commands, manage Graphite metadata, or retarget
-  child PRs after deleting the merged branch.
+- `make finalize-merge PR=...` validates against the active rollout plan (`active-plan.yaml`):
+  branch pattern matching, required CI checks, and rebase-merge availability.
+  - **Default (single PR):** merges via `gh pr merge --rebase --delete-branch`. For PRs whose
+    base is a non-trunk stack branch, it warns that only the current PR is merged and directs to
+    `gt merge` or Graphite web for full-stack merges. It does not manage Graphite metadata or
+    retarget child PRs after deleting the merged branch.
+  - `--stack` / `STACK=1` — attempts `gt merge` first; falls back to `gh pr merge` if `gt` is
+    unavailable or fails.
   - `--yes` / `YES=1` — skip interactive confirmation (required in agent/CI contexts).
-  - `--stack` / `STACK=1` — trigger full-stack merge mode via `gt merge`.
 - for Graphite stacks, prefer `gt merge` or Graphite web "Merge stack" to merge the full stack in
   one operation — this keeps Graphite metadata consistent and retargets children correctly
 - if using `make finalize-merge` on individual PRs in a stack, do NOT run `gt sync --force` to
