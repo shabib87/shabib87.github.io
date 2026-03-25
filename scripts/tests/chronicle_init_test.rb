@@ -42,7 +42,8 @@ class ChronicleInitTest < Minitest::Test
   # --- Path derivation ---
 
   def test_derives_project_dir_from_pwd
-    assert_match(/sed.*s\|\/\|-\|g/, script_body)
+    # Uses bash parameter expansion to replace / with - (shellcheck-safe alternative to sed)
+    assert_match(/PWD.*\/.*-/, script_body)
   end
 
   def test_creates_chronicle_directory
