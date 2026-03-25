@@ -45,7 +45,7 @@ while IFS= read -r line; do
     in_summary=true
     continue
   fi
-  if $in_summary && [[ -n "$line" && ! "$line" =~ ^[[:space:]]*$ ]]; then
+  if $in_summary && [[ ! "$line" =~ ^[[:space:]]*$ ]]; then
     has_summary=true
     break
   fi
