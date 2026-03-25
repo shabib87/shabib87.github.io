@@ -142,6 +142,20 @@ Code quality principles — these are hard requirements, not suggestions:
 - **YAGNI**: Do not build for hypothetical future requirements. No feature flags, config
   options, or abstraction layers unless the current task demands them.
 
+## Session Chronicle
+
+- Log notable events to the chronicle file in real-time during sessions.
+- Use only these tags: `[DECISION]`, `[ERROR]`, `[PIVOT]`, `[INSIGHT]`,
+  `[MEMORY-HIT]`, `[MEMORY-MISS]`, `[USER-CORRECTION]`, `[BLOCKED]`.
+- Each event is one line: `- [TAG] brief description`.
+  Add indented detail lines only when the rationale is not obvious.
+  Optional timestamp prefix: `- HH:MM [TAG] description`.
+- Write a `## Summary` section before ending substantive sessions.
+- The SessionStart hook creates the chronicle file and injects its path.
+- Invoke `/session-retro` for deep retrospective on meaningful sessions.
+- Do not log routine actions (file reads, tool calls, simple edits).
+  Log decisions, failures, surprises, and corrections.
+
 ## Instruction-Based Boundary Caveat
 
 Agent boundary control is instruction-based, not hard sandbox partitioning per role.
