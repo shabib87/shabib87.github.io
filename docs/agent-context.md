@@ -11,19 +11,19 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-25 00:15:00 EDT`
+- Synced at: `2026-03-25 00:30:00 EDT`
 - Synced by: `Claude Code`
-- Scope: `CWS-96 DoD closeout`
+- Scope: `CWS-96 DoD closeout + full Linear queue sync`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
   - `Blog Content Pipeline`
-  - `CWS-81` (Todo — parent of CWS-93, CWS-94)
+  - `CWS-81` (Todo — Linear reorg, blocks CWS-97/100/101)
   - `CWS-96` (Done — session chronicle, merged PR #66)
 
 ## Stale After
 
-- `2026-03-26 00:15:00 EDT`
+- `2026-03-26 00:30:00 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
@@ -33,11 +33,15 @@ This file is a bounded cache for agent continuity.
 
 ## Top Priorities
 
-1. CWS-81: Linear reorganization and cycle normalization (High, Todo, M1 — parent task, check remaining scope)
-2. CWS-21: Define decomposition rules for single vs stacked PRs (High, Backlog, M1)
-3. CWS-70: Define PR packaging behavior for agent background tasks (High, Backlog, M2)
-4. CWS-72: Define auth/secret requirements for agent cloud tasks (High, Backlog, M2)
-5. CWS-54: Configure Semgrep CE for security scanning (High, Backlog, M3, in current cycle)
+1. CWS-81: Linear reorganization and cycle normalization (High, Todo, M1, in cycle — blocks CWS-97, CWS-100, CWS-101)
+2. CWS-21: Define decomposition rules for single vs stacked PRs (High, Backlog, M1, in cycle — PICKUP_READY: NO)
+3. CWS-98: Add planning-flow guardrail rule for Claude Code agents (High, Backlog, M2, agent-task)
+4. CWS-99: Create planning-flow process skill for Claude.ai (High, Backlog, M2, human-task)
+5. CWS-54: Configure Semgrep CE for security scanning (High, Backlog, M3, in cycle, agent-task)
+6. CWS-70: Define PR packaging behavior for agent background tasks (High, Backlog, M2)
+7. CWS-72: Define auth/secret requirements for agent cloud tasks (High, Backlog, M2)
+8. CWS-100: Linear issue creation skill (High, Backlog, M2, human-task — blocked by CWS-81)
+9. CWS-102: Create private skills repo with marketplace distribution (High, Backlog, M2, human-task)
 
 ## Open Decisions
 
@@ -59,14 +63,14 @@ This file is a bounded cache for agent continuity.
 
 ## Next Actions (snapshot — verify against Linear before executing)
 
-1. Check CWS-81 remaining scope — both sub-tasks (CWS-93, CWS-94) are done; may be closeable
-2. Pick up CWS-21 (decomposition rules — M1, High, agent-task)
-3. Pick up CWS-70 (PR packaging for cloud tasks — M2, High)
-4. Pick up CWS-72 (auth/secret requirements — M2, High)
-5. Pick up CWS-54 (Semgrep CE — M3, High, in current cycle)
-6. Pick up CWS-19 (ADR infrastructure — M2, Medium, Ready)
-7. Pick up CWS-30 (pre-commit hook — M2, Medium)
-8. Pick up CWS-47 (drafts-to-posts publish workflow — M2, Medium)
+1. Pick up CWS-81 (Linear reorg — High, Todo, M1, in cycle, agent-task, blocks 3 downstream issues)
+2. Pick up CWS-98 (planning-flow guardrail — High, Backlog, M2, agent-task)
+3. Pick up CWS-54 (Semgrep CE — High, Backlog, M3, in cycle, agent-task)
+4. Pick up CWS-21 (decomposition rules — High, Backlog, M1, in cycle — check pickup gate after CWS-81)
+5. Pick up CWS-67 (agent background execution contract — High, Backlog, M2, agent-task)
+6. Pick up CWS-68 (bootstrap preflight — High, Backlog, M2, agent-task)
+7. Pick up CWS-70 (PR packaging for cloud tasks — High, Backlog, M2, agent-task)
+8. Pick up CWS-72 (auth/secret requirements — High, Backlog, M2, agent-task)
 9. Schedule CWS-14 voice profile interview session
 10. Pick up CWS-92 Docker sandbox setup
 
