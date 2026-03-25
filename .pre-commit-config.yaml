@@ -4,9 +4,9 @@ repos:
     hooks:
       - id: check-yaml
       - id: end-of-file-fixer
-        exclude: ^\.claude/settings(\.local)?\.json$
+        exclude: ^\.claude/
       - id: trailing-whitespace
-        exclude: ^\.claude/settings(\.local)?\.json$
+        exclude: ^\.claude/
       - id: mixed-line-ending
       - id: check-merge-conflict
       - id: check-added-large-files

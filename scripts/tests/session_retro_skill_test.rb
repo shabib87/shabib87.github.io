@@ -4,7 +4,7 @@
 require "minitest/autorun"
 
 class SessionRetroSkillTest < Minitest::Test
-  SKILL_DIR = File.expand_path("../../.agents/skills/session-retro", __dir__)
+  SKILL_DIR = File.expand_path("../../.claude/skills/session-retro", __dir__)
   SKILL_PATH = File.join(SKILL_DIR, "SKILL.md")
   REFS_DIR = File.join(SKILL_DIR, "references")
 
