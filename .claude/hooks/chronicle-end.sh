@@ -18,8 +18,10 @@ branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "detached")"
 branch_slug="$(echo "$branch" | tr '/' '-')"
 
 # Find today's chronicle file for this branch (most recently modified)
+# Match exact slug or slug-N suffix to avoid cross-branch collision
+# (e.g., "cws-96" must not match "cws-96-session-chronicle")
 chronicle_file=""
-for f in "$chronicle_dir/${today}-${branch_slug}"*.md; do
+for f in "$chronicle_dir/${today}-${branch_slug}.md" "$chronicle_dir/${today}-${branch_slug}-"[0-9]*.md; do
   [[ -f "$f" ]] || continue
   if [[ -z "$chronicle_file" || "$f" -nt "$chronicle_file" ]]; then
     chronicle_file="$f"
