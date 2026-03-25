@@ -20,8 +20,7 @@ class ChronicleEndTest < Minitest::Test
   end
 
   def test_traps_err_to_exit_2
-    assert_match(/trap .* ERR/, script_body)
-    assert_match(/exit 2/, script_body)
+    assert_match(/trap 'exit 2' ERR/, script_body)
   end
 
   # --- Independent path derivation ---
