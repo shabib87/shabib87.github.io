@@ -1,7 +1,0 @@
-interface:
-  display_name: "Session Retro"
-  short_description: "Deep session retrospective with memory update proposals and blog narrative"
-  default_prompt: "Use $session-retro to review this session's chronicle, propose memory updates, and generate a blog-ready narrative."
-
-policy:
-  allow_implicit_invocation: false
