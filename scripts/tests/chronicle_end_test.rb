@@ -61,10 +61,9 @@ class ChronicleEndTest < Minitest::Test
   end
 
   def test_counts_individual_categories
-    assert_match(/DECISION/, script_body)
-    assert_match(/ERROR/, script_body)
-    assert_match(/PIVOT/, script_body)
-    assert_match(/INSIGHT/, script_body)
+    %w[DECISION ERROR PIVOT INSIGHT MEMORY-HIT MEMORY-MISS USER-CORRECTION BLOCKED].each do |tag|
+      assert_match(/#{Regexp.escape(tag)}/, script_body, "Missing category count for #{tag}")
+    end
   end
 
   # --- Bash 3.2 safety ---
