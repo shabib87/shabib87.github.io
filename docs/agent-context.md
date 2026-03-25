@@ -11,22 +11,24 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-24 14:30:00 EDT`
+- Synced at: `2026-03-24 22:40:00 EDT`
 - Synced by: `Claude Code`
-- Scope: `CWS-95 merge closeout`
+- Scope: `CWS-96 PR submission`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
   - `Blog Content Pipeline`
   - `CWS-81` (Todo — parent of CWS-93, CWS-94)
+  - `CWS-96` (In Progress — session chronicle)
 
 ## Stale After
 
-- `2026-03-25 14:30:00 EDT`
+- `2026-03-25 22:40:00 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
 
+- CWS-96 (session chronicle & self-improvement loop) In Progress — PR #66, single PR (flattened from 4-PR stack).
 - CWS-89 (remove dead `.cursor/rules/` directory) merged — PR #64.
 - CWS-95 (remove remember plugin + curl fallback) merged — PR #63.
 - CWS-94 (script hardening) merged via `gt merge` — 3-PR Graphite stack.
