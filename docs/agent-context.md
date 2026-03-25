@@ -11,30 +11,25 @@ This file is a bounded cache for agent continuity.
 
 ## Last Synced From Linear
 
-- Synced at: `2026-03-24 22:40:00 EDT`
+- Synced at: `2026-03-25 00:15:00 EDT`
 - Synced by: `Claude Code`
-- Scope: `CWS-96 PR submission`
+- Scope: `CWS-96 DoD closeout`
 - Linear anchors:
   - `Content & Thought Leadership`
   - `Agentic Delivery Platform`
   - `Blog Content Pipeline`
   - `CWS-81` (Todo — parent of CWS-93, CWS-94)
-  - `CWS-96` (In Progress — session chronicle)
+  - `CWS-96` (Done — session chronicle, merged PR #66)
 
 ## Stale After
 
-- `2026-03-25 22:40:00 EDT`
+- `2026-03-26 00:15:00 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
 
-- CWS-96 (session chronicle & self-improvement loop) In Progress — PR #66, single PR (flattened from 4-PR stack).
-- CWS-89 (remove dead `.cursor/rules/` directory) merged — PR #64.
-- CWS-95 (remove remember plugin + curl fallback) merged — PR #63.
-- CWS-94 (script hardening) merged via `gt merge` — 3-PR Graphite stack.
-- CWS-93 (backlog hygiene) Done.
 - CWS-81 (Linear reorganization, parent) remains Todo — check remaining sub-task scope.
-- CWS-80 (Done), CWS-82 (Done).
+- No active implementation work in progress.
 
 ## Top Priorities
 
@@ -54,6 +49,13 @@ This file is a bounded cache for agent continuity.
 
 - Editorial chain blocked until voice profile interview (CWS-14/48)
 - `com.apple.provenance` extended attribute on `.claude/settings.json` blocks pre-push hooks — workaround: recreate file outside sandbox or strip xattr manually
+- Claude Code sandbox denies write to `.claude/skills/` and `.claude/settings.json` — git operations (rebase, checkout, cherry-pick) touching these paths must be run by the user outside sandbox
+
+## Session Learnings (CWS-96)
+
+- Repo-flow skill Procedure steps 5-9 (Linear state transitions, cycle linkage, traceability) are hard requirements, not optional housekeeping. Execute them as a sequential checklist.
+- `make finalize-merge` handles the mechanical merge. Agent responsibilities around it (Linear Done, agent-context content sync) are defined in repo-flow Procedure and AGENTS.md DoD — not in the script. Don't reframe skipped agent steps as tooling gaps.
+- Sandbox-protected paths (`.claude/`) cause git operation failures. When a multi-branch workflow (stacked PRs, rebases) touches these paths, prefer single-branch strategies to avoid cascading sandbox conflicts.
 
 ## Next Actions (snapshot — verify against Linear before executing)
 
@@ -70,6 +72,7 @@ This file is a bounded cache for agent continuity.
 
 ## Recent Completions
 
+- CWS-96: Session chronicle & self-improvement loop (Done, merged — PR #66)
 - CWS-89: Remove dead `.cursor/rules/` directory (Done, merged — PR #64)
 - CWS-95: Remove remember plugin + curl fallback library, codify quality principles (Done, merged — PR #63)
 - CWS-94: Harden PR scripts for stack, sandbox, and agent workflows (Done, merged — 3-PR stack)
