@@ -9,6 +9,25 @@
             "command": ".claude/hooks/check-agent-context-staleness.sh"
           }
         ]
+      },
+      {
+        "matcher": "startup|resume|compact|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/chronicle-init.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/chronicle-end.sh"
+          }
+        ]
       }
     ]
   }
