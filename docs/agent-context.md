@@ -23,7 +23,7 @@ This file is a bounded cache for agent continuity.
 
 ## Stale After
 
-- `2026-03-26 00:30:00 EDT`
+- `2026-04-01 20:14:17 EDT`
 - Rule: if current time is later than this timestamp, run a new Linear sync before execution.
 
 ## Active Phase
