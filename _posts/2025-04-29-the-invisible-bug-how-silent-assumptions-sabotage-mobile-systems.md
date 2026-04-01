@@ -324,7 +324,7 @@ This isn’t about tools or stack traces. It’s about habits. Here’s the loop
 
 <figure class="post-figure">
   <img
-    src="/assets/images/posts/invisible-bug-debugging-loop.svg"
+    src="/assets/images/invisible-bug-debugging-loop.svg"
     alt="Five-step systems debugging loop from isolating conditions to preventing repeat failures"
   >
   <figcaption>Debugging loop for turning silent assumptions into explicit cross-layer contracts.</figcaption>
