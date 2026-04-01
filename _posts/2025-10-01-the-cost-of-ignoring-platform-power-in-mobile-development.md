@@ -23,6 +23,7 @@ image: https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&
 image_alt: Developer workspace with a laptop, phone, and code editor open on a desk
 image_source: unsplash
 fact_check_status: complete
+excerpt: "Fear mongering and negativity sells more. Truth is often more nuanced."
 ---
 
 <figure class="post-figure">
@@ -108,7 +109,7 @@ convergence. That is why Liquid Glass and Material You look so different, and wh
 
 <figure class="post-figure">
   <img
-    src="/assets/images/posts/2025-10-01-the-cost-of-ignoring-platform-power-in-mobile-development/separation-vs-convergence.svg"
+    src="/assets/images/2025-10-01-the-cost-of-ignoring-platform-power-in-mobile-development/separation-vs-convergence.svg"
     alt="The Permanent Tension in Mobile Development"
   >
   <figcaption>The real battle isn’t Native vs Cross-Platform, it’s Separation vs Convergence (Image generated with help of AI)</figcaption>

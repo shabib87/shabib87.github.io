@@ -24,6 +24,7 @@ image: https://images.unsplash.com/photo-1489875347897-49f64b51c1f8?auto=format&
 image_alt: MacBook Pro with images of computer language codes
 image_source: unsplash
 fact_check_status: complete
+excerpt: "We spent years wondering if AI would replace the engineer. What we actually found is that it only raised the stakes for how we design and structure systems."
 ---
 
 <figure class="post-figure">
